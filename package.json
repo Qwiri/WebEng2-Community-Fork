@@ -56,7 +56,8 @@
     "rollup": "^2.48.0",
     "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.32.13",
-    "yargs": "^15.1.0"
+    "yargs": "^15.1.0",
+    "reveal-plantuml": "^1.0.2"
   },
   "browserslist": "> 0.5%, IE 11, not dead",
   "eslintConfig": {
@@ -96,5 +97,8 @@
       "no-eq-null": 2,
       "no-unused-expressions": 0
     }
+  },
+  "dependencies": {
+    "reveal-plantuml": "^1.0.2"
   }
 }

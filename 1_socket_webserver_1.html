@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/white.css">
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h3>HTTP - Hypertext Transfer Protokoll</h3>
+
+            <ul>
+                <li>Protokoll zur Übertragung von Daten über ein Netzwerk</li>
+                <li>Wird hauptsächlich im WWW eingesetzt</li>
+            </ul>
+        </section>
+        <section>
+            <h3>HTTP - Request Response Prinzip</h3>
+            <pre>
+                <code class="language-plantuml">
+                  @startuml
+                  Client -> Server: Request (HTTP)
+                  Server -> Client: Response (HTTP)
+                  @enduml
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h3>HTTP - Request Response Prinzip</h3>
+
+            <ul>
+                <li>Request: Client schickt Daten zum Server</li>
+                <li>Response: Server schickt Daten zum Client</li>
+                <li>
+                    Ab HTTP/2 darf der Server Daten an den Client "pushen"
+                    <ul>
+                        <li>kein unnötiger Request Cycle</li>
+                        <li>weniger Kommunikation und mehr Performance</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h3>HTTP - Header Aufbau</h3>
+
+            <ul>
+                <li>Erste Zeile: &lt;method&gt;&lt;uri&gt;&lt;protocol&gt;</li>
+                <li>Erste Zeile: &lt;method&gt;&lt;uri&gt;&lt;protocol&gt;</li>
+                <li>
+                    Weitere Zeilen: &lt;header-field&gt;: &lt;header-value&gt;
+                    <ul>
+                        <li>Bsp. Content-Type: appliation/json</li>
+                    </ul>
+                </li>
+                <li>
+                    Letzte Zeile: Leerzeile
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h3>HTTP - Header Method</h3>
+
+            <ul>
+                <li>GET - Ressource Anfordern</li>
+                <li>HEAD - Header zu einer Ressource Anfordern</li>
+                <li>POST - Ressource anlegen (nicht Idempotent)</li>
+                <li>PUT - Ressource ersetzen</li>
+                <li>DELETE - Ressource löschen</li>
+                <li>PATCH - Ressource modifizieren (nicht Idempotent)</li>
+                <li>OPTIONS - Kommunikationsoptionen zu einer Ressource</li>
+                <li>CONNECT - Vorbereitung SSL-Tunnel im Proxy</li>
+                <li>TRACE - Gibt den Weg zum Server zurück (debugging)</li>
+            </ul>
+        </section>
+        <section>
+            <section>
+                <h3>HTTP - Header URI</h3>
+
+                Uniform Ressource Identifier
+
+                Aufbau:
+                &lt;schema&gt;://&lt;server&gt;&lt;port&gt;/&lt;path&gt;?&lt;query&gt;#&lt;fragment&gt;
+            </section>
+            <section>
+                <h3>Test</h3>
+            </section>
+        </section>
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        plugins: [RevealMarkdown, RevealHighlight],
+        dependencies: [
+            {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+        ]
+    });
+</script>
+</body>
+</html>
