@@ -1,0 +1,16 @@
+.reveal section p,
+.reveal section li {
+    font-size: 0.8em !important;
+}
+
+.fitted-code-wrapper {
+    width: fit-content !important;
+}
+
+.fitted-code {
+    text-align: center;
+}
+
+.reveal section p.small-text {
+    font-size: 0.5em !important;
+}

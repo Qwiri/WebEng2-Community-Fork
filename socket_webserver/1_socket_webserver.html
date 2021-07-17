@@ -6,26 +6,29 @@
 
     <title>1. Socket Webserver</title>
 
-    <link rel="stylesheet" href="dist/reset.css">
-    <link rel="stylesheet" href="dist/reveal.css">
-    <link rel="stylesheet" href="dist/theme/white.css">
+    <link rel="stylesheet" href="/dist/reset.css">
+    <link rel="stylesheet" href="/dist/reveal.css">
+    <link rel="stylesheet" href="/dist/theme/white.css">
 
-    <link rel="stylesheet" href="plugin/highlight/zenburn.css">
+    <link rel="stylesheet" href="/plugin/highlight/zenburn.css">
+    <link rel="stylesheet" href="styles/custom_styles.css">
 </head>
 <body>
 <div class="reveal">
     <div class="slides">
         <section data-markdown>
             <textarea data-template>
-                ### HTTP - Hypertext Transfer Protokoll
+                #### HTTP - Hypertext Transfer Protokoll
 
                 - Protokoll zur Übertragung von Daten über ein Netzwerk
                 - Wird hauptsächlich im WWW eingesetzt
+
+                <img src="assets/http_client_server.png" style="height: 400px;">
             </textarea>
         </section>
         <section>
             <section>
-                <h3>HTTP - Request Response Prinzip</h3>
+                <h4>HTTP - Request Response Prinzip</h4>
                 <pre>
                 <code class="language-plantuml">
                   @startuml
@@ -44,7 +47,7 @@
             </section>
             <section data-markdown>
             <textarea data-template>
-                ### HTTP - Request Response Prinzip
+                #### HTTP - Request Response Prinzip
 
                 - Ab HTTP/2 darf der Server Daten "pushen"
                 - Vorteile:
@@ -58,17 +61,17 @@
             </textarea>
             </section>
             <section>
-                <h3>HTTP - Request Response Prinzip</h3>
+                <h4>HTTP - Request Response Prinzip</h4>
                 <pre>
-                <code class="language-plantuml">
-                  @startuml
-                  Client -> Server: Request "Homepage"
-                  Server -> Client: homepage.html
-                  Server -> Client: stylesheet.css
-                  Server -> Client: logic.js
-                  @enduml
-                </code>
-            </pre>
+                    <code class="language-plantuml">
+                      @startuml
+                      Client -> Server: Request "Homepage"
+                      Server -> Client: homepage.html
+                      Server -> Client: stylesheet.css
+                      Server -> Client: logic.js
+                      @enduml
+                    </code>
+                </pre>
                 <aside class="notes">
                     <ul>
                         <li>Client schickt Daten zum Server</li>
@@ -78,53 +81,82 @@
                 </aside>
             </section>
         </section>
-        <section data-markdown>
-            <textarea data-template>
-                ### HTTP - Header Aufbau
+        <section>
+            <section>
+                <div class="r-stack">
+                    <div class="fragment fade-out" data-fragment-index="1">
+                        <h4>HTTP/2 - Header Aufbau</h4>
 
-                - Erste Zeile:
-                ```xml
-                <method><uri><protocol>
-                ```
-                - Weitere Zeilen:
-                ```xml
-                <header-field>: <header-value>
-                ```
-                    - Bsp. Content-Type: appliation/json
-                - Letzte Zeile: Leerzeile
-            </textarea>
+                        <p>Pseudo-Header Fields:</p>
+                        <ul>
+                            <li>:method</li>
+                            <li>:scheme</li>
+                            <li>:authority</li>
+                            <li>:path</li>
+                        </ul>
+                        <p>Header Fields:</p>
+                        <pre class="fitted-code-wrapper"><code class="xml hljs">&lt;header-field&gt;: &lt;header-value&gt;</code></pre>
+                        <p class="small-text">Bsp. Content-Type: appliation/json</p>
+                    </div>
+                    <img class="fragment" data-fragment-index="1" src="assets/http2_header_example.png" height="400">
+                </div>
+
+                <aside class="notes">
+                    <ul>
+                        <li>siehe: <a href="https://datatracker.ietf.org/doc/html/rfc7540#section-8.1.2.1">Pseudo-Header
+                            Fields</a></li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h4>HTTP/1.1 - Header Aufbau</h4>
+
+                <p>Erste Zeile:</p>
+                <pre class="fitted-code-wrapper"><code class="xml hljs">&lt;method&gt;&lt;uri&gt;&lt;protocol&gt;</code></pre>
+                <p>Weitere Zeilen:</p>
+                <pre class="fitted-code-wrapper"><code
+                        class="xml hljs">&lt;header-field&gt;: &lt;header-value&gt;</code></pre>
+                <p class="small-text">Bsp. Content-Type: appliation/json</p>
+
+                <p>Letzte Zeile: Leerzeile</p>
+            </section>
         </section>
-        <section data-markdown>
+        <section>
+            <section data-markdown>
             <textarea data-template>
-                ### HTTP - Header Method
+                #### HTTP - Header Method
 
                 - GET - Ressource Anfordern
-                - HEAD - Header zu einer Ressource Anfordern
                 - POST - Ressource anlegen (nicht Idempotent)
                 - PUT - Ressource ersetzen
                 - DELETE - Ressource löschen
+            </textarea>
+            </section>
+            <section data-markdown>
+            <textarea data-template>
+                #### HTTP - Header Method
+                - HEAD - Header zu einer Ressource Anfordern
                 - PATCH - Ressource modifizieren (nicht Idempotent)
                 - OPTIONS - Kommunikationsoptionen zu einer Ressource
                 - CONNECT - Vorbereitung SSL-Tunnel im Proxy
                 - TRACE - Gibt den Weg zum Server zurück (debugging)
             </textarea>
+            </section>
         </section>
         <section>
-            <section data-markdown>
-                <textarea data-template>
-                    ### HTTP - Header URI
+            <section>
+                <h4>HTTP - Header URI</h4>
 
-                    Uniform Ressource Identifier
+                <p>Uniform Ressource Identifier</p>
 
-                    Aufbau:
-                    ```xml
-                    <schema>://<server><port>/<path>?<query>#<fragment>
-                    ```
-                </textarea>
+                <p>Aufbau:</p>
+                <pre class="fitted-code-wrapper">
+                    <code class="xml hljs">&lt;schema&gt;://&lt;server&gt;&lt;port&gt;/&lt;path&gt;?&lt;query&gt;#&lt;fragment&gt;</code>
+                </pre>
             </section>
             <section data-markdown>
                 <textarea data-template>
-                    ### URI - Schema
+                    #### URI - Schema
 
                     - Name des Schemas entspricht meist dem Übertragungsprotokoll
                     - Beispiele: HTTP, HTTPS, FTP, MAILTO, ...
@@ -137,7 +169,7 @@
             </section>
             <section data-markdown>
                 <textarea data-template>
-                    ### URI - Server
+                    #### URI - Server
 
                     - Fully-Qualified Host Name
                         - Fully-Qualified Domain Name (FQDN, z.B. www.dhbw.de)
@@ -151,7 +183,7 @@
             </section>
             <section data-markdown>
                 <textarea data-template>
-                    ### URI - Port und Path
+                    #### URI - Port und Path
 
                     - Port:
                         - Ganze Zahl <= 65535
@@ -167,37 +199,35 @@
             </section>
             <section data-markdown>
                 <textarea data-template>
-                    ### URI - Query
+                    #### URI - Query
 
                     - optionale Parameter
                     - besteht aus Name und Wert (?x=6&name=Mueller&y=0)
                     - einige Sonderzeichen müssen encodiert werden
                 </textarea>
             </section>
-            <section data-markdown>
-                <textarea data-template>
-                    ### URI - Fragment
+            <section>
+                <h4>URI - Fragment</h4>
 
-                    - optional
-                    - verweist auf ein Element der Zielseite
-                </textarea>
+                <p>verweist auf ein Element der Zielseite</p>
+                <p><a href="https://datatracker.ietf.org/doc/html/rfc7540#section-8.1.2.1">/html/rfc7540<span
+                        style="color: red">#section-8.1.2.1</span></a></p>
             </section>
-            <section data-markdown>
-                <textarea data-template>
-                    ### URI - Kodierung
+            <section>
+                <h4>URI - Kodierung</h4>
 
-                    - Zeichen mit einer Sonderfunktion müssen encodiert werden
-                    - Beispiel:
-                        - '&' -> %26		(ASCII)
-                        - '€' -> %E2%82%AC	(UTF-8)
-                        - '€' -> %u20AC	    (Unicode)
+                <ul>
+                    <li>Zeichen mit einer Sonderfunktion müssen encodiert werden</li>
+                    <li>Beispiel:</li>
+                </ul>
 
-                </textarea>
+                <p>Url als QueryParameter?</p>
+                <p><a href="https://datatracker.ietf.org/">https://datatracker.ietf.org/</a> <br> -> https%3A%2F%2Fdatatracker.ietf.org%2F</p>
             </section>
         </section>
         <section data-markdown>
             <textarea data-template>
-                ### HTTP - Protokoll
+                #### HTTP - Protokoll
 
                 - normalerweise HTTP/2
                 - HTTP/1.1 wird immer noch verwendet
@@ -212,7 +242,7 @@
         </section>
         <section data-markdown>
             <textarea data-template>
-                ### HTTP - Header Felder
+                #### HTTP - Header Felder
 
                 - Accept
                     - erwarteter Media Type der Response
@@ -226,7 +256,7 @@
         </section>
         <section data-markdown>
             <textarea data-template>
-                ### HTTP - Status Codes
+                #### HTTP - Status Codes
 
                 - 1xx Informational
                 - 2xx Successful
@@ -246,24 +276,24 @@
         <section>
             <section data-markdown>
                 <textarea data-template>
-                    ### Praxis - Webserver Marke Eigenbau
+                    #### Praxis - Webserver Marke Eigenbau
 
                     - Ziel
-                        - Ein kleiner Webserver, der Anfragen eines Browsers beantworten kann und einfache Funktionen ausführt.
+                        - Ein kleiner Webserver, der Anfragen eines Clients beantworten kann.
 
                     - Form
                         - Java - Konsolen - Anwendung
                         - Port öffnen
                         - Verbindung entgegennehmen
-                        - HTTP Anfrage beantworten
+                        - Anfrage beantworten
                 </textarea>
             </section>
             <section data-markdown>
                 <textarea data-template>
-                    ### Praxis - Webclient
+                    #### Praxis - Webclient
 
                     - Über Java eine Socket-Verbindung aufbauen
-                    - Anfrage an einen beliebigen Server senden (z.B. www.xkcd.com/)
+                    - Anfrage an einen beliebigen Server senden (z.B. www.xkcd.com, HTTP/1.1)
                     - Response auf die Konsole ausgeben
 
                     - Auslesen der Antwort
@@ -274,12 +304,12 @@
             </section>
             <section data-markdown>
                 <textarea data-template>
-                    ### Praxis - Webserver
+                    #### Praxis - Webserver
 
                     - Step 1
                         - Mit Java einen Webserver bereitstellen
                             - Dieser soll eine Socket Connection bereitstellen und eine Anfrage bearbeiten
-                        - den bereits geschriebenen Client gegen den Server laufen lassen
+                        - Wir schreiben uns einen Client, der diesen Webserver aufruft
                     - Step 2
                         - Webserver soll jetzt mehrere Requests bearbeiten können
                     - Step 3
@@ -288,7 +318,7 @@
             </section>
             <section data-markdown>
                 <textarea data-template>
-                    ### Praxis - Werkzeug Client
+                    #### Praxis - Werkzeug Client
 
                     Client öffnet Port:
                     ```java
@@ -312,7 +342,7 @@
             </section>
             <section data-markdown>
                 <textarea data-template>
-                    ### Praxis - Werkzeug Server
+                    #### Praxis - Werkzeug Server
 
                     Server öffnet einen Port (Server Socket):
                     ```java
@@ -334,7 +364,7 @@
             </section>
             <section data-markdown>
                 <textarea data-template>
-                    ### Praxis - Kleine Erinnerung
+                    #### Praxis - Kleine Erinnerung
 
                     Zeilenweise Empfangen von Daten
                     ```java
@@ -356,7 +386,7 @@
             </section>
             <section data-markdown>
                 <textarea data-template>
-                    ### Praxis - SSL Verbindung
+                    #### Praxis - SSL Verbindung
 
                     SSL-Verbindung für HTTPS:
                     ```java
@@ -369,10 +399,10 @@
     </div>
 </div>
 
-<script src="dist/reveal.js"></script>
-<script src="plugin/notes/notes.js"></script>
-<script src="plugin/markdown/markdown.js"></script>
-<script src="plugin/highlight/highlight.js"></script>
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
 <script>
     Reveal.initialize({
         hash: true,
