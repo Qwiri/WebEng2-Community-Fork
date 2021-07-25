@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="/dist/reveal.css">
     <link rel="stylesheet" href="/dist/theme/white.css">
 
-    <link rel="stylesheet" href="/plugin/highlight/zenburn.css">
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
     <link rel="stylesheet" href="styles/custom_styles.css">
+    <link rel="stylesheet" href="/src/custom_styles/global_styles.css">
 </head>
 <body>
 <div class="reveal">
@@ -222,7 +223,8 @@
                 </ul>
 
                 <p>Url als QueryParameter?</p>
-                <p><a href="https://datatracker.ietf.org/">https://datatracker.ietf.org/</a> <br> -> https%3A%2F%2Fdatatracker.ietf.org%2F</p>
+                <p><a href="https://datatracker.ietf.org/">https://datatracker.ietf.org/</a> <br> ->
+                    https%3A%2F%2Fdatatracker.ietf.org%2F</p>
             </section>
         </section>
         <section data-markdown>
@@ -321,20 +323,20 @@
                     #### Praxis - Werkzeug Client
 
                     Client öffnet Port:
-                    ```java
+                    ```java []
                     Socket socket = new Socket(server, 80);
                     ```
                     Client schließt Port
-                    ```java
+                    ```java []
                     socket.close();
                     ```
                     Empfangen von Daten:
-                    ```java
+                    ```java []
                     InputStream in = socket.getInputStream();
                     int c = in.read();
                     ```
                     Senden von Daten:
-                    ```java
+                    ```java []
                     OutputStream out = socket.getOutputStream();
                     out.write(c);
                     ```
@@ -345,19 +347,19 @@
                     #### Praxis - Werkzeug Server
 
                     Server öffnet einen Port (Server Socket):
-                    ```java
+                    ```java []
                     ServerSocket serverSocket = new ServerSocket(port);
                     ```
                     Server wartet auf eine Verbindung (hier wird das eigentliche Socket initialisiert):
-                    ```java
+                    ```java []
                     Socket socket = serverSocket.accept();
                     ```
                     Server schließt eine Verbindung:
-                    ```java
+                    ```java []
                     socket.close();
                     ```
                     Server schließt den Port
-                    ```java
+                    ```java []
                     serverSocket.close();
                     ```
                 </textarea>
@@ -367,7 +369,7 @@
                     #### Praxis - Kleine Erinnerung
 
                     Zeilenweise Empfangen von Daten
-                    ```java
+                    ```java []
                     var in = new BufferedReader(
                         new InputStreamReader(
                             clientSocket.getInputStream()
@@ -376,7 +378,7 @@
                     String line = in.readLine();
                     ```
                     Zeilenweise Senden von Daten
-                    ```java
+                    ```java []
                     var out = new PrintWriter(
                         socket.getOutputStream, true
                     );
@@ -389,7 +391,7 @@
                     #### Praxis - SSL Verbindung
 
                     SSL-Verbindung für HTTPS:
-                    ```java
+                    ```java []
                     var sslSocketFactory = SSLSocketFactory.getDefault();
                     Socket sslSocket = sslSocketFactory.createSocket(host, port);
                     ```
@@ -406,6 +408,7 @@
 <script>
     Reveal.initialize({
         hash: true,
+        slideNumber: true,
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
         dependencies: [
             {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},

@@ -1,14 +1,11 @@
+.reveal .slide-number {
+    font-size: 40pt;
+    color: #ffffff;
+}
+
 .reveal section p,
 .reveal section li {
     font-size: 0.8em !important;
-}
-
-.fitted-code-wrapper {
-    width: fit-content !important;
-}
-
-.fitted-code {
-    text-align: center;
 }
 
 .reveal section p.small-text {
