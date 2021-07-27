@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Introduction</title>
+
+    <link rel="stylesheet" href="/dist/reset.css">
+    <link rel="stylesheet" href="/dist/reveal.css">
+    <link rel="stylesheet" href="/dist/theme/white.css">
+
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+    <link rel="stylesheet" href="styles/custom_styles.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown>
+            <textarea data-template>
+                # Webengineering II
+            </textarea>
+        </section>
+        <section data-markdown>
+            Vorstellungfolien
+        </section>
+        <section>
+            <section data-markdown>
+                <textarea data-template>
+                    ## Ablauf der Vorlesung
+    
+                    - Theoretische Einführung
+                    - Praktische Vertiefung
+                </textarea>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    ## Themen
+
+                    - Webservices from Scratch
+                    - Dynamisches HTML
+                    - Rich Client (2 Vorlesungseinheiten)
+                    - Benutzerverwaltung
+                    - Security
+                    - Prüfungsvorbereitung
+                </textarea>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    # Umfrage Vorkenntniss
+                    ## URL: 
+                </textarea>
+                <aside class="notes">
+                    Umfrage mit Slido (Account bereits angelegt)
+                    WordCloud => wo bestehen Interessen
+                    Rating Poll => Erfahrung mit verschiedenen Techniken
+                </aside>
+            </seciton>
+            <section data-markdown>
+                <textarea data-template>
+                    ## Praxisteil
+
+                    - Skeleton Projekt (wird als Git Repository bereitgestellt)
+                    - Intellij & Eclipse
+                    - Einrichtung am Ende der Vorlesung
+                </textarea>
+            </section>
+        </section>
+        <section data-markdown>
+            <textarea data-template>
+                ## Einordung der Themen
+            </textarea>
+        </section>
+        <section data-markdown>
+            <textarea data-template>
+                ## Webservices from Scratch
+
+                - HTTP Request + Response
+                - HTTP 2.0
+                - Statuscodes
+                - Praxis: Webservices Marke Eigenbau
+            </textarea>
+        </section>
+        <section data-markdown>
+            <textarea data-template>
+                ## Dynamische Pages
+
+                - Möglichkeiten HTML Serverseitig dynamisch zu generieren
+                - JAVA Code einbetten
+                - MVC
+                - Praxis: JSF in die Anwendung einbauen
+            </textarea>
+        </section>
+    </div>
+</div>
+
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        dependencies: [
+            {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+        ]
+    });
+</script>
+</body>
+</html>
