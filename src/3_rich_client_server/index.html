@@ -17,22 +17,34 @@
 <div class="reveal">
   <div class="slides">
     <section>
-      <h4>Rich Client (Server) Anwendung</h4>
+      <h3>Rich Client (Server) Anwendung</h3>
     </section>
     <section>
       <h4>Wiederholung</h4>
       <pre>
         <code class="language-plantuml">
           @startuml
+          activate Client
           Client -> Server: Request (GET)
+          deactivate Client
+          activate Server
           Server -> Client: Response (HTML Page)
+          deactivate Server
+          activate Client
           Client -> Server: Request (Post)
+          deactivate Client
+          activate Server
           Server -> Client: Response (HTML Page)
+          deactivate Server
+          activate Client
           @enduml
         </code>
       </pre>
     </section>
     <section>
+      <section>
+        <h3>Motivation</h3>
+      </section>
       <section>
         <h4>Daten vom Backend</h4>
         <pre>
@@ -142,7 +154,7 @@
       <section>
         <h4>HTML Struktur</h4>
         <ul>
-          <li>dynamischer Anteil der Seite ist eher gering</li>
+          <li>dynamischer Anteil der Seite beschränkt sich auf Informationen</li>
         </ul>
         <pre>
         <code class="language-html" data-line-numbers="7">&lt;html&gt;
@@ -157,6 +169,177 @@
   &lt;/body&gt;
 &lt;/html&gt;</code>
         </pre>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>Single Page Application</h3>
+      </section>
+      <section>
+        <p><em>“A single-page application is exactly what its name implies: a JavaScript-driven web appliation that requires only a single page load.”</em></p>
+        <p class="cite">JavaScript - The Definitive Guide</p>
+        <p class="cite">5th ed., O'Reilly, Sebastopol, CA, 2006</p>
+      </section>
+      <section>
+        <h4>Single Page Application Konzept</h4>
+        <pre>
+          <code class="language-plantuml">
+            @startuml
+            participant "Client" as client
+            participant "Web Server" as webServer
+            participant "Webservice" as webService
+
+            group Initializing
+              activate client
+              client -> webServer: GET /index.html
+              activate webServer
+              webServer -> client: index.html
+              webServer -> client: styles.css
+              webServer -> client: script.js
+              deactivate webServer
+              client -> client: start application
+            end
+
+            group Runtime
+              client -> webService: GET /some-id
+              deactivate client
+              activate webService
+              webService -> client: some-data
+              deactivate webService
+              activate client
+              client -> client: rerender
+            end
+            @enduml
+          </code>
+        </pre>
+      </section>
+      <section>
+        <h4>Vorteile einer SPA</h4>
+        <ul>
+          <li>kleinere Datenmengen werden übertragen</li>
+          <li>kürzere Response Time</li>
+          <li>bessere User Experience</li>
+          <li>Rendering und Geschäftslogik läuft auf dem Client</li>
+          <li>Weniger Serverressourcen</li>
+          <li>Hybride Anwendung auch mobile einsetzbar</li>
+        </ul>
+      </section>
+      <section>
+        <h4>Nachteile einer SPA</h4>
+        <ul>
+          <li>initiale Response ist groß</li>
+          <li>Geschäftslogik auf dem Client kann nicht vertraut werden</li>
+          <li>erneute Validierung im Backend</li>
+          <li>duplizierter Code</li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>Webservice</h3>
+      </section>
+      <section>
+        <p><em>"A Web service is a software system designed to support interoperable machine-to-machine interaction over a network. It has an interface described in a machine-processable format."</em></p>
+        <p class="cite">w3.org</p>
+        <aside class="notes">
+          <ul>
+            <li>https://www.w3.org/TR/2004/NOTE-ws-gloss-20040211/#webservice</li>
+            <li>Ein Webservice ist ein Dienst, der über ein Netzwerk angesprochen werden kann.</li>
+            <li>Die Dienste eines Webservices werde meist von anderen Maschinen oder Anwendungen genutzt.</li>
+            <li>sollte natürlich einen Nutzen stiften, sonst würde ihn keiner aufrufen</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <pre>
+          <code class="language-plantuml">
+            @startuml
+            participant "Client" as client
+            participant "Webservice" as webservice
+
+            group Runtime
+              client -> webservice : GET /resource/{resource-id}
+              webservice -> client : resource
+              client -> webservice : POST /resource
+              webservice -> client : resource (saved)
+              client -> webservice : PUT /resource/{resource-id}
+              webservice -> client : resource (updated)
+            end
+            @enduml
+          </code>
+        </pre>
+      </section>
+      <section>
+        <h4>Kommunikation</h4>
+        <p>Webservices müssen wie Menschen die selbe Sprache sprechen</p>
+        <pre>
+          <code class="language-plantuml">
+            @startuml
+            actor "Englisch" as englisch
+            actor "Deutsch" as deutsch
+
+            englisch ->X deutsch
+            deutsch ->X englisch
+            @enduml
+          </code>
+        </pre>
+      </section>
+      <section>
+        <h4>Datenübertragungsformate</h4>
+        <div class="split-row-container">
+          <div class="split-row-child">
+            <p>JSON</p>
+            <pre>
+              <code class="language-json" data-line-numbers>{
+ "id": "some-id",
+ "name": "Kai Wachendörfer",
+ "mail": "mail@domain.de",
+}</code>
+            </pre>
+          </div>
+          <div class="split-row-child">
+            <p>XML</p>
+            <pre>
+              <code class="language-xml" data-line-numbers>&lt;user&gt;
+ &lt;id&gt;some-id&lt;/id&gt;
+ &lt;name&gt;Kai Wachend&#246;rfer&lt;/name&gt;
+ &lt;mail&gt;mail@domain.de&lt;/mail&gt;
+&lt;/user&gt;</code>
+            </pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h4>Datenübertragungsformate</h4>
+        <ul>
+          <li>ältere Schnittstellen nutzen gerne noch XML (SOAP)</li>
+          <li>die meisten modernen Frameworks setzen auf JSON</li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>RESTful Webservice</h3>
+      </section>
+      <section>
+        Erklären was RESTful Webservices grundlegend ausmachen.
+        Nicht ins Detail gehen. Schließlich gibt es dafür noch mal eine andere Vorlesung.
+        Wir versuchen unseren Webservice Resty aufzubauen, beten aber keine Religion an.
+        <h4></h4>
+        <ul>
+
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>Praxis bau des Servers</h3>
+      </section>
+      <section>
+        Ktor Projekt aufsetzen.
+        Syntax erklären.
+        Anforderungen aufschrieben.
+        Etc.
       </section>
     </section>
   </div>

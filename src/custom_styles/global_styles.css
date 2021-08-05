@@ -5,9 +5,27 @@
 
 .reveal section p,
 .reveal section li {
-    font-size: 0.8em !important;
+    font-size: 0.8em;
+}
+
+.reveal section p.cite {
+    font-size: 0.4em;
 }
 
 .reveal section p.small-text {
-    font-size: 0.5em !important;
+    font-size: 0.5em;
+}
+
+.split-row-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.split-row-child {
+    width: 50%;
+}
+
+div.split-row-child > pre.code-wrapper {
+    margin: 2%;
+    width: 96%;
 }
