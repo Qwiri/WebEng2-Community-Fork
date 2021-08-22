@@ -17,9 +17,244 @@
 <div class="reveal">
     <div class="slides">
         <section>
+            <h4>Was beim letzten mal geschah</h4>
+            <ul>
+                <li>Single Page Applications</li>
+                <li>Webservices</li>
+                <li>Schnittstelle zum Backend</li>
+                <li>Implementierung eines Webservices</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Rich Client: Client Anwendung</h3>
+        </section>
+        <section>
+            <h4>In dieser Vorlesung</h4>
+            <ul>
+                <li>Frontend Architekturen: Wie baue ich eine SPA?</li>
+                <li>Frontend Architektur in Angular</li>
+                <li>Vergleich zu anderen Frameworks (React, Vue, Flutter)</li>
+                <li>Praxis: Bau unserer Todo Anwendung in Angular</li>
+                <li>Statemanagement im Frontend</li>
+                <li>Statemanagement mit Angular NgRx</li>
+                <li>Vergleich zu anderen Frameworks</li>
+                <li>Praxis: Einbau eines Statemanagements in unsere Todo Anwendung mit NgRx</li>
+            </ul>
+        </section>
+        <section>
+            <h4>Single Page Applications</h4>
+            <ul>
+                <li>Wir haben besprochen:
+                    <ul>
+                        <li>Was ist eine SPA?</li>
+                        <li>Was sind ihre Vorteile?</li>
+                        <li>Was sind ihre Nachteile?</li>
+                    </ul>
+                </li>
+                <li>Was uns fehlt:
+                    <ul>
+                        <li>Wie baut man eine SPA?</li>
+                        <li>Welche Architekturen gibt es?</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h3>Wie baut man eine SPA?</h3>
+        </section>
+        <section>
+            <section>
+                <h3>Monolith</h3>
+            </section>
+            <section>
+                <h4>Monolith</h4>
+                <ul>
+                    <li>Erster Gedanke: Einfach mal loslegen.</li>
+                    <li>Wie soll die UI aussehen?</li>
+                    <li>Welche HTML Elemente brauche ich?</li>
+                    <li>Was brauche ich fürs Styling?</li>
+                    <li>Welche Logik soll das Frontend unterstützen?</li>
+                </ul>
+                <aside class="notes">
+                    <ul>
+                        <li>Vielleicht denken sie hier noch an die Trennung von HTML, CSS und JavaScript.</li>
+                        <li>Damit wird das ganze dann ein wenig schöner.</li>
+                        <li>Trotzdem wird es wahrscheinlich damit Enden, dass man einen </li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h4>Monolith</h4>
+                <img src="assets/monolith.jpg" style="height: 400px;">
+                <aside class="notes">
+                    <ul>
+                        <li>Sieht für sie jetzt evtl. schön aus.</li>
+                        <li>Aber versuche sie mal diese Anwendung wiederzuverwenden oder sogar für neue Features zu erweitern.</li>
+                        <li>Das ist meistens das Problem bei monolithischen Anwendungen.</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h4>Monolith</h4>
+                <ul>
+                    <li>Monolithen sind typischerweise:
+                        <ul>
+                            <li>schwer wiederverwendbar</li>
+                            <li>schwer erweiterbar</li>
+                        </ul>
+                    </li>
+                    <li>Monolithen haben in sich meist:
+                        <ul>
+                            <li>keine klaren Schnittstellen</li>
+                            <li>viele Abhängigkeiten</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h4>Monolith</h4>
+                <ul>
+                    <li>grundlegend sind Monolithen nicht schlecht um erstmal loszulegen</li>
+                    <li>wenn die Codebasis wächst werden diese leider sehr unübersichtlich</li>
+                    <li>mit mehreren Teams an einem Monolith zu arbeiten sorgt häufig für Konflikte</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>Component Architecture</h3>
+                <img src="assets/error-lego.jpg" style="height: 400px;">
+                <aside class="notes">
+                    <ul>
+                        <li>Component Architecture könnte man sich wie Lego vorstellen</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h4>Component Architecture</h4>
+                <ul>
+                    <li>einzelne Components werden zu einer Seite zusammengesetzt</li>
+                    <li>sie sollen möglichst unabhängig voneinander sein</li>
+                    <li>wie Legosteine kann man sie vielseitig einsetzen</li>
+                </ul>
+            </section>
+            <section>
+                <h4>Component Architecture</h4>
+                <ul>
+                    <li>Was könnte man sich alles als Component vorstellen?
+                        <ul>
+                            <li>Buttons, Text Fields, Labels, etc.</li>
+                            <li>Form Groups, Cards, etc.</li>
+                            <li>Header, Footer, Overlays, etc.</li>
+                            <li>Pages</li>
+                        </ul>
+                    </li>
+                </ul>
+                <aside class="notes">
+                    <ul>
+                        <li>Unter einer Card kann man sich gebündelten Content vorstellen. Möglicherweise mit Bild und Edit Button oder so?</li>
+                        <li>Eine Component kann also ein sehr kleiner Teil der Anwendung sein, wie z.B. ein einzelner Button</li>
+                        <li>Eine Component kann aber auch ein Abschnitt sein oder sogar eine ganze Seite, die sich mit einem bestimmten Thema beschäftigt.</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h4>Component Architecture</h4>
+                <ul>
+                    <li>Components haben wie Classes feste Schnittstellen</li>
+                    <li>damit können sie an unterschiedlichen Stellen eingebunden werden</li>
+                    <li>dies sind im Gegensatz zu Classes keine Methoden</li>
+                    <li>es werden Parameter in die Components rein und wieder rausgegeben</li>
+                    <li>Beispiel:
+                        <ul>
+                            <li>Text Field</li>
+                            <li>erhält einen Placeholder oder default Text</li>
+                            <li>gibt den eingegebenen Text des Nutzers zurück</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h4>Component Architecture</h4>
+                <ul>
+                    <li>Wie bereits oben angedeutet kann man Components einordnen in:
+                        <ul>
+                            <li>Atoms - Buttons, Text Fields, etc.</li>
+                            <li>Molecules - Form Groups, Cards, etc.</li>
+                            <li>Organisms - Header, Footer, Overlays, etc.</li>
+                            <li>Templates - Schablone</li>
+                            <li>Pages - konkrete Seite</li>
+                        </ul>
+                    </li>
+                </ul>
+                <aside class="notes">
+                    <ul>
+                        <li>https://bradfrost.com/blog/post/atomic-web-design/</li>
+                        <li>Atoms - die Bausteine unserer Anwendung - Buttons, etc.</li>
+                        <li>Molecules - kleine zusammenschlüsse von Atoms - Suchfelder, Form Groups</li>
+                        <li>Organisms - fachliche Components. Zusammenschlüsse von Molecules mit denen der User interagieren kann</li>
+                        <li>Templates - Schablone die den Aufbau der Seite zeigt</li>
+                        <li>Pages - konkrete Seiten</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h4>Component Architecture</h4>
+                <ul>
+                    <li>SRP: Single Responsible Principle</li>
+                    <li><em>"A class should have only one reason to change."</em></li>
+                    <li><em>"A module should be responsible to one, and only one, actor."</em></li>
+                    <li>dies ist auch auf Components anwendbar</li>
+                    <li>Components sollten
+                        <ul>
+                            <li>nur einen Grund haben sich zu ändern</li>
+                            <li>nur einem Akteur gegenüber verantwortlich sein</li>
+                        </ul>
+                    </li>
+                </ul>
+                <aside class="notes">
+                    <ul>
+                        <li>Zitate von Robert C. Marting SOLID und Clean Architecture</li>
+                        <li>Sie denken sich jetzt vielleicht, dass dies nur bei kleineren Components möglich ist</li>
+                        <li>Doch auch eine Page hat eine Verantwortlichkeit und damit nur einen Grund sich zu ändern</li>
+                        <li>Bzw. sie ist gegenüber einem Akteur verantwortlich</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h4>Component Architecture</h4>
+                <ul>
+                    <li>Vorteile:
+                        <ul>
+                            <li>Konsistenz im Styling</li>
+                            <li>Wiederverwendbarkeit</li>
+                            <li>schnellere Entwicklung</li>
+                            <li>einfachere Instandhaltung </li>
+                        </ul>
+                    </li>
+                    <li>Nachteile:
+                        <ul>
+                            <li></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>Micro Frontends</h3>
+            </section>
+            <section>
+                Hier ein wenig Micro Frontends erklären.
+            </section>
+        </section>
+        <section>
             Was wir alles für diese Section brauchen:
 
             Typische Frontendarchitektur (anzeige): Component Architektur
+            https://www.simform.com/blog/component-based-development/
+            Kurzer Einblick in das Thema Micro Frontends
+            https://martinfowler.com/articles/micro-frontends.html
 
             Component System Angular
             Services in Angular

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <title>3. Rich Client (Server) Anwendung</title>
+  <title>3. Rich Client: Server Anwendung</title>
 
   <link rel="stylesheet" href="/dist/reset.css">
   <link rel="stylesheet" href="/dist/reveal.css">
@@ -17,7 +17,7 @@
 <div class="reveal">
   <div class="slides">
     <section>
-      <h3>Rich Client (Server) Anwendung</h3>
+      <h3>Rich Client: Server Anwendung</h3>
     </section>
     <section>
       <h4>Wiederholung</h4>
@@ -236,7 +236,21 @@
     </section>
     <section>
       <section>
-        <h3>Webservice</h3>
+        <h3>Webservices</h3>
+      </section>
+      <section>
+        <h4>Webservices</h4>
+        <ul>
+          <li>Backend liefert keine View mehr aus</li>
+          <li>Lediglich Daten und Geschäftslogik wird bereitgestellt</li>
+          <li>View übernimmt unsere SPA</li>
+        </ul>
+        <aside class="notes">
+          <ul>
+            <li>Die Schnittstelle muss Commands unterstützen um die Geschäftslogik zu triggern</li>
+            <li>Die Schnittstelle muss Queries unterstützen um Daten abrufbar zu machen</li>
+          </ul>
+        </aside>
       </section>
       <section>
         <p><em>"A Web service is a software system designed to support interoperable machine-to-machine interaction over a network. It has an interface described in a machine-processable format."</em></p>
@@ -322,6 +336,8 @@
         <h3>RESTful Webservice</h3>
       </section>
       <section>
+        Vielleicht eher Command and Query?
+
         Erklären was RESTful Webservices grundlegend ausmachen.
         Nicht ins Detail gehen. Schließlich gibt es dafür noch mal eine andere Vorlesung.
         Wir versuchen unseren Webservice Resty aufzubauen, beten aber keine Religion an.
@@ -336,7 +352,7 @@
         <h3>Praxis bau des Servers</h3>
       </section>
       <section>
-        Ktor Projekt aufsetzen.
+        Spring Projekt aufsetzen.
         Syntax erklären.
         Anforderungen aufschrieben.
         Etc.
