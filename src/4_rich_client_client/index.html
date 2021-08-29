@@ -64,10 +64,10 @@
         </section>
         <section>
             <section>
-                <h3>Monolith</h3>
+                <h3>Einfach mal loslegen?</h3>
             </section>
             <section>
-                <h4>Monolith</h4>
+                <h4>Einfach mal loslegen?</h4>
                 <ul>
                     <li>Erster Gedanke: Einfach mal loslegen.</li>
                     <li>Wie soll die UI aussehen?</li>
@@ -79,7 +79,7 @@
                     <ul>
                         <li>Vielleicht denken sie hier noch an die Trennung von HTML, CSS und JavaScript.</li>
                         <li>Damit wird das ganze dann ein wenig schöner.</li>
-                        <li>Trotzdem wird es wahrscheinlich damit Enden, dass man einen </li>
+                        <li>Trotzdem wird es wahrscheinlich damit Enden, dass man einen Monolith erhält.</li>
                     </ul>
                 </aside>
             </section>
@@ -115,9 +115,16 @@
                 <h4>Monolith</h4>
                 <ul>
                     <li>grundlegend sind Monolithen nicht schlecht um erstmal loszulegen</li>
+                    <li>ein Monolith kann durchaus seine Berechtigung haben</li>
                     <li>wenn die Codebasis wächst werden diese leider sehr unübersichtlich</li>
                     <li>mit mehreren Teams an einem Monolith zu arbeiten sorgt häufig für Konflikte</li>
                 </ul>
+                <aside class="notes">
+                    <ul>
+                        <li>Monolithen sind nicht grundsätzlich schlecht</li>
+                        <lI>Ein gut designter Monolith kann zu einem Modulith werden und sehr gut funktionieren</lI>
+                    </ul>
+                </aside>
             </section>
         </section>
         <section>
@@ -144,7 +151,7 @@
                     <li>Was könnte man sich alles als Component vorstellen?
                         <ul>
                             <li>Buttons, Text Fields, Labels, etc.</li>
-                            <li>Form Groups, Cards, etc.</li>
+                            <li>Search Bar, Form Groups, Cards, etc.</li>
                             <li>Header, Footer, Overlays, etc.</li>
                             <li>Pages</li>
                         </ul>
@@ -162,41 +169,26 @@
                 <h4>Component Architecture</h4>
                 <ul>
                     <li>Components haben wie Classes feste Schnittstellen</li>
-                    <li>damit können sie an unterschiedlichen Stellen eingebunden werden</li>
-                    <li>dies sind im Gegensatz zu Classes keine Methoden</li>
-                    <li>es werden Parameter in die Components rein und wieder rausgegeben</li>
-                    <li>Beispiel:
-                        <ul>
-                            <li>Text Field</li>
-                            <li>erhält einen Placeholder oder default Text</li>
-                            <li>gibt den eingegebenen Text des Nutzers zurück</li>
-                        </ul>
-                    </li>
+                    <li>damit können sie modular eingesetzt werden</li>
+                    <li>die Schnittstelle sind Input und Output Parameter</li>
                 </ul>
             </section>
             <section>
                 <h4>Component Architecture</h4>
-                <ul>
-                    <li>Wie bereits oben angedeutet kann man Components einordnen in:
-                        <ul>
-                            <li>Atoms - Buttons, Text Fields, etc.</li>
-                            <li>Molecules - Form Groups, Cards, etc.</li>
-                            <li>Organisms - Header, Footer, Overlays, etc.</li>
-                            <li>Templates - Schablone</li>
-                            <li>Pages - konkrete Seite</li>
-                        </ul>
-                    </li>
-                </ul>
-                <aside class="notes">
-                    <ul>
-                        <li>https://bradfrost.com/blog/post/atomic-web-design/</li>
-                        <li>Atoms - die Bausteine unserer Anwendung - Buttons, etc.</li>
-                        <li>Molecules - kleine zusammenschlüsse von Atoms - Suchfelder, Form Groups</li>
-                        <li>Organisms - fachliche Components. Zusammenschlüsse von Molecules mit denen der User interagieren kann</li>
-                        <li>Templates - Schablone die den Aufbau der Seite zeigt</li>
-                        <li>Pages - konkrete Seiten</li>
-                    </ul>
-                </aside>
+                <p>Beispiel (Angular):</p>
+                <pre>
+                  <code class="javascript" data-line-numbers>export class TextInputComponent {
+
+    @Input()
+    placeholder: string;
+    @Output()
+    text: EventEmitter&lt;string&gt;;
+
+    someLogic() {
+        // some logic
+    }
+}                   </code>
+                </pre>
             </section>
             <section>
                 <h4>Component Architecture</h4>
@@ -234,18 +226,116 @@
                     </li>
                     <li>Nachteile:
                         <ul>
-                            <li></li>
+                            <li>tiefe Verschachtelungen möglich</li>
+                            <li>Logik in den Components</li>
+                            <li>im Prinzip immer noch ein Monolith (Modulith)</li>
+                            <li>mehrere Teams an einem Artefakt ist nicht optimal</li>
                         </ul>
                     </li>
                 </ul>
             </section>
+            <section>
+                <h4>Aufbau einer Component Architecture</h4>
+                <p>meist nach dem MVC Pattern</p>
+                <img src="assets/MVC.png" style="height: 400px">
+                <aside class="notes">
+                    <ul>
+                        <li>um dies besser zu verstehen schauen wir uns dies anhand eines Angular Beispiels an</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h4>Aufbau einer Component: Praxis</h4>
+                <aside class="notes">
+                    <ul>
+                        <li>grundsätzlich besteht eine Component aus getrenntem Typescript, HTML und CSS</li>
+                        <li>die Trennung macht eine Component in sich übersichtlich</li>
+                        <li>es empfiehlt sich möglichst wenig Logik im HTML zu hinterlassen, dafür ist das Typescript File</li>
+                        <li>der View ist damit also klar. Das ist das HTML.</li>
+                        <li>als Model werden normalerweise Services in Angular betrachtet</li>
+                        <li>Services sind einer Typescriptcode. Es handelt sich hierbei wieder um Komponenten in denen nur Logik oder Backendaufrufe stattfinden.</li>
+                        <li>Sie stellen also die Daten bereit, die in der View angezeigt werden können</li>
+                        <li>Als Controller kann man sich damit den Typescript Part der Component vorstellen.</li>
+                        <li>Oft wird das Angular Component System nicht mit MVC, sondern MVVM bezeichnet. Model View ViewModel.</li>
+                        <li>Ich denke man kann dies aber auch gut auf MVC abstrahieren.</li>
+                        <li>Ich gehe später noch mal genauer auf die einzelne Syntax etc. von Angular ein, damit ihr auch ein Praxisbeispiel dazu bauen könnt.</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h4>Component Architecture Frameworks</h4>
+                <ul>
+                    <li>Angular</li>
+                    <li>React</li>
+                    <li>Vue</li>
+                    <li>und viele mehr...</li>
+                </ul>
+                <aside class="notes">
+                    <ul>
+                        <li>die meisten JavaScript SPA Frameworks setzen auf eine Component Architecture.</li>
+                        <li>die Frameworks unterscheiden sich meistens nur in Details, Syntax, Performance.</li>
+                        <li>hat man die Basis, also Component Architectures verstanden, so kann man sich leicht an neue Frameworks gewöhnen</li>
+                        <li>kann man eins, kann man alle...</li>
+                        <li>wir schauen uns später konkret Angular an.</li>
+                    </ul>
+                </aside>
+            </section>
         </section>
         <section>
             <section>
-                <h3>Micro Frontends</h3>
+                <h3>Exkurs: Atomic Design</h3>
+            </section>
+            <section>
+                <h4>Exkurs: Atomic Design</h4>
+                <p>große Frontends mit vielen Components werden unübersichtlich</p>
+                <img src="assets/lego-unsortiert.jpg" style="height: 400px;">
+            </section>
+            <section>
+                <h4>Exkurs: Atomic Design</h4>
+                <p>Strukturierung und Kategorisierung von Components</p>
+                <p>Ziel ist ein ordentlicher Baukasten an Components</p>
+                <img src="assets/component-periodic-table.png" style="height: 400px;">
+                <p class="small-text">https://bradfrost.com/blog/post/atomic-web-design/</p>
+            </section>
+            <section>
+                <h4>Exkurs: Atomic Design</h4>
+                <ul>
+                    <li>nach Atomic Design werden Components geordnet nach:
+                        <ul>
+                            <li>Atoms - Buttons, Text Fields, etc.</li>
+                            <li>Molecules - Search Bar, Form Groups, etc.</li>
+                            <li>Organisms - Header, Footer, Overlays, etc.</li>
+                            <li>Templates - Schablone</li>
+                            <li>Pages - konkrete Seite</li>
+                        </ul>
+                    </li>
+                </ul>
+                <aside class="notes">
+                    <ul>
+                        <li>https://bradfrost.com/blog/post/atomic-web-design/</li>
+                        <li>Atoms - die Bausteine unserer Anwendung - Buttons, etc.</li>
+                        <li>Molecules - kleine zusammenschlüsse von Atoms - Suchfelder, Form Groups</li>
+                        <li>Organisms - fachliche Components. Zusammenschlüsse von Molecules mit denen der User interagieren kann</li>
+                        <li>Templates - Schablone die den Aufbau der Seite zeigt</li>
+                        <li>Pages - konkrete Seiten</li>
+                    </ul>
+                </aside>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>Ausblick: Micro Frontends</h3>
             </section>
             <section>
                 Hier ein wenig Micro Frontends erklären.
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>Praxis: Todo Anwendung</h3>
+            </section>
+            <section>
+                <h4></h4>
             </section>
         </section>
         <section>
