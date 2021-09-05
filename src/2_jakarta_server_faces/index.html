@@ -1,0 +1,372 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Jakarta Webservices</title>
+
+    <link rel="stylesheet" href="/dist/reset.css">
+    <link rel="stylesheet" href="/dist/reveal.css">
+    <link rel="stylesheet" href="/dist/theme/white.css">
+
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+    <link rel="stylesheet" href="styles/custom_styles.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <div data-markdown>
+                # Jakarta Server Faces
+            </div>
+            <aside class="notes" data-markdown>
+                - Früher Java Server Faces
+                - gehört zu Jakarta EE (ehemals Java EE)
+                - Framework basiert auf Servlets und JSP
+                - Framework Standard
+            </aside>
+        </section>
+        <section>
+            <div data-markdown>
+                ## Ziele
+
+                * Requestübergreifendes Management des States der UI Komponenten
+                * Stark typisiertes Eventmodel um serverseitig Client Events zu behandeln
+                * Kapselung der Unterschiede innerhalb der Clients und Browsern
+                * Handling der Navigation sowie Error und Exception Events
+                * Typ Konvertierung
+                * Validierung der Daten sowie entsprechendes Errorhandling
+            </div>
+            <aside class="notes" data-markdown>
+                Typ Konvertierung: vom Application Model zu Anzeigestrings und umgedreht
+            </aside>
+        </section>
+        <section>
+            <div data-markdown>
+                ## Requirements
+                
+                * JDK
+                * Servlet-Container (bspw. Apache Tomcat)
+            </div>
+            <aside class="notes" data-markdown>
+                Technische Voraussetzungen: JDK und Servlet-Container zur Entwicklung
+                
+                Für das JSF Verständnis wird allerdings auch Grundverständnis über HTTP und Java sowie grundlegende MVC Kenntnisse benötigt.
+            </aside>
+        </section>
+        <!--section>
+            <div data-markdown>
+                ## Komponenten
+
+                * Verminderung Redundanzen
+                * hierarchische Struktur
+                * Container Komponenten vorhanden
+                * Struktur durch MVC
+            </div>
+            <aside class="notes" data-markdown>
+                JSF enthält ein Komponentensystem ähnlich dem System der Java Swing API.
+            </aside>
+        </section-->
+        <section>
+            <div data-markdown>
+                ## JSF Konfiguration
+
+                * Konfiguration in faces-config.xml im WEB-INF Ordner
+                * hier gibt es Definitionen zu:
+                    * Navigation
+                    * Listeners
+                    * Beans
+                    * etc.
+            </div>
+        </section>
+        <section>
+            <h3>Lifecycle</h3>
+            <img data-fragment-index="1" src="assets/JSF-lifecycle.png" height="400">
+            <aside class="notes" data-markdown>
+                Sollte eine Phase nicht benötigt werden oder eine Exception auftreten so wird direkt die Phase 6 Render Response ausgeführt.
+                Frage nach der Reihenfolge?
+            </aside>
+        </section>
+        <section>
+                <h2>Erste Ausgabe</h2>
+
+                <pre>
+                    <code data-line-numbers="|3-4|10">&lt;!DOCTYPE html&gt;
+    &lt;html lang="de"  xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:h="http://java.sun.com/jsf/html"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"/&gt;
+        &lt;title&gt;Hello World of JSF&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h:outputText value="Hello World"/&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                    </code>
+                </pre>
+        </section>
+        <section>
+            <section>
+                <div data-markdown>
+                    ## JSF Tags
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+## outputText
+
+| Parameter   | Bedeutung                                                                   |
+|-------------|-----------------------------------------------------------------------------|
+| ID          | Bezeichner                                                                  |
+| value       | Wert (kann auch zwischen öffnenden und schließenden Tag geschrieben werden) |
+| rendered    | Gibt an ob das Tag gerendert werden soll oder nicht.                        |
+| styleClass  | Css Klasse                                                                  |
+| style       | Css Stylerules                                                              |
+| title       | HTML Title Attribut                                                         |
+
+                </div>
+            </section>
+        </section>
+        <section>
+            <section>
+                <div data-markdown>
+                    ## Unified Expression Language
+    
+                    * Grundsyntax
+    
+                    ``` HTML
+                    ${expression} // immediate
+                    #{expression} // deferred
+                    ```
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Literale
+
+                    ```
+                    ${'hello ' + 'world'} // hello world
+                    ${21*2} // 42
+                    
+                    ${'\${' + '\#{'} // $ und # müssen escaped werden
+                    ```
+                </div>
+                <aside class="notes">
+                    Literal: Konstante
+                    Ansonsten gleich wie bei JSP
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Attributzugriff auf Beans
+
+                    Rein lesend: 
+
+                    ```
+                    ${bean.attribute} // => bean.getAttribute
+                    ```
+                </div>
+                <aside class="notes">
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Attributzugriff auf Beans
+
+                    Lesend und schreibend: 
+
+                    ```
+                    #{bean.attribute} // Funktion phasenabhängig
+                    ```
+
+                    * Lesender Zugriff in den Phasen: `process validations` und `render response`
+                    * Schreibender Zugriff in den Phasen: `update Model`
+                    * Beispiel (Two-Way-Binding, lesend+schreiben):
+                    ```
+                    &lt;h:InputText value="#{bean.name}"/&gt;
+                    ```
+                </div>
+                <aside class="notes">
+                </aside>
+            </section>
+        </section>
+        <section>
+            <section>
+                <div data-markdown>
+                    ## Beans
+                </div>
+                <aside class="notes" data-markdown>
+                    * funktionieren grundlegend wie JSP Beans
+                    * einige Unterschiede
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Beans definieren
+                    * Annotations:
+                        * Zugriff über Klassenname mit kleinem Anfangsbuchstabe
+
+                    ```
+                    @ManagedBean
+                    @ViewScope
+                    public class SayHello
+                    ```
+
+                    * Faces-config.xml:
+                        * Zugriff über Attributwert managed-bean-name
+
+                    ```
+                    &lt;managed-bean&gt;
+                        &lt;managed-bean-name&gt;sayHello&lt;/managed-bean-name&gt;
+                        &lt;managed-bean-class&gt;demo.SayHello&lt;/managed-bean-class&gt;
+                        &lt;managed-bean-scope&gt;request&lt;/managed-bean-scope&gt;
+                    &lt;/managed-bean&gt;   
+                    ```
+
+                </div>
+            </section>
+            <section>
+                <div data-markdown1>
+                    ### Scopes
+
+                    * Request Scope `@javax.faces.bean.RequestScoped`
+                    * View Scope `@javax.faces.bean.RequestScoped`
+                        * während der Nutzer auf dem gleichen View bleibt
+                        * gilt auch über mehrere Page-Reloads 
+                    * Session Scope `@javas.faces.bean.SessionScoped`
+                    * Application Scope `javax.faces.bean.ApplicationScoped`
+                        * Gilt über die komplette Laufzeit
+                </div>
+            </section>
+            <section>
+                <div>
+                    ### Baking Beans
+
+                    * JSF ruft die Getter und Setter in jeder Phase neu auf
+                        * unnötige Resourcenverschwendung
+                    * Daher keine aufwendigen Berechnungen oder Aufruf externer Dienste (Datenbank etc.)
+                    * Füge Baking Beans zwischen View und Logik ein
+                        * Pufferung und Interpretation der Daten
+                </div>
+            </section>
+        </section>
+        <section>
+            <section>
+                <div data-markdown>
+                    ## Navigation
+
+                    * explizit über in `faces-config.xml` definierte Regeln
+                    * implizit wenn keine explizite Regel greift
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Navigation Rule (explizite Navition)
+
+                    ``` html[|2|3,7|4|5|6]
+                    &lt;navigation-rule&gt;
+                        &lt;from-view-id&gt;/login.xhtml&lt;/from-view-id&gt;
+                        &lt;navigation-case&gt;
+                            &lt;from-action&gt;#{LoginForm.login}&lt;/from-action&gt;
+                            &lt;from-outcome&gt;success&lt;/from-outcome&gt;
+                            &lt;to-view-id&gt;/storefront.xhtml&lt;/to-view-id&gt;
+                        &lt;/navigation-case&gt;
+                        &lt;navigation-case&gt;
+                            &lt;to-view-id&gt;/default.xhtml&lt;/to-view-id&gt;
+                        &lt;/navigation-case&gt;
+                    &lt;/navigation-rule&gt;
+                    ```
+                </div>
+                <aside class="notes">
+                    <div data-markdown>
+                        * from-view-id: legt fest, für welchen View die Navigation Rule gilt. Es ist auch möglich Wildcards zu nutzen.
+                        * navigation-case: Die Fälle werden von oben nach unten abgearbeitet. Sollte einer zutreffen, wird der erste Treffer zur Navigation genutzt.
+                        * from-action und from-outcome sind optional.
+                            * Wenn beide spezifiziert sind, wird der Rückgabewert der Action (from-action) mit dem Wert in from-outcome verglichen
+                            * Ist nur from-outcome definiert, muss der Wert mit dem Rückgabewert der Action der jakarta.faces.component.UICommand Komponenten bzw. deren Implementierung übereinstimmen.
+                            * Sofern nur from-action definiert ist muss ein Component Tag existieren, welches dem Rückgabewert entspricht.
+                        * weitere Attribute möglich
+                    </div>
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Implizite Navigation
+
+                    Greift keine Navigation Regel dann wird der Rückgabewert der jeweiligen Action als relative URL genutzt.
+                </div>
+            </section>
+        </section>
+        <section>
+            <!--section>
+                <div data-markdown>
+                    ## User Interface Component Model
+
+                    * Basisinterface für Userkomponenten
+                    * Komponenten sind wiederverwendbar
+                    * hierarchische Struktur
+                    * schachtelbar
+                </div>
+                <aside class="notes" data-markdown>
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ## UIComponent
+
+                    * abstract Class
+                    * definiert das Verhalten und die Status Informationen
+                    * enthält Basisimplementierung
+                        * Getter und Setter für die Id, Component Type
+                        * Value und Component Binding
+                </div>
+            </section-->
+            <section>
+                <div data-markdown>
+                    ### Zusätzliche Interfaces
+
+                    * Converters
+                    * Events and Listeners
+                    * Validators
+                </div>
+                <aside class="notes">
+                    * Converter: Pluggable support class to convert the markup value of a component to and from the corresponding type in the model tier.
+                    * Events  and  Listeners: An  event  broadcast  and  listener  registration  model  based  on  the  design patterns of the JavaBeans Specification, version 1.0.1.
+                    * Validators: Pluggable  support  classes  that  can  examine  the  local  value  of  a  component  (as received  in  an  incoming  request)  and  ensure  that  it  conforms  to  the  business  rules  enforced  by each  Validator.  Error  messages  for  validation  failures  can  be  generated  and  sent  back  to  the  user during rendering.
+                </aside>
+            </section>
+        </section>
+        <section>
+            <div data-markdown>
+                ## Common Event Processing
+            </div>
+            <aside class="notes" data-markdown>
+            </aside>
+        </section>
+        <section>
+            <div data-markdown>
+            </div>
+            <aside class="notes" data-markdown>
+            </aside>
+        </section>
+    </div>
+</div>
+
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        dependencies: [
+            {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+        ]
+    });
+</script>
+</body>
+</html>
