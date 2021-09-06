@@ -118,21 +118,125 @@
                 <textarea data-template>
                     #### Themen
 
-                    - Dynamisches HTML (JSF)
-                    - Rich Client (2 - 3 Vorlesungseinheiten)
-                        - Angular Frontend
-                        - Spring Backend
+                    - Dynamisches HTML
+                    - Rich Client
                     - Benutzerverwaltung
                     - Security
                     - Prüfungsvorbereitung
+                    - App Entwicklung (Optional)
                 </textarea>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Dynamisches HTML
+
+                    - Umsetzung einer Anwendung
+                        - mit bereits erlernten Technologien
+                        - Java, HTML und JSP
+                    - wir nutzen JSF
+                        - MVC Design
+                        - Lifecycle und Eventmanagement
+                </textarea>
+                <aside class="notes">
+                    - Umsetzung mit erlernten Technologien
+                        - wir schauen mal wie weit wir kommen, mit dem was wir schon können
+                    - früher nutze JSF JSP, seit JSF 2 gibt es eine eigenes Rendering (facelets -> erweiterte servlets).
+                    - JSF
+                        - Validierung
+                        - Konvertierung
+                        - Events -> Userevents aus dem Frontend
+                </aside>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Rich Client
+
+                    - Umsetzung einer Anwendung
+                        - mit unbekannten Technologien
+                        - Typescript, Angular und Spring
+                    - Aufteilung in Frontend und Backend
+                        - 2-3 Vorlesungseinheiten
+                </textarea>
+                <aside class="notes">
+                    - Aufteilung in Frontend und Backend
+                        - Rich Clients sind häufig in Frontend und Backend geteilt, da das Frontend bereits eine eigene Anwendung ist.
+                        - Das Backend liefert normalerweise nur noch Daten und führt Geschäftslogik aus.
+                </aside>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Rich Client
+
+                    - Warum Angular?
+                        - stärkere Struktur
+                        - gut zum Einsteigen
+                    - Warum Spring?
+                        - weit verbreitet
+                        - wenig Konfiguration
+                    - Frameworks sind repräsentativ für ihre Gattung
+                </textarea>
+                <aside class="notes">
+                    - Warum Angular?
+                        - weit verbreitet
+                        - werdet ihr bestimmt in Projekten mal sehen
+                        - ich kenne mich damit aus
+                    - Warum Spring?
+                        - wichtig für das Arbeitsleben
+                        - wird euch wahrscheinlich mal unterkommen
+                        - wenig Zeit für das Setup
+                        - weniger auf die Technik konzentrieren
+                </aside>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Benutzerverwaltung
+
+                    - Webanwendungen sind Nutzerzentriert
+                        - Benutzeridentifikation
+                        - Rechteverwaltung
+                        - Datenverwaltung
+                        - Abrechnungsverwaltung
+                    - OAuth2 und JWT
+                        - ist "der" verbreitete Standard
+                </textarea>
+                <aside class="notes">
+                    - Nutzer müssen identifiziert werden
+                        - brauchen verschiedene Rechte
+                        - dürfen nur auf bestimmte Daten zugreifen
+                        - müssen evtl. für Dienstleistungen bezahlen
+                    - Benutzerverwaltung ist kompliziert
+                        - Bitte nicht selbst machen
+                    - OAuth2
+                        - weil kompliziert bitte Standards verwenden
+                        - und best practices einhalten
+                </aside>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Security
+
+                    - Webanwendungen sind öffentlich erreichbar
+                    - C.I.A - Prinzip
+                        - Confidentiality
+                        - Integrity
+                        - Availability
+                    - wird gerne vernachlässigt
+                    - Benutzerfreundlichkeit steht im Konflikt zu Security
+                </textarea>
+                <aside class="notes">
+                    - Wie Gebäude müssen auch Webanwendungen einbruchssicher sein
+                    - Vertraulichkeit, Integrität und Verfügbarkeit
+                    - Fokus liegt auf den Features, nicht auf den Qualitätskriterien
+                        - Messbarkeit ist schwierig
+                </aside>
             </section>
             <section data-markdown>
                 <textarea data-template>
                     #### Praxisteil
 
-                    - Skeleton Projekt (wird als Git Repository bereitgestellt)
-                    - Funktionale Anforderungen werden von uns bereitgestellt
+                    - Skeleton Projekt
+                        - wird als Git Repository bereitgestellt
+                    - Funktionale Anforderungen stellen wir bereit
                     - Gemeinsame Umsetzung der Anforderungen
                 </textarea>
             </section>
@@ -142,28 +246,17 @@
 
                     - Vorhandene Entwicklungsumgebung
                         - wir unterstützen: Intellij & Eclipse
-                    - Git ist installier!
+                    - Projekte auf Gitlab
+                        - Git ist installiert!
                     - Java Projekte über Maven
-                        - Maven ist installiert (bei Intellij enthalten)!
+                        - mit Maven Wrapper
                     - JavaScript Projekte mit NPM
                         - NPM ist installiert!
                 </textarea>
+                <aside class="notes">
+                    - Maven Wrapper -> mvn wird mit in Git Versioniert keine installation notwendig
+                </aside>
             </section>
-        </section>
-        <section data-markdown>
-            <textarea data-template>
-                ## Einordung der Themen
-            </textarea>
-        </section>
-        <section data-markdown>
-            <textarea data-template>
-                ## Dynamische Pages
-
-                - Möglichkeiten HTML Serverseitig dynamisch zu generieren
-                - JAVA Code einbetten
-                - MVC
-                - Praxis: JSF in die Anwendung einbauen
-            </textarea>
         </section>
     </div>
 </div>
