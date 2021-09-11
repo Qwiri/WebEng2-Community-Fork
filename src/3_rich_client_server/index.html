@@ -254,7 +254,8 @@
         </aside>
       </section>
       <section>
-        <p><em>"A Web service is a software system designed to support interoperable machine-to-machine interaction over a network. It has an interface described in a machine-processable format."</em></p>
+        <p><em>"A Web service is a software system designed to support interoperable machine-to-machine interaction over a network. It has an interface
+          described in a machine-processable format."</em></p>
         <p class="cite">w3.org</p>
         <aside class="notes">
           <ul>
@@ -357,6 +358,580 @@
         Syntax erklären.
         Anforderungen aufschrieben.
         Etc.
+      </section>
+    </section>
+    <section>
+      <section data-markdown>
+        <textarea data-template>
+          ### Spring
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Spring
+
+          - Application Framework
+          - Dependency-Injection-Container
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Spring-Boot
+
+          - Basiert auf Spring
+          - Erweitert um Java EE
+          - Convention-over-Configuration
+          - Annotation-Base Configuration
+            - Spring ursprünglich eigentlich XML
+        </textarea>
+      </section>
+      <!-- Spring - Bootstrap -->
+      <section data-markdown>
+        <textarea data-template>
+          #### Bootstrap
+
+          - Aufbau des Objektgraphen
+          - Zwei primäre Quellen für Objekte
+            - Components
+            - Configurations
+          - Objektgraph ist normalerweise statisch
+          - Objektgraph erlaubt dynamische Erweiterung
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          ### Bootstrap
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Bootstrap - Verwendung
+
+          - `@SpringBootApplication` zur Deklaration des Einstiegspunkt
+          - `@ComponentScan` für komplexere Umstände
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Bootstrap - Beispiel
+
+          ```java
+          @SpringBootApplication
+          public class MySpringApplication {
+              public static void main(String[] args) {
+                  SpringApplication.run(MySpringApplication.class, args);
+              }
+          }
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Bootstrap - Details
+
+          `@SpringBootApplication`
+          - `scanBasePackages` Base-Package für alle Configurations und Components
+            - Default ist das aktuelle Package
+        </textarea>
+      </section>
+      <!-- Spring - Components -->
+      <section data-markdown>
+        <textarea data-template>
+          #### Components
+
+          - Direkte Deklaration von Objekten
+          - Erzeugung durch den Dependency-Injection-Container
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Components - Verwendung
+
+          - `@Component` zur Deklaration
+          - `@Order` zur Definition der Präzedenz
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Components - Beispiel
+
+          ```java
+          @Component
+          public class MyComponent {
+              ...
+          }
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Components - Aliase
+
+          - `@Controller` für Endpoints
+          - `@RestController` für ReST-Endpoints
+          - `@Services` für Services
+          - `@Repository` für Datenbankschnittstellen
+        </textarea>
+      </section>
+      <!-- Spring - Configurations -->
+      <section data-markdown>
+        <textarea data-template>
+          #### Configurations
+
+          - Indirekte Deklaration von Objekten
+          - Sowie Ändern und Erweitern bestehender Objekte
+          - Aufruf durch den Dependency-Injection-Container
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Configurations - Verwendung
+
+          - `@Configuration` zur Deklaration einer Konfiguration
+          - `@Bean` zur Deklaration eines Objektes
+          - `@Order` zur Definition der Präzedenz
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Configurations - Beispiel
+
+          ```java
+          @Configuration
+          public class MyConfiguration {
+              @Bean
+              public MyComponent createComponent(){
+                  ...
+              }
+          }
+          ```
+        </textarea>
+      </section>
+      <!-- Spring - Referenzierung -->
+      <section data-markdown>
+        <textarea data-template>
+          #### Referenzierung
+
+          - Benötigt Aufruf durch Dependency-Injection-Container
+          - Auflösung der Referenzen über Typ
+          - Mehrfach vorhandene Objekt über Namen ggf. Classifier
+          - Boostrap scheitert wenn Referenz nicht auslösbar
+            - keine entsprechendes Objekt
+            - mehrere entsprechende Objekte
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Referenzierung - Verwendung
+
+          - `@Autowired` zur Markierung eines Parameters
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Referenzierung - Beispiel
+
+          ```java
+          @Component
+          public class MyComponentWithDependency {
+              public MyComponentWithDependency(@Autowired MyRequiredComponent component){
+                  ...
+              }
+          }
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Referenzierung - Beispiel
+
+          ```java
+          @Configuration
+          public class MyConfiguration {
+              @Bean
+              public MyComponentWithDependency createDependantComponent(@Autowired MyRequiredComponent component){
+                  ...
+              }
+          }
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Referenzierung - Details
+
+          `@Autowired`
+          - `required` für optionale Objekte
+        </textarea>
+      </section>
+    </section>
+    <section>
+      <section data-markdown>
+        <textarea data-template>
+          ### Spring Schichten
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Spring Schichten
+
+          - Frontend
+          - Middleware
+          - Backend
+        </textarea>
+      </section>
+      <!-- Spring - Controllers -->
+      <section data-markdown>
+        <textarea data-template>
+          #### Controller
+
+          - Schnittstelle zur Außenwelt
+          - Abstraktes Konstrukt
+          - Verschiedene Arten von Schnittstellen möglich (ReST, GraphQL etc.)
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Controller - Einordnung
+
+          - Frontend
+          - Referenziert Services
+          - Wird von niemanden referenziert
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Controller - Verwendung
+
+          - `@Controller` zur Deklaration
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller
+
+          - Konkrete Ausprägung eines Controllers
+          - ReST basiert
+          - Definiert die Endpoints der Anwendung
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Verwendung
+
+          - `@RestController` zur Deklaration
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Verwendung
+
+          - `@RequestMapping` zur Definition des Endpoints
+          - `@PathVariable` für Pfad-Variablen
+          - `@QueryParam` für Query-Parameter
+          - `@RequestBody` für Bodies
+          - `@ResponseStatus` für besondere Http-Status
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Beispiel
+
+          ```java
+          @RestController
+          @RequestMapping(path = "/notes", produces = MediaType.APPLICATION_JSON)
+          public class MyNoteController {
+              ...
+          }
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Beispiel
+
+          Notizen holen
+          `GET /notes`
+
+          Notizen suchen
+          `GET /notes?q={search}`
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Beispiel
+
+          ```java
+          @RequestMapping(method = RequestMethod.GET)
+          public List<Note> getNotes(@RequestParam(name = "q", required = false) String search) {
+              ...
+          }
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Beispiel
+
+          Notiz anlegen
+          `POST /notes`
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Beispiel
+
+          ```java
+          @RequestMapping(method = RequestMethod.POST)
+          public Note createNote(@RequestBody NoteProposal proposal) {
+              ...
+          }
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Beispiel
+
+          Notiz ändern
+          `PUT /notes/{note}`
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Beispiel
+
+          ```java
+          @RequestMapping(path = "/{note}", method = RequestMethod.PUT)
+          public Note updateNote(@PathVariable("note) Long noteId, @RequestBody NoteProposal proposal) {
+              ...
+          }
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Beispiel
+
+          Notiz ändern
+          `DELETE /notes/{note}`
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Beispiel
+
+          ```java
+          @RequestMapping(path = "/{note}", method = RequestMethod.DELETE)
+          public Note deleteNote(@PathVariable("note) Long noteId, @RequestBody NoteProposal proposal) {
+              ...
+          }
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Beispiel
+
+          Anhang holen
+          `GET /notes/{note}/attachment/{attachment}`
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Beispiel
+
+          ```java
+          @RequestMapping(
+              path = "/{note}/attachment/{attachment}",
+              method = RequestMethod.GET,
+              produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
+          )
+          public byte[] getAttachment(@PathVariable("note") Long noteId, @PathVariable("attachment) String attachmentId) {
+              ...
+          }
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Rest-Controller - Details
+
+          `@RequestMapping`
+          - `path` Pfad ink. Pfad-Variablen
+          - `method` Erwartete Methode
+          - `consumes` Erwarteter Content-Type
+          - `produces` Erzeugter Content-Type
+        </textarea>
+      </section>
+      <!-- Spring - Service -->
+      <section data-markdown>
+        <textarea data-template>
+          #### Service
+
+          - Implementiert Businesslogik
+          - Oftmals durch ein Interface abstrahiert
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Service - Einordnung
+
+          - Middleware
+          - Referenziert Repositories und andere Services
+          - Wird von Controller und Services referenziert
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Service - Verwendung
+
+          - `@Service` zur Deklaration
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Service - Beispiel
+
+          ```java
+          @Service
+          public interface MyNoteService {
+              ...
+          }
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Service - Beispiel
+
+          ```java
+          @Service
+          public class MyNoteServiceImpl implements MyNoteService {
+              ...
+          }
+          ```
+        </textarea>
+      </section>
+      <!-- Spring - Repository -->
+      <section data-markdown>
+        <textarea data-template>
+          #### Repository
+
+          - Implementiert Datenbankschnittstelle für eine Entity
+          - Abstraktes Konstrukt
+          - Verschiedene Arten von Datenbankschnittstelle möglich (JPA, ElasticSearch etc.)
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Repository - Einordnung
+
+          - Backend
+          - Referenziert andere Repositories
+          - Wird von Services referenziert
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### Repository - Verwendung
+
+          - `@Repository` zur Deklaration
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### JPA-Repository
+
+          - Basiert auf Java-Persistence-API
+          - Implementation per Proxy
+          - Erweiterung durch Annotationen
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### JPA-Repository - Verwendung
+
+          - `@Repository` zur Deklaration
+          - `@Query` zur Definition komplexer Queries
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### JPA-Repository - Beispiel
+
+          ```java
+          @Repository
+          public interface MyNoteRepository extends JpaRepository<Note, Long> {
+              ...
+          }
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### JPA-Repository - Beispiel
+
+          ```java
+          List<Note> findAll();
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### JPA-Repository - Beispiel
+
+          ```java
+          Note findById(Long id);
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### JPA-Repository - Beispiel
+
+          ```java
+          Note findByNameAndDescription(String name, String description);
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### JPA-Repository - Beispiel
+
+          ```java
+          @Query("SELECT n FROM Notes n WHERE n.tag IN (:tags) AND n.creationDate >= :timestamp")
+          Note findWithTagsAfter(String[] tags, OffsetDateTime timestamp);
+          ```
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### JPA-Repository - Better Practice
+
+          - Vielzahl an vordefinierten Operationen
+          - Wrapper-Klasse für explizite Schnittstellen
+          - Mehr Aufwand - Mehr Konsistenz
+            - Projekt-spezifisches Wording
+            - Vermeidung von `Optional`
+            - Keine ungewollten Operationen
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### JPA-Repository - Beispiel
+
+          ```java
+          @Repository
+          public class MyNoteRepository {
+              private @Autowired MySpringNoteRepository delegate;
+
+              public @Nullable Note find(@NotNull Long id) {
+                  return delegate.findById(id).orElse(null)
+              }
+          }
+          ```
+        </textarea>
       </section>
     </section>
   </div>
