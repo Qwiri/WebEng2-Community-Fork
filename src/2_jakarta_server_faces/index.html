@@ -387,16 +387,100 @@
             </section>
             <section>
                 <div data-markdown>
-                    ### Listener Classes
+                    #### Listener Classes Application Events
 
                     * für jeden Application Event Type eine Listener
                         * ActionListener
                         * ValueChangeListener
                 </div>
             </section>
+            <section>
+                <div data-markdown>
+                    ### System Events
+
+                    * extends `SystemEvent`
+                    * alle spezifizierte Events unter `jakarta.faces.event`
+                    * Beispiel: `PostConstructApplicationEvent`
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    #### Component System Events
+
+                    * spezielle System Events
+                    * beinhalten einen Verweis auf eine Komponente
+                    * Beispiel: `PreRenderViewEvent`
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    #### Listener Classes
+    
+                    * nur zwei Listener Classes nötig
+                    * für System Events: `jakarta.faces.event.SystemEventListener`
+                    * für Component System Events: `jakarta.faces.event.ComponentSystemEventListener`
+                </div>
+            </section>
+        </section>
+        <section>
+            <section>
+                <div data-markdown>
+                    ## Validatoren
+    
+                    * Validatoren für Beans und Input Fields
+                    * Standardvalidatoren für gängige Datentypen
+                        * einfache Einschränkungen für Standard-Datentypen
+                    * eigene komplexe Validatoren möglich
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Standardvalidatoren
+    
+                    ```
+                        &lt;f:validateLength minimum="6" maximum="15"/&gt;
+                        &lt;f:validateLongRange minimum="6" maximum="15"/&gt;
+                        &lt;f:validatePattern pattern="&lt;myPattern&gt;"/&gt;
+                    ```
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Verwendung
+
+                    ```
+&lt;h:inputText value="#{bean.variable}" validator="validatorMethod()" /&gt;
+&lt;h:inputText value="#{bean.variable}"&gt;
+    &lt;f:validateRequired/&gt;
+&lt;/inputText&gt;
+                    ```
+                </div>
+            </section>
+        </section>
+        <section>
+            <section>
+                <div data-markdown>
+                    ## Konverter
+    
+                    * Validatoren für Beans und Input Fields
+                    * StandardKonverter für gängige Datentypen
+                        * BooleanConverter, BigIntegerConverter, DateTimeConverter etc.
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Verwendung
+
+                    * wird automatisch zugeordnet durch den Typ der Beanvariable
+                    ```
+                    &lt;h:inputText value="#{bean.variable}"/&gt;
+                    ```
+                </div>
+            </section>
         </section>
         <section>
             <div data-markdown>
+
             </div>
             <aside class="notes" data-markdown>
             </aside>
