@@ -225,7 +225,6 @@
                         &lt;managed-bean-scope&gt;request&lt;/managed-bean-scope&gt;
                     &lt;/managed-bean&gt;   
                     ```
-
                 </div>
             </section>
             <section>
@@ -338,14 +337,63 @@
                     * Validators: Pluggable  support  classes  that  can  examine  the  local  value  of  a  component  (as received  in  an  incoming  request)  and  ensure  that  it  conforms  to  the  business  rules  enforced  by each  Validator.  Error  messages  for  validation  failures  can  be  generated  and  sent  back  to  the  user during rendering.
                 </aside>
             </section>
+            <section>
+                <div data-markdown>
+                    ## Konverter
+                    * verschiedene Standardkonverter
+                        * BigDecimalConverter, BooleanConverter, CharacterConverter, DoubleConverter, LongConverter, ShortConverter, BigIntegerConverter, ByteConverter, DateTimeConverter, EnumConverter, NumberConverter
+                    * Standardkonverter werden automatisch angewandt
+                    
+                    ```
+                    &lt;h:inputText value="#{bean.value}" /&gt;
+                    ```
+                </div>
+            </section>
         </section>
         <section>
-            <div data-markdown>
-                ## Common Event Processing
-            </div>
-            <!-- TODO Hier schätze ich fehlt noch etwas?-->
-            <aside class="notes" data-markdown>
-            </aside>
+            <section>
+                <div data-markdown>
+                    ## Common Event Processing
+                </div>
+                <aside class="notes" data-markdown>
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Event Types
+
+                    * Application Events
+                        * ActionEvent
+                        * ValueChangeEvent
+                    * System Events
+                </div>
+                <aside class="notes">
+                    Application Events: Anwendungsspezifisch, werden von Anwendungsentwicklern geschrieben, immer an eine UIComponent gebunden
+                    System Events: representieren spezifische Zeitpunkte in der Anwendungsausführung              
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Application Events
+
+                    * extends `jakarta.faces.event.FacesEvent`
+                    * enthält immer die triggernde Komponenten
+                    * werden an eine Lifecycle Phase gebunden
+                    * können gequeued werden
+                </div>
+                <aside class="notes">
+
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Listener Classes
+
+                    * für jeden Application Event Type eine Listener
+                        * ActionListener
+                        * ValueChangeListener
+                </div>
+            </section>
         </section>
         <section>
             <div data-markdown>
