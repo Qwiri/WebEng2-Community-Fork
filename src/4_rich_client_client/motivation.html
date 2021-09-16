@@ -1,9 +1,9 @@
 <section>
-  <h3>Motivation</h3>
+    <h3>Motivation</h3>
 </section>
 <section>
-  <h4>Daten vom Backend</h4>
-  <pre>
+    <h4>Daten vom Backend</h4>
+    <pre>
         <code class="language-html" data-line-numbers>&lt;html&gt;
   &lt;head&gt;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
@@ -18,8 +18,8 @@
       </pre>
 </section>
 <section>
-  <h4>Stylesheets</h4>
-  <pre>
+    <h4>Stylesheets</h4>
+    <pre>
         <code class="language-html" data-line-numbers="3">&lt;html&gt;
   &lt;head&gt;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
@@ -34,12 +34,12 @@
       </pre>
 </section>
 <section>
-  <h4>Stylesheets</h4>
-  <ul>
-    <li>enthalten häufig ähnliche Informationen</li>
-    <li>könnten einmalig ausgeliefert werden</li>
-  </ul>
-  <pre>
+    <h4>Stylesheets</h4>
+    <ul>
+        <li>enthalten häufig ähnliche Informationen</li>
+        <li>könnten einmalig ausgeliefert werden</li>
+    </ul>
+    <pre>
           <code class="language-html" data-line-numbers>&lt;style&gt;
  label {
    font-size: 12pt;
@@ -57,8 +57,8 @@
         </pre>
 </section>
 <section>
-  <h4>JavaScript</h4>
-  <pre>
+    <h4>JavaScript</h4>
+    <pre>
         <code class="language-html" data-line-numbers="4">&lt;html&gt;
   &lt;head&gt;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
@@ -73,12 +73,12 @@
       </pre>
 </section>
 <section>
-  <h4>JavaScript</h4>
-  <ul>
-    <li>ebenfalls repetitiv</li>
-    <li>auf mehreren HTML Seiten braucht es gleiche Funktionalität</li>
-  </ul>
-  <pre>
+    <h4>JavaScript</h4>
+    <ul>
+        <li>ebenfalls repetitiv</li>
+        <li>auf mehreren HTML Seiten braucht es gleiche Funktionalität</li>
+    </ul>
+    <pre>
           <code class="language-html" data-line-numbers>&lt;script&gt;
   function openDropdown() {
     // do it
@@ -92,8 +92,8 @@
         </pre>
 </section>
 <section>
-  <h4>HTML Struktur</h4>
-  <pre>
+    <h4>HTML Struktur</h4>
+    <pre>
         <code class="language-html" data-line-numbers>&lt;html&gt;
   // head
   &lt;body&gt;
@@ -108,11 +108,11 @@
         </pre>
 </section>
 <section>
-  <h4>HTML Struktur</h4>
-  <ul>
-    <li>dynamischer Anteil der Seite beschränkt sich auf Informationen</li>
-  </ul>
-  <pre>
+    <h4>HTML Struktur</h4>
+    <ul>
+        <li>dynamischer Anteil der Seite beschränkt sich auf Informationen</li>
+    </ul>
+    <pre>
         <code class="language-html" data-line-numbers="7">&lt;html&gt;
   // head
   &lt;body&gt;
@@ -127,8 +127,8 @@
         </pre>
 </section>
 <section>
-  <h4>Wartezeiten nach den Requests</h4>
-  <pre>
+    <h4>Wartezeiten nach den Requests</h4>
+    <pre>
       <code class="language-plantuml">
           @startuml
           activate Client
@@ -149,11 +149,11 @@
           @enduml
       </code>
   </pre>
-  <aside class="notes">
-    <ul>
-      <li>User können in den Wartezeiten, bis die nächste Seite geladen wurde, nichts machen.</li>
-      <li>Es wird außerdem kein Loadingspinner etc. angezeigt</li>
-      <li>Bei SPA's wäre dies möglich</li>
-    </ul>
-  </aside>
+    <aside class="notes">
+        <ul>
+            <li>User können in den Wartezeiten, bis die nächste Seite geladen wurde, nichts machen.</li>
+            <li>Es wird außerdem kein Loadingspinner etc. angezeigt</li>
+            <li>Bei SPA's wäre dies möglich</li>
+        </ul>
+    </aside>
 </section>
