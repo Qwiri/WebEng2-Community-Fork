@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>1. Socket Webserver</title>
+
+  <link rel="stylesheet" href="/dist/reset.css">
+  <link rel="stylesheet" href="/dist/reveal.css">
+  <link rel="stylesheet" href="/dist/theme/white.css">
+
+  <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+  <link rel="stylesheet" href="styles/custom_styles.css">
+  <link rel="stylesheet" href="/src/custom_styles/global_styles.css">
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <section>
+      <h3>Dependency Injection</h3>
+    </section>
+    <section>
+      <h4>Dependency Injection</h4>
+      <p>Abhängigkeiten werden nicht vom Objekt selbst erzeugt, sondern von einem anderen Objekt bei der initialisierung hinein gegeben.</p>
+    </section>
+    <section>
+
+    </section>
+  </div>
+</div>
+
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: true,
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+    dependencies: [
+      {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+    ]
+  });
+</script>
+</body>
+</html>

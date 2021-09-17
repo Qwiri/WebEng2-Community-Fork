@@ -1,0 +1,340 @@
+<section>
+    <h3>Angular</h3>
+</section>
+<section>
+    <h4>Component Structure</h4>
+    <img src="assets/component_structure.png" style="height: 150px;"/>
+    <aside class="notes">
+        <ul>
+            <li>eine Angular Component besteht normalerweise aus 4 Dateien</li>
+            <li>css -> enthält Informationen fürs Styling
+                <ul>
+                    <li>Styling wird nur auf die eigene Component angewendet</li>
+                    <li>Übergreifende Styles sollten an anderer Stelle abgelegt werden</li>
+                    <li>Alternativ kann man die "ViewEncapsulation" auch ausschalten</li>
+                </ul>
+            </li>
+            <li>html -> enthält die Struktur des views
+                <ul>
+                    <li>im HTML kann auf Variablen und Methoden der ts Datei zugegriffen werden</li>
+                </ul>
+            </li>
+            <li>spec.ts -> Tests für die Methode, wir gehen hier evtl. noch mal später ein</li>
+            <li>ts -> enthält Logik und Daten</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>component.ts</h4>
+    <pre>
+                  <code class="javascript" data-line-numbers>@Component({
+    selector: 'app-show-data',
+    templateUrl: './show-data.component.html',
+    styleUrls: ['./show-data.component.css']
+})
+export class ShowDataComponent {
+    ...
+}  </code>
+                </pre>
+    <aside class="notes">
+        <ul>
+            <li>@Component Annotation</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>selector</h4>
+    <pre>
+                  <code class="javascript" data-line-numbers="2">@Component({
+    selector: 'app-show-data',
+    templateUrl: './show-data.component.html',
+    styleUrls: ['./show-data.component.css']
+})
+export class ShowDataComponent {
+    ...
+}  </code>
+                </pre>
+    <aside class="notes">
+        <ul>
+            <li>selector -> damit wird die Component an anderer Stelle eingebunden</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>templateUrl</h4>
+    <pre>
+                  <code class="javascript" data-line-numbers="3">@Component({
+    selector: 'app-show-data',
+    templateUrl: './show-data.component.html',
+    styleUrls: ['./show-data.component.css']
+})
+export class ShowDataComponent {
+    ...
+}  </code>
+                </pre>
+    <aside class="notes">
+        <ul>
+            <li>templateUrl -> verweis auf das zugehörige HTML file</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>styleUrls</h4>
+    <pre>
+                  <code class="javascript" data-line-numbers="4">@Component({
+    selector: 'app-show-data',
+    templateUrl: './show-data.component.html',
+    styleUrls: ['./show-data.component.css']
+})
+export class ShowDataComponent {
+    ...
+}  </code>
+                </pre>
+    <aside class="notes">
+        <ul>
+            <li>styleUrls -> enthält ein Array von css files, die eingebunden werden</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>component</h4>
+    <pre>
+                  <code class="javascript" data-line-numbers="6-8">@Component({
+    selector: 'app-show-data',
+    templateUrl: './show-data.component.html',
+    styleUrls: ['./show-data.component.css']
+})
+export class ShowDataComponent {
+    ...
+}  </code>
+                </pre>
+    <aside class="notes">
+        <ul>
+            <li>die Component ist eine Typescript class</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Input/Output</h4>
+    <pre>
+                  <code class="javascript" data-line-numbers>export class ShowDataComponent {
+
+    @Input()
+    someData: SomeData;
+    @Output()
+    output: EventEmitter = new EventEmitter&lt;Output&gt;();
+}  </code>
+                </pre>
+    <aside class="notes">
+        <ul>
+            <li>Daten müssen in Components hinein und heraus gegeben werden</li>
+            <li>Dafür gibt es Input und Output Parameter</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Input</h4>
+    <ul>
+        <li>einfache Datentypen</li>
+        <li>werden automatisch aktualisiert</li>
+    </ul>
+    <pre>
+                  <code class="javascript" data-line-numbers="3-4">export class ShowDataComponent {
+
+    @Input()
+    someData: SomeData;
+    @Output()
+    output: EventEmitter = new EventEmitter&lt;Output&gt;();
+}  </code>
+                </pre>
+    <aside class="notes">
+        <ul>
+            <li>Sie werden von der Parent Component in die Child Component gegeben</li>
+            <li>Wenn sich die Daten der Parent Component ändern, werden die Daten in den Child Components ebenfalls
+                geupdated
+            </li>
+            <li>Darum kümmert sich Angular als Framework</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Output</h4>
+    <ul>
+        <li>EventEmitter für das Datum</li>
+        <li>output wird durch emit() ausgelöst</li>
+    </ul>
+    <pre>
+                  <code class="javascript" data-line-numbers="5-6">export class ShowDataComponent {
+
+    @Input()
+    someData: SomeData;
+    @Output()
+    output: EventEmitter = new EventEmitter&lt;Output&gt;();
+}  </code>
+                </pre>
+    <aside class="notes">
+        <ul>
+            <li>EventEmitter stelle die emit() function bereit</li>
+            <li>die Parent Component kann dann eine Callback Function angeben, die auf emit getriggert werden soll</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Input/Output - Parent</h4>
+    <pre>
+                    <code class="html" data-line-numbers>&lt;app-show-data
+    [someData]=&quot;{ ... }&quot;
+    (output)=&quot;callOnUpdate($event)&quot;&gt;
+&lt;/app-show-data&gt;</code>
+                </pre>
+    <aside class="notes">
+        <ul>
+            <li>Eckige Klammern werden für Inputs</li>
+            <li>Runde Klammern für Outputs verwendet</li>
+            <li>Ein Parameter kann auch Input und Output gleichzeitig sein</li>
+            <li>$event enthält dann die Daten die in das emit() gegeben wurden</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Lifecycle Methods</h4>
+    <ul>
+        <li>werden zu bestimmten Ereignissen aufgerufen</li>
+    </ul>
+    <pre>
+    <code class="javascript" data-line-numbers>export class ShowDataComponent implements OnInit {
+
+    ngOnInit() {
+        // do something on init
+    }
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Warum brauchen wir onInit, es gibt doch ein </li>
+            <li>ngOnInit findet im lifecycle später statt, wenn das HTML bereits initialisiert wurde</li>
+            <li>weitere Lifecycle Methods findet ihr im Web https://angular.io/guide/lifecycle-hooks</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>component.html</h4>
+    <pre>
+    <code class="html" data-line-numbers>&lt;div *ngIf=&quot;someData&quot;&gt;
+    &lt;h4&gt;{{someData.someTitle}}&lt;/h4&gt;
+    &lt;p&gt;{{someData.someDescription}}&lt;/p&gt;
+    &lt;input type=&quot;text&quot; [(ngModel)]=&quot;someData.text&quot;/&gt;
+    &lt;input type=&quot;button&quot; value=&quot;Submit&quot;
+        (click)=&quot;updateData()&quot;/&gt;
+&lt;/div&gt;
+    </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>die component.html bildet die Struktur der Component</li>
+            <li>sie enthält neben HTML auch zugriffe auf Methoden und Daten der component.ts</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Datenzugriffe</h4>
+    <pre>
+    <code class="html" data-line-numbers="2-3">&lt;div *ngIf=&quot;someData&quot;&gt;
+    &lt;h4&gt;{{someData.someTitle}}&lt;/h4&gt;
+    &lt;p&gt;{{someData.someDescription}}&lt;/p&gt;
+    &lt;input type=&quot;text&quot; [(ngModel)]=&quot;someData.text&quot;/&gt;
+    &lt;input type=&quot;button&quot; value=&quot;Submit&quot;
+        (click)=&quot;updateData()&quot;/&gt;
+&lt;/div&gt;
+    </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>in geschweiften Klammern kann aus dem HTML auf Daten der Component zugegriffen werden</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Direktiven</h4>
+    <pre>
+    <code class="html" data-line-numbers="1">&lt;div *ngIf=&quot;someData&quot;&gt;
+    &lt;h4&gt;{{someData.someTitle}}&lt;/h4&gt;
+    &lt;p&gt;{{someData.someDescription}}&lt;/p&gt;
+    &lt;input type=&quot;text&quot; [(ngModel)]=&quot;someData.text&quot;/&gt;
+    &lt;input type=&quot;button&quot; value=&quot;Submit&quot;
+        (click)=&quot;updateData()&quot;/&gt;
+&lt;/div&gt;
+    </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wie auch bei anderen Frameworks (JSF) gibt es bei Angular so genannte structural directives</li>
+            <li>ngIf prüft eine Condition und zeigt den HTML Block an oder eben nicht</li>
+            <li>hier wird geprüft, ob someData gesetzt ist</li>
+            <li>in Direktiven kann ohne geschweifte Klammern auf Daten der Components zugegriffen werden</li>
+            <li>es gibt natürlich noch weitere structural directives wie ngFor, etc.</li>
+            <li>können auch selbst geschrieben/erweitert werden</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Click</h4>
+    <pre>
+    <code class="html" data-line-numbers="5-6">&lt;div *ngIf=&quot;someData&quot;&gt;
+    &lt;h4&gt;{{someData.someTitle}}&lt;/h4&gt;
+    &lt;p&gt;{{someData.someDescription}}&lt;/p&gt;
+    &lt;input type=&quot;text&quot; [(ngModel)]=&quot;someData.text&quot;/&gt;
+    &lt;input type=&quot;button&quot; value=&quot;Submit&quot;
+        (click)=&quot;updateData()&quot;/&gt;
+&lt;/div&gt;
+    </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>(click) ist das Äquivalent zu onclick in Angular</li>
+            <li>An den runden Klammern erkennt man, dass es ein output Wert ist</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>ngModel</h4>
+    <pre>
+    <code class="html" data-line-numbers="4">&lt;div *ngIf=&quot;someData&quot;&gt;
+    &lt;h4&gt;{{someData.someTitle}}&lt;/h4&gt;
+    &lt;p&gt;{{someData.someDescription}}&lt;/p&gt;
+    &lt;input type=&quot;text&quot; [(ngModel)]=&quot;someData.text&quot;/&gt;
+    &lt;input type=&quot;button&quot; value=&quot;Submit&quot;
+        (click)=&quot;updateData()&quot;/&gt;
+&lt;/div&gt;
+    </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Input und Output in einem</li>
+            <li>mit ngModel können wir Daten direkt mit einem Input Feld verknüpfen</li>
+            <li>es gibt Alternativen, wie z.B. FormControl -> darauf gehen wir nicht weiter ein</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Services</h4>
+    <ul>
+        <li>möglichst wenig Logik in den Components</li>
+        <li>Business Logik gehört in Services</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>@Injectable({
+    providedIn: 'root'
+})
+export class TodoService {
+    ...
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wie greifen die Components auf Services zu?</li>
+            <li>mit Injectable markiert man, dass ein Service per Dependency Injection in einer Component injected werden kann</li>
+            <li>hier evtl. ein kleiner Exkurs in Dependency Injection?</li>
+        </ul>
+    </aside>
+</section>
