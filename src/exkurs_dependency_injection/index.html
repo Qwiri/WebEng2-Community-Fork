@@ -21,11 +21,61 @@
       <h3>Dependency Injection</h3>
     </section>
     <section>
-      <h4>Dependency Injection</h4>
-      <p>Abhängigkeiten werden nicht vom Objekt selbst erzeugt, sondern von einem anderen Objekt bei der initialisierung hinein gegeben.</p>
+      <h4>Dependency Injection Robo</h4>
+      <img src="assets/dependency_injection_robo.png" style="height: 500px;">
+      <p>(auf Whish bestellt)</p>
+      <aside class="notes">
+        <ul>
+          <li>der Dependency Injection Robo soll handwerklich arbeiten</li>
+          <li>er selbst weiß aber nur, dass sein Arm arbeiten kann</li>
+          <li>wie der Arm aufgebaut ist, ist ihm egal</li>
+          <li>für die Herstellung des Arms ist ein anderer Robo zuständig</li>
+          <li>er möchte nur Arbeiten</li>
+        </ul>
+      </aside>
     </section>
     <section>
+      <h4>Injection</h4>
+      <ul>
+        <li>der Robo weiß, dass er einen Arm hat</li>
+        <li>er kennt die Schnittstelle zu seinem Arm</li>
+        <li>der Arm wird in einer Robo Fabrik angeschraubt</li>
+        <li>wir sprechen hier von "Injection"</li>
+      </ul>
+    </section>
+    <section>
+      <h4>Robo Code</h4>
+      <pre>
+        <code class="java" data-line-numbers>public class Robo {
+  private Arm arm;
 
+  public Robo(Arm arm) {
+    this.arm = arm;
+  }
+
+  public arbeite() {
+    this.arm.arbeite();
+  }
+}
+        </code>
+      </pre>
+    </section>
+    <section>
+      <h4>Robo Fabrik Code</h4>
+      <pre>
+        <code class="java" data-line-numbers>public class RoboFabrik {
+  public static void main(String[] args) {
+    Arm arm = new BohrerArm();
+    Robo robo = new Robo(arm);
+    robo.arbeite();
+  }
+}
+        </code>
+      </pre>
+    </section>
+    <section>
+      <h4>Zusammengefasst</h4>
+      <p>Abhängigkeiten werden nicht vom Objekt selbst erzeugt, sondern von einem anderen Objekt bei der initialisierung hinein gegeben.</p>
     </section>
   </div>
 </div>

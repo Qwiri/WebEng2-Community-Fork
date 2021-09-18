@@ -1,6 +1,42 @@
 <section>
-  <h3>Ausblick: Micro Frontends</h3>
+  <h3>Micro Frontends</h3>
 </section>
 <section>
-  Hier ein wenig Micro Frontends erklären.
+  <h4>SPA & Component Architecture</h4>
+  <ul>
+    <li>bewahren uns nicht vor einem Monolith (Modulith)</li>
+    <li>mehrere Teams an einem Monolith führt zu Konflikten</li>
+    <li>schlechte Skalierbarkeit, wenn das Projekt wächst</li>
+  </ul>
+</section>
+<section>
+  <h4>Micro Frontends</h4>
+  <ul>
+    <li>aufteilen des Monolith in mehrere Frontends</li>
+    <li>Frontends können zu einem Frontend zusammengesteckt werden</li>
+  </ul>
+  <img src="assets/micro_frontends_connected.png" height="400px" />
+  <aside class="notes">
+    <ul>
+      <li>Micro Frontends können bei bedarf zu einem Frontend zusammengesteckt werden</li>
+      <li>dies muss aber nicht sein, evtl. wird über eine Navigation von einem zum anderen Frontend navigiert</li>
+      <li>Micro Frontends können von verschiedenen Teams mit verschiedenen Sprache und Frameworks gebaut werden</li>
+      <li>evtl. auch ein eigener Deploy Zyklus</li>
+    </ul>
+  </aside>
+</section>
+<section>
+  <h4>Micro Frontends</h4>
+  <ul>
+    <li>reden meist auch mit eigenen Backends</li>
+    <li>Micro Services</li>
+  </ul>
+  <img src="assets/micro_frontends_backend.png" height="300px" />
+  <aside class="notes">
+    <ul>
+      <li>Micro Frontends sind aus Micro Services entstanden</li>
+      <li>um auch die Frontends Skalierbarer zu machen</li>
+      <li>dies ist nur bei wirklich komplexen Anwendungen zu empfehlen</li>
+    </ul>
+  </aside>
 </section>

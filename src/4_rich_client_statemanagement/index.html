@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>1. Socket Webserver</title>
+
+  <link rel="stylesheet" href="/dist/reset.css">
+  <link rel="stylesheet" href="/dist/reveal.css">
+  <link rel="stylesheet" href="/dist/theme/white.css">
+
+  <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+  <link rel="stylesheet" href="styles/custom_styles.css">
+  <link rel="stylesheet" href="/src/custom_styles/global_styles.css">
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <section>
+      Was wir alles für diese Section brauchen:
+
+      Simples Beispiel bauen.
+
+      Typische Frontendarchitektur (statehandling): StateManagement mit Redux
+      Konkrete Bibliothek NgRx
+      Actions
+      Reducer
+      State
+
+      Unsere bestehende Anwendung um ein StateManagement erweitern.
+
+      Vergleich zu anderen Frameworks
+      React, Vue, Flutter
+      Component System
+      StateManagement
+      Redux, Bloc, etc.
+      https://ordina-jworks.github.io/angular/2018/10/08/angular-state-management-comparison.html
+    </section>
+  </div>
+</div>
+
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: true,
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+    dependencies: [
+      {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+    ]
+  });
+</script>
+</body>
+</html>

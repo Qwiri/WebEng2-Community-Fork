@@ -41,6 +41,32 @@
     </pre>
 </section>
 <section>
+    <h4>Routing?</h4>
+    <ul>
+        <li>ist eigentlich nicht notwendig</li>
+        <li>Anwendung macht einfach ein rerender</li>
+    </ul>
+    <img src="assets/routing_spa_wrong.png" style="height: 350px">
+</section>
+<section>
+    <h4>Also kein Routing?</h4>
+    <ul>
+        <li>URL bleibt über die Laufzeit gleich</li>
+        <li>teilen eines Links einer bestimmten Ressource?</li>
+    </ul>
+    <img src="assets/routing_spa_wrong_cross.png" style="height: 350px">
+</section>
+<section>
+    <h4>Routing</h4>
+    <ul>
+        <li>wir brauchen Routing in SPA's doch!</li>
+        <li>es passiert ein pseudo Routing</li>
+        <li>SPA Frameworks liefern Routing mit oder es gibt Libraries</li>
+        <li>dazu später mehr ...</li>
+    </ul>
+    <img src="assets/routing_spa.png" style="height: 350px">
+</section>
+<section>
     <h4>Vorteile einer SPA</h4>
     <ul>
         <li>Reduktion der übertragenen Daten</li>
@@ -107,6 +133,7 @@
                     <li>Nutzer fordert Daten an und kann sich dann mit etwas anderem beschäftigen, bis die Daten geladen
                         sind.
                     </li>
+                    <li>In der Realität wird die Seite meistens nicht benutzt während eines BE Requests</li>
                 </ul>
             </li>
             <li>asynchrones Nachladen der Daten
