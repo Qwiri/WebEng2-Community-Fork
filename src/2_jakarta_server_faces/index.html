@@ -231,13 +231,21 @@
                 <div data-markdown>
                     ### Scopes
 
-                    * Request Scope `@javax.faces.bean.RequestScoped`
-                    * View Scope `@javax.faces.bean.RequestScoped`
+                    * @RequestScoped
+                        * nur für den aktuellen Request
+                    * @ViewScoped
                         * während der Nutzer auf dem gleichen View bleibt
                         * gilt auch über mehrere Page-Reloads 
-                    * Session Scope `@javas.faces.bean.SessionScoped`
-                    * Application Scope `javax.faces.bean.ApplicationScoped`
-                        * Gilt über die komplette Laufzeit
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Scopes
+
+                    * @SessionScoped
+                        * gilt für die Session des Nutzers
+                    * @ApplicationScoped
+                        * Gilt über die komplette Laufzeit der App
                 </div>
             </section>
             <section>
@@ -246,7 +254,7 @@
 
                     * JSF ruft die Getter und Setter in jeder Phase neu auf
                         * unnötige Resourcenverschwendung
-                    * Daher keine aufwendigen Berechnungen oder Aufruf externer Dienste (Datenbank etc.)
+                    * Aufwendige Berechnungen oder Aufrufe externer Dienste aus Beans sind teuer
                     * Füge Baking Beans zwischen View und Logik ein
                         * Pufferung und Interpretation der Daten
                 </div>
