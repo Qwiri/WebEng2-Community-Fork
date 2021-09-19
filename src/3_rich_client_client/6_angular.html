@@ -282,8 +282,8 @@ export class AppModule {
     <pre>
         <code class="javascript" data-line-numbers>const routes: Routes = [
     {
-        path: 'list-view',
-        component: ListViewComponent,
+        path: 'show-data',
+        component: ShowDataComponent,
     },
 ];
 
@@ -308,15 +308,15 @@ export class AppRoutingModule {
         <code class="javascript" data-line-numbers="|3-4,7-8|11">const routes: Routes = [
     {
         path: '',
-        redirectTo: 'list-view',
+        redirectTo: 'show-data',
     },
     {
-        path: 'list-view',
-        component: ListViewComponent,
+        path: 'show-data',
+        component: ShowDataComponent,
     },
     {
-        path: 'item-view/:id',
-        component: ItemViewComponent,
+        path: 'other/:some-parameter-id',
+        component: OtherComponent,
     },
 ];</code>
     </pre>
@@ -340,6 +340,75 @@ export class AppRoutingModule {
     <aside class="notes">
         <ul>
             <li>im router-outlet werden dann die Components die übers Routing erreicht werden eingefügt</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Internes Routing</h4>
+    <pre>
+        <code class="javascript" data-line-numbers>export class ShowDataComponent {
+
+    constructor(private readonly router: Router) {
+    }
+
+    async navigateToOtherComponent() {
+        await this.router.navigate(['other-component']);
+    }
+}
+        </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>der Pfad wird in einem Array in die Methode navigate hineingegeben</li>
+            <li>der Pfad muss mit einer der Routen aus dem Routing Module übereinstimmen</li>
+            <li>im Array können auch mehrere Strings übergeben werden. Diese werden einfach über ein / miteinander verknüpft</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Routing mit Parametern</h4>
+    <pre>
+        <code class="javascript" data-line-numbers>export class ShowDataComponent {
+
+    constructor(private readonly router: Router) {
+    }
+
+    async navigateToOtherComponent() {
+        await this.router
+                  .navigate(
+                      ['other-component',
+                       'some-parameter']
+                  );
+    }
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Parameter werden einfach an das Array angehängt, schließlich werden sie einfach an den Pfad gehängt</li>
+            <li>im Routing Module müssen Parameter speziell gekennzeichnet werden -> Erinnerung :some-parameter-id</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Auslesen des Parameter</h4>
+    <pre>
+        <code class="javascript" data-line-numbers>export class OtherComponent {
+
+    constructor(activatedRoute: ActivatedRoute) {
+        const someParameter =
+            activatedRoute
+                .snapshot
+                .paramMap
+                .get('some-parameter-id');
+    }
+}
+        </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>ActivatedRoute wird injected</li>
+            <li>aus ihr kann der Parameter ausgelesen werden</li>
+            <li>der Identifier ist aus den Route Definitionen aus dem Routing Module</li>
         </ul>
     </aside>
 </section>
