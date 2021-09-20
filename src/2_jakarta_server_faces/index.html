@@ -43,17 +43,23 @@
             </aside>
         </section>
         <section>
-            <div data-markdown>
-                ## Requirements
-                
-                * JDK
-                * Servlet-Container (bspw. Apache Tomcat)
+            <div>
+                <h2>Abgrenzung zu JSP</h2>
+                <div class="container">
+                    <div class="col">
+                        <p><bold>JSF</bold></p>
+                        <p>
+                            ist ein MVC Framework, welches zu dem ein Lifecycle enthält
+                        </p>
+                    </div>
+                    <div class="col">
+                        <p><bold>JSP</bold></p>
+                        <p>
+                            ermöglicht das dynamische Erzeugen von HTML Pages
+                        </p>
+                    </div>
+                </div>
             </div>
-            <aside class="notes" data-markdown>
-                Technische Voraussetzungen: JDK und Servlet-Container zur Entwicklung
-                
-                Für das JSF Verständnis wird allerdings auch Grundverständnis über HTTP und Java sowie grundlegende MVC Kenntnisse benötigt.
-            </aside>
         </section>
         <!--section>
             <div data-markdown>
@@ -81,19 +87,31 @@
             </div>
         </section>
         <section>
-            <h3>Lifecycle</h3>
-            <img data-fragment-index="1" src="assets/JSF-lifecycle.png" height="400">
-            <aside class="notes" data-markdown>
-                Sollte eine Phase nicht benötigt werden oder eine Exception auftreten so wird direkt die Phase 6 Render Response ausgeführt.
-                Frage nach der Reihenfolge?
-            </aside>
+            <section>
+                <h3>Lifecycle</h3>
+                <img data-fragment-index="1" src="assets/JSF-lifecycle-full.svg" height="400">
+                <aside class="notes" data-markdown>
+                </aside>
+            </section>
+            <section>
+                <h3>Lifecycle: Initialer Aufruf</h3>
+                <img data-fragment-index="1" src="assets/JSF-lifecycle-initial.svg" height="400">
+                <aside class="notes" data-markdown>
+                </aside>
+            </section>
+            <section>
+                <h3>Lifecycle: Validation Error</h3>
+                <img data-fragment-index="1" src="assets/JSF-lifecycle-validation-error.svg" height="400">
+                <aside class="notes" data-markdown>
+                </aside>
+            </section>
         </section>
         <section>
                 <h2>Erste Ausgabe</h2>
 
                 <pre>
                     <code data-line-numbers="|3-4|10">&lt;!DOCTYPE html&gt;
-    &lt;html lang="de"  xmlns="http://www.w3.org/1999/xhtml"
+&lt;html lang="de"  xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://java.sun.com/jsf/core" 
     xmlns:h="http://java.sun.com/jsf/html"&gt;
     &lt;head&gt;
@@ -142,6 +160,10 @@
                     #{expression} // deferred
                     ```
                 </div>
+                <aside class="notes">
+                    Immediate: direkte Ausführung in der ersten Phase<br/>
+                    Deferred: wird in jeder Phase neu ausgeführt
+                </aside>
             </section>
             <section>
                 <div data-markdown>
@@ -204,48 +226,55 @@
                 </aside>
             </section>
             <section>
-                <div data-markdown>
-                    ### Beans definieren
-                    * Annotations:
-                        * Zugriff über Klassenname mit kleinem Anfangsbuchstabe
+                <div>
 
-                    ```
-                    @ManagedBean
-                    @ViewScope
-                    public class SayHello
-                    ```
-
-                    * Faces-config.xml:
-                        * Zugriff über Attributwert managed-bean-name
-
-                    ```
-                    &lt;managed-bean&gt;
-                        &lt;managed-bean-name&gt;sayHello&lt;/managed-bean-name&gt;
-                        &lt;managed-bean-class&gt;demo.SayHello&lt;/managed-bean-class&gt;
-                        &lt;managed-bean-scope&gt;request&lt;/managed-bean-scope&gt;
-                    &lt;/managed-bean&gt;   
-                    ```
+                    <h3>Beans definieren</h3>
+                    <ul>
+                        <li>
+                            Annotations:
+                            <ul>
+                                <li>
+                                    Zugriff über Klassenname mit kleinem Anfangsbuchstabe
+                                </li>
+                            </ul>
+                            <pre>
+                                <code data-line-numbers>@ManagedBean
+@ViewScope
+public class SayHello
+                                </code>
+                            </pre>
+                        </li>
+                        <li>
+                            Faces-config.xml:
+                            <ul>
+                                <li>
+                                    Zugriff über Attributwert managed-bean-name
+                                </li>
+                            </ul>
+                            <pre>
+                                <code data-line-numbers>&lt;managed-bean&gt;
+    &lt;managed-bean-name&gt;sayHello&lt;/managed-bean-name&gt;
+    &lt;managed-bean-class&gt;demo.SayHello&lt;/managed-bean-class&gt;
+    &lt;managed-bean-scope&gt;request&lt;/managed-bean-scope&gt;
+&lt;/managed-bean&gt;  
+                                </code>
+                            </pre>
+                        </li>
+                    </ul>
                 </div>
             </section>
             <section>
                 <div data-markdown>
                     ### Scopes
-
-                    * @RequestScoped
-                        * nur für den aktuellen Request
-                    * @ViewScoped
+					
+                    * Request Scope `RequestScoped`
+                    * View Scope `ViewScoped`
                         * während der Nutzer auf dem gleichen View bleibt
                         * gilt auch über mehrere Page-Reloads 
-                </div>
-            </section>
-            <section>
-                <div data-markdown>
-                    ### Scopes
-
-                    * @SessionScoped
-                        * gilt für die Session des Nutzers
-                    * @ApplicationScoped
-                        * Gilt über die komplette Laufzeit der App
+	                * @SessionScoped
+	                    * gilt für die Session des Nutzers
+                    * Application Scope `ApplicationScoped`
+                        * Gilt über die komplette Laufzeit
                 </div>
             </section>
             <section>
@@ -345,7 +374,7 @@
                     * Validators: Pluggable  support  classes  that  can  examine  the  local  value  of  a  component  (as received  in  an  incoming  request)  and  ensure  that  it  conforms  to  the  business  rules  enforced  by each  Validator.  Error  messages  for  validation  failures  can  be  generated  and  sent  back  to  the  user during rendering.
                 </aside>
             </section>
-            <section>
+            <!--section>
                 <div data-markdown>
                     ## Konverter
                     * verschiedene Standardkonverter
@@ -356,7 +385,7 @@
                     &lt;h:inputText value="#{bean.value}" /&gt;
                     ```
                 </div>
-            </section>
+            </section-->
         </section>
         <section>
             <section>
@@ -471,7 +500,7 @@
                     ## Konverter
     
                     * Validatoren für Beans und Input Fields
-                    * StandardKonverter für gängige Datentypen
+                    * Konverter für gängige Datentypen
                         * BooleanConverter, BigIntegerConverter, DateTimeConverter etc.
                 </div>
             </section>
@@ -493,8 +522,30 @@
             <aside class="notes" data-markdown>
             </aside>
         </section>
+        <section>
+            <div data-markdown>
+                ## Requirements
+                
+                * JDK
+                * Servlet-Container (bspw. Apache Tomcat)
+            </div>
+            <aside class="notes" data-markdown>
+                Technische Voraussetzungen: JDK und Servlet-Container zur Entwicklung
+                
+                Für das JSF Verständnis wird allerdings auch Grundverständnis über HTTP und Java sowie grundlegende MVC Kenntnisse benötigt.
+            </aside>
+        </section>
     </div>
 </div>
+
+<style>
+    .container{
+        display: flex;
+    }
+    .col{
+        flex: 1;
+    }
+</style>
 
 <script src="/dist/reveal.js"></script>
 <script src="/plugin/notes/notes.js"></script>
