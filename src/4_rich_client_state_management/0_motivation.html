@@ -1,0 +1,56 @@
+<section>
+    <h3>Motivation</h3>
+</section>
+<section>
+    <h4>Datenmanagement im Frontend</h4>
+    <pre>
+        <code class="javascript" data-line-numbers>export class ShowDataComponent {
+
+    @Input()
+    someData: SomeData;
+    @Output()
+    output: EventEmitter = new EventEmitter&lt;Output&gt;();
+}       </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>wir erinnern uns an die letzte Vorlesung</li>
+            <li>Daten werden über Input und Output Parameter in Components hinein und heraus gegeben</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Datenmanagement im Frontend</h4>
+    <pre>
+        <code class="html" data-line-numbers>&lt;app-show-data
+    [someData]=&quot;{ ... }&quot;
+    (output)=&quot;callOnOutput($event)&quot;&gt;
+&lt;/app-show-data&gt;</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Daten können von der Parent Component an eine Child Component weitergegeben werden</li>
+            <li>Genauso umgekehrt von einer Child Component an die Parent Component</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Tiefe Component Hierarchien</h4>
+    <ul>
+        <li>Daten werden durch Components "hindurchgereicht"</li>
+        <li>Code wird unnötig aufgebläht</li>
+    </ul>
+    <img src="assets/component_hierarchy.drawio.png" style="height: 400px;">
+    <aside class="notes">
+        <ul>
+            <li>Daten werden in beide Richtungen "durchgereicht"</li>
+            <li>als Input durch die Component nach untern</li>
+            <li>und als Output wieder hoch</li>
+            <li>dies erzeugt eine Menge Code der irgendwie falsch erscheint</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Boilerplate Code</h4>
+
+</section>
