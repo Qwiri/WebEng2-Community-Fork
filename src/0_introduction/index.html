@@ -1,0 +1,403 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Introduction</title>
+
+    <link rel="stylesheet" href="/dist/reset.css">
+    <link rel="stylesheet" href="/dist/reveal.css">
+    <link rel="stylesheet" href="/dist/theme/white.css">
+
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+    <link rel="stylesheet" href="styles/custom_styles.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown>
+            <textarea data-template>
+                ### Webengineering II
+            </textarea>
+        </section>
+        <section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Vorstellungfolien
+                </textarea>
+            </section>
+            <section>
+                <div class="container">
+
+                    <div class="col">
+                        Bild
+                    </div>
+
+                    <div class="col">
+                        <h4>Daniel Pfeil</h4>
+                        <ul>
+                            <li>Alter: 25</li>
+                            <li>Ausbildung Fachinformatiker</li>
+                            <li>Bachelor Angewandte Informatik DHBW</li>
+                            <li>API Studio UG gegründet</li>
+                            <li>verschiedene OpenSource Projekte</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+            <section>
+                <h4>Kai Wachendörfer</h4>
+                <ul>
+                    <li>Lieblingssprache Kotlin</li>
+                    <li>erster Berührungspunkt mit Java 2013</li>
+                    <li>2016 Studienbeginn an der DHBW
+                        <ul>
+                            <li>Angewandte Informatik</li>
+                            <li>Praxis bei einem Reiseveranstalter</li>
+                            <li>Webentwicklung mit PHP</li>
+                            <li>Entwicklung Alexa Skill</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h4>Kai Wachendörfer</h4>
+                <ul>
+                    <li>2019 Anstellung bei Cofinpro
+                        <ul>
+                            <li>Finanzdienstleister in Frankfurt</li>
+                            <li>Webentwicklung Fullstack</li>
+                            <li>Backend, Frontend, App und Release Jobs</li>
+                            <li>Großprojekt mit 100-150 Personen</li>
+                        </ul>
+                    </li>
+                    <li>Hobbies
+                        <ul>
+                            <li>Motorrad fahren</li>
+                            <li>Lego bauen</li>
+                            <li>Competitive Games (aber nicht competitive)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <section data-markdown>
+                <textarea data-template>
+                    ### WordCloud
+                </textarea>
+            <aside class="notes">
+                <ul>
+                    <li>WordCloud => Was verbindet ihr mit Webengineering? Gerne auch über Webengineering 1 heraus.</li>
+                    <li>https://app.sli.do/event/y2hbe4zw/embed/polls/23b9af3c-c417-4b34-a8ec-568bae336b2c</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <section data-markdown>
+                <textarea data-template>
+                    ### Motivation
+                </textarea>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Ausgangslage
+
+                    - Zahlreiche Webanwendung
+                    - Warum sind Webanwendungen zahlreich?
+                </textarea>
+                <aside class="notes">
+                    <ul>
+                        <li>Frage an die Studenten geben.</li>
+                        <li>Vorschläge auf der Tafel/Flipchart sammeln.</li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Mögliche Ursachen (Versioning)
+
+                    - Versioning für Client Anwendung ist aufwendig
+                    - Schnittstellenkompatibilität muss gegeben sein
+                    - Versioning kommt bei Webanwendungen nicht vor
+                </textarea>
+                <aside class="notes">
+                    <ul>
+                        <li>Versioning im Sinne von verschiedene Versionen eines Clients rufen die selbe
+                            Serverschnittstelle auf
+                        </li>
+                        <li>Webanwendung wird immer neu ausgeliefert. Keine veralteten Versionen.</li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Mögliche Ursachen (Plattformunabhängig)
+
+                    - unterschiedliche Plattformen (Windows, Mac, iOS, etc.)
+                        - stellen unterschiedliche Umgebungen bereit
+                        - erfordern unterschiedliche Anwendungen
+                    - Web Browser folgen dem W3C Standard
+                        - eine Anwendung läuft in jedem Browser (theoretisch)
+                </textarea>
+                <aside class="notes">
+                    <ul>
+                        <li>unterschiedliche Plattformen (Mobile und Web mit verschiedenen Betriebssystemen)
+                            <ul>
+                                <li>unterschiedliche Systemumgebungen, unterschiedliche Entwicklungsumgebungen</li>
+                            </ul>
+                        </li>
+                        <li>Web Browser funktionieren theoretisch alle gleich. In der Praxis unterscheiden sie sich
+                            jedoch (in
+                            Details).
+                        </li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Mögliche Ursachen
+
+                    - Datenübertragung übers Internet ist günstig
+                        - früher Messung in KB heute in MB (für Webfrontends)
+                    - niedrige Einstiegshürde für Entwickler
+                        - HTML, JavaScript und CSS wird interpretiert
+                        - schnelle Resultate
+                </textarea>
+                <aside class="notes">
+                    <ul>
+                        <li>Früher gab es Anwendungen auf CD's heute läd man diese im Internet herunter.
+                            <ul>
+                                <li>Anwendungen können übers Web ohne Probleme ausgeliefert werden, die schön und
+                                    Benutzbar sind.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Client Anwendungen existieren noch auf Smartphones. Navigation der Betriebssystemen ist
+                            unterschiedlich.
+                        </li>
+                    </ul>
+                </aside>
+            </section>
+        </section>
+        <section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Ablauf der Vorlesung
+    
+                    - Theoretische Einführung
+                    - Praktische Vertiefung
+                    - Praktische Übung
+                </textarea>
+                <aside class="notes">
+                    <ul>
+                        <li>Anteile variieren.</li>
+                        <li>Kommt auf das Thema an.</li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Themen
+
+                    - Dynamisches HTML
+                    - Rich Client
+                    - Benutzerverwaltung
+                    - Security
+                    - Prüfungsvorbereitung
+                    - App Entwicklung (Optional)
+                </textarea>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Dynamisches HTML
+
+                    - Umsetzung einer Anwendung
+                        - mit bereits erlernten Technologien
+                        - Java, HTML und JSP
+                    - wir nutzen JSF
+                        - MVC Design
+                        - Lifecycle und Eventmanagement
+                </textarea>
+                <aside class="notes">
+                    <ul>
+                        <li>Umsetzung mit erlernten Technologien
+                            <ul>
+                                <li>wir schauen mal wie weit wir kommen, mit dem was wir schon können</li>
+                            </ul>
+                        </li>
+                        <li>früher nutze JSF JSP, seit JSF 2 gibt es eine eigenes Rendering (facelets -> erweiterte
+                            servlets).
+                        </li>
+                        <li>JSF
+                            <ul>
+                                <li>Validierung</li>
+                                <li>Konvertierung</li>
+                                <li>Events -> Userevents aus dem Frontend</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Rich Client
+
+                    - Umsetzung einer Anwendung
+                        - mit unbekannten Technologien
+                        - Typescript, Angular und Spring
+                    - Aufteilung in Frontend und Backend
+                        - 2-3 Vorlesungseinheiten
+                </textarea>
+                <aside class="notes">
+                    <ul>
+                        <li>Aufteilung in Frontend und Backend</li>
+                        <li>Rich Clients sind häufig in Frontend und Backend geteilt, da das Frontend bereits eine
+                            eigene
+                            Anwendung ist.
+                        </li>
+                        <li>Das Backend liefert normalerweise nur noch Daten und führt Geschäftslogik aus.</li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Rich Client
+
+                    - Warum Angular?
+                        - stärkere Struktur
+                        - gut zum Einsteigen
+                    - Warum Spring?
+                        - weit verbreitet
+                        - wenig Konfiguration
+                    - Frameworks sind repräsentativ für ihre Gattung
+                </textarea>
+                <aside class="notes">
+                    <ul>
+                        <li>Warum Angular?
+                            <ul>
+                                <li>weit verbreitet</li>
+                                <li>werdet ihr bestimmt in Projekten mal sehen</li>
+                                <li>Wir kennen uns damit aus</li>
+                            </ul>
+                        </li>
+                        <li>Warum Spring?
+                            <ul>
+                                <li>wichtig für das Arbeitsleben</li>
+                                <li>wird euch wahrscheinlich mal unterkommen</li>
+                                <li>wenig Zeit für das Setup</li>
+                                <li>weniger auf die Technik konzentrieren</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Benutzerverwaltung
+
+                    - Webanwendungen sind Nutzerzentriert
+                        - Benutzeridentifikation
+                        - Rechteverwaltung
+                        - Datenverwaltung
+                        - Abrechnungsverwaltung
+                    - OAuth2 und JWT
+                        - ist "der" verbreitete Standard
+                </textarea>
+                <aside class="notes">
+                    <ul>
+                        <li>Nutzer müssen identifiziert werden
+                            <ul>
+                                <li>brauchen verschiedene Rechte</li>
+                                <li>dürfen nur auf bestimmte Daten zugreifen</li>
+                                <li>müssen evtl. für Dienstleistungen bezahlen</li>
+                            </ul>
+                        </li>
+                        <li>Benutzerverwaltung ist kompliziert
+                            <ul>Bitte nicht selbst machen</ul>
+                        </li>
+                        <li>OAuth2
+                            <ul>
+                                <li>weil kompliziert bitte Standards verwenden</li>
+                                <li>und best practices einhalten</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Security
+
+                    - Webanwendungen sind öffentlich erreichbar
+                    - C.I.A - Prinzip
+                        - Confidentiality
+                        - Integrity
+                        - Availability
+                    - wird gerne vernachlässigt
+                    - Benutzerfreundlichkeit steht im Konflikt zu Security
+                </textarea>
+                <aside class="notes" data-markdown>
+                    - Wie Gebäude müssen auch Webanwendungen einbruchssicher sein
+                    - Vertraulichkeit, Integrität und Verfügbarkeit
+                    - Fokus liegt auf den Features, nicht auf den Qualitätskriterien
+                    - Messbarkeit ist schwierig
+                </aside>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Praxisteil
+
+                    - Skeleton Projekt
+                        - wird als Git Repository bereitgestellt
+                    - Funktionale Anforderungen stellen wir bereit
+                    - Gemeinsame Umsetzung der Anforderungen
+                </textarea>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Voraussetzungen Praxisteil
+
+                    - Vorhandene Entwicklungsumgebung
+                        - wir unterstützen: Intellij & Eclipse
+                    - Projekte auf Gitlab
+                        - Git ist installiert!
+                    - Java Projekte über Maven
+                        - mit Maven Wrapper
+                    - JavaScript Projekte mit NPM
+                        - NPM ist installiert!
+                </textarea>
+                <aside class="notes">
+                    - Maven Wrapper -> mvn wird mit in Git Versioniert keine installation notwendig
+                </aside>
+            </section>
+        </section>
+    </div>
+</div>
+<style>
+    .container {
+        display: flex;
+    }
+
+    .col {
+        flex: 1;
+    }
+</style>
+
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        dependencies: [
+            {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+        ]
+    });
+</script>
+</body>
+</html>
