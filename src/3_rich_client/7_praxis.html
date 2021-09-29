@@ -1,0 +1,43 @@
+<section>
+    <h3>Praxis: Todo Anwendung</h3>
+    <aside class="notes">
+        <ul>
+            <li>Wir haben uns jetzt grundlegende Konzepte für Frontends angesehen.</li>
+            <li>Jetzt wird es Zeit für die Praxis.</li>
+            <li>Dafür sollten wir uns noch mal die Syntax von Angular ansehen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Anforderungen</h4>
+    <ul>
+        <li>List View mit allen Todo's
+            <ul>
+                <li>sortiert nach "done/undone"</li>
+                <li>"+" Button um neue Todo's hinzuzufügen</li>
+            </ul>
+        </li>
+        <li>Detail View
+            <ul>
+                <li>Detailansicht des Todo's</li>
+                <li>hier kann die "done" Checkbox bearbeitet werden</li>
+            </ul>
+        </li>
+        <li>Edit View
+            <ul>
+                <li>um neue Todo's anzulegen</li>
+                <li>und bestehende zu bearbeiten</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section>
+    <h4>Todo</h4>
+    <pre>
+                    <code class="javascript" data-line-numbers>export interface Todo {
+    id: number;
+    title: string;
+    done: boolean;
+}</code>
+                </pre>
+</section>

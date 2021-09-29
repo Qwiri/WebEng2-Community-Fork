@@ -1,0 +1,225 @@
+<section>
+    <h3>Single Page Application</h3>
+</section>
+<section>
+    <p><em>“A single-page application is exactly what its name implies: a JavaScript-driven web application that
+        requires only a single page load.”</em></p>
+    <p class="cite">JavaScript - The Definitive Guide</p>
+    <p class="cite">5th ed., O'Reilly, Sebastopol, CA, 2006</p>
+</section>
+<section>
+    <h4>Single Page Application Konzept</h4>
+    <pre>
+        <code class="language-plantuml">
+            @startuml
+            participant "Client" as client
+            participant "Web Server" as webServer
+            participant "Web Service" as webService
+
+            group Initializing
+            activate client
+            client -> webServer: GET /index.html
+            activate webServer
+            webServer -> client: index.html
+            webServer -> client: styles.css
+            webServer -> client: script.js
+            deactivate webServer
+            client -> client: start application
+            end
+
+            group Runtime
+            client -> webService: GET /some-id
+            deactivate client
+            activate webService
+            webService -> client: some-data
+            deactivate webService
+            activate client
+            client -> client: rerender
+            end
+            @enduml
+        </code>
+    </pre>
+</section>
+<section>
+    <h4>Routing?</h4>
+    <ul>
+        <li>ist eigentlich nicht notwendig</li>
+        <li>Anwendung macht einfach ein rerender</li>
+    </ul>
+    <img src="assets/routing_spa_wrong.png" style="height: 350px">
+</section>
+<section>
+    <h4>Also kein Routing?</h4>
+    <ul>
+        <li>URL bleibt über die Laufzeit gleich</li>
+        <li>teilen eines Links einer bestimmten Ressource?</li>
+    </ul>
+    <img src="assets/routing_spa_wrong_cross.png" style="height: 350px">
+</section>
+<section>
+    <h4>Routing</h4>
+    <ul>
+        <li>wir brauchen Routing in SPA's doch!</li>
+        <li>es passiert ein pseudo Routing</li>
+        <li>SPA Frameworks liefern Routing mit oder es gibt Libraries</li>
+        <li>dazu später mehr ...</li>
+    </ul>
+    <img src="assets/routing_spa.png" style="height: 350px">
+</section>
+<section>
+    <h4>Vorteile einer SPA</h4>
+    <ul>
+        <li>Reduktion der übertragenen Daten</li>
+        <li>bessere User Experience</li>
+        <li>weniger Serverressourcen</li>
+        <li>Session Clientseitig (Server ist Stateless)</li>
+        <li>Hybride Anwendung auch mobile einsetzbar</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>SPA's verhalten sich häufig wie App's. Daher können hybride Anwendungen auch als App eingesetzt
+                werden.
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Reduktion der übertragenen Daten</h4>
+    <p>hier reden wir von Daten zur "Runtime"</p>
+    <pre>
+        <code class="language-html" data-line-numbers="7">&lt;html&gt;
+  // head
+  &lt;body&gt;
+    &lt;header&gt;&lt;/header&gt;
+    &lt;nav&gt;&lt;/nav&gt;
+    &lt;div&gt;
+      // some data
+    &lt;/div&gt;
+    &lt;footer&gt;&lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code>
+        </pre>
+    <aside class="notes">
+        <ul>
+            <li>Erinnerung an das UML Initializing vs Runtime</li>
+            <li>Erinnerung, dass nur noch Daten übertragen werden, keine ganzen HTML Seiten</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Bessere User Experience</h4>
+    <ul>
+        <li>kürzere Response Time</li>
+        <li>weniger BE Request notwendig</li>
+        <li>Seite ist während eines BE Requests benutzbar</li>
+        <li>asynchrones Nachladen der Daten</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Kürzere Response Time
+                <ul>
+                    <li>durch weniger Daten die übertragen werden müssen</li>
+                </ul>
+            </li>
+            <li>weniger BE Requests notwendig
+                <ul>
+                    <li>Fehlermeldungen etc. können bereits ohne BE Requests angezeigt werden</li>
+                    <li>Auch Geschäftslogik kann direkt im Frontend ausgeführt werden</li>
+                </ul>
+            </li>
+            <li>Seite ist während eines BE Requests benutzbar
+                <ul>
+                    <li>Durch Loadingspinner etc. bekommt der Nutzer ein direktes Feedback auf seine Action</li>
+                    <li>Nutzer fordert Daten an und kann sich dann mit etwas anderem beschäftigen, bis die Daten geladen
+                        sind.
+                    </li>
+                    <li>In der Realität wird die Seite meistens nicht benutzt während eines BE Requests</li>
+                </ul>
+            </li>
+            <li>asynchrones Nachladen der Daten
+                <ul>
+                    <li>der Nutzer kann bereits mit ersten Daten interagieren, während andere noch geladen werden.</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Weniger Serverressourcen</h4>
+    <ul>
+        <li>Rendering läuft auf dem Client</li>
+        <li>Geschäftslogik kann auf dem Client laufen
+            <ul>
+                <li>weniger BE Requests notwendig</li>
+            </ul>
+        </li>
+        <li>Server kümmert sich nur um die Daten</li>
+    </ul>
+</section>
+<section>
+    <h4>Nachteile einer SPA</h4>
+    <ul>
+        <li>initiale Response ist groß</li>
+        <li>Client ist nicht Vertrauenswürdig</li>
+        <li>duplizierter Code</li>
+        <li>höherer Entwicklungsaufwand</li>
+    </ul>
+</section>
+<section>
+    <h4>Initiale Response ist groß</h4>
+    <pre>
+                    <code class="language-plantuml">
+                        @startuml
+                        participant "Client" as client
+                        participant "Web Server" as webServer
+
+                        group Initializing
+                        activate client
+                        client -> webServer: GET /index.html
+                        activate webServer
+                        webServer -> client: index.html
+                        webServer -> client: styles.css
+                        webServer -> client: script.js
+                        deactivate webServer
+                        client -> client: start application
+                        end
+                        @enduml
+                    </code>
+                </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wir erinnern uns an das SPA Laufzeitdiagramm</li>
+            <li>zu Anfang müssen erstmal alle Daten geladen werden</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Client ist nicht Vertrauenswürdig</h4>
+    <ul>
+        <li>JavaScript Code auf dem Client kann manipuliert werden</li>
+        <li>erneute Validierung im BE notwendig</li>
+        <li>Validierungen sind meist duplizierter Code</li>
+        <li>hierfür gibt es Abhilfe:
+            <ul>
+                <li>Multiplattform Libraries</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>ein versierter Nutzer kann den JavaScript Code in seinem Browser verändern.
+                <ul>
+                    <li>wir sprechen hier noch nicht mal von XSS</li>
+                </ul>
+            </li>
+            <li>Daten die im BE gespeichert werden, müssen daher noch mal validiert werden</li>
+            <li>Validierungen, aber auch andere Geschäftslogik sind häufig dupliziert.
+                <ul>
+                    <li>Das kann gewünscht sein. Vielleicht möchte man Frontend und Backend voneinander entkoppeln</li>
+                    <li>Andererseits kann man Code auch übers BE und Frontend sharen.</li>
+                    <li>Multiplattform Libraries wie von Kotlin können hier helfen</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
