@@ -34,6 +34,10 @@
                 * Requestübergreifendes Management des States der UI Komponenten
                 * Stark typisiertes Eventmodel um serverseitig Client Events zu behandeln
                 * Kapselung der Unterschiede innerhalb der Clients und Browsern
+            </div>
+        </section>
+        <section>
+            <div data-markdown>
                 * Handling der Navigation sowie Error und Exception Events
                 * Typ Konvertierung
                 * Validierung der Daten sowie entsprechendes Errorhandling
@@ -516,11 +520,77 @@ public class SayHello
             </section>
         </section>
         <section>
-            <div data-markdown>
-
-            </div>
-            <aside class="notes" data-markdown>
-            </aside>
+            <section>
+                <div data-markdown>
+                    ## JSF-Tags
+                </div>
+                <aside class="notes" data-markdown>
+                    * nur die für die Praxis relevanten
+                    * die JSF Tags besitzen mindestens die gleichen Attribute wie das HTML Pendant
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Form
+                    <code>
+                        &lt;h:form id="id"&gt;
+                            ...
+                        &lt;/h:form&gt;
+                    </code>
+                </div>
+                <aside class="notes">
+                    https://www.javatpoint.com/jsf-form
+                    Besitzt die gleichen Attribute wie das HTML Tag.
+                    Wird benutzt um Formulare zu wrappen
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Checkbox
+                    <code>
+                        &lt;h:selectBooleanCheckbox value="#{item.done}" disabled="true" /&gt;
+                    </code>
+                </div>
+                <aside class="notes">
+                    https://www.javatpoint.com/jsf-form
+                    Besitzt die gleichen Attribute wie das HTML Tag.
+                    Wird benutzt um Formulare zu wrappen
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Input Text
+                    <code>
+                        &lt;h:inputText value="#{item.title}"/&gt;
+                    </code>
+                </div>
+                <aside class="notes">
+                    https://www.javatpoint.com/jsf-inputtext
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Input Hidden
+                    <code>
+                        &lt;h:inputHidden value="#{item.title}"/&gt;
+                    </code>
+                </div>
+                <aside class="notes">
+                    https://www.javatpoint.com/jsf-inputhidden
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Commandbutton
+                    <code>
+                        &lt;h:commandButton value="Speichern" action="#{manager.save()}"/&gt;
+                    </code>
+                </div>
+                <aside class="notes">
+                    https://www.javatpoint.com/jsf-commandbutton
+                    Der Return Wert der Methode muss ein String sein. Dieser wird dann zur Navigation genutzt.
+                </aside>
+            </section>
         </section>
         <section>
             <div data-markdown>
@@ -534,6 +604,25 @@ public class SayHello
                 
                 Für das JSF Verständnis wird allerdings auch Grundverständnis über HTTP und Java sowie grundlegende MVC Kenntnisse benötigt.
             </aside>
+        </section>
+        <section>
+            <section>
+                <div data-markdown>
+                    ## Praxis
+        
+                    * erstellen Todo Listen Anwendung
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Requirements
+
+                    * Todo Liste
+                    * erkennbar welche Todo bereits abgeschlossen
+                    * Todos sollen hinzugefügt und editiert werden können
+                    * Todos enthalten ID, Titel und Description
+                </div>
+            </section>
         </section>
     </div>
 </div>
