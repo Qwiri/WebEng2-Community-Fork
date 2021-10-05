@@ -59,3 +59,45 @@
         </ul>
     </aside>
 </section>
+<section>
+    <h4>Think Big</h4>
+    <p>Was wenn das Frontend noch größer ist ...</p>
+    <p>und überall die Daten erneut aus dem Backend gefetched werden?</p>
+    <img src="assets/component_hierarchy.png" style="height: 400px;">
+</section>
+<section>
+    <h4>Verteilter Daten</h4>
+    <ul>
+        <li>Verteilte Daten</li>
+        <li>Verteilter State
+            <ul>
+                <li>State: Zustand der Anwendung</li>
+                <li>Daten vom Backend, Zustand der UI, etc.</li>
+            </ul>
+        </li>
+        <li>unübersichtlich bei großen Anwendungen
+            <ul>
+                <li>fehlerhafter State muss erst entdeckt werden</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Daten sind meist über die Anwendung verteilt</li>
+            <li>Das heißt auch der State ist über die Anwendung verteilt
+                <ul>
+                    <li>State ist der Zustand der Anwendung</li>
+                    <li>Welche Daten vom Backend das Frontend aktuell anzeigt</li>
+                    <li>Änderungen an den Daten die der Nutzer vorgenommen hat, etc.</li>
+                </ul>
+            </li>
+            <li>Besonders bei größeren Anwendungen wird es unübersichtlich
+                <ul>
+                    <li>Man kann sich manche Fehler nicht erklären, weil Daten überall übers Frontend verteilt sind</li>
+                    <li>bzw. weil State übers Frontend verteilt ist.</li>
+                    <li>Wechselwirkungen und Seiteneffekte treten dann gerne auf</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>

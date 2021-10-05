@@ -219,12 +219,21 @@
     </ul>
 </section>
 <section>
+    <h4>Vorteile von State Management</h4>
     <ul>
-        <li>ein globaler State der Anwendung</li>
-        <li>State ist immutable</li>
-        <li>jeder kann den State abrufen</li>
-        <li>Veränderungen des States über Actions</li>
-        <li>Actions werden an den Reducer gesendet</li>
-        <li>jeder kann Actions auslösen</li>
+        <li>Daten bzw. State kann von überall abgerufen werden</li>
+        <li>Fehler durch Seiteneffekte werden eingeschränkt</li>
+        <li>Daten werden nicht mehrmals vom Backend geladen</li>
+        <li>basiert auf Functional Reactive Programming (FRP)</li>
+        <li>zentraler State hilf beim Entwickeln/Debuggen</li>
     </ul>
+    <aside class="notes">
+        <ul>
+            <li>kein unnötiger Code mehr zur Weitergabe von Daten</li>
+            <li>Seiteneffekte werden vermieden. Action führt zu neuem State. State zu einem UI rerender.</li>
+            <li>FRP wird häufig eingesetzt um Anwendungen Nutzerfreundlicher und reaktiver zu gestalten.</li>
+            <li>State Management arbeitet quasi mit FRP</li>
+            <li>mit einem zentralen State hat man zu jeder Zeit einen Überblick über die Anwendung und kann Fehler schneller finden.</li>
+        </ul>
+    </aside>
 </section>
