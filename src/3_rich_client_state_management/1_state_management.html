@@ -77,6 +77,7 @@
                     <li>unübersichtlich</li>
                     <li>schlecht wartbar</li>
                     <li>schlecht erweiterbar</li>
+                    <li>Seiteneffekte wollen wir ja eigentlich mit State Management vermeiden</li>
                 </ul>
             </li>
             <li>trotzdem wollen wir einen Global state verwenden</li>
@@ -102,7 +103,8 @@
             reducer -> store
             store --> selector
             reducer <-- action
-            selector --> presentation
+            store ---> presentation
+            selector -> presentation
             action <-- control
             @enduml
         </code>
@@ -193,7 +195,8 @@
             reducer -> store
             store --> selector
             reducer <-- action
-            selector --> presentation
+            store ---> presentation
+            selector -> presentation
             action <-- control
             @enduml
         </code>
@@ -216,6 +219,7 @@
                 <li>eine Projektion auf dem State auslösen</li>
             </ul>
         </li>
+        <li>Selectors können verschachtelt werden</li>
     </ul>
 </section>
 <section>
@@ -224,13 +228,19 @@
         <li>Daten bzw. State kann von überall abgerufen werden</li>
         <li>Fehler durch Seiteneffekte werden eingeschränkt</li>
         <li>Daten werden nicht mehrmals vom Backend geladen</li>
-        <li>basiert auf Functional Reactive Programming (FRP)</li>
+        <li>basiert auf Functional Reactive Programming (FRP)
+            <ul>
+                <li>macht die Anwendung häufig Nutzerfreundlicher</li>
+                <li>Anwendung soll nach einer Nutzereingabe nicht "blockieren"</li>
+            </ul>
+        </li>
         <li>zentraler State hilf beim Entwickeln/Debuggen</li>
     </ul>
     <aside class="notes">
         <ul>
             <li>kein unnötiger Code mehr zur Weitergabe von Daten</li>
             <li>Seiteneffekte werden vermieden. Action führt zu neuem State. State zu einem UI rerender.</li>
+            <li>in großen Projekten werden Daten in den verschiedensten Components geladen. Somit kann es schnell passieren, dass Daten doppelt geladen werden</li>
             <li>FRP wird häufig eingesetzt um Anwendungen Nutzerfreundlicher und reaktiver zu gestalten.</li>
             <li>State Management arbeitet quasi mit FRP</li>
             <li>mit einem zentralen State hat man zu jeder Zeit einen Überblick über die Anwendung und kann Fehler schneller finden.</li>

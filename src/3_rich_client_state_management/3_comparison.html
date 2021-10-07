@@ -1,0 +1,78 @@
+<section>
+    <h3>Abseits von NgRx</h3>
+</section>
+<section>
+    <h4>State Management überall</h4>
+    <ul>
+        <li>unzählige State Management Frameworks</li>
+        <li>jedes Frontend Framework bringt ein eigenes mit</li>
+        <li>unter der Haube funktionieren alle gleich</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>jedes "Frontend" Framework ist bewusst gewählt. Hier geht es nicht nur um Web, sondern auch um App.</li>
+            <li>Wie anfangs erwähnt sind Apps sehr ähnlich zu SPA Anwendungen</li>
+            <li>wir schauen uns jetzt ein paar Beispiele an</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Redux</h4>
+    <ul>
+        <li>State Management für React</li>
+        <li>Release 2015</li>
+        <li>Redux verzichtet auf einen Selector</li>
+        <li>wenig "magic"</li>
+        <li>kann sogar ohne "magic" implementiert werden</li>
+    </ul>
+    <pre>
+        <code class="language-plantuml">
+            @startuml
+            component reducer
+            component action
+            component store
+            node UI {
+                component presentation
+                component control
+            }
+
+            reducer --> store
+            reducer <-- action
+            action <-- control
+            store --> presentation
+            @enduml
+        </code>
+    </pre>
+</section>
+<section>
+    <h4>Vuex</h4>
+    <div>
+        <ul>
+            <li>State Management für Vue</li>
+            <li>Release 2020</li>
+            <li>erinnert an NgRx</li>
+            <li>leichtgewichtige Implementierung</li>
+        </ul>
+    </div>
+    <pre>
+        <code class="language-plantuml">
+            @startuml
+            component mutator
+            component action
+            component state
+            component getter
+            node UI {
+                component presentation
+                component control
+            }
+
+            mutator <-- action
+            action <-- control
+            mutator -> state
+            state --> presentation
+            state --> getter
+            getter --> presentation
+            @enduml
+        </code>
+    </pre>
+</section>

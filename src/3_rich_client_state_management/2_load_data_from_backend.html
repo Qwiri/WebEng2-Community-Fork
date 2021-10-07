@@ -1,0 +1,60 @@
+<section>
+  <h3>Daten vom Backend laden?</h3>
+</section>
+<section>
+    <h4>State Management gut und schön ...</h4>
+    <ul>
+        <li>Wie bekomme ich Daten vom Backend?</li>
+        <li>Reducer arbeitet nur synchron</li>
+        <li>Daten über eine Action übergeben?</li>
+        <li>Backend Call aus der Component?</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Daten sollten natürlich nicht in einer Component geladen werden</li>
+            <li>Components sollten nur fürs Rendering da sein</li>
+            <li>sie dürfen gerne auch Actions des Nutzers an den Reducer weiterleiten</li>
+            <li>mehr aber bitte nicht!</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>NgRx Effects</h4>
+    <ul>
+        <li>Actions können von Effects abgefangen werden</li>
+        <li>Effects können asynchrone Tasks ausführen</li>
+        <li>zum Beispiel Backendcalls</li>
+    </ul>
+    <pre>
+        <code class="language-plantuml">
+            @startuml
+            component store
+            component reducer
+            component effect
+            component action
+            component selector
+            node UI {
+                component presentation
+                component control
+            }
+
+            reducer -> store
+            store --> selector
+            effect -> action
+            effect <- action
+            reducer <-- action
+            selector -> presentation
+            action <-- control
+            @enduml
+        </code>
+    </pre>
+</section>
+<section>
+    <h4>Effects</h4>
+    <ul>
+        <li>Effects gibt es in verschiedenen Frameworks/Libraries</li>
+        <li>heißen nur manchmal anders</li>
+        <li>in Redux heißt es "Thunk Middleware"</li>
+        <li>NGXS unterstützt generell asynchrone Operationen</li>
+    </ul>
+</section>
