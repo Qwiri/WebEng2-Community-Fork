@@ -21,7 +21,539 @@
     </section>
     <section>
       <section>
-        <h3>Webservices</h3>
+        <textarea data-template>
+          ### Überleitung
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Verantwortlichkeiten - JSF
+
+          - View-Management
+            - Rendering
+            - Validation
+          - State-Management
+            - Events
+            - Routing
+          - Data-Management
+            - Persistence
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Verantwortlichkeiten - Rich Client
+
+          - View-Management
+            - Rendering
+            - Ensurance
+          - State-Management
+            - Events
+            - Routing
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Verantwortlichkeiten - Webservice
+
+          - Data-Management
+            - Validation
+            - Persistence
+        </textarea>
+      </section>
+    </section>
+    <section>
+      <section>
+        <textarea data-template>
+          ### Webservice
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Webservice - Stateless
+
+          - Kein Zustand
+          - Keine Session
+          - Anfrage ausschließlich mit fachlichen Informationen
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Keine Übertragung von Zustandsänderungen</li>
+            <li>Keine Übertragung von unzusammenhängenden Informationen</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Webservice - Stateless
+
+          - Keine nicht-persistenten Informationen
+            - Transparentes Caching ausgenommen
+          - Persistierung in Datenbank oder Dateisystem
+            - Transparente Datenbank oder Dateisystem
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Keine anfrageübergreifende Informationen</li>
+            <li>Transparente Caches agieren auf persistenten oder berechenbaren Daten</li>
+            <li>Transparente Caches agieren niemals auf flüchtigen Daten</li>
+            <li>Transparente Caches für persistente Daten müssen kurzlebig oder Änderungen bewusst sein</li>
+            <li>Transparente Datenbanken/Dateisysteme (ver)teilen über mehrere Instanzen</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Webservice - Skalierbar
+
+          - Abhängig von ausschließlich externen Informationen
+            - Eingaben des Clients
+            - Daten der Persistence
+          - Instanzen sind identitätslos
+          - Dynamisches hoch-/runterfahren von Instanzen
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Webservice - Untrusting
+
+          - Validierung aller Eingaben
+          - Isolierung aller Eingaben
+          - Durchgehende Prüfung der Authorisierung
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Validierung stellt Korrektheit sicher</li>
+            <li>Validierung stellt keine Sicherheit sicher</li>
+            <li>Isolierung durch formlose Betrachtung der Eingaben</li>
+            <li>Isolierung durch z.B. Prepared-Statements</li>
+            <li>Mindestens Validierung des Tokens (zumeist über Signature/Secret)</li>
+            <li>Eventuelle Überprüfung der Zugriffsrechte</li>
+          </ul>
+        </aside>
+      </section>
+    </section>
+    <section>
+      <section>
+        <textarea data-template>
+          ### Architekturen
+        </textarea>
+      </section>
+      <!-- Architekturen -->
+      <section>
+        <textarea data-template>
+          #### Architekturen
+
+          - Monolith
+          - Modulith
+          - Services
+          - Microservice
+        </textarea>
+      </section>
+      <section>
+        <h4>Architekturen - Monolith</h4>
+        <img src="assets/monolith.svg" height="400">
+      </section>
+      <section>
+        <textarea data-template>
+          #### Architekturen - Monolith
+
+          - Alle Aspekte der Anwendung in einem Projekt
+          - Keine Trennung zwischen Fachlichkeiten
+          - Keine externen Abhängigkeiten zur Laufzeit
+        </textarea>
+      </section>
+      <section>
+        <h4>Architekturen - Modulith</h4>
+        <img src="assets/modulith.svg" height="400">
+      </section>
+      <section>
+        <textarea data-template>
+          #### Architekturen - Modulith
+
+          - Unterteilung der Anwendung in Fachlichkeiten
+          - Auslagerung der Fachlichkeiten in Module
+          - Module definieren öffentliche Schnittstellen
+          - Auslagerung in Form von Package, Modul, Projekt
+          - Keine Auslagerung zur Laufzeit
+          - Zusammengeführt durch Kern
+        </textarea>
+      </section>
+      <section>
+        <h4>Architekturen - Services</h4>
+        <img src="assets/services.svg" height="400">
+      </section>
+      <section>
+        <textarea data-template>
+          #### Architekturen - Services
+
+          - Modulith als Kern
+          - Auslagerung einzelner Module in Services
+          - Services haben eigene Datenhaltung
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Daten müssen nicht repliziert werden, da Kern das Mapping übernimmt</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <h4>Architekturen - Microservices</h4>
+        <img src="assets/microservices.svg" height="400">
+      </section>
+      <section>
+        <textarea data-template>
+          #### Architekturen - Microservices
+
+          - Auslagerung jedes Modules in Services
+          - Expliziter Kern durch implizite Abhängigkeiten zwischen Services ersetzt
+          - Services replizieren Daten in eigener Datenhaltung
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Daten müssen repliziert werden, da es keinen Kern fürs Mapping gibt</li>
+          </ul>
+        </aside>
+      </section>
+    </section>
+    <section>
+      <section>
+        <textarea data-template>
+          ### Vergleich
+        </textarea>
+      </section>
+      <!-- Kriterien -->
+      <section>
+        <textarea data-template>
+          #### Vergleich - Kriterien
+
+          - Initialaufwand
+          - Wartungsaufwand
+          - Betriebsaufwand
+          - Personalaufwand
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Kriterien
+
+          - Abhängigkeit
+          - Ausführbarkeit
+          - Testbarkeit
+          - Skalierbarkeit
+          - Zuverlässigkeit
+          - Ausfallsicherheit
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Initialaufwand
+
+          - Aufsetzten der Architektur
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Initialaufwand
+
+          Monolith   Modulith   Services   Microservices
+          Gering     Mittel     Mittel     Hoch
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Monolith braucht kein Konzept</li>
+            <li>Modulith braucht einfaches Konzept</li>
+            <li>Services braucht erweitertes Konzept</li>
+            <li>Microservices braucht allgemeines Konzept</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Wartungsaufwand
+
+          - Einführung neuer Features
+          - Entfernung alter Features
+          - Behebung von Fehler
+          - Aktualisierung der Abhängigkeiten
+          - Refactoring
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Abhängigkeiten sind Sprache, Frameworks, Libraries, Services, Datenbanken, Schnittstellen</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Wartungsaufwand
+
+          Monolith   Modulith   Services   Microservices
+          Hoch       Mittel     Mittel     Gering
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Monolith: stark erhöhter Aufwand</li>
+            <li>Modulith: Module leicht erweiterbar; Kern erhöhter Aufwand</li>
+            <li>Services: Aufwand abhängig von Kern oder Service</li>
+            <li>Microservices: können vollständig neugeschrieben werden</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Betriebsaufwand
+
+          - Betreiben der Services
+          - Instandhaltung der Umgebung
+          - Behebung von Störungen
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Betriebsaufwand
+
+          Monolith   Modulith   Services   Microservices
+          Gering     Gering     Mittel     Hoch
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Monolith: wenige, große Instanzen; wenige Server, physische Umgebung</li>
+            <li>Modulith: s.h. Monolith</li>
+            <li>Services: wenige, große Instanzen + kleine, evt. häufige Services; einige Server, evt. partiell virtualisierte Umgebung</li>
+            <li>Microservices: viele, kleine Instanzen; viele Server, virtualisierte Umgebung</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Personalaufwand
+
+          - Teamgröße sowie Teamanzahl
+          - Erhöhte Komplexität erfordert mehr Personal
+          - Mehr Personal erfordert erhöhte Flexibilität
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Personalaufwand
+
+          Monolith   Modulith   Services   Microservices
+          Gering     Mittel     Mittel     Hoch
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Monolith: sehr kleines Entwicklungsteam benötigt; Operations durch Entwickler</li>
+            <li>Modulith: sehr kleines bis kleines Entwicklungsteam benötigt; evt. extra Personal für Operations</li>
+            <li>Services: Entwicklungsteam abhängig von Größe des Projektes; extra Personal für Operations</li>
+            <li>Microservices: ein, großes bis mehrere, kleine Entwicklungsteams; klein bis mittleres Operationsteam</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Abhängigkeit
+
+          - Trennung der Fachlichkeiten
+          - Freiheit der Technologien
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Abhängigkeit
+
+          Monolith   Modulith   Services   Microservices
+          Hoch       Hoch       Mittel     Gering
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Monolith: sehr starke Kopplung, keine Kohäsion</li>
+            <li>Modulith: mäßige Kopplung, gewisse Kohäsion</li>
+            <li>Services: losere Kopplung, partiell hohe Kohäsion; mehrere Sprachen/Frameworks möglich</li>
+            <li>Microservices: lose Kopplung, hohe Kohäsion; mehrere Sprachen/Frameworks/Images möglich</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Ausführbarkeit
+
+          - Ausprobieren neuer Features
+          - Nachstellen von Fehler
+          - Aufsetzen der Umgebung
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Ausführbarkeit
+
+          Monolith   Modulith   Services   Microservices
+          Hoch       Hoch       Mittel     Gering
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Monolith: nur eine Instanz benötigt</li>
+            <li>Modulith: s.h. Monolith</li>
+            <li>Services: mehre Instanzen benötigt</li>
+            <li>Microservices: mehrere Instanzen und Umgebung benötigt</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Testbarkeit
+
+          - Validierung der Korrektheit
+          - Absichern von Entwicklungen
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Testbarkeit
+
+          Monolith   Modulith   Services   Microservices
+          Gering     Mittel     Mittel     Hoch
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Monolith: nur in Gesamtheit testbar</li>
+            <li>Modulith: einzelne Module testbar, Kern nur in Gesamtheit</li>
+            <li>Services: einzelne Module/Services testbar</li>
+            <li>Microservices: einzelne Services modular testbar</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Skalierbarkeit
+
+          - Reaktionsfähigkeit bei Fluktuationen
+          - Effiziente Nutzung der Resourcen
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Skalierbarkeit
+
+          Monolith   Modulith   Services   Microservices
+          Keine      Gering     Mittel     Hoch
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Monolith: nicht skalierbar</li>
+            <li>Modulith: einzelne Module über Threading skalierbar</li>
+            <li>Services: einzelne Services können skaliert werden</li>
+            <li>Microservices: alle Services können skaliert werden</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Zuverlässigkeit
+
+          - Störungsanfälligkeit
+          - Kommunikationsabbrüche
+          - Fehlerhafte Zustände
+          - Netzwerke, Hardware, Software
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Zuverlässigkeit
+
+          Monolith   Modulith   Services   Microservices
+          Hoch       Hoch       Mittel     Hoch
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Monolith: kaum Netzwerkverbindung; keine Interaktion zwischen Servergruppen; wenig Teile</li>
+            <li>Modulith: s.h Monolith</li>
+            <li>Services: Kommunikation zwischen Kern und Service anfällig; mehrere Teile</li>
+            <li>Microservices: Netzwerkvirtualisierung und Servergruppen anfällig; viele Teile</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Ausfallsicherheit
+
+          - Ausfallsicherheit
+          - Redundanz
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Ausfallsicherheit
+
+          Monolith   Modulith   Services   Microservices
+          Gering      Gering     Mittel     Hoch
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Monolith: Single-Point-of-Failure</li>
+            <li>Modulith: s.h Monolith</li>
+            <li>Services: Kern Single-Point-of-Failure, Services redundant</li>
+            <li>Microservices: alle Services redundant</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Anforderungen
+
+          Monolith              Modulith                Services                Microservices
+          Unbekannt - Einfach   Einfach - Umfangreich   Umfangreich - Komplex   Komplex
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Anforderungen und Teamgröße limitieren Architekturmöglichkeiten</li>
+            <li>Architektur nach Konvergierung von Anforderungen und Personalaufwand wählen</li>
+            <li>Teamgröße muss sich mit Anforderungen decken</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Teamgröße
+
+          Monolith   Modulith       Services        Microservices
+          Klein      Klein - Groß   Mittel - Groß   Groß - Mehrere
+        </textarea>
+        <aside class="notes">
+          <ul>
+            <li>Anforderungen und Teamgröße limitieren Architekturmöglichkeiten</li>
+            <li>Architektur nach Konvergierung von Anforderungen und Personalaufwand wählen</li>
+            <li>Teamgröße muss sich mit Anforderungen decken</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Zusammenfassung
+
+          {placeholder:comparison_table}
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Fazit
+
+          - Anforderungen und Teamgröße limitieren jeweils Architekturmöglichkeiten
+          - Architektur aus Deckung der Architekturmöglichkeiten wählen
+          - Teamgröße muss sich mit Anforderungen decken
+        </textarea>
+      </section>
+      <section>
+        <textarea data-template>
+          #### Vergleich - Fazit
+
+          - Monolith für unbekannte Projekte
+          - Modulith für mehr Wartbarkeit
+          - Services für Skalierbarkeit
+          - Microservices für Zuverlässigkeit
+        </textarea>
+      </section>
+    </section>
+    <section>
       <section data-markdown>
         <textarea data-template>
           ### Spring
@@ -350,7 +882,9 @@
 
           ```java
           @RequestMapping(method = RequestMethod.GET)
-          public List<Note> getNotes(@RequestParam(name = "q", required = false) String search) {
+          public List<Note> getNotes(
+              @RequestParam(name = "q", required = false) String search
+          ) {
               ...
           }
           ```
@@ -390,7 +924,10 @@
 
           ```java
           @RequestMapping(path = "/{note}", method = RequestMethod.PUT)
-          public Note updateNote(@PathVariable("note) Long noteId, @RequestBody NoteProposal proposal) {
+          public Note updateNote(
+              @PathVariable("note) Long noteId,
+              @RequestBody NoteProposal proposal
+          ) {
               ...
           }
           ```
@@ -410,7 +947,10 @@
 
           ```java
           @RequestMapping(path = "/{note}", method = RequestMethod.DELETE)
-          public Note deleteNote(@PathVariable("note) Long noteId, @RequestBody NoteProposal proposal) {
+          public Note deleteNote(
+              @PathVariable("note) Long noteId,
+              @RequestBody NoteProposal proposal
+          ) {
               ...
           }
           ```
@@ -434,7 +974,10 @@
               method = RequestMethod.GET,
               produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
           )
-          public byte[] getAttachment(@PathVariable("note") Long noteId, @PathVariable("attachment) String attachmentId) {
+          public byte[] getAttachment(
+              @PathVariable("note") Long noteId,
+              @PathVariable("attachment) String attachmentId
+          ) {
               ...
           }
           ```
@@ -618,6 +1161,55 @@
               }
           }
           ```
+        </textarea>
+      </section>
+    </section>
+    <section>
+      <section data-markdown>
+        <textarea data-template>
+          ### TODO Anwendung
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### TODO Anwendung - Anforderungen
+
+          - TODOs abfragen
+          - TODO anlegen
+          - TODO als Done markieren
+          - TODO löschen
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### TODO Anwendung - Anforderungen
+
+          TODOs abfragen
+          `GET /todo`
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### TODO Anwendung - Anforderungen
+
+          TODO anlegen
+          `POST /todo`
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### TODO Anwendung - Anforderungen
+
+          TODO als Done markieren
+          `PUT /todo/{id}`
+        </textarea>
+      </section>
+      <section data-markdown>
+        <textarea data-template>
+          #### TODO Anwendung - Anforderungen
+
+          TODO löschen
+          `DELETE /todo/{id}`
         </textarea>
       </section>
     </section>
