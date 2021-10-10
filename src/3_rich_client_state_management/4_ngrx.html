@@ -221,3 +221,104 @@ export class AppModule {
 &lt;/div&gt;</code>
     </pre>
 </section>
+<section>
+    <h4>State Observing</h4>
+    <ul>
+        <li>auf den State kann auch direkt observed werden</li>
+        <li>anstatt einer async Pipe</li>
+        <li>bei neuem State wird someData überschrieben</li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>export class ListViewComponent implements OnInit {
+    someData: SomeData[];
+
+    constructor(private readonly store: Store) {}
+
+    ngOnInit() {
+        this.store.select(selectSomeData).subscribe({
+            someData => this.someData = someData
+        });
+    }
+}</code>
+    </pre>
+</section>
+<section>
+    <h4>Effects</h4>
+    <ul>
+        <li>sind <em>@Injectable</em> classes</li>
+        <li>auf <em>actions$</em> wird subscribed</li>
+        <li>Service wird für Backendaufrufe injected</li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>@Injectable()
+export class SomeDataEffects {
+    // some effects here
+
+    constructor(
+        private readonly actions$: Actions,
+        private readonly someDataService: SomeDataService
+    ) {}
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>ein Effect fängt Actions ab und führt seinen Code aus, z.B. Backendcalls</li>
+            <li>Actions werden wir herkömmliche Injectables in die class injected</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Effects</h4>
+    <ul>
+        <li>auf den <em>actions$</em> wird subscribed</li>
+        <li>anschließend wird der Backendaufruf ausgeführt</li>
+        <li>neue Action muss weitergegeben werden
+            <ul>
+                <li>diese Action landet dann beim Reducer</li>
+            </ul>
+        </li>
+        <li>Error Fall sollte beachtet werden</li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>loadSomeData$ = createEffect(() => this.actions$.pipe(
+    ofType(Action.LoadSomeData),
+    mergeMap(() => this.someDataService.getAll()
+        .then(
+            someData => loadSomeDataSuccess({ someData }),
+            _ => loadSomeDataError({ message: 'error' })
+        ),
+    ),
+));</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>mit <em>createEffect()</em> wird ein Effect erzeugt</li>
+            <li>anschließend wird auf den Actions subscribed (piped)
+                <ul>
+                    <li>ofType filtert die richtigen Actions -> es können auch mehrere sein</li>
+                    <li>mergeMap sorgt dann dafür, dass asynchroner Code ausgeführt werden kann</li>
+                    <li>in der mergeMap muss eine Action zurückgegeben werden</li>
+                    <li>dies kann die eingehende Action, aber auch eine neue sein</li>
+                    <li>Fehlerhandling sollte beachtet werden, falls ein Fehler auftreten kann</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Effect registrieren</h4>
+    <ul>
+        <li>wird im AppModule registriert</li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>@NgModule({
+    imports: [
+        ...
+        EffectsModule.forRoot([SomeDataEffects]),
+        ...
+    ],
+})
+export class AppModule {
+}</code>
+    </pre>
+</section>
