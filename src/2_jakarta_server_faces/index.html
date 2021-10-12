@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
     <link rel="stylesheet" href="styles/custom_styles.css">
+    <link rel="stylesheet" href="/src/custom_styles/global_styles.css">
 </head>
 <body>
 <div class="reveal">
@@ -159,7 +160,7 @@
     
                     * Grundsyntax
     
-                    ``` HTML
+                    ```html
                     ${expression} // immediate
                     #{expression} // deferred
                     ```
@@ -241,13 +242,15 @@
                                     Zugriff über Klassenname mit kleinem Anfangsbuchstabe
                                 </li>
                             </ul>
-                            <pre>
+                        </li>
+                    </ul>
+                    <pre>
                                 <code data-line-numbers>@ManagedBean
 @ViewScope
 public class SayHello
                                 </code>
                             </pre>
-                        </li>
+                    <ul>
                         <li>
                             Faces-config.xml:
                             <ul>
@@ -255,16 +258,16 @@ public class SayHello
                                     Zugriff über Attributwert managed-bean-name
                                 </li>
                             </ul>
-                            <pre>
-                                <code data-line-numbers>&lt;managed-bean&gt;
-    &lt;managed-bean-name&gt;sayHello&lt;/managed-bean-name&gt;
-    &lt;managed-bean-class&gt;demo.SayHello&lt;/managed-bean-class&gt;
-    &lt;managed-bean-scope&gt;request&lt;/managed-bean-scope&gt;
-&lt;/managed-bean&gt;  
-                                </code>
-                            </pre>
                         </li>
                     </ul>
+                    <pre>
+                                <code data-line-numbers>&lt;managed-bean&gt;
+  &lt;managed-bean-name&gt;sayHello&lt;/managed-bean-name&gt;
+  &lt;managed-bean-class&gt;demo.SayHello&lt;/managed-bean-class&gt;
+  &lt;managed-bean-scope&gt;request&lt;/managed-bean-scope&gt;
+&lt;/managed-bean&gt;
+                                </code>
+                            </pre>
                 </div>
             </section>
             <section>
@@ -274,9 +277,9 @@ public class SayHello
                     * Request Scope `RequestScoped`
                     * View Scope `ViewScoped`
                         * während der Nutzer auf dem gleichen View bleibt
-                        * gilt auch über mehrere Page-Reloads 
-	                * @SessionScoped
-	                    * gilt für die Session des Nutzers
+                        * gilt auch über mehrere Page-Reloads
+                    * Session `SessionScoped
+                        * gilt für die Session des Nutzers
                     * Application Scope `ApplicationScoped`
                         * Gilt über die komplette Laufzeit
                 </div>
@@ -478,10 +481,10 @@ public class SayHello
                 <div data-markdown>
                     ### Standardvalidatoren
     
-                    ```
-                        &lt;f:validateLength minimum="6" maximum="15"/&gt;
-                        &lt;f:validateLongRange minimum="6" maximum="15"/&gt;
-                        &lt;f:validatePattern pattern="&lt;myPattern&gt;"/&gt;
+                    ```html
+&lt;f:validateLength minimum="6" maximum="15"/&gt;
+&lt;f:validateLongRange minimum="6" maximum="15"/&gt;
+&lt;f:validatePattern pattern="&lt;myPattern&gt;"/&gt;
                     ```
                 </div>
             </section>
@@ -489,8 +492,9 @@ public class SayHello
                 <div data-markdown>
                     ### Verwendung
 
-                    ```
-&lt;h:inputText value="#{bean.variable}" validator="validatorMethod()" /&gt;
+                    ```html
+&lt;h:inputText value="#{bean.variable}"
+             validator="validatorMethod()" /&gt;
 &lt;h:inputText value="#{bean.variable}"&gt;
     &lt;f:validateRequired/&gt;
 &lt;/inputText&gt;
@@ -530,13 +534,13 @@ public class SayHello
                 </aside>
             </section>
             <section>
-                <div data-markdown>
-                    ### Form
-                    <code>
-                        &lt;h:form id="id"&gt;
-                            ...
-                        &lt;/h:form&gt;
-                    </code>
+                <div>
+                    <h4>Form</h4>
+                    <pre>
+                        <code class="html">&lt;h:form id="id"&gt;
+    ...
+&lt;/h:form&gt;</code>
+                    </pre>
                 </div>
                 <aside class="notes">
                     https://www.javatpoint.com/jsf-form
@@ -545,11 +549,12 @@ public class SayHello
                 </aside>
             </section>
             <section>
-                <div data-markdown>
-                    ### Checkbox
-                    <code>
-                        &lt;h:selectBooleanCheckbox value="#{item.done}" disabled="true" /&gt;
-                    </code>
+                <div>
+                    <h4>Checkbox</h4>
+                    <pre>
+                        <code class="html">&lt;h:selectBooleanCheckbox value="#{item.done}"
+                         disabled="true" /&gt;</code>
+                    </pre>
                 </div>
                 <aside class="notes">
                     https://www.javatpoint.com/jsf-form
@@ -558,33 +563,34 @@ public class SayHello
                 </aside>
             </section>
             <section>
-                <div data-markdown>
-                    ### Input Text
-                    <code>
-                        &lt;h:inputText value="#{item.title}"/&gt;
-                    </code>
+                <div>
+                    <h4>Input Text</h4>
+                    <pre>
+                        <code class="html">&lt;h:inputText value="#{item.title}"/&gt;</code>
+                    </pre>
                 </div>
                 <aside class="notes">
                     https://www.javatpoint.com/jsf-inputtext
                 </aside>
             </section>
             <section>
-                <div data-markdown>
-                    ### Input Hidden
-                    <code>
-                        &lt;h:inputHidden value="#{item.title}"/&gt;
-                    </code>
+                <div>
+                    <h4>Input Hidden</h4>
+                    <pre>
+                        <code class="html">&lt;h:inputHidden value="#{item.title}"/&gt;</code>
+                    </pre>
                 </div>
                 <aside class="notes">
                     https://www.javatpoint.com/jsf-inputhidden
                 </aside>
             </section>
             <section>
-                <div data-markdown>
-                    ### Commandbutton
-                    <code>
-                        &lt;h:commandButton value="Speichern" action="#{manager.save()}"/&gt;
-                    </code>
+                <div>
+                    <h4>Commandbutton</h4>
+                    <pre>
+                        <code class="html">&lt;h:commandButton value="Speichern"
+                 action="#{manager.save()}"/&gt;</code>
+                    </pre>
                 </div>
                 <aside class="notes">
                     https://www.javatpoint.com/jsf-commandbutton
