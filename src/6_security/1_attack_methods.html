@@ -1,0 +1,67 @@
+<section>
+    <h3>Angriffsmethoden</h3>
+</section>
+<section>
+    <h4>Angriffsmethoden</h4>
+    <ul>
+        <li>Request-Manipulation</li>
+        <li>Directory Traversal</li>
+        <li>SQL-Injection</li>
+        <li>Email-Injection</li>
+        <li>Cross-Site-Scripting</li>
+        <li>Cross-Site-Request-Forgery</li>
+        <li>Session Hijacking</li>
+        <li>Man-In-The-Browser</li>
+        <li>Man-In-The-Middle</li>
+        <li>Phishing</li>
+        <li>Denail-Of-Service</li>
+    </ul>
+</section>
+<section>
+    <h4>Request-Manipulation</h4>
+    <p>Wer hat davon mitbekommen?</p>
+    <img src="assets/cdu_connect.jpg" height="200px" />
+    <aside class="notes">
+        <ul>
+            <li>https://lilithwittmann.medium.com/wenn-die-cdu-ihren-wahlkampf-digitalisiert-a3e9a0398b4d</li>
+            <li>Die Sicherheitslücke bei CDU Connect war durch einfache Request Manipulation zu finden.</li>
+            <li>Wie Lilith Wittmann in ihrem Beitrag dazu schreibt, konnte sie die Daten der Anwendung einfach über die Backendschnittstellen abfragen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Request-Manipulation</h4>
+    <ul>
+        <li><em>"www.some-domain.de/users/34"</em></li>
+        <li>gibt es vielleicht auch einen user 35?</li>
+        <li>alle öffentlichen Schnittstellen können aufgerufen werden</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Security through obscurity ist keine ordentliche Security</li>
+            <li>Nur weil jemand es nicht gesagt bekommt, heißt es nicht, dass er es nicht selbst herausfinden kann</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Request-Manipulation</h4>
+    <ul>
+        <li>sollte eigentlich <strong>NIE</strong> auftreten</li>
+        <li>keine Sicherheitslücke, sondern fahrlässiges handeln</li>
+        <li>Daten dürfen nur für berechtigte Personen aufrufbar sein</li>
+        <li>Lösung: Datenzugriff nur für berechtigte authentifizierte Nutzer</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Wie wir anhand des CDU Beispiels sehen, ist Request Manipulation leider immer noch ein Thema</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Directory Traversal</h4>
+    <ul>
+        <li>ähnlich wie Request-Manipulation</li>
+        <li><em>"http://www.example.com/index.foo?item=datei1.html"</em></li>
+        <li><em>"http://www.example.com/index.foo?item=../../../Config.sys"</em></li>
+    </ul>
+</section>
