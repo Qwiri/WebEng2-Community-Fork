@@ -7,12 +7,10 @@
         <li>Request-Manipulation</li>
         <li>Directory Traversal</li>
         <li>SQL-Injection</li>
-        <li>Email-Injection</li>
+        <li>Session Hijacking</li>
         <li>Cross-Site-Scripting</li>
         <li>Cross-Site-Request-Forgery</li>
-        <li>Session Hijacking</li>
         <li>Man-In-The-Browser</li>
-        <li>Man-In-The-Middle</li>
         <li>Phishing</li>
         <li>Denail-Of-Service</li>
     </ul>
@@ -32,28 +30,27 @@
 <section>
     <h4>Request-Manipulation</h4>
     <ul>
-        <li><em>"www.some-domain.de/users/34"</em></li>
-        <li>gibt es vielleicht auch einen user 35?</li>
+        <li><em>"www.some-domain.de/users/41"</em></li>
+        <li>gibt es vielleicht auch einen user 42?</li>
         <li>alle öffentlichen Schnittstellen können aufgerufen werden</li>
     </ul>
     <aside class="notes">
         <ul>
             <li>Security through obscurity ist keine ordentliche Security</li>
-            <li>Nur weil jemand es nicht gesagt bekommt, heißt es nicht, dass er es nicht selbst herausfinden kann</li>
+            <li>Nur weil jemand nicht darauf klicken kann, heißt es nicht, dass man es nicht aufrufen kann.</li>
         </ul>
     </aside>
 </section>
 <section>
-    <h4>Request-Manipulation</h4>
+    <h4>Request-Manipulation - Lösung</h4>
     <ul>
-        <li>sollte eigentlich <strong>NIE</strong> auftreten</li>
-        <li>keine Sicherheitslücke, sondern fahrlässiges handeln</li>
-        <li>Daten dürfen nur für berechtigte Personen aufrufbar sein</li>
-        <li>Lösung: Datenzugriff nur für berechtigte authentifizierte Nutzer</li>
+        <li>Datenzugriff nur für berechtigte und authentifizierte Nutzer</li>
+        <li>evtl. zusätzlich keine monoton Aufsteigende Id's</li>
     </ul>
     <aside class="notes">
         <ul>
             <li>Wie wir anhand des CDU Beispiels sehen, ist Request Manipulation leider immer noch ein Thema</li>
+            <li>Man kann auch aus den kleinsten Daten wichtige Informationen extrahieren.</li>
         </ul>
     </aside>
 </section>
@@ -63,5 +60,193 @@
         <li>ähnlich wie Request-Manipulation</li>
         <li><em>"http://www.example.com/index.foo?item=datei1.html"</em></li>
         <li><em>"http://www.example.com/index.foo?item=../../../Config.sys"</em></li>
+    </ul>
+</section>
+<section>
+    <h4>Directory Traversal - Lösung</h4>
+    <ul>
+        <li>keine sensitiven Daten an öffentlichen Orten ablegen</li>
+        <li>Zugriffsrechte auf Ordner absichern</li>
+        <li>Pfade als Eingabe müssen überprüft werden</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>am besten einen eigenen Server für seine öffentlich zugänglichen Daten</li>
+            <li>ansonsten kann man die einzelnen Ordner gegen Zugriffe von außen schützen</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>SQL-Injection</h4>
+    <img src="assets/sql_injection_meme.jpg" height="400px"/>
+</section>
+<section>
+    <h4>SQL-Injection</h4>
+    <pre>
+        <code class="java" data-line-numbers>var username = "foo@mail.com'; --"
+var password = "lala"</code>
+    </pre>
+    <pre>
+        <code class="java" data-line-numbers>var sql = "SELECT * FROM user " +
+          "WHERE username='" + username + "' " +
+            "AND password= '" + password "';";</code>
+    </pre>
+    <pre>
+        <code class="sql" data-line-numbers>SELECT * FROM user
+  WHERE username='foo@mail.com';
+    --' AND password='lala';</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>wir fügen zusätzlich zum Nutzernamen weiteren SQL Code in den Query ein</li>
+            <li>der Rest des Queries wird damit auskommentiert</li>
+            <li>Nutzername muss in diesem Fall zumindest valide sein</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>SQL-Injection - Varianten</h4>
+    <pre>
+        <code class="java" data-line-numbers>var username = "lala'; DROP TABLE user;--"
+var password = "lala"</code>
+    </pre>
+    <pre>
+        <code class="java" data-line-numbers>var username = "lala'; UPDATE password='password' " +
+                      "WHERE username='foo@mail.com';--"
+var password = "lala"</code>
+    </pre>
+</section>
+<section>
+    <h4>SQL-Injection - Vorgehen</h4>
+    <ul>
+        <li>ausprobieren der gängigsten Namen für
+            <ul>
+                <li>Datenbanken</li>
+                <li>Tabellen</li>
+                <li>Spalten</li>
+            </ul>
+        </li>
+        <li>Fehlermeldungen liefern wichtige Informationen</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>hier sind Fehlermeldungen der Datenbank gemeint, die an eine öffentliche Schnittstelle weitergeleitet werden</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>SQL-Injection - Lösung</h4>
+    <ul>
+        <li>Silver Bullet: Prepared Statements</li>
+    </ul>
+    <pre>
+        <code class="java" data-line-numbers>var sql = "SELECT * FROM user " +
+          "WHERE username=:username" +
+            "AND password=:password";
+
+em.createNativeQuery(sql)
+    .setParameter("username", username)
+    .setParameter("password", password)
+    .getSingleResult();</code>
+    </pre>
+</section>
+<section>
+    <h4>Session Hijacking</h4>
+    <ul>
+        <li>klauen der Session eines Nutzers</li>
+        <li>raten der Session ID</li>
+        <li>ausspähen der Session ID</li>
+        <li>aussperren des Nutzers durch Passwortänderung</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>die Session ID kann z.B. durch Cross Site Scripting geklaut werden</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Session Hijacking - Lösung</h4>
+    <ul>
+        <li>binden der Session ID an die IP-Adresse oder Browser</li>
+        <li>Session ID öfter aktualisieren</li>
+        <li>Passwort ändern verhindern
+            <ul>
+                <li>altes Passwort erneut eingeben</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section>
+    <h4>Cross-Site-Scripting</h4>
+    <img src="assets/cross_site_scripting.png" height="400px"/>
+    <aside class="notes">
+        <ul>
+            <li>über einen Link kann man den Code auch in den Browser eines anderen bringen</li>
+            <li>andere Varianten wäre über eine Datenbank (Kommentarfunktion)</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Cross-Site-Scripting</h4>
+    <ul>
+        <li>einfügen von JavaScript Code in Webseiten</li>
+        <li>Ausführung des Codes durch den Browser</li>
+        <li>Möglicher Schaden
+            <ul>
+                <li>Verwirrung des Nutzers</li>
+                <li>Weiterleitung auf andere Webseiten</li>
+                <li>auslesen und wegschicken von Daten</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section>
+    <h4>Cross-Site-Scripting - Lösung</h4>
+    <ul>
+        <li>Encoding von Inhalten die Angezeigt werden</li>
+        <li>Angular bringt das von Haus aus mit</li>
+    </ul>
+    <img src="assets/cross_site_scripting_solution.png" height="400px"/>
+</section>
+<section>
+    <h4>Cross-Site-Scripting - Lösung</h4>
+    <ul>
+        <li>Content Security Policy
+            <ul>
+                <li>schränkt das Abrufen von Scripts ein</li>
+                <li>schränkt den JavaScript Code ein
+                    <ul>
+                        <li>eval("some-code")</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>eine Content Security Policy sagt dem Browser was er ausführen und laden darf</li>
+            <li>natürlich kommt es auch darauf an, dass der Browser sich richtig verhält</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Cross-Site-Request-Forgery</h4>
+    <ul>
+        <li>Mischung aus XSS und Session Hijacking</li>
+        <li>Ausnutzung der Session durch XSS</li>
+        <li>Script löst im Hintergrund Transaktionen beim Backend aus</li>
+    </ul>
+    <img src="assets/cross_site_request_forgery.png" height="200px"/>
+</section>
+<section>
+    <h4>Cross-Site-Request-Forgery - Lösung</h4>
+    <ul>
+        <li>ähnlich wie bei xss</li>
+    </ul>
+</section>
+<section>
+    <ul>
+        <li>Selbst aus kleinen Informationen kann man sehr viele Informationen über eine Firma in die Hand bekommen</li>
+        <li>Empfehlung Daniel Kriesel Spiegel Mining</li>
     </ul>
 </section>
