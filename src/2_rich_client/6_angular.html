@@ -27,7 +27,7 @@
 <section>
     <h4>component.ts</h4>
     <pre>
-                  <code class="javascript" data-line-numbers="|2|3|4|6-8">@Component({
+                  <code class="typescript" data-line-numbers="|2|3|4|6-8">@Component({
     selector: 'app-show-data',
     templateUrl: './show-data.component.html',
     styleUrls: ['./show-data.component.css']
@@ -49,7 +49,7 @@ export class ShowDataComponent {
 <section>
     <h4>Input/Output</h4>
     <pre>
-                  <code class="javascript" data-line-numbers>export class ShowDataComponent {
+                  <code class="typescript" data-line-numbers>export class ShowDataComponent {
 
     @Input()
     someData: SomeData;
@@ -71,7 +71,7 @@ export class ShowDataComponent {
         <li>werden automatisch aktualisiert</li>
     </ul>
     <pre>
-                  <code class="javascript" data-line-numbers="3-4">export class ShowDataComponent {
+                  <code class="typescript" data-line-numbers="3-4">export class ShowDataComponent {
 
     @Input()
     someData: SomeData;
@@ -96,7 +96,7 @@ export class ShowDataComponent {
         <li>output wird durch emit() ausgelöst</li>
     </ul>
     <pre>
-                  <code class="javascript" data-line-numbers="5-6">export class ShowDataComponent {
+                  <code class="typescript" data-line-numbers="5-6">export class ShowDataComponent {
 
     @Input()
     someData: SomeData;
@@ -134,7 +134,7 @@ export class ShowDataComponent {
         <li>werden zu bestimmten Ereignissen aufgerufen</li>
     </ul>
     <pre>
-    <code class="javascript" data-line-numbers>export class ShowDataComponent implements OnInit {
+    <code class="typescript" data-line-numbers>export class ShowDataComponent implements OnInit {
 
     ngOnInit() {
         // do something on init
@@ -209,7 +209,7 @@ export class ShowDataComponent {
         </li>
     </ul>
     <pre>
-        <code class="javascript" data-line-numbers>@Injectable({
+        <code class="typescript" data-line-numbers>@Injectable({
     providedIn: 'root'
 })
 export class SomeDataService {
@@ -230,7 +230,7 @@ export class SomeDataService {
         <li>Angular injected Services automatisch</li>
     </ul>
     <pre>
-        <code class="javascript" data-line-numbers>export class ShowDataComponent {
+        <code class="typescript" data-line-numbers>export class ShowDataComponent {
 
     constructor(
         private readonly someDataService: SomeDataService
@@ -249,7 +249,7 @@ export class SomeDataService {
     <h4>Module</h4>
     <p>größere Anwendungen können modularisiert werden</p>
     <pre>
-        <code class="javascript" data-line-numbers>@NgModule({
+        <code class="typescript" data-line-numbers>@NgModule({
     declarations: [
         AppComponent,
         ShowDataComponent,
@@ -280,7 +280,7 @@ export class AppModule {
         <li>RoutingModule wird im AppModule importiert</li>
     </ul>
     <pre>
-        <code class="javascript" data-line-numbers>const routes: Routes = [
+        <code class="typescript" data-line-numbers>const routes: Routes = [
     {
         path: 'show-data',
         component: ShowDataComponent,
@@ -305,7 +305,7 @@ export class AppRoutingModule {
 <section>
     <h4>Routes</h4>
     <pre>
-        <code class="javascript" data-line-numbers="|3-4,7-8|11">const routes: Routes = [
+        <code class="typescript" data-line-numbers="|3-4,7-8|11">const routes: Routes = [
     {
         path: '',
         redirectTo: 'show-data',
@@ -346,7 +346,7 @@ export class AppRoutingModule {
 <section>
     <h4>Internes Routing</h4>
     <pre>
-        <code class="javascript" data-line-numbers>export class ShowDataComponent {
+        <code class="typescript" data-line-numbers>export class ShowDataComponent {
 
     constructor(private readonly router: Router) {
     }
@@ -368,7 +368,7 @@ export class AppRoutingModule {
 <section>
     <h4>Routing mit Parametern</h4>
     <pre>
-        <code class="javascript" data-line-numbers>export class ShowDataComponent {
+        <code class="typescript" data-line-numbers>export class ShowDataComponent {
 
     constructor(private readonly router: Router) {
     }
@@ -392,7 +392,7 @@ export class AppRoutingModule {
 <section>
     <h4>Auslesen des Parameter</h4>
     <pre>
-        <code class="javascript" data-line-numbers>export class OtherComponent {
+        <code class="typescript" data-line-numbers>export class OtherComponent {
 
     constructor(activatedRoute: ActivatedRoute) {
         const someParameter =
@@ -419,7 +419,7 @@ export class AppRoutingModule {
         <li>kennt die HTTP Methods</li>
     </ul>
     <pre>
-        <code class="javascript" data-line-numbers>export class SomeDataService {
+        <code class="typescript" data-line-numbers>export class SomeDataService {
 
     constructor(private readonly httpClient: HttpClient) {
     }
@@ -445,7 +445,7 @@ export class AppRoutingModule {
         <li>muss im Module importiert werden</li>
     </ul>
     <pre>
-        <code class="javascript">@NgModule({
+        <code class="typescript">@NgModule({
     ...
     imports: [
         HttpClientModule,

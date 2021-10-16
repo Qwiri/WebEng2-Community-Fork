@@ -1,0 +1,164 @@
+<section>
+    <h3>Abseits von NgRx</h3>
+</section>
+<section>
+    <h4>State Management überall</h4>
+    <ul>
+        <li>unzählige State Management Frameworks</li>
+        <li>jedes Frontend Framework bringt ein eigenes mit</li>
+        <li>unter der Haube funktionieren alle gleich</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>jedes "Frontend" Framework ist bewusst gewählt. Hier geht es nicht nur um Web, sondern auch um App.</li>
+            <li>Wie anfangs erwähnt sind Apps sehr ähnlich zu SPA Anwendungen</li>
+            <li>wir schauen uns jetzt ein paar Beispiele an</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Redux</h4>
+    <ul>
+        <li>State Management für React</li>
+        <li>Release 2015</li>
+        <li>Redux verzichtet auf einen Selector</li>
+        <li>wenig "magic"</li>
+        <li>kann sogar ohne "magic" implementiert werden</li>
+    </ul>
+    <pre>
+        <code class="language-plantuml">
+            @startuml
+            component reducer
+            component action
+            component store
+            node UI {
+                component presentation
+                component control
+            }
+
+            reducer --> store
+            reducer <-- action
+            action <-- control
+            store --> presentation
+            @enduml
+        </code>
+    </pre>
+</section>
+<section>
+    <h4>Vuex</h4>
+    <div>
+        <ul>
+            <li>State Management für Vue</li>
+            <li>Release 2020</li>
+            <li>erinnert an NgRx</li>
+            <li>leichtgewichtige Implementierung</li>
+        </ul>
+    </div>
+    <pre>
+        <code class="language-plantuml">
+            @startuml
+            component mutator
+            component action
+            component state
+            component getter
+            node UI {
+                component presentation
+                component control
+            }
+
+            mutator <-- action
+            action <-- control
+            mutator -> state
+            state --> presentation
+            state --> getter
+            getter --> presentation
+            @enduml
+        </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>wie NgRx nur mit anderen Namen</li>
+            <li>es sieht nach mehr "magie" auf den ersten Blick aus</li>
+            <li>ich habe allerdings nur mal das Tutorial durchgeklickt</li>
+            <li>passt allerdings mit der Aussage eines Kollegen von mir überein, der meinte das Vue allgemein sehr anfängerfreundlich sei</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Bloc</h4>
+    <div>
+        <ul>
+            <li>State Management für Dart/Flutter</li>
+            <li>Release 2018</li>
+            <li>ohne "Selector"</li>
+            <li>kommt auch ohne Events aus
+                <ul>
+                    <li>nennt man dann Cubit</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <pre>
+        <code class="language-plantuml">
+            @startuml
+            component bloc
+            component event
+            component state
+            node UI {
+                component presentation
+                component control
+            }
+
+            bloc <-- event
+            event <-- control
+            bloc --> state
+            state --> presentation
+            @enduml
+        </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Bestandteile wurden wieder nur umbenannt</li>
+            <li>im Kern steckt dasselbe Pattern dahinter</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Bloc (Cubit)</h4>
+    <div>
+        <ul>
+            <li>Control ruft Methoden des Cubits auf</li>
+            <li>leichtgewichtiger Cubit</li>
+        </ul>
+    </div>
+    <pre>
+        <code class="language-plantuml">
+            @startuml
+            component cubit
+            component state
+            node UI {
+                component presentation
+                component control
+            }
+
+            cubit -> state
+            cubit <-- control
+            state --> presentation
+            @enduml
+        </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Bloc's und Events sind in vielen Fälle zu überdimensioniert</li>
+            <li>deshalb hat man sich entschieden Cubits zu nutzen</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Was möchte ich damit sagen?</h4>
+    <ul>
+        <li>State Management ist ein Pattern das überall vorkommt</li>
+        <li>im Kern funktionieren alle gleich</li>
+        <li>Wenn ihr das Konzept verstanden habt, könnt ihr schnell neue Frameworks lernen</li>
+    </ul>
+</section>
