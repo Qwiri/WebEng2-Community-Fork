@@ -1,0 +1,324 @@
+<section>
+    <h3>NgRx</h3>
+</section>
+<section>
+    <h4>Model</h4>
+    <pre>
+        <code class="typescript" data-line-numbers>export interface Todo {
+    id?: number;
+    title: string;
+    done: boolean;
+}        </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>habt ihr ja bereits in eurer Anwendung und kennt ihr aus der ersten Praxisübung</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Actions</h4>
+    <ul>
+        <li>werden über die Funktion <em>"createAction"</em> erstellt</li>
+        <li>brauchen einen Identifier
+            <ul>
+                <li>besteht aus einer Source: <em>"[Some Component]"</em></li>
+                <li>und einem Event: <em>"Add Some Data"</em></li>
+            </ul>
+        </li>
+        <li>können Properties enthalten
+            <ul>
+                <li>in diesem Fall <em>"SomeData"</em></li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>export const addSomeData = createAction(
+    '[Some Component] Add Some Data',
+    props<{ someData: SomeData }>(),
+);</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Identifier
+                <ul>
+                    <li>Source soll zeigen wo diese Action geworfen wird</li>
+                    <li>Event beschreibt was diese Action bewirkt</li>
+                </ul>
+            </li>
+            <li>Properties werden über die Funktion props<>() hinzugefügt
+                <ul>
+                    <li>werden normalerweise in ein Objekt gewrapped um künstliche "named" Parameter zu haben</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Reducer</h4>
+    <ul>
+        <li>braucht einen initialen State
+            <ul>
+                <li>dieser ist Readonly!</li>
+            </ul>
+        </li>
+        <li>wird über <em>"createReducer"</em> erzeugt</li>
+        <li>braucht Handler für jede Action
+            <ul>
+                <li>dieser erstellt den neuen State</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>export const initialState: ReadonlyMap&lt;number, SomeData&gt;
+    = new Map([]);
+
+export const someDataReducer = createReducer(
+    initialState,
+    on(addSomeData, addSomeDataReducer),
+);
+
+function addSomeDataReducer(
+    state: ReadonlyMap&lt;number, SomeData&gt;,
+    { someData }: { someData: SomeData }
+): Map&lt;number, SomeData&gt; {
+    // do something and return new state
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Initialer State kann auch Daten enthalten</li>
+            <li>State muss Readonly (Immutable) sein, weil der State von keinem einfach so verändert werden darf
+                <ul>
+                    <li>Erinnerung an die Regeln des State Managements</li>
+                </ul>
+            </li>
+            <li>Reducer wird über die Methode "createReducer" erzeugt
+                <ul>
+                    <li>bekommt den initialen State</li>
+                    <li>außerdem werden hier die Handler für die Actions definiert</li>
+                </ul>
+            </li>
+            <li>Handler
+                <ul>
+                    <li>für jede Action die dieser Reducer bearbeiten soll</li>
+                    <li>es macht keinen Sinn eine Action von mehreren Reducern bearbeiten zu lassen</li>
+                    <li>ich habe den Handler als Funktion ausgelagert</li>
+                    <li>dies muss nicht sein, man kann es auch als anonyme Funktion schreiben</li>
+                    <li>Wichtig: der Handler verändert den State nicht, sondern erzeugt einen neuen!</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Reducer registrieren</h4>
+    <ul>
+        <li>Reducer müssen im App Module registriert werden</li>
+        <li>es können mehrere Reducer registriert werden</li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>import { someDataReducer } from './state/todo.reducer';
+
+@NgModule({
+    imports: [
+        ...
+        StoreModule.forRoot({ someData: someDataReducer })
+        ...
+    ],
+})
+export class AppModule {
+}</code>
+    </pre>
+</section>
+<section>
+    <h4>State</h4>
+    <ul>
+        <li>enthält den globalen Status der Anwendung</li>
+        <li>ist Readonly (Immutable)</li>
+        <li>kann in mehrere Stücke unterteilt sein</li>
+        <li>einfaches Interface</li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>export interface AppState {
+    someData: ReadonlyMap&lt;number, SomeData&gt;;
+}</code>
+    </pre>
+</section>
+<section>
+    <h4>Selectors</h4>
+    <ul>
+        <li>Hilfsmittel um einen Teil des States auszulesen</li>
+        <li>werden mit <em>"createSelector"</em> erzeugt
+            <ul>
+                <li>besteht aus Selector</li>
+                <li>und Projector</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>export const selectSomeData = createSelector(
+    (state: AppState) =&gt; state.someData,
+    (someData: Map&lt;number, SomeData&gt;)
+            =&gt; Array.from(someData.values()),
+);</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>mit der Selector Funktion wird aus dem AppState ein Teilstate ausgelesen</li>
+            <li>mit dem Projector kann man diesen Teilstate umwandeln (projezieren)</li>
+            <li>in diesem Fall wird aus dem State die Map von SomeData ausgelesen und ein Array aus dem Values gemacht</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Dispatchen einer Action</h4>
+    <ul>
+        <li>Store wird über den Constructor injected</li>
+        <li>Action wird einfach auf dem Store dispatched</li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>export class SomeDataComponent {
+
+    someData: SomeData;
+
+    constructor(private readonly store: Store) {}
+
+    onSubmit() {
+        this.store.dispatch(
+            addSomeData({ someData: this.someData })
+        );
+    }
+}</code>
+    </pre>
+</section>
+<section>
+    <h4>Selection des States</h4>
+    <ul>
+        <li>aufrufen der Funktion <em>"select()"</em> auf dem Store</li>
+        <li><em>"select()"</em> liefert ein Observable
+            <ul>
+                <li>vergleichbar zu Java Streams</li>
+            </ul>
+        </li>
+        <li>auf das Observable wird mit <em>"async"</em> subscribed</li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>export class ListViewComponent {
+    someData$ = this.store.select(selectSomeData);
+
+    constructor(private readonly store: Store) {
+    }
+}</code>
+    </pre>
+    <pre>
+        <code class="html" data-line-numbers>&lt;div *ngIf=&quot;someData$ | async&quot;&gt;
+    &lt;h2 class=&quot;mb-3&quot;&gt;SomeData:&lt;/h2&gt;
+    &lt;div *ngFor=&quot;let someData of someData$ | async&quot;&gt;
+        &lt;app-list-view-item [item]=&quot;someData&quot;&gt;
+        &lt;/app-list-view-item&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code>
+    </pre>
+</section>
+<section>
+    <h4>State Observing</h4>
+    <ul>
+        <li>auf den State kann auch direkt observed werden</li>
+        <li>anstatt einer async Pipe</li>
+        <li>bei neuem State wird someData überschrieben</li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>export class ListViewComponent implements OnInit {
+    someData: SomeData[];
+
+    constructor(private readonly store: Store) {}
+
+    ngOnInit() {
+        this.store.select(selectSomeData).subscribe({
+            someData => this.someData = someData
+        });
+    }
+}</code>
+    </pre>
+</section>
+<section>
+    <h4>Effects</h4>
+    <ul>
+        <li>sind <em>@Injectable</em> classes</li>
+        <li>auf <em>actions$</em> wird subscribed</li>
+        <li>Service wird für Backendaufrufe injected</li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>@Injectable()
+export class SomeDataEffects {
+    // some effects here
+
+    constructor(
+        private readonly actions$: Actions,
+        private readonly someDataService: SomeDataService
+    ) {}
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>ein Effect fängt Actions ab und führt seinen Code aus, z.B. Backendcalls</li>
+            <li>Actions werden wir herkömmliche Injectables in die class injected</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Effects</h4>
+    <ul>
+        <li>auf den <em>actions$</em> wird subscribed</li>
+        <li>anschließend wird der Backendaufruf ausgeführt</li>
+        <li>neue Action muss weitergegeben werden
+            <ul>
+                <li>diese Action landet dann beim Reducer</li>
+            </ul>
+        </li>
+        <li>Error Fall sollte beachtet werden</li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>loadSomeData$ = createEffect(() => this.actions$.pipe(
+    ofType(Action.LoadSomeData),
+    mergeMap(() => this.someDataService.getAll()
+        .then(
+            someData => loadSomeDataSuccess({ someData }),
+            _ => loadSomeDataError({ message: 'error' })
+        ),
+    ),
+));</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>mit <em>createEffect()</em> wird ein Effect erzeugt</li>
+            <li>anschließend wird auf den Actions subscribed (piped)
+                <ul>
+                    <li>ofType filtert die richtigen Actions -> es können auch mehrere sein</li>
+                    <li>mergeMap sorgt dann dafür, dass asynchroner Code ausgeführt werden kann</li>
+                    <li>in der mergeMap muss eine Action zurückgegeben werden</li>
+                    <li>dies kann die eingehende Action, aber auch eine neue sein</li>
+                    <li>Fehlerhandling sollte beachtet werden, falls ein Fehler auftreten kann</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Effect registrieren</h4>
+    <ul>
+        <li>wird im AppModule registriert</li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>@NgModule({
+    imports: [
+        ...
+        EffectsModule.forRoot([SomeDataEffects]),
+        ...
+    ],
+})
+export class AppModule {
+}</code>
+    </pre>
+</section>
