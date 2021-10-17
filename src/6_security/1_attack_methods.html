@@ -168,7 +168,7 @@ em.createNativeQuery(sql)
     <h4>Session Hijacking - Lösung</h4>
     <ul>
         <li>binden der Session ID an die IP-Adresse oder Browser</li>
-        <li>Session ID öfter aktualisieren</li>
+        <li>größere Session ID wählen</li>
         <li>Passwort ändern verhindern
             <ul>
                 <li>altes Passwort erneut eingeben</li>
@@ -181,8 +181,12 @@ em.createNativeQuery(sql)
     <img src="assets/cross_site_scripting.png" height="400px"/>
     <aside class="notes">
         <ul>
-            <li>über einen Link kann man den Code auch in den Browser eines anderen bringen</li>
-            <li>andere Varianten wäre über eine Datenbank (Kommentarfunktion)</li>
+            <li>über einen Link kann man den Code auch in den Browser eines anderen bringen, dies nennt man nicht-persistentes xss.</li>
+            <li>es gibt auch persistentes xss, z.B. über eine Datenbank (Kommentarfunktion)
+                <ul>
+                    <li>eingaben eines Nutzers werden bei anderen Nutzern wieder ausgegeben</li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </section>
@@ -207,6 +211,12 @@ em.createNativeQuery(sql)
         <li>Angular bringt das von Haus aus mit</li>
     </ul>
     <img src="assets/cross_site_scripting_solution.png" height="400px"/>
+    <aside class="notes">
+        <ul>
+            <li>Nicht nur bei der Ausgabe von Inhalten muss geprüft werden. Auch wenn Nutzer Daten an den Server schicken müssen die Inhalte geprüft werden.</li>
+            <li>Dann kann es gar nicht passieren, dass XSS aus dem Backend an den User ausgeliefert wird.</li>
+        </ul>
+    </aside>
 </section>
 <section>
     <h4>Cross-Site-Scripting - Lösung</h4>
@@ -214,7 +224,7 @@ em.createNativeQuery(sql)
         <li>Content Security Policy
             <ul>
                 <li>schränkt das Abrufen von Scripts ein</li>
-                <li>schränkt den JavaScript Code ein
+                <li>schränkt den JavaScript Code ein der ausgeführt wird
                     <ul>
                         <li>eval("some-code")</li>
                     </ul>
@@ -234,19 +244,106 @@ em.createNativeQuery(sql)
     <ul>
         <li>Mischung aus XSS und Session Hijacking</li>
         <li>Ausnutzung der Session durch XSS</li>
-        <li>Script löst im Hintergrund Transaktionen beim Backend aus</li>
+        <li>Script löst im Hintergrund Transaktionen aus</li>
     </ul>
     <img src="assets/cross_site_request_forgery.png" height="200px"/>
+    <aside class="notes">
+        <ul>
+            <li>Streng genommen ist die Nutzung einer Session Id eine Variante von CSRF. Dies nennt man Session-Riding.</li>
+            <li>Normales CSRF beschränkt sich auf das Ausführen von Transaktionen</li>
+        </ul>
+    </aside>
 </section>
 <section>
     <h4>Cross-Site-Request-Forgery - Lösung</h4>
     <ul>
-        <li>ähnlich wie bei xss</li>
+        <li>siehe XSS</li>
+        <li>Webanwendung und Server teilen ein Secret
+            <ul>
+                <li>Secret wird bei jedem Request mitgeschickt</li>
+                <li>Secret kann im Cookie oder im Header liegen</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>CSRF baut auf XSS auf. Daher am besten XSS verhindern</li>
+            <li>Angular bietet ein HttpClientXsrfModule an. Dies kümmert sich um das teilen eines Secrets (clientseitig)</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Man-In-The-Middle (Man-In-The-Browser)</h4>
+    <ul>
+        <li>Angreifer schaltet sich zwischen Nutzer und Betreiber</li>
+        <li>zum Beispiel durch einen Fake Webauftritt</li>
+        <li>bei Man-In-The-Browser wird kein Fake Webauftritt gebraucht
+            <ul>
+                <li>der Angreifer manipuliert hier direkt den Browser</li>
+            </ul>
+        </li>
     </ul>
 </section>
 <section>
+    <h4>Man-In-The-Middle - Lösung</h4>
     <ul>
-        <li>Selbst aus kleinen Informationen kann man sehr viele Informationen über eine Firma in die Hand bekommen</li>
-        <li>Empfehlung Daniel Kriesel Spiegel Mining</li>
+        <li>HTTPS verwenden (ordentliche Verschlüsselung)</li>
+        <li>zwei Faktor Authentifizierung (2FA)</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>es gibt natürlich noch weitere Maßnahmen, um das Mitlesen von Daten zu verhindern</li>
+            <li>dies sind die beiden primären Methoden, die wir (als Betreiber) in der Hand haben</li>
+            <li>wenn der zweite Faktor ein Schlüssel ist, kann dies zu einer sehr guten Verschlüsselung der Daten genutzt werden</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Phishing</h4>
+    <img src="assets/phishing.png" height="400px"/>
+</section>
+<section>
+    <h4>Phishing</h4>
+    <ul>
+        <li>erlangen von persönlichen Daten durchs Vertrauenserschleichung</li>
+        <li>Angreifer gibt sich z.B. als Webseiten Betreiber aus</li>
+        <li>basiert auf Social Engineering</li>
+    </ul>
+</section>
+<section>
+    <h4>Phishing - Lösung</h4>
+    <ul>
+        <li>2FA hilft gegen Identitätsdiebstahl</li>
+        <li>Nutzer müssen leider mitdenken</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>mit 2FA muss der Angreifer auch den zweiten Faktor, das Handy stehlen, um die Identität des Nutzers zu klauen</li>
+            <li>sich im Internet zu bewegen wird immer Mitdenken erfordern</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Denail-Of-Service</h4>
+    <ul>
+        <li>Überlastung eines Systems durch viele Anfragen</li>
+        <li>im speziellen Fall auch Distributed-Denail-of-Service
+            <ul>
+                <li>hierbei werden Anfragen von vielen Rechner gestellt</li>
+                <li>oft durch Botnetze</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>gehackte Rechner werden zu einem Botnetz zusammengesteckt</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Denail-Of-Service - Lösung</h4>
+    <ul>
+        <li>wird im Idealfall vom Server Provider verhinder</li>
+        <li>Muster der Angriffe erkennen und auf diese nicht reagieren</li>
     </ul>
 </section>
