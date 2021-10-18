@@ -21,12 +21,12 @@
     </section>
     <section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           ### Überleitung
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Verantwortlichkeiten - JSF
 
           - View-Management
@@ -37,10 +37,13 @@
             - Routing
           - Data-Management
             - Persistence
-        </textarea>
+        </div>
+        <aside class="notes">
+          <li>these are some notes</li>
+        </aside>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Verantwortlichkeiten - Rich Client
 
           - View-Management
@@ -49,32 +52,32 @@
           - State-Management
             - Events
             - Routing
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Verantwortlichkeiten - Webservice
 
           - Data-Management
             - Validation
             - Persistence
-        </textarea>
+        </div>
       </section>
     </section>
     <section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           ### Webservice
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Webservice - Stateless
 
           - Kein Zustand
           - Keine Session
           - Anfrage ausschließlich mit fachlichen Informationen
-        </textarea>
+        </div>
         <aside class="notes">
           <ul>
             <li>Keine Übertragung von Zustandsänderungen</li>
@@ -83,14 +86,14 @@
         </aside>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Webservice - Stateless
 
           - Keine nicht-persistenten Informationen
             - Transparentes Caching ausgenommen
           - Persistierung in Datenbank oder Dateisystem
             - Transparente Datenbank oder Dateisystem
-        </textarea>
+        </div>
         <aside class="notes">
           <ul>
             <li>Keine anfrageübergreifende Informationen</li>
@@ -102,7 +105,7 @@
         </aside>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Webservice - Skalierbar
 
           - Abhängig von ausschließlich externen Informationen
@@ -110,16 +113,16 @@
             - Daten der Persistence
           - Instanzen sind identitätslos
           - Dynamisches hoch-/runterfahren von Instanzen
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Webservice - Untrusting
 
           - Validierung aller Eingaben
           - Isolierung aller Eingaben
           - Durchgehende Prüfung der Authorisierung
-        </textarea>
+        </div>
         <aside class="notes">
           <ul>
             <li>Validierung stellt Korrektheit sicher</li>
@@ -134,40 +137,40 @@
     </section>
     <section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           ### Architekturen
-        </textarea>
+        </div>
       </section>
       <!-- Architekturen -->
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Architekturen
 
           - Monolith
           - Modulith
           - Services
           - Microservice
-        </textarea>
+        </div>
       </section>
       <section>
         <h4>Architekturen - Monolith</h4>
         <img src="assets/monolith.svg" height="400">
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Architekturen - Monolith
 
           - Alle Aspekte der Anwendung in einem Projekt
           - Keine Trennung zwischen Fachlichkeiten
           - Keine externen Abhängigkeiten zur Laufzeit
-        </textarea>
+        </div>
       </section>
       <section>
         <h4>Architekturen - Modulith</h4>
         <img src="assets/modulith.svg" height="400">
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Architekturen - Modulith
 
           - Unterteilung der Anwendung in Fachlichkeiten
@@ -176,20 +179,20 @@
           - Auslagerung in Form von Package, Modul, Projekt
           - Keine Auslagerung zur Laufzeit
           - Zusammengeführt durch Kern
-        </textarea>
+        </div>
       </section>
       <section>
         <h4>Architekturen - Services</h4>
         <img src="assets/services.svg" height="400">
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Architekturen - Services
 
           - Modulith als Kern
           - Auslagerung einzelner Module in Services
           - Services haben eigene Datenhaltung
-        </textarea>
+        </div>
         <aside class="notes">
           <ul>
             <li>Daten müssen nicht repliziert werden, da Kern das Mapping übernimmt</li>
@@ -201,13 +204,13 @@
         <img src="assets/microservices.svg" height="400">
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Architekturen - Microservices
 
           - Auslagerung jedes Modules in Services
           - Expliziter Kern durch implizite Abhängigkeiten zwischen Services ersetzt
           - Services replizieren Daten in eigener Datenhaltung
-        </textarea>
+        </div>
         <aside class="notes">
           <ul>
             <li>Daten müssen repliziert werden, da es keinen Kern fürs Mapping gibt</li>
@@ -217,23 +220,23 @@
     </section>
     <section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           ### Vergleich
-        </textarea>
+        </div>
       </section>
       <!-- Kriterien -->
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Kriterien
 
           - Initialaufwand
           - Wartungsaufwand
           - Betriebsaufwand
           - Personalaufwand
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Kriterien
 
           - Abhängigkeit
@@ -242,22 +245,23 @@
           - Skalierbarkeit
           - Zuverlässigkeit
           - Ausfallsicherheit
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Initialaufwand
 
           - Aufsetzten der Architektur
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Initialaufwand
 
-          Monolith   Modulith   Services   Microservices
-          Gering     Mittel     Mittel     Hoch
-        </textarea>
+          Monolith  | Modulith  | Services | Microservices
+          ----------|-----------|----------|--------------
+          Gering    | Mittel    | Mittel   | Hoch
+        </div>
         <aside class="notes">
           <ul>
             <li>Monolith braucht kein Konzept</li>
@@ -268,7 +272,7 @@
         </aside>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Wartungsaufwand
 
           - Einführung neuer Features
@@ -276,7 +280,7 @@
           - Behebung von Fehler
           - Aktualisierung der Abhängigkeiten
           - Refactoring
-        </textarea>
+        </div>
         <aside class="notes">
           <ul>
             <li>Abhängigkeiten sind Sprache, Frameworks, Libraries, Services, Datenbanken, Schnittstellen</li>
@@ -284,12 +288,13 @@
         </aside>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Wartungsaufwand
 
-          Monolith   Modulith   Services   Microservices
-          Hoch       Mittel     Mittel     Gering
-        </textarea>
+          Monolith | Modulith | Services | Microservices
+          ---------|----------|----------|--------------
+          Hoch     | Mittel   | Mittel   | Gering
+        </div>
         <aside class="notes">
           <ul>
             <li>Monolith: stark erhöhter Aufwand</li>
@@ -300,21 +305,22 @@
         </aside>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Betriebsaufwand
 
           - Betreiben der Services
           - Instandhaltung der Umgebung
           - Behebung von Störungen
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Betriebsaufwand
 
-          Monolith   Modulith   Services   Microservices
-          Gering     Gering     Mittel     Hoch
-        </textarea>
+          Monolith | Modulith | Services | Microservices
+          ---------|----------|----------|--------------
+          Gering   | Gering   | Mittel   | Hoch
+        </div>
         <aside class="notes">
           <ul>
             <li>Monolith: wenige, große Instanzen; wenige Server, physische Umgebung</li>
@@ -325,21 +331,22 @@
         </aside>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Personalaufwand
 
           - Teamgröße sowie Teamanzahl
           - Erhöhte Komplexität erfordert mehr Personal
           - Mehr Personal erfordert erhöhte Flexibilität
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Personalaufwand
 
-          Monolith   Modulith   Services   Microservices
-          Gering     Mittel     Mittel     Hoch
-        </textarea>
+          Monolith | Modulith | Services | Microservices
+          ---------|----------|----------|--------------
+          Gering   | Mittel   | Mittel   | Hoch
+        </div>
         <aside class="notes">
           <ul>
             <li>Monolith: sehr kleines Entwicklungsteam benötigt; Operations durch Entwickler</li>
@@ -350,20 +357,21 @@
         </aside>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Abhängigkeit
 
           - Trennung der Fachlichkeiten
           - Freiheit der Technologien
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Abhängigkeit
 
-          Monolith   Modulith   Services   Microservices
-          Hoch       Hoch       Mittel     Gering
-        </textarea>
+          Monolith | Modulith | Services | Microservices
+          ---------|----------|----------|--------------
+          Hoch     | Hoch     | Mittel   | Gering
+        </div>
         <aside class="notes">
           <ul>
             <li>Monolith: sehr starke Kopplung, keine Kohäsion</li>
@@ -374,45 +382,47 @@
         </aside>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Ausführbarkeit
 
           - Ausprobieren neuer Features
           - Nachstellen von Fehler
           - Aufsetzen der Umgebung
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Ausführbarkeit
 
-          Monolith   Modulith   Services   Microservices
-          Hoch       Hoch       Mittel     Gering
-        </textarea>
+          Monolith | Modulith | Services | Microservices
+          ---------|----------|----------|--------------
+          Hoch     | Hoch     | Mittel   | Gering
+        </div>
         <aside class="notes">
           <ul>
             <li>Monolith: nur eine Instanz benötigt</li>
             <li>Modulith: s.h. Monolith</li>
-            <li>Services: mehre Instanzen benötigt</li>
+            <li>Services: mehrere Instanzen benötigt</li>
             <li>Microservices: mehrere Instanzen und Umgebung benötigt</li>
           </ul>
         </aside>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Testbarkeit
 
           - Validierung der Korrektheit
           - Absichern von Entwicklungen
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Testbarkeit
 
-          Monolith   Modulith   Services   Microservices
-          Gering     Mittel     Mittel     Hoch
-        </textarea>
+          Monolith | Modulith | Services | Microservices
+          ---------|----------|----------|--------------
+          Gering   | Mittel   | Mittel   | Hoch
+        </div>
         <aside class="notes">
           <ul>
             <li>Monolith: nur in Gesamtheit testbar</li>
@@ -423,20 +433,21 @@
         </aside>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Skalierbarkeit
 
           - Reaktionsfähigkeit bei Fluktuationen
           - Effiziente Nutzung der Resourcen
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Skalierbarkeit
 
-          Monolith   Modulith   Services   Microservices
-          Keine      Gering     Mittel     Hoch
-        </textarea>
+          Monolith | Modulith | Services | Microservices
+          ---------|----------|----------|--------------
+          Keine    | Gering   | Mittel   | Hoch
+        </div>
         <aside class="notes">
           <ul>
             <li>Monolith: nicht skalierbar</li>
@@ -447,25 +458,26 @@
         </aside>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Zuverlässigkeit
 
           - Störungsanfälligkeit
           - Kommunikationsabbrüche
           - Fehlerhafte Zustände
           - Netzwerke, Hardware, Software
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Zuverlässigkeit
 
-          Monolith   Modulith   Services   Microservices
-          Hoch       Hoch       Mittel     Hoch
-        </textarea>
+          Monolith | Modulith | Services | Microservices
+          ---------|----------|----------|--------------
+          Hoch     | Hoch     | Mittel   | Hoch
+        </div>
         <aside class="notes">
           <ul>
-            <li>Monolith: kaum Netzwerkverbindung; keine Interaktion zwischen Servergruppen; wenig Teile</li>
+            <li>Monolith: kaum Netzwerkverbindung; keine Interaktion zwischen Servergruppen; wenige Teile</li>
             <li>Modulith: s.h Monolith</li>
             <li>Services: Kommunikation zwischen Kern und Service anfällig; mehrere Teile</li>
             <li>Microservices: Netzwerkvirtualisierung und Servergruppen anfällig; viele Teile</li>
@@ -473,20 +485,21 @@
         </aside>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Ausfallsicherheit
 
           - Ausfallsicherheit
           - Redundanz
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Ausfallsicherheit
 
-          Monolith   Modulith   Services   Microservices
-          Gering      Gering     Mittel     Hoch
-        </textarea>
+          Monolith | Modulith | Services | Microservices
+          ---------|----------|----------|--------------
+          Gering   |  Gering  |  Mittel  |  Hoch
+        </div>
         <aside class="notes">
           <ul>
             <li>Monolith: Single-Point-of-Failure</li>
@@ -497,78 +510,80 @@
         </aside>
       </section>
       <section>
-        <textarea data-template>
-          #### Vergleich - Anforderungen
-
-          Monolith              Modulith                Services                Microservices
-          Unbekannt - Einfach   Einfach - Umfangreich   Umfangreich - Komplex   Komplex
-        </textarea>
-        <aside class="notes">
-          <ul>
-            <li>Anforderungen und Teamgröße limitieren Architekturmöglichkeiten</li>
-            <li>Architektur nach Konvergierung von Anforderungen und Personalaufwand wählen</li>
-            <li>Teamgröße muss sich mit Anforderungen decken</li>
-          </ul>
-        </aside>
-      </section>
-      <section>
-        <textarea data-template>
-          #### Vergleich - Teamgröße
-
-          Monolith   Modulith       Services        Microservices
-          Klein      Klein - Groß   Mittel - Groß   Groß - Mehrere
-        </textarea>
-        <aside class="notes">
-          <ul>
-            <li>Anforderungen und Teamgröße limitieren Architekturmöglichkeiten</li>
-            <li>Architektur nach Konvergierung von Anforderungen und Personalaufwand wählen</li>
-            <li>Teamgröße muss sich mit Anforderungen decken</li>
-          </ul>
-        </aside>
-      </section>
-      <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Zusammenfassung
 
           {placeholder:comparison_table}
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
+          #### Vergleich - Anforderungen
+
+          | Monolith | Modulith | Services | Microservices |
+          |----------|----------|----------|---------------|
+          | Unbekannt - Einfach | Einfach - Umfangreich | Umfangreich - Komplex | Komplex       |
+        </div>
+        <aside class="notes">
+          <ul>
+            <li>Anforderungen und Teamgröße limitieren Architekturmöglichkeiten</li>
+            <li>Architektur nach Konvergierung von Anforderungen und Personalaufwand wählen</li>
+            <li>Teamgröße muss sich mit Anforderungen decken</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Vergleich - Teamgröße
+
+          | Monolith | Modulith | Services | Microservices |
+          |----------|----------|----------|---------------|
+          Klein      | Klein - Groß | Mittel - Groß | Groß - Mehrere
+        </div>
+        <aside class="notes">
+          <ul>
+            <li>Anforderungen und Teamgröße limitieren Architekturmöglichkeiten</li>
+            <li>Architektur nach Konvergierung von Anforderungen und Personalaufwand wählen</li>
+            <li>Teamgröße muss sich mit Anforderungen decken</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <div data-markdown>
           #### Vergleich - Fazit
 
           - Anforderungen und Teamgröße limitieren jeweils Architekturmöglichkeiten
           - Architektur aus Deckung der Architekturmöglichkeiten wählen
           - Teamgröße muss sich mit Anforderungen decken
-        </textarea>
+        </div>
       </section>
       <section>
-        <textarea data-template>
+        <div data-markdown>
           #### Vergleich - Fazit
 
           - Monolith für unbekannte Projekte
           - Modulith für mehr Wartbarkeit
           - Services für Skalierbarkeit
           - Microservices für Zuverlässigkeit
-        </textarea>
+        </div>
       </section>
     </section>
     <section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           ### Spring
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Spring
 
           - Application Framework
           - Dependency-Injection-Container
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Spring-Boot
 
           - Basiert auf Spring
@@ -576,7 +591,7 @@
           - Convention-over-Configuration
           - Annotation-Base Configuration
             - Spring ursprünglich eigentlich XML
-        </textarea>
+        </div>
         <aside class="notes">
           <ul>
             <li>Spring besteht aus Modulen die miteinander kombiniert werden können</li>
@@ -587,8 +602,8 @@
         </aside>
       </section>
       <!-- Spring - Bootstrap -->
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Bootstrap
 
           - Aufbau des Objektgraphen
@@ -597,7 +612,7 @@
             - Configurations
           - Objektgraph ist normalerweise statisch
           - Objektgraph erlaubt dynamische Erweiterung
-        </textarea>
+        </div>
         <aside class="notes">
           <ul>
             <li>Objektgraphen ist der Graph den der Dependency Injection Container aufbaut</li>
@@ -606,21 +621,21 @@
           </ul>
         </aside>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           ### Bootstrap
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Bootstrap - Verwendung
 
           - `@SpringBootApplication` zur Deklaration des Einstiegspunkt
           - `@ComponentScan` für komplexere Umstände
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Bootstrap - Beispiel
 
           ```java
@@ -631,41 +646,41 @@
               }
           }
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Bootstrap - Details
 
           `@SpringBootApplication`
           - `scanBasePackages` Base-Package für alle Configurations und Components
             - Default ist das aktuelle Package
-        </textarea>
+        </div>
       </section>
       <!-- Spring - Components -->
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Components
 
           - Direkte Deklaration von Objekten
           - Erzeugung durch den Dependency-Injection-Container
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Components - Verwendung
 
           - `@Component` zur Deklaration
           - `@Order` zur Definition der Präzedenz
-        </textarea>
+        </div>
         <aside class="notes">
           <ul>
             <li>@Order wird nur gebraucht wenn man bestehende Components einer Library überschreiben möchte</li>
           </ul>
         </aside>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Components - Beispiel
 
           ```java
@@ -674,39 +689,39 @@
               ...
           }
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Components - Aliase
 
           - `@Controller` für Endpoints
           - `@RestController` für ReST-Endpoints
           - `@Services` für Services
           - `@Repository` für Datenbankschnittstellen
-        </textarea>
+        </div>
       </section>
       <!-- Spring - Configurations -->
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Configurations
 
           - Indirekte Deklaration von Objekten
           - Sowie Ändern und Erweitern bestehender Objekte
           - Aufruf durch den Dependency-Injection-Container
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Configurations - Verwendung
 
           - `@Configuration` zur Deklaration einer Konfiguration
           - `@Bean` zur Deklaration eines Objektes
           - `@Order` zur Definition der Präzedenz
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Configurations - Beispiel
 
           ```java
@@ -718,11 +733,11 @@
               }
           }
           ```
-        </textarea>
+        </div>
       </section>
       <!-- Spring - Referenzierung -->
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Referenzierung
 
           - Benötigt Aufruf durch Dependency-Injection-Container
@@ -731,51 +746,55 @@
           - Boostrap scheitert wenn Referenz nicht auslösbar
             - keine entsprechendes Objekt
             - mehrere entsprechende Objekte
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Referenzierung - Verwendung
 
           - `@Autowired` zur Markierung eines Parameters
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Referenzierung - Beispiel
 
           ```java
           @Component
           public class MyComponentWithDependency {
-              public MyComponentWithDependency(@Autowired MyRequiredComponent component){
+              public MyComponentWithDependency(
+                  @Autowired MyRequiredComponent component
+              ) {
                   ...
               }
           }
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Referenzierung - Beispiel
 
           ```java
           @Configuration
           public class MyConfiguration {
               @Bean
-              public MyComponentWithDependency createDependantComponent(@Autowired MyRequiredComponent component){
+              public MyComponentWithDependency createDependantComponent(
+                  @Autowired MyRequiredComponent component
+              ) {
                   ...
               }
           }
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Referenzierung - Details
 
           `@Autowired`
           - `required` für optionale Objekte
-        </textarea>
+        </div>
         <aside class="notes">
           <ul>
             <li>required ist ein Attribut von Autowired</li>
@@ -785,64 +804,64 @@
       </section>
     </section>
     <section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           ### Spring Schichten
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Spring Schichten
 
           - Frontend
           - Middleware
           - Backend
-        </textarea>
+        </div>
       </section>
       <!-- Spring - Controllers -->
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Controller
 
           - Schnittstelle zur Außenwelt
           - Abstraktes Konstrukt
           - Verschiedene Arten von Schnittstellen möglich (ReST, GraphQL etc.)
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Controller - Einordnung
 
           - Frontend
           - Referenziert Services
           - Wird von niemanden referenziert
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Controller - Verwendung
 
           - `@Controller` zur Deklaration
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller
 
           - Konkrete Ausprägung eines Controllers
           - ReST basiert
           - Definiert die Endpoints der Anwendung
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Verwendung
 
           - `@RestController` zur Deklaration
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Verwendung
 
           - `@RequestMapping` zur Definition des Endpoints
@@ -850,23 +869,26 @@
           - `@QueryParam` für Query-Parameter
           - `@RequestBody` für Bodies
           - `@ResponseStatus` für besondere Http-Status
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Beispiel
 
           ```java
           @RestController
-          @RequestMapping(path = "/notes", produces = MediaType.APPLICATION_JSON)
+          @RequestMapping(
+              path = "/notes",
+              produces = MediaType.APPLICATION_JSON
+          )
           public class MyNoteController {
               ...
           }
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Beispiel
 
           Notizen holen
@@ -874,10 +896,10 @@
 
           Notizen suchen
           `GET /notes?q={search}`
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Beispiel
 
           ```java
@@ -888,18 +910,18 @@
               ...
           }
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Beispiel
 
           Notiz anlegen
           `POST /notes`
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Beispiel
 
           ```java
@@ -908,18 +930,18 @@
               ...
           }
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Beispiel
 
           Notiz ändern
           `PUT /notes/{note}`
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Beispiel
 
           ```java
@@ -931,22 +953,25 @@
               ...
           }
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Beispiel
 
           Notiz ändern
           `DELETE /notes/{note}`
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Beispiel
 
           ```java
-          @RequestMapping(path = "/{note}", method = RequestMethod.DELETE)
+          @RequestMapping(
+              path = "/{note}",
+              method = RequestMethod.DELETE
+          )
           public Note deleteNote(
               @PathVariable("note) Long noteId,
               @RequestBody NoteProposal proposal
@@ -954,18 +979,18 @@
               ...
           }
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Beispiel
 
           Anhang holen
           `GET /notes/{note}/attachment/{attachment}`
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Beispiel
 
           ```java
@@ -981,10 +1006,10 @@
               ...
           }
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Rest-Controller - Details
 
           `@RequestMapping`
@@ -992,35 +1017,35 @@
           - `method` Erwartete Methode
           - `consumes` Erwarteter Content-Type
           - `produces` Erzeugter Content-Type
-        </textarea>
+        </div>
       </section>
       <!-- Spring - Service -->
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Service
 
           - Implementiert Businesslogik
           - Oftmals durch ein Interface abstrahiert
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Service - Einordnung
 
           - Middleware
           - Referenziert Repositories und andere Services
           - Wird von Controller und Services referenziert
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Service - Verwendung
 
           - `@Service` zur Deklaration
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Service - Beispiel
 
           ```java
@@ -1029,10 +1054,10 @@
               ...
           }
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Service - Beispiel
 
           ```java
@@ -1041,102 +1066,111 @@
               ...
           }
           ```
-        </textarea>
+        </div>
       </section>
       <!-- Spring - Repository -->
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Repository
 
           - Implementiert Datenbankschnittstelle für eine Entity
           - Abstraktes Konstrukt
           - Verschiedene Arten von Datenbankschnittstelle möglich (JPA, ElasticSearch etc.)
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Repository - Einordnung
 
           - Backend
           - Referenziert andere Repositories
           - Wird von Services referenziert
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### Repository - Verwendung
 
           - `@Repository` zur Deklaration
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### JPA-Repository
 
           - Basiert auf Java-Persistence-API
           - Implementation per Proxy
           - Erweiterung durch Annotationen
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### JPA-Repository - Verwendung
 
           - `@Repository` zur Deklaration
           - `@Query` zur Definition komplexer Queries
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### JPA-Repository - Beispiel
 
           ```java
           @Repository
-          public interface MyNoteRepository extends JpaRepository<Note, Long> {
+          public interface MyNoteRepository
+              extends JpaRepository<Note, Long> {
               ...
           }
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### JPA-Repository - Beispiel
 
           ```java
           List<Note> findAll();
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### JPA-Repository - Beispiel
 
           ```java
           Note findById(Long id);
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### JPA-Repository - Beispiel
 
           ```java
-          Note findByNameAndDescription(String name, String description);
+          Note findByNameAndDescription(
+              String name,
+              String description
+          );
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### JPA-Repository - Beispiel
 
           ```java
-          @Query("SELECT n FROM Notes n WHERE n.tag IN (:tags) AND n.creationDate >= :timestamp")
-          Note findWithTagsAfter(String[] tags, OffsetDateTime timestamp);
+          @Query("SELECT n FROM Notes n "
+               + "WHERE n.tag IN (:tags) "
+               + "AND n.creationDate >= :timestamp")
+          Note findWithTagsAfter(
+              String[] tags,
+              OffsetDateTime timestamp
+          );
           ```
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### JPA-Repository - Better Practice
 
           - Vielzahl an vordefinierten Operationen
@@ -1145,10 +1179,10 @@
             - Projekt-spezifisches Wording
             - Vermeidung von `Optional`
             - Keine ungewollten Operationen
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### JPA-Repository - Beispiel
 
           ```java
@@ -1161,60 +1195,60 @@
               }
           }
           ```
-        </textarea>
+        </div>
       </section>
     </section>
     <section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           ### TODO Anwendung
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### TODO Anwendung - Anforderungen
 
           - TODOs abfragen
           - TODO anlegen
           - TODO als Done markieren
           - TODO löschen
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### TODO Anwendung - Anforderungen
 
           TODOs abfragen
           `GET /todo`
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### TODO Anwendung - Anforderungen
 
           TODO anlegen
           `POST /todo`
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### TODO Anwendung - Anforderungen
 
           TODO als Done markieren
           `PUT /todo/{id}`
-        </textarea>
+        </div>
       </section>
-      <section data-markdown>
-        <textarea data-template>
+      <section>
+        <div data-markdown>
           #### TODO Anwendung - Anforderungen
 
           TODO löschen
           `DELETE /todo/{id}`
-        </textarea>
+        </div>
       </section>
     </section>
   </div>
-</div>
+</iv>
 
 <script src="/dist/reveal.js"></script>
 <script src="/plugin/notes/notes.js"></script>
