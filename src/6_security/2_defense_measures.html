@@ -1,0 +1,70 @@
+<section>
+    <h3>Abwehrmaßnahmen</h3>
+</section>
+<section>
+    <h4>Data Mining</h4>
+    <ul>
+        <li>aus Daten auf neue Daten schließen</li>
+        <li>so ergeben sich aus wenig Daten viele Informationen</li>
+        <li>Empfehlung: Daniel Kriesel "Spiegel Mining"</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Beispiel: unterschied zwischen nicht vorhanden (404) und verboten (403) bei fortlaufenden Id's lässt auf die Menge schließen</li>
+            <li>Spiegel Mining: https://www.youtube.com/watch?v=-YpwsdRKt8Q</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Allgemeine Abwehrmaßnahmen</h4>
+    <ul>
+        <li>Serverseitig Daten
+            <ul>
+                <li>enkodieren</li>
+                <li>validieren</li>
+                <li>nicht interpretieren</li>
+            </ul>
+        </li>
+        <li>Verschlüsselung verwenden
+            <ul>
+                <li>HTTPS</li>
+            </ul>
+        </li>
+        <li>Wichtige Transaktionen zusätzlich absichern
+            <ul>
+                <li>2FA</li>
+            </ul>
+        </li>
+        <li>Whitelisting besser als Blacklisting</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Blacklisting ist immer noch besser als nichts auszuschließen. Trotzdem besser auf Whitlisting setzen wo es eben geht.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Allgemeine Abwehrmaßnahmen</h4>
+    <ul>
+        <li>Minimalitätsprinzip</li>
+        <li>Sicherheitsmaßnahmen nicht ausschalten/umgehen
+            <ul>
+                <li>Content Security Policy</li>
+                <li>Cross-Origin Resource Sharing</li>
+            </ul>
+        </li>
+        <li>aktualisieren von Abhängigkeiten
+            <ul>
+                <li>Sonar - Dependency Check</li>
+                <li>Jenkins - Dependency Upgrade</li>
+            </ul>
+        </li>
+        <li>Weiterbildung/Fortbildung</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Minimalitätsprinzip: Der Server sollte möglichst wenig Informationen preisgeben. Z.B. bei Fehlermeldungen.</li>
+            <li>Sicherheitsmaßnahmen können bei der Entwicklung stören. Das heißt nicht, dass man sie ausschalten sollte.</li>
+        </ul>
+    </aside>
+</section>
