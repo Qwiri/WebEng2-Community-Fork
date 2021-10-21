@@ -133,7 +133,7 @@
 </section>
 <section>
   <h4>Aufbau einer Component Architecture</h4>
-  <p>meist nach dem MVC Pattern</p>
+  <p>parallelen zum MVC Pattern</p>
   <img src="assets/MVC.png" style="height: 400px">
   <aside class="notes">
     <ul>
@@ -148,14 +148,12 @@
       <li>grundsätzlich besteht eine Component aus getrenntem Typescript, HTML und CSS</li>
       <li>die Trennung macht eine Component in sich übersichtlich</li>
       <li>es empfiehlt sich möglichst wenig Logik im HTML zu hinterlassen, dafür ist das Typescript File</li>
-      <li>der View ist damit also klar. Das ist das HTML.</li>
-      <li>als Model werden normalerweise Services in Angular betrachtet</li>
-      <li>Services sind reiner Typescriptcode. Es handelt sich hierbei wieder um Komponenten in denen nur Logik oder Backendaufrufe stattfinden.</li>
-      <li>Sie stellen also die Daten bereit, die in der View angezeigt werden können</li>
-      <li>Als Controller kann man sich damit den Typescript Part der Component vorstellen.</li>
-      <li>Oft wird das Angular Component System nicht mit MVC, sondern MVVM bezeichnet. Model View ViewModel.</li>
-      <li>Das heißt das Typescript File übersetzt das Model noch mal in ein ViewModel, dass dann direkt angezeigt werden kann</li>
+      <li>die html Datei könnte man daher als View bezeichnen</li>
+      <li>das Model sind einfach die Klassen, die im View angezeigt werden</li>
+      <li>einen klassischen Controller oder ein View Model gibt es nicht wirklich</li>
+      <li>es gibt aber klare parallelen zwischen einer Component Architecture und einem MVC Pattern</li>
       <li>Ich gehe später noch mal genauer auf die einzelne Syntax etc. von Angular ein, damit ihr auch ein Praxisbeispiel dazu bauen könnt.</li>
+      <li>https://stackoverflow.com/questions/36950582/angular-design-pattern-mvc-mvvm-or-mv</li>
     </ul>
   </aside>
 </section>
