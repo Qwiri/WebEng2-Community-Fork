@@ -157,6 +157,30 @@
     </ul>
 </section>
 <section>
+    <h4>Vorteile einer SPA</h4>
+    <ul>
+        <li>Clientseitige Session
+            <ul>
+                <li>Server kann Stateless sein</li>
+                <li>Skalierbarkeit des Servers</li>
+                <li>Loadbalancing ist einfacher</li>
+            </ul>
+        </li>
+        <li>Hybride Anwendungen
+            <ul>
+                <li>SPA's sind ähnlich wie App's</li>
+                <li>React Native oder Flutter zeigen wie es geht</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Wenn es mehrere Instanzen eines Backendservices geben soll, muss ein Loadbalancing die Anfragen der Nutzer auf die einzeln Instanzen verteilen</li>
+            <li>Dies wird einfacher durch eine Clientseitige Session, da der Client nicht immer zum selben Service geroutet werden muss</li>
+        </ul>
+    </aside>
+</section>
+<section>
     <h4>Nachteile einer SPA</h4>
     <ul>
         <li>initiale Response ist groß</li>
@@ -199,6 +223,7 @@
         <li>JavaScript Code auf dem Client kann manipuliert werden</li>
         <li>erneute Validierung im BE notwendig</li>
         <li>Validierungen sind meist duplizierter Code</li>
+        <li>dadurch entsteht mehr Entwicklungsaufwand</li>
         <li>hierfür gibt es Abhilfe:
             <ul>
                 <li>Multiplattform Libraries</li>
