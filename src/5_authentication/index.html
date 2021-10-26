@@ -263,6 +263,86 @@
                 </aside>
             </section>
         </section>
+        <section>
+            <section data-markdown>
+                ## Authentifizierung in der Praxis
+            </section>
+            <section data-markdown>
+                ### Notwendigkeit Session
+                
+                * HTTP ist zustandslos
+                * Zustand für Authentifizierung nötig
+                * Abstraktes Konstrukt: Session
+            </section>
+            <section>
+                <h3>Speicherung der Sessions</h3>
+
+                <div class="container">
+                    <div class="col" data-markdown>
+                        #### Cookies
+
+                        * Zustimmung erforderlich
+                        * Session Riding nicht möglich
+                    </div>
+                    <div class="col" data-markdown>
+                        #### URL-Rewriting
+
+                        * Client unanbhängig
+                        * Session-ID offensichtlich
+                        * Gefahr durch "Session Riding"
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h3>Probleme in verteilten Anwendungen</h3>
+
+                <img src="assets/scaled-application.svg"/>
+                <aside class="notes">
+                    Sobald die Anwendung skaliert werden soll, entsteht ein Problem mit der Session Verwaltung.
+                    Dabei gibt es verschiedene Probleme die auftreten können und verschiedene Lösungen.
+                </aside>
+            </section>
+            <section>
+                <h3>Probleme in verteilten Anwendungen</h3>
+
+                <img src="assets/scaled-application-session.svg"/>
+                <aside class="notes">
+                    Ist eine Anwendung nicht für eine skalierte Nutzung konzipiert kann folgendes Szenario eintreten.
+                    Nutzer A verbindet sich über den Load Balancer mit der Instanz A.
+                    Dort erzeugt er eine für sich gültige Session. 
+                    Diese kann er nun benutzen um sich bei Instanz A als Nutzer auszugeben.
+                    Während seiner Nutzungszeit kann es jedoch vorkommen, dass der Loadbalancer den Nutzer auf eine andere Instanz verschiebt.
+                    In diesem Fall besitzt der Nutzer keine gültige Session mehr.
+                </aside>
+            </section>
+            <section data-markdown>
+                ### Mögliche Lösungen
+
+                * Nutzer wird nach der initialen Zuweisung an eine Instanz dauerhaft gebunden
+                * Sessions werden Instanz übergreifend gespeichert
+                * Session ist tokenbasiert beim Nutzer
+            </section>
+            <section data-markdown>
+                ### HTTP Basic Authentication
+
+                * Browser stellt Forumlar bereit
+                * Credentials-Tupel username:password
+                * meist authentifiziert der Server
+                * Formular nicht editierbar
+            </section>
+            <section>
+                <h3>HTTP Basic Authentication: Ablauf</h3>
+
+                <img src="assets/HTTP-Basic-Authentication.svg" />
+            </section>
+            <section data-markdown>
+                ### Form Based Authentication
+
+                * Formular wird von der Anwendung erzeugt
+                * Anwendung entscheidet über Zugang
+                * bessere Fehlerbehandlung
+            </section>
+        </section>
     </div>
 </div>
 <style>
@@ -272,6 +352,7 @@
 
     .col {
         flex: 1;
+        padding: 0 20px;
     }
 </style>
 <script src="/dist/reveal.js"></script>
