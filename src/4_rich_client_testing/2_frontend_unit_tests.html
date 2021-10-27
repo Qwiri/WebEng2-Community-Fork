@@ -1,0 +1,225 @@
+<section>
+    <h3>Frontend Unit Tests</h3>
+</section>
+<section>
+    <h4>Frontend Unit Tests</h4>
+    <ul>
+        <li>Service Tests
+            <ul>
+                <li>Services sind einfache Typescript Klassen</li>
+                <li>testen von Programmlogik</li>
+            </ul>
+        </li>
+        <li>Was ist mit Component Tests?</li>
+        <li>Component enthält
+            <ul>
+                <li>Logik im Typescript File</li>
+                <li>Struktur und Styling im HTML & CSS</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Service Tests sind relativ straight forward. Quasi wie ein Unit Test aus Java.</li>
+            <li>Services sind einfache Typescript klassen.</li>
+            <li>Components sind da ein wenig komplexer. Schließlich verfügen sie zusätzlich noch über HTML und CSS.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Component Test</h4>
+    <ul>
+        <li>Was testen wir?
+            <ul>
+                <li>Logik</li>
+                <li>dynamische Struktur?</li>
+                <li>dynamisches Styling?</li>
+            </ul>
+        </li>
+        <li>dynamische Struktur/Styling
+            <ul>
+                <li>*ngIf</li>
+                <li>*ngFor</li>
+                <li>[class]</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Die Logik der Components sollten wir natürlich testen.</li>
+            <li>Statische Struktur und Styling zu testen macht in der Regel keinen Sinn. Warum sollte ich testen, dass der Text bold ist, wenn ich grade das Styling hinzugefügt habe.</li>
+            <li>Dynamische Struktur und Styling zu testen macht durchaus Sinn. Beispiel: Wenn eine Variable gesetzt ist, soll der Text rot hinterlegt sein.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Component Tests</h4>
+    <ul>
+        <li>Nutzerinteraktionen</li>
+        <li>ein Nutzer
+            <ul>
+                <li>ruft nicht die Typescript Methoden auf</li>
+                <li>klickt auf die Buttons/Links</li>
+                <li>interagiert mit den Inputs</li>
+            </ul>
+        </li>
+        <li>wir sollten daher
+            <ul>
+                <li>das HTML testen</li>
+                <li>programmatisch die Buttons klicken</li>
+                <li>Input Felder direkt bearbeiten</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Unsere Unit-Tests sind näher an der Realität, wenn wir das HTML mit testen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Testing mit JavaScript (Jasmine)</h4>
+    <pre>
+        <code class="javascript" data-line-numbers>describe('ich bin eine Beschreibung', () => {
+    beforeAll(() => {});
+
+    beforeEach(() => {});
+
+    it('ich bin ein Test', () => {
+        expect(actual).toEqual(expect) // quasi ein assert
+    });
+
+    afterEach(() => {});
+
+    afterAll(() => {});
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>JavaScript Test werden normalerweise mit Jasmine geschrieben.</li>
+            <li>Jasmine liefert verschiedene Tools, um Tests strukturierter aufzubauen und einfacher zu gestalten.</li>
+            <li>"describe" beschreibt einen Test und kann mehrere Tests logisch zusammenfassen.</li>
+            <li>"beforeAll" bekommt eine Callback Function, die vor allen Tests in diesem "describe" Block ausgeführt wird.</li>
+            <li>"beforeEach" bekommt eine Callback Function, die vor jedem Test in diesem "describe" Block ausgeführt wird.</li>
+            <li>"it" ist ein einzelner Test. Er hat eine Beschreibung und eine Callback Function in der Testcode stehen sollte.</li>
+            <li>"expect" ist quasi ein assert aus Java. Bietet einige Hilfsmethoden wie .toEqual() um das Testen zu vereinfachen.</li>
+            <li>"afterEach" und "afterAll" erklären sich glaube ich selbst.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h3>Sauberer Aufbau von JavaScript Tests</h3>
+</section>
+<section>
+    <h4>Testbeschreibung</h4>
+    <ul>
+        <li>sollte einen Satz ergeben</li>
+        <li>folgt einem Schema
+            <ul>
+                <li>z.B. "Object ... should ... when"</li>
+                <li>gerne auch andere Schema's</li>
+                <li>viele gehen in ähnliche Richtung</li>
+            </ul>
+        </li>
+        <li>Testbeschreibung als lebende Doku</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it('ComponentUnderTest should show element-card
+            when element-data is not empty', () => {});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Testbeschreibung als vollständiger Satz hilft dabei zu verstehen, was im Test passieren soll.</li>
+            <li>ein Schema sorgt dafür, dass sich andere Entwickler besser zurechtfinden. Und auch man selbst hat irgendwann vergessen was hier in diesem Code passiert.</li>
+            <li>Über gute Testbeschreibungen kann man sehr gut erkennen wie sich Components verhalten sollen und was ihre Aufgabe ist.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Testbeschreibung</h4>
+    <ul>
+        <li>sollte wenig Duplizierungen enthalten</li>
+        <li>damit entsteht eine saubere Struktur</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>describe('ComponentUnderTest', () => {
+  describe('updateData()', () => {
+    it('should update data when data is not empty',
+        () => {});
+
+    it('should not update data when data is empty',
+        () => {});
+
+    ...
+  });
+
+  ...
+});</code>
+    </pre>
+</section>
+<section>
+    <h4>Single Responsibility Principle</h4>
+    <ul>
+        <li>jeder Test sollte nur eine Sache testen
+            <ul>
+                <li>am besten ein "expect" pro Test</li>
+                <li>macht es einfacher eine Testbeschreibung zu finden</li>
+            </ul>
+        </li>
+        <li>im Fehlerfall ist das Problem schneller erkannt</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Wenn der Test nur eine Sache testen, ist im Fehlerfall schneller erkennbar was kaputt ist. Denn es steht ja in der Testbeschreibung.</li>
+            <li>Es kann natürlich auch passieren, dass der Test wegen Setup Code fehlschlägt, dieser Setup Code sollte allerdings auch in einem eigenen Test fehlschlagen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Codeduplizierung</h4>
+    <ul>
+        <li>soll vermieden werden</li>
+        <li>setup Code kann in "beforeEach"/"beforeAll"</li>
+        <li>parametrisierte Tests
+            <ul>
+                <li>gleicher Test mit unterschiedlichen Parametern</li>
+                <li>weniger Codeduplizierung</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it.each([
+  {input: 'input1', expected: 'expected1'},
+  {input: 'input2', expected: 'expected2'},
+  ...
+])('should to something', ({input, expected}) => {
+   // code for testing
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Codeduplizierung soll wie in Produktivcode vermieden werden. Sonst müssen wir in Zukunft Änderungen an 20 Stellen machen.</li>
+            <li>Setup Code ist oft dupliziert und sollte daher in entsprechende Blöcke ausgelagert werden.</li>
+            <li>Parametrisierte Tests helfen, wenn selbst der Testcode dupliziert wird.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Reproduzierbar</h4>
+    <ul>
+        <li>Tests müssen reproduzierbar sein</li>
+        <li>"date.now()"?
+            <ul>
+                <li>Produktivcode ist abhängig vom aktuellen Datum</li>
+                <li>Testcode muss damit auch vom aktuellen Datum abhängig sein</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Tests müssen immer laufen, egal was der Kontext ist in dem sie sich befinden.</li>
+            <li>Tests können fehlschlagen, wenn sich das Datum ändert und der Testfall statische Daten anstatt dynamischen verwendet.</li>
+            <li>Bei uns sind mal Tests am ersten April gefailed. Hier hat sich ein Entwickler einen Spaß erlaubt.</li>
+        </ul>
+    </aside>
+</section>

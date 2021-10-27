@@ -1,0 +1,103 @@
+<section>
+    <h3>Unit Tests</h3>
+</section>
+<section>
+    <h4>Unit Tests</h4>
+    <ul>
+        <li>in unserem Fall sind Units
+            <ul>
+                <li>Components</li>
+                <li>Services</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section>
+    <h4>Wieso Unit Tests?</h4>
+    <ul>
+        <li>divide et impera
+            <ul>
+                <li>Wir teilen Komplexität mit Components</li>
+                <li>Wieso nicht auch bei Tests?</li>
+            </ul>
+        </li>
+        <li>Testen auf sehr detaillierter Ebene
+            <ul>
+                <li>viele Kombinationen möglich</li>
+                <li>Übersichtlichkeit?</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Auch für Tests lohnt es sich sie in kleine Teile aufzuteilen, um die Anwendung übersichtlich zu halten.</li>
+            <li>Bei einem Unit-Test können wir auf sehr detaillierter Ebene Testen.
+                <ul>
+                    <li>Wenn wir mehrere Components zusammen testen, entstehen viele Kombinationen von Eingabeparametern und Zuständen.</li>
+                    <li>Wir brauchen also eine Menge Testfälle, die schnell unübersichtlich werden können.</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Test Driven</h4>
+    <ul>
+        <li>wir entwickeln Components</li>
+        <li>also müssen wir auch Components testen</li>
+        <li>es reicht nicht ein ganzes Feature zu testen
+            <ul>
+                <li>Components können in anderen Features eingesetzt werden</li>
+                <li>funktioniert die Component in einem anderen Szenario?</li>
+                <li>schnelles Feedback durch Tests</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Components sind nur vollständig, wenn sie auch über einen Test verfügen.</li>
+            <li>Schließlich sollen die Component vielleicht in unterschiedlichen Szenarien eingesetzt werden. Es braucht Tests um abzusichern, dass sie sich auch richtig verhält.</li>
+            <li>Ein Feature zu entwickeln dauert manchmal ein paar Wochen. Wenn ich erst am Ende einen Test schreibe, bekomme ich sehr spät Feedback. Mit Unit-Tests geht das schneller.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Isoliertes Testen</h4>
+    <ul>
+        <li>Unit-Testing heißt isoliertes Testing einer Unit</li>
+        <li>Wie isolieren wir die Unit?</li>
+        <li>Dependency Injection
+            <ul>
+                <li>eine Component kennt nur die Schnittstelle eines Services</li>
+                <li>sie kennt nicht seine Implementierung</li>
+                <li>die Implementierung tauschen wir im Tests aus</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Wenn wir eine Component testen und diese einen Service nutzt, wollen wir den Service nicht mit testen.</li>
+            <li>Wenn wir den Service mittesten würde, müssten wir auch seine Abhängigkeiten bereitstellen.</li>
+            <li>Daten die in den Service hineingegeben werden (aus der Component) müssten valide sein, denn er führt darauf ja richtige Operationen aus.</li>
+            <li>Wir müssen also richtige Daten nutzen und können nicht simple Testdaten nutzen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Mocks</h4>
+    <ul>
+        <li>sind die Implementierungen im Testfall</li>
+        <li>sind nur Attrappen für Objekte (Services)</li>
+        <li>über sie können wir
+            <ul>
+                <li>Mock-Daten an die Units geben</li>
+                <li>prüfen ob Methoden richtig aufgerufen wurden</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Mock Frameworks nehmen hier einige Arbeit ab.</li>
+        </ul>
+    </aside>
+</section>

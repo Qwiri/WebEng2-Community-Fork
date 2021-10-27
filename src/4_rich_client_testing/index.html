@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>3_rich_client_state_management</title>
+    <title>4_rich_client_testing</title>
 
     <link rel="stylesheet" href="/dist/reset.css">
     <link rel="stylesheet" href="/dist/reveal.css">
@@ -18,24 +18,30 @@
 <div class="reveal">
     <div class="slides">
         <section>
-            <h3>Rich Client State Management</h3>
+            <h3>Rich Client Testing</h3>
         </section>
         <section>
-            <h4>Was beim letzten mal geschah</h4>
+            <h4>Guidelines Testing</h4>
             <ul>
-                <li>Single Page Application (SPA)</li>
-                <li>Component Architecture</li>
-                <li>Atomic Design</li>
-                <li>Micro Frontends</li>
-                <li>Angular - SPA</li>
+                <li>es geht um Qualität, nicht Quantität</li>
+                <li>Test Coverage zeigt das Fehlen von Tests, nicht die Qualität</li>
+                <li>Softwareentwickler sind selbst für Qualität verantwortlich</li>
+                <li>es geht um gute Tests, nicht um 100% Coverage</li>
             </ul>
+            <aside class="notes">
+                <ul>
+                    <li>Es geht beim Testing nicht darum 100% Test-Coverage zu erreichen und jeden erdenklichen Fall zu testen</li>
+                    <li>Eine menge unnützer Tests gibt uns keinen Garanten für gute Software.</li>
+                    <li>Softwareentwickler sollten Gehirn investieren, um Tests für sinnvolle Fälle zu schreiben.</li>
+                    <li>Diese Guidelines kann man auf alle Tests übertragen.</li>
+                </ul>
+            </aside>
         </section>
-        <section data-external="./0_motivation.html"></section>
-        <section data-external="./1_state_management.html"></section>
-        <section data-external="./2_load_data_from_backend.html"></section>
-        <section data-external="./3_comparison.html"></section>
-        <section data-external="./4_ngrx.html"></section>
-        <section data-external="./5_praxis.html"></section>
+        <section data-external="./0_test_pyramid.html"></section>
+        <section data-external="./1_unit_tests.html"></section>
+        <section data-external="./2_frontend_unit_tests.html"></section>
+        <section data-external="./3_testing_in_angular.html"></section>
+        <section data-external="./4_praxis.html"></section>
     </div>
 </div>
 
@@ -58,7 +64,7 @@
             },
         ]
     });
-    Reveal.configure({showNotes: true});
+    Reveal.configure({showNotes: false});
 </script>
 </body>
 </html>
