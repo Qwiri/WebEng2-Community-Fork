@@ -72,12 +72,44 @@
     </aside>
 </section>
 <section>
-    <h4>Verteilter Daten</h4>
+    <h4>Routing</h4>
+    <ul>
+        <li>Wie werden Daten über mehrere Screens geteilt?</li>
+        <li>Router Outlet nimmt keine Parameter entgegen
+            <ul>
+                <li>Wie auch, es können unterschiedliche Screens eingebettet werden</li>
+                <li>Die Screens könnten alle unterschiedliche Parameter haben</li>
+            </ul>
+        </li>
+        <li>Services könnten die Daten cachen
+            <ul>
+                <li>dies geht schon in die Richtung State Management</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="html" data-line-numbers="">&lt;router-outlet&gt;&lt;/router-outlet&gt;</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wenn wir die Daten nur in der Component laden und speichern müssten wir nach jeder Navigation die Daten erneut vom Backend laden</li>
+            <li>Wir können die Daten auch nicht in der obersten Component laden und durch das Router Outlet an die Screens geben, da wir keine Parameter durch den Router Outlet reichen können</li>
+            <li>Die Services könnten die Daten vom Backend cachen
+                <ul>
+                    <li>damit würde unser Service bereits zu einem übergeordneten Objekt, dass uns die Daten managed</li>
+                    <li>das heißt ein Service mit Caching geht bereits in Richtung State Management</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Verteilte Daten</h4>
     <ul>
         <li>Verteilte Daten</li>
         <li>unübersichtlich bei großen Anwendungen
             <ul>
-                <li>fehlerhafter Daten müssen erst entdeckt werden</li>
+                <li>fehlerhafte Daten müssen erst entdeckt werden</li>
             </ul>
         </li>
     </ul>
