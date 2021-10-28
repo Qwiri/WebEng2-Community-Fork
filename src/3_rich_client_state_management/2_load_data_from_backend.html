@@ -3,12 +3,34 @@
 </section>
 <section>
     <h4>State Management gut und schön ...</h4>
-    <ul>
-        <li>Wie bekomme ich Daten vom Backend?</li>
-        <li>Reducer arbeitet nur synchron</li>
-        <li>Daten über eine Action übergeben?</li>
-        <li>Backend Call aus der Component?</li>
-    </ul>
+    <div>
+        <ul>
+            <li>Wie bekomme ich Daten vom Backend?</li>
+            <li>Reducer arbeitet nur synchron</li>
+            <li>Daten über eine Action übergeben?</li>
+            <li>Backend Call aus der Component?</li>
+        </ul>
+    </div>
+    <pre>
+        <code class="language-plantuml">
+            @startuml
+            component store
+            component "reducer \n(schreibt neuen State)" as reducer
+            component "action \n(mit Daten)" as action
+            component selector
+            node UI {
+                component presentation
+                component "control \n(läd Daten)"as control
+            }
+
+            reducer -> store
+            store --> selector
+            reducer <-- action
+            selector -> presentation
+            action <-- control
+            @enduml
+        </code>
+    </pre>
     <aside class="notes">
         <ul>
             <li>Daten sollten natürlich nicht in einer Component geladen werden</li>
@@ -54,7 +76,7 @@
     <ul>
         <li>Effects gibt es in verschiedenen Frameworks/Libraries</li>
         <li>heißen nur manchmal anders</li>
-        <li>in Redux heißt es "Thunk Middleware"</li>
+        <li>in Redux heißt es "Thunk" (Thunk Middleware)</li>
         <li>NGXS unterstützt generell asynchrone Operationen</li>
     </ul>
 </section>
