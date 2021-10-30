@@ -265,7 +265,7 @@
         </section>
         <section>
             <section data-markdown>
-                ## Authentifizierung in der Praxis
+                ## Probleme in der Praxis
             </section>
             <section data-markdown>
                 ### Notwendigkeit Session
@@ -295,8 +295,7 @@
             </section>
             <section>
                 <h3>Probleme in verteilten Anwendungen</h3>
-
-                <img src="assets/scaled-application.svg"/>
+                <img src="assets/loadbalancer-initial.svg"/>
                 <aside class="notes">
                     Sobald die Anwendung skaliert werden soll, entsteht ein Problem mit der Session Verwaltung.
                     Dabei gibt es verschiedene Probleme die auftreten können und verschiedene Lösungen.
@@ -315,12 +314,75 @@
                     In diesem Fall besitzt der Nutzer keine gültige Session mehr.
                 </aside>
             </section>
+            <section>
+                <p data-markdown>
+                    ### Mögliche Lösungen
+    
+                    * Nutzer wird nach der initialen Zuweisung an eine Instanz dauerhaft gebunden
+                    * Sessions werden Instanz übergreifend gespeichert
+                    * Session Gateway // besser formulieren
+                    * Session ist tokenbasiert beim Nutzer // vlt besser formulieren
+                </p>
+                <aside class="notes">
+                    Zusammenfassung
+                </aside>
+            </section>
+            <section>
+                <h3>
+                    Instanzbindung
+                </h3>
+                <img src="assets/loadbalancer-instancebased.svg"/>
+                <aside class="notes" data-markdown">
+                    Der Anwender wird in diesem Fall vom Loadbalancer immer an die gleiche Instanz weitergeleitet wird.
+                    Da der Nutzer dann immer bei der gleichen Instanz landet, muss man sich keine Gedanken über das Session Sharing machen.
+                    Vorteil:
+                    * keine extra Technik benötigt
+                    Nachteil:
+                    * Die Instanz darf nicht sterben
+                    * Last auf einer Instanz verhält sich dynamisch
+                </aside>
+            </section>
+            <section>
+                <h3>Instanzübergreifend</h3>
+                <img src="assets/loadbalancer-instance-shared.svg"/>
+                <aside class="notes" data-markdown>
+                    Die Session eines Users wird in einem Session Store abgelegt.
+                    Jede Instanz hat Zugriff auf diese.
+                    Vorteil:
+                    * Nutzer kann je nach Last auf den Instanzen verschoben werden
+                    * Instanzen können auch sterben
+                    Nachteil:
+                    * der Session Store kann ein Performance Bottleneck werden
+                </aside>
+            </section>
+            <section>
+                <h3>Sessiongateway</h3>
+                <img src="assets/loadbalancer-session-gateway.svg" />
+                <aside class="notes">
+                    Jeder Aufruf wird durch das Session Gateway geleitet.
+                    Meistens übernimmt der Loadbalancer diese Rolle.
+                    Vorteil:
+                    * Die Instanz muss sich nicht darum kümmern
+                    * eine zentrale Stelle
+                    Nachteil:
+                    * Performance Bottleneck
+                    * unter Umständen zu grob granular
+                </aside>
+            </section>
+            <section>
+                <h3>Tokenbasierte Sessions</h3>
+                <img src="assets/loadbalancer-token-based.svg" />
+                <aside class="notes">
+                    Der User schickt bei jeder Anfrage das Token mit.
+                    Eine Möglichkeit dabei ist dieses Token im HTTP Header mitzusenden.
+                    Vorteil und Nachteil zugleich:
+                    * Jede Instanz kann bzw. muss selber entscheiden können ob das Token gültig ist
+                </aside>
+            </section>
+        </section>
+        <section>
             <section data-markdown>
-                ### Mögliche Lösungen
-
-                * Nutzer wird nach der initialen Zuweisung an eine Instanz dauerhaft gebunden
-                * Sessions werden Instanz übergreifend gespeichert
-                * Session ist tokenbasiert beim Nutzer
+                ## mögliche Authentifizierungverfahren
             </section>
             <section data-markdown>
                 ### HTTP Basic Authentication
@@ -341,6 +403,83 @@
                 * Formular wird von der Anwendung erzeugt
                 * Anwendung entscheidet über Zugang
                 * bessere Fehlerbehandlung
+            </section>
+            <section data-markdown>
+                ### Protokolle
+                
+                * Security Assertion Markup Language (SAML)
+                * OAuth2
+            </section>
+            <section>
+                <div class="container">
+                    <div class="col" data-markdown>
+                        #### Authorisation
+
+                        gewährt Usern Zugriff auf Resourcen
+                    </div>
+                    <div class="col" data-markdown>
+                        #### Authentication
+
+                        stellt sicher, dass der Nutzer auch wirklich der ist für den er sich ausgibt
+                    </div>
+                </div>
+                <aside class="notes">
+                    Unterscheidung Authorisation vs. Authentication wichtig zur Erkennung der Unterschiede zwischen OAuth2 und SAML.
+                </aside>
+            </section>
+            <section>
+                <h4>Terminologie</h4>
+
+                <div class="container">
+                    <div class="col" data-markdown>
+                        SAML 
+
+                        * Client
+                        * Identity Provider (IDP)
+                        * Service Provider (SP)
+                    </div>
+                    <div class="col" data-markdown>
+                        OAuth2
+
+                        * Client
+                        * Authorisation Server
+                        * Resource Server
+                    </div>
+                </div>
+                <aside class="notes" data-markdown>
+                    * Client ist der jeweilige User/Browser/Server der sich authentifizieren bzw. autorisieren möchte
+                    * Server, welcher die Identitäten und Zugangsdaten enthält
+                    * Die geschützte Resource/Anwendung
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    #### Security Assertion Markup Language
+    
+                    * XML basiertes Authentication Protokoll
+                    * Single Sign On (SSO)
+                    * Optional Single Sign Off (SLO)
+                    * Identity Management
+                </div>
+                <aside class="notes">
+                    Single Sign On erfordert nur ausgetauschte Zertifikate zwischen IDP und SP.
+                    Der SP kann dann das vom IDP signierte Zertifikat des Client verifizieren.
+                    Für Single Logout wird eine aktive Verbindung zwischen SP und IDP benötigt.
+                    Der IDP bestätigt dann die Gültigkeit des Zertifikat.
+                    Logout funktioniert ansonsten durch das "Vergessen" des Zertifikat.
+                    Daher sollten die Zertifikate ein Ablaufdatum haben.
+                </aside>
+            </section>
+            <section>
+                <img src="assets/SAML.webp"/>
+            </section>
+            <section data-markdown>
+                #### OAuth2
+
+                * 
+            </section>
+            <section>
+                <img src="assets/OAuth2.webp"/>
             </section>
         </section>
     </div>
