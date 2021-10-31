@@ -251,15 +251,51 @@
                 * mindestens zwei unterschiedliche Authentifizierungsfaktoren (Wissen+Besitz)
                 * gängige Arten: Zeitbasiert (OTP), Tokens (SMS), Smart Cards
             </section>
+            <section data-markdown>
+                ### Gängige Verfahren
+
+                * OTP
+                * TOTP
+                * U2F
+            </section>
+            <section data-markdown>
+                #### OTP
+
+                * One Time Password
+                * meist von der Anwendung generiert und an den Nutzer über einen getrennten Kanal übermittelt
+                    * E-Mail
+                    * SMS
+                    * WhatsApp (neuerdings bspw: Paypal)
+                * nicht mit One Time Pad verwechseln
+            </section>
+            <section data-markdown>
+                #### TOTP
+                
+                * OTP wird aus einem Secret und Timestamp generiert
+                * Secret wird zunächst zwischen Anwendung und Client ausgetauscht
+            </section>
+            <section data-markdown>
+                #### U2F
+
+                * spezielles Challenge Response Verfahren der FIDO Allianz
+                * alle gängigen Browser unterstützen mittlerweile U2F
+                * mittlerweile auch viele unterstütze Anwendungen
+                    * Nextcloud
+                    * Gitlab
+                * Spezielle USB Keys
+                    * Yubikey
+                    * Nitro
+            </section>
             <section>
                 <div data-markdown>
                     ### Multi Faktor: Probleme
     
-                    * bei generierten Tokens
+                    * bei generierten Tokens (bspw. OTP, TOTP)
                         * Generierung sollte nicht auf gleichem Gerät stattfinden wie auf dem Benutzergerät
                 </div>
                 <aside class="notes">
                     Generierte Tokens: Beispiel für problematische Anwendung Banken: PushTan plus Onlinebanking App auf gleichem Gerät.
+                    an der Tafel Angriff ausführen
                 </aside>
             </section>
         </section>
@@ -473,13 +509,72 @@
             <section>
                 <img src="assets/SAML.webp"/>
             </section>
-            <section data-markdown>
-                #### OAuth2
-
-                * 
+            <section>
+                <div data-markdown>
+                    #### OAuth2
+    
+                    * meist JSON Web Tokens (JWT)
+                    * Client muss nicht zwingend ein Browser sein
+                    * Autorisierungsprotokoll
+                    * Access and Refreshtokens
+                </div>
+                <aside class="notes" data-markdown>
+                    * Accesstokens haben in der Regel eine Lifetime
+                    * läuft diese ab, kann man mit dem Refreshtoken einen neuen Accesstoken anfordern
+                    * Refreshtoken haben daher eine längere Lifetime
+                </aside>
             </section>
             <section>
                 <img src="assets/OAuth2.webp"/>
+            </section>
+            <section data-markdown>
+                ### Ablage der Tokens
+
+                * Besondere Vorsicht wo die Tokens gespeichert werden
+                    * NICHT im Local- / Sessionstorage
+                * Auth0 Doku bietet Best Practices für verschiedene Szenarien
+            </section>
+        </section>
+        <section>
+            <section data-markdown>
+                ## JSON Web Token
+            </section>
+            <section data-markdown>
+                ### Generelles
+
+                * von AUTH0 bereitgestellt
+                * mittlerweile Libraries für alle gängigen Sprachen
+                * Framework für Autorisierungstokens
+            </section>
+            <section>
+                <h3>Aufbau JWT</h3>
+                
+                <img src="assets/JWT-Aufbau.png"/>
+                
+                <aside class="notes" data-markdown>
+                    * ein Token besteht aus drei Teilen
+                    * die Teile werden durch einen Punkt getrennt
+                    * der 1. Teil (rot) beinhaltet Daten über den Hash Algorithmus und den Typ
+                    * der 2. Teil (lila) beinhaltet die Payload Daten
+                    * der 3. Teil (cyan) ist ein Hash über die beiden ersten Teile plus einem Secret
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Token lifecycle
+    
+                    1. JWT wird mit Header und Payload wird vom Autorisierungsserver bestückt
+                    2. Autorisierungsserver signiert den Token mit dem Secret und sendet ihn an den Client
+                    3. Client sendet den Token an die Anwendung
+                    4. Anwendung prüft mithilfe des Secret den Token 
+                </div>
+                <aside class="notes" data-markdown>
+                    * Secret darf nur dem Autorisierungsserver und dem Anwendungserver bekannt sein
+                    * sollte das Secret öffentlich werden müssen alle Tokens als invalide behandelt werden
+                </aside>
+            </section>
+            <section data-markdown>
+                ### JWT.io Praxis
             </section>
         </section>
     </div>
