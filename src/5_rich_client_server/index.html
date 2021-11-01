@@ -30,13 +30,13 @@
           #### Verantwortlichkeiten - JSF
 
           - View-Management
-            - Rendering
-            - Validation
+          - Rendering
+          - Validation
           - State-Management
-            - Events
-            - Routing
+          - Events
+          - Routing
           - Data-Management
-            - Persistence
+          - Persistence
         </div>
         <aside class="notes">
           <li>these are some notes</li>
@@ -47,11 +47,11 @@
           #### Verantwortlichkeiten - Rich Client
 
           - View-Management
-            - Rendering
-            - Ensurance
+          - Rendering
+          - Ensurance
           - State-Management
-            - Events
-            - Routing
+          - Events
+          - Routing
         </div>
       </section>
       <section>
@@ -59,8 +59,8 @@
           #### Verantwortlichkeiten - Webservice
 
           - Data-Management
-            - Validation
-            - Persistence
+          - Validation
+          - Persistence
         </div>
       </section>
     </section>
@@ -90,9 +90,9 @@
           #### Webservice - Stateless
 
           - Keine nicht-persistenten Informationen
-            - Transparentes Caching ausgenommen
+          - Transparentes Caching ausgenommen
           - Persistierung in Datenbank oder Dateisystem
-            - Transparente Datenbank oder Dateisystem
+          - Transparente Datenbank oder Dateisystem
         </div>
         <aside class="notes">
           <ul>
@@ -109,8 +109,8 @@
           #### Webservice - Skalierbar
 
           - Abhängig von ausschließlich externen Informationen
-            - Eingaben des Clients
-            - Daten der Persistence
+          - Eingaben des Clients
+          - Daten der Persistence
           - Instanzen sind identitätslos
           - Dynamisches hoch-/runterfahren von Instanzen
         </div>
@@ -258,9 +258,9 @@
         <div data-markdown>
           #### Vergleich - Initialaufwand
 
-          Monolith  | Modulith  | Services | Microservices
+          Monolith | Modulith | Services | Microservices
           ----------|-----------|----------|--------------
-          Gering    | Mittel    | Mittel   | Hoch
+          Gering | Mittel | Mittel | Hoch
         </div>
         <aside class="notes">
           <ul>
@@ -293,7 +293,7 @@
 
           Monolith | Modulith | Services | Microservices
           ---------|----------|----------|--------------
-          Hoch     | Mittel   | Mittel   | Gering
+          Hoch | Mittel | Mittel | Gering
         </div>
         <aside class="notes">
           <ul>
@@ -319,7 +319,7 @@
 
           Monolith | Modulith | Services | Microservices
           ---------|----------|----------|--------------
-          Gering   | Gering   | Mittel   | Hoch
+          Gering | Gering | Mittel | Hoch
         </div>
         <aside class="notes">
           <ul>
@@ -345,7 +345,7 @@
 
           Monolith | Modulith | Services | Microservices
           ---------|----------|----------|--------------
-          Gering   | Mittel   | Mittel   | Hoch
+          Gering | Mittel | Mittel | Hoch
         </div>
         <aside class="notes">
           <ul>
@@ -370,7 +370,7 @@
 
           Monolith | Modulith | Services | Microservices
           ---------|----------|----------|--------------
-          Hoch     | Hoch     | Mittel   | Gering
+          Hoch | Hoch | Mittel | Gering
         </div>
         <aside class="notes">
           <ul>
@@ -396,7 +396,7 @@
 
           Monolith | Modulith | Services | Microservices
           ---------|----------|----------|--------------
-          Hoch     | Hoch     | Mittel   | Gering
+          Hoch | Hoch | Mittel | Gering
         </div>
         <aside class="notes">
           <ul>
@@ -421,7 +421,7 @@
 
           Monolith | Modulith | Services | Microservices
           ---------|----------|----------|--------------
-          Gering   | Mittel   | Mittel   | Hoch
+          Gering | Mittel | Mittel | Hoch
         </div>
         <aside class="notes">
           <ul>
@@ -446,7 +446,7 @@
 
           Monolith | Modulith | Services | Microservices
           ---------|----------|----------|--------------
-          Keine    | Gering   | Mittel   | Hoch
+          Keine | Gering | Mittel | Hoch
         </div>
         <aside class="notes">
           <ul>
@@ -473,7 +473,7 @@
 
           Monolith | Modulith | Services | Microservices
           ---------|----------|----------|--------------
-          Hoch     | Hoch     | Mittel   | Hoch
+          Hoch | Hoch | Mittel | Gering
         </div>
         <aside class="notes">
           <ul>
@@ -498,7 +498,7 @@
 
           Monolith | Modulith | Services | Microservices
           ---------|----------|----------|--------------
-          Gering   |  Gering  |  Mittel  |  Hoch
+          Gering | Gering | Mittel | Hoch
         </div>
         <aside class="notes">
           <ul>
@@ -510,11 +510,8 @@
         </aside>
       </section>
       <section>
-        <div data-markdown>
-          #### Vergleich - Zusammenfassung
-
-          {placeholder:comparison_table}
-        </div>
+        <h4>Vergleich - Zusammenfassung</h4>
+        <img src="assets/architecture_comparison.svg" height="600">
       </section>
       <section>
         <div data-markdown>
@@ -522,7 +519,7 @@
 
           | Monolith | Modulith | Services | Microservices |
           |----------|----------|----------|---------------|
-          | Unbekannt - Einfach | Einfach - Umfangreich | Umfangreich - Komplex | Komplex       |
+          | Unbekannt - Einfach | Einfach - Umfangreich | Umfangreich - Komplex | Komplex |
         </div>
         <aside class="notes">
           <ul>
@@ -538,7 +535,7 @@
 
           | Monolith | Modulith | Services | Microservices |
           |----------|----------|----------|---------------|
-          Klein      | Klein - Groß | Mittel - Groß | Groß - Mehrere
+          Klein | Klein - Groß | Mittel - Groß | Groß - Mehrere
         </div>
         <aside class="notes">
           <ul>
@@ -590,7 +587,7 @@
           - Erweitert um Java EE
           - Convention-over-Configuration
           - Annotation-Base Configuration
-            - Spring ursprünglich eigentlich XML
+          - Spring ursprünglich eigentlich XML
         </div>
         <aside class="notes">
           <ul>
@@ -608,8 +605,8 @@
 
           - Aufbau des Objektgraphen
           - Zwei primäre Quellen für Objekte
-            - Components
-            - Configurations
+          - Components
+          - Configurations
           - Objektgraph ist normalerweise statisch
           - Objektgraph erlaubt dynamische Erweiterung
         </div>
@@ -641,9 +638,9 @@
           ```java
           @SpringBootApplication
           public class MySpringApplication {
-             public static void main(String[] args) {
-                SpringApplication.run(MySpringApplication.class, args);
-             }
+          public static void main(String[] args) {
+          SpringApplication.run(MySpringApplication.class, args);
+          }
           }
           ```
         </div>
@@ -654,7 +651,7 @@
 
           `@SpringBootApplication`
           - `scanBasePackages` Base-Package für alle Configurations und Components
-            - Default ist das aktuelle Package
+          - Default ist das aktuelle Package
         </div>
       </section>
       <!-- Spring - Components -->
@@ -686,7 +683,7 @@
           ```java
           @Component
           public class MyComponent {
-              ...
+          ...
           }
           ```
         </div>
@@ -727,10 +724,10 @@
           ```java
           @Configuration
           public class MyConfiguration {
-              @Bean
-              public MyComponent createComponent(){
-                  ...
-              }
+          @Bean
+          public MyComponent createComponent(){
+          ...
+          }
           }
           ```
         </div>
@@ -744,8 +741,8 @@
           - Auflösung der Referenzen über Typ
           - Mehrfach vorhandene Objekt über Namen ggf. Classifier
           - Boostrap scheitert wenn Referenz nicht auslösbar
-            - keine entsprechendes Objekt
-            - mehrere entsprechende Objekte
+          - keine entsprechendes Objekt
+          - mehrere entsprechende Objekte
         </div>
       </section>
       <section>
@@ -762,11 +759,11 @@
           ```java
           @Component
           public class MyComponentWithDependency {
-              public MyComponentWithDependency(
-                  @Autowired MyRequiredComponent component
-              ) {
-                  ...
-              }
+          public MyComponentWithDependency(
+          @Autowired MyRequiredComponent component
+          ) {
+          ...
+          }
           }
           ```
         </div>
@@ -778,12 +775,12 @@
           ```java
           @Configuration
           public class MyConfiguration {
-              @Bean
-              public MyComponentWithDependency createDependantComponent(
-                  @Autowired MyRequiredComponent component
-              ) {
-                  ...
-              }
+          @Bean
+          public MyComponentWithDependency createDependantComponent(
+          @Autowired MyRequiredComponent component
+          ) {
+          ...
+          }
           }
           ```
         </div>
@@ -878,11 +875,11 @@
           ```java
           @RestController
           @RequestMapping(
-              path = "/notes",
-              produces = MediaType.APPLICATION_JSON
+          path = "/notes",
+          produces = MediaType.APPLICATION_JSON
           )
           public class MyNoteController {
-              ...
+          ...
           }
           ```
         </div>
@@ -905,9 +902,9 @@
           ```java
           @RequestMapping(method = RequestMethod.GET)
           public List&lt;Note&gt; getNotes(
-              @RequestParam(name = "q", required = false) String search
+          @RequestParam(name = "q", required = false) String search
           ) {
-              ...
+          ...
           }
           ```
         </div>
@@ -927,7 +924,7 @@
           ```java
           @RequestMapping(method = RequestMethod.POST)
           public Note createNote(@RequestBody NoteProposal proposal) {
-              ...
+          ...
           }
           ```
         </div>
@@ -947,10 +944,10 @@
           ```java
           @RequestMapping(path = "/{note}", method = RequestMethod.PUT)
           public Note updateNote(
-              @PathVariable("note") Long noteId,
-              @RequestBody NoteProposal proposal
+          @PathVariable("note") Long noteId,
+          @RequestBody NoteProposal proposal
           ) {
-              ...
+          ...
           }
           ```
         </div>
@@ -969,13 +966,13 @@
 
           ```java
           @RequestMapping(
-              path = "/{note}",
-              method = RequestMethod.DELETE
+          path = "/{note}",
+          method = RequestMethod.DELETE
           )
           public Note deleteNote(
-              @PathVariable("note") Long noteId
+          @PathVariable("note") Long noteId
           ) {
-              ...
+          ...
           }
           ```
         </div>
@@ -994,15 +991,15 @@
 
           ```java
           @RequestMapping(
-              path = "/{note}/attachment/{attachment}",
-              method = RequestMethod.GET,
-              produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
+          path = "/{note}/attachment/{attachment}",
+          method = RequestMethod.GET,
+          produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
           )
           public byte[] getAttachment(
-              @PathVariable("note") Long noteId,
-              @PathVariable("attachment") String attachmentId
+          @PathVariable("note") Long noteId,
+          @PathVariable("attachment") String attachmentId
           ) {
-              ...
+          ...
           }
           ```
         </div>
@@ -1050,7 +1047,7 @@
           ```java
           @Service
           public interface MyNoteService {
-              ...
+          ...
           }
           ```
         </div>
@@ -1062,7 +1059,7 @@
           ```java
           @Service
           public class MyNoteServiceImpl implements MyNoteService {
-              ...
+          ...
           }
           ```
         </div>
@@ -1117,8 +1114,8 @@
           ```java
           @Repository
           public interface MyNoteRepository
-              extends JpaRepository&lt;Note, Long&gt; {
-              ...
+          extends JpaRepository&lt;Note, Long&gt; {
+          ...
           }
           ```
         </div>
@@ -1147,8 +1144,8 @@
 
           ```java
           Note findByNameAndDescription(
-              String name,
-              String description
+          String name,
+          String description
           );
           ```
         </div>
@@ -1159,11 +1156,11 @@
 
           ```java
           @Query("SELECT n FROM Notes n "
-               + "WHERE n.tag IN (:tags) "
-               + "AND n.creationDate >= :timestamp")
+          + "WHERE n.tag IN (:tags) "
+          + "AND n.creationDate >= :timestamp")
           List&lt;Note&gt; findWithTagsAfter(
-              String[] tags,
-              OffsetDateTime timestamp
+          String[] tags,
+          OffsetDateTime timestamp
           );
           ```
         </div>
@@ -1175,9 +1172,9 @@
           - Vielzahl an vordefinierten Operationen
           - Wrapper-Klasse für explizite Schnittstellen
           - Mehr Aufwand - Mehr Konsistenz
-            - Projekt-spezifisches Wording
-            - Verändern der Methodensignatur
-            - Keine ungewollten Operationen
+          - Projekt-spezifisches Wording
+          - Verändern der Methodensignatur
+          - Keine ungewollten Operationen
         </div>
       </section>
       <section>
@@ -1187,17 +1184,17 @@
           ```java
           @Repository
           public class MyNoteRepository {
-              private final MySpringNoteRepository delegate;
+          private final MySpringNoteRepository delegate;
 
-              public MyNoteRepository(
-                  @Autowired MySpringNoteRepository delegate
-              ) {
-                  this.delegate = delegate;
-              }
+          public MyNoteRepository(
+          @Autowired MySpringNoteRepository delegate
+          ) {
+          this.delegate = delegate;
+          }
 
-              public @Nullable Note find(@NotNull Long id) {
-                  return delegate.findById(id).orElse(null)
-              }
+          public @Nullable Note find(@NotNull Long id) {
+          return delegate.findById(id).orElse(null)
+          }
           }
           ```
         </div>
@@ -1253,21 +1250,21 @@
       </section>
     </section>
   </div>
-</iv>
+  </iv>
 
-<script src="/dist/reveal.js"></script>
-<script src="/plugin/notes/notes.js"></script>
-<script src="/plugin/markdown/markdown.js"></script>
-<script src="/plugin/highlight/highlight.js"></script>
-<script>
-  Reveal.initialize({
-    hash: true,
-    slideNumber: true,
-    plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-    dependencies: [
-      {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
-    ]
-  });
-</script>
+  <script src="/dist/reveal.js"></script>
+  <script src="/plugin/notes/notes.js"></script>
+  <script src="/plugin/markdown/markdown.js"></script>
+  <script src="/plugin/highlight/highlight.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      dependencies: [
+        {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+      ]
+    });
+  </script>
 </body>
 </html>
