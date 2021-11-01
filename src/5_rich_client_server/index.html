@@ -635,15 +635,15 @@
         </div>
       </section>
       <section>
-        <div data-markdown>
+        <div data-markdown data-line-numbers="3">
           #### Bootstrap - Beispiel
 
           ```java
           @SpringBootApplication
           public class MySpringApplication {
-              public static void main(String[] args) {
-                  SpringApplication.run(MySpringApplication.class, args);
-              }
+             public static void main(String[] args) {
+                SpringApplication.run(MySpringApplication.class, args);
+             }
           }
           ```
         </div>
@@ -904,7 +904,7 @@
 
           ```java
           @RequestMapping(method = RequestMethod.GET)
-          public List<Note> getNotes(
+          public List&lt;Note&gt; getNotes(
               @RequestParam(name = "q", required = false) String search
           ) {
               ...
@@ -947,7 +947,7 @@
           ```java
           @RequestMapping(path = "/{note}", method = RequestMethod.PUT)
           public Note updateNote(
-              @PathVariable("note) Long noteId,
+              @PathVariable("note") Long noteId,
               @RequestBody NoteProposal proposal
           ) {
               ...
@@ -973,8 +973,7 @@
               method = RequestMethod.DELETE
           )
           public Note deleteNote(
-              @PathVariable("note) Long noteId,
-              @RequestBody NoteProposal proposal
+              @PathVariable("note") Long noteId
           ) {
               ...
           }
@@ -1001,7 +1000,7 @@
           )
           public byte[] getAttachment(
               @PathVariable("note") Long noteId,
-              @PathVariable("attachment) String attachmentId
+              @PathVariable("attachment") String attachmentId
           ) {
               ...
           }
@@ -1118,7 +1117,7 @@
           ```java
           @Repository
           public interface MyNoteRepository
-              extends JpaRepository<Note, Long> {
+              extends JpaRepository&lt;Note, Long&gt; {
               ...
           }
           ```
@@ -1129,7 +1128,7 @@
           #### JPA-Repository - Beispiel
 
           ```java
-          List<Note> findAll();
+          List&lt;Note&gt; findAll();
           ```
         </div>
       </section>
@@ -1162,7 +1161,7 @@
           @Query("SELECT n FROM Notes n "
                + "WHERE n.tag IN (:tags) "
                + "AND n.creationDate >= :timestamp")
-          Note findWithTagsAfter(
+          List&lt;Note&gt; findWithTagsAfter(
               String[] tags,
               OffsetDateTime timestamp
           );
@@ -1177,7 +1176,7 @@
           - Wrapper-Klasse für explizite Schnittstellen
           - Mehr Aufwand - Mehr Konsistenz
             - Projekt-spezifisches Wording
-            - Vermeidung von `Optional`
+            - Verändern der Methodensignatur
             - Keine ungewollten Operationen
         </div>
       </section>
@@ -1188,7 +1187,13 @@
           ```java
           @Repository
           public class MyNoteRepository {
-              private @Autowired MySpringNoteRepository delegate;
+              private final MySpringNoteRepository delegate;
+
+              public MyNoteRepository(
+                  @Autowired MySpringNoteRepository delegate
+              ) {
+                  this.delegate = delegate;
+              }
 
               public @Nullable Note find(@NotNull Long id) {
                   return delegate.findById(id).orElse(null)
