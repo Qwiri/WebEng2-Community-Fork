@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>3. Rich Client (Server) Anwendung</title>
+
+    <link rel="stylesheet" href="/dist/reset.css">
+    <link rel="stylesheet" href="/dist/reveal.css">
+    <link rel="stylesheet" href="/dist/theme/white.css">
+
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+    <link rel="stylesheet" href="/src/custom_styles/global_styles.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h4>Was beim letzten mal geschah</h4>
+            <ul>
+                <li>Multi Page Application</li>
+                <li>JSF</li>
+                <li>Wiederholung MVC</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Rich Client: Client Anwendung</h3>
+        </section>
+        <section>
+            <h4>In dieser Vorlesung</h4>
+            <ul>
+                <li>Single Page Applications
+                    <ul>
+                        <li>Was ist eine SPA?</li>
+                        <li>Was sind Vorteile?</li>
+                        <li>Was sind Nachteile?</li>
+                    </ul>
+                </li>
+                <li>Frontend Architekturen: Wie baue ich eine SPA?
+                    <ul>
+                        <li>Component Architektur</li>
+                        <li>Micro Frontends</li>
+                    </ul>
+                </li>
+                <li>Frontend Architektur in Angular</li>
+                <li>Vergleich zu anderen Frameworks (React, Vue, Flutter)</li>
+                <li>Praxis: Bau unserer Todo Anwendung in Angular</li>
+            </ul>
+        </section>
+        <section>
+            <h4>Wiederholung</h4>
+            <p>Wie funktioniert die Navigation bei Multi Page Anwendungen?</p>
+            <pre>
+                <code class="language-plantuml">
+                  @startuml
+                  activate Client
+                  Client -> Server: Request (GET)
+                  deactivate Client
+                  activate Server
+                  Server -> Client: Response (HTML Page)
+                  deactivate Server
+                  activate Client
+                  Client -> Server: Request (Post)
+                  deactivate Client
+                  activate Server
+                  Server -> Client: Response (HTML Page)
+                  deactivate Server
+                  activate Client
+                  @enduml
+                </code>
+              </pre>
+        </section>
+        <section data-external="./motivation.html"></section>
+        <section data-external="./single_page_application.html"></section>
+        <section>
+            <h4>Single Page Applications</h4>
+            <ul>
+                <li>Wir haben besprochen:
+                    <ul>
+                        <li>Was ist eine SPA?</li>
+                        <li>Was sind ihre Vorteile?</li>
+                        <li>Was sind ihre Nachteile?</li>
+                    </ul>
+                </li>
+                <li>Was uns fehlt:
+                    <ul>
+                        <li>Wie baut man eine SPA?</li>
+                        <li>Welche Architekturen gibt es?</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h3>Wie baut man eine SPA?</h3>
+        </section>
+        <section data-external="./just_start_spa.html"></section>
+        <section data-external="./component_architecture.html"></section>
+        <section data-external="./atomic_design.html"></section>
+        <section><h4 style="color: red">Bis hier hin kann reviewed werden</h4></section>
+        <section>
+            <section>
+                <h3>Ausblick: Micro Frontends</h3>
+            </section>
+            <section>
+                Hier ein wenig Micro Frontends erklären.
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>Praxis: Todo Anwendung</h3>
+                <aside class="notes">
+                    <ul>
+                        <li>Wir haben uns jetzt grundlegende Konzepte für Frontends angesehen.</li>
+                        <li>Jetzt wird es Zeit für die Praxis.</li>
+                        <li>Dafür sollten wir uns noch mal die Syntax von Angular ansehen.</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h4>Component Syntax</h4>
+                <pre>
+                  <code class="javascript" data-line-numbers>@Component({
+    selector: 'app-text-input',
+    templateUrl: './text-input.component.html',
+    styleUrls: ['./text-input.component.css'],
+})
+export class TextInputComponent {
+      // some logic
+}                   </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            Was wir alles für diese Section brauchen:
+
+            Typische Frontendarchitektur (anzeige): Component Architektur
+            https://www.simform.com/blog/component-based-development/
+            Kurzer Einblick in das Thema Micro Frontends
+            https://martinfowler.com/articles/micro-frontends.html
+
+            Component System Angular
+            Services in Angular
+            Dependency Injection in Angular
+
+            Input/Output Params
+
+            Routing
+
+            Simples Beispiel bauen.
+
+            Typische Frontendarchitektur (statehandling): StateManagement mit Redux
+            Konkrete Bibliothek NgRx
+            Actions
+            Reducer
+            State
+
+            Unsere bestehende Anwendung um ein StateManagement erweitern.
+
+            Vergleich zu anderen Frameworks
+            React, Vue, Flutter
+            Component System22
+            StateManagement
+                Redux, Bloc, etc.
+            https://ordina-jworks.github.io/angular/2018/10/08/angular-state-management-comparison.html
+        </section>
+        <section>
+            <h4>Beim nächsten mal:</h4>
+
+            <li>Statemanagement im Frontend</li>
+            <li>Statemanagement mit Angular NgRx</li>
+            <li>Vergleich zu anderen Frameworks</li>
+            <li>Praxis: Einbau eines Statemanagements in unsere Todo Anwendung mit NgRx</li>
+        </section>
+    </div>
+</div>
+
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        dependencies: [
+            {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+            {
+                src: '../../plugin/external/external.js',
+                condition: function() {
+                    return !!document.querySelector( '[data-external],[data-external-replace]' );
+                }
+            },
+        ]
+    });
+</script>
+</body>
+</html>
