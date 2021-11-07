@@ -50,9 +50,12 @@
     <pre>
         <code class="javascript" data-line-numbers>fixture.debugElement.query(By.css('.some-class'));
 fixture.debugElement.query(By.css('#some-id'));
-fixture.debugElement.query(By.css(
+const nativeElement = fixture.debugElement.query(By.css(
     '[data-test-id=some-data-test-id]'
-));</code>
+)).nativeElement;
+const componentInstance = fixture.debugElement.query(
+    By.directive(SomeComponent)
+).componentInstance;</code>
     </pre>
     <aside class="notes">
         <ul>
@@ -93,6 +96,10 @@ fixture.debugElement.query(By.css(
         <li>Library fürs Mocking</li>
         <li>Syntax ist für andere Sprachen ähnlich</li>
     </ul>
+    <p>Zero Setup:</p>
+    <pre>
+        <code class="json">"ts-mockito": "^2.6.1"</code>
+    </pre>
 </section>
 <section>
     <h4>TS-Mockito</h4>
@@ -133,7 +140,7 @@ const someServiceInstance = instance(someServiceMock);</code>
     </aside>
 </section>
 <section>
-    <h4>WHEN</h4>
+    <h4>when</h4>
     <ul>
         <li>when() mockt Rückgabewerte des Mocks</li>
         <li>ein Mock kann verschiedene Rückgabewerte haben</li>
@@ -151,7 +158,7 @@ when(mock.someOtherFunction()).thenReturn('bar');</code>
     </aside>
 </section>
 <section>
-    <h4>Verify</h4>
+    <h4>verify</h4>
     <ul>
         <li>mit verify() prüfen wir Interaktionen mit dem Mock</li>
         <li>wir können testen wie viele Interaktionen stattgefunden haben</li>
@@ -213,6 +220,51 @@ verify(mock.someOtherFunction(anyString())).never();</code>
             <li>Mocke ich ein Objekt manuell, dann muss ich die Methoden hier manuell umbenennen.</li>
         </ul>
     </aside>
+</section>
+<section>
+    <h4>ng-mocks</h4>
+    <ul>
+        <li>Library zum Mocken von Components</li>
+        <li>Component kann andere Components enthalten</li>
+        <li>Subcomponents sollen nicht getestet werden</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Components die von der zu testenden Component verwendet werden, werden ja selbst unit testet. Wir wollen sie daher nicht mittesten.</li>
+            <li>Ich habe diese Funktionalität bisher für React, Flutter und andere Frameworks vermisst. Ich denke besonders, um saubere UI-Unit-Tests zu schreiben ist sowas sehr hilfreich.</li>
+            <li>Die Funktionalität von Subcomponents wird natürlich mit gemockt.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>ng-mocks</h4>
+    <p>Zero Setup:</p>
+    <pre>
+        <code class="json">"ng-mocks": "^12.5.0"</code>
+    </pre>
+    <p>Mocking von Components:</p>
+    <pre>
+        <code class="typescript" data-line-numbers>TestBed.configureTestingModule({
+    declarations: [
+        MockComponent(ButtonComponent),
+        ComponentUnderTest
+    ],
+}).compileComponents();</code>
+    </pre>
+</section>
+<section>
+    <h4>ng-mocks</h4>
+    <p>Mock Component ist über das Fixture erreichbar</p>
+    <pre>
+        <code class="javascript" data-line-numbers>const componentInstance = fixture.debugElement.query(
+    By.directive(SomeComponent)
+).componentInstance;</code>
+    </pre>
+    <p>Input und Output Parameter sind verwendbar</p>
+    <pre>
+        <code class="javascript" data-line-numbers>componentInstance.someOutput.emit('someOutput'):
+componentInstance.someInput = 'someInput';</code>
+    </pre>
 </section>
 <section>
     <h4>Testing Libraries</h4>
