@@ -1,0 +1,618 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Authentifizierung</title>
+
+    <link rel="stylesheet" href="/dist/reset.css">
+    <link rel="stylesheet" href="/dist/reveal.css">
+    <link rel="stylesheet" href="/dist/theme/white.css">
+
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+    <link rel="stylesheet" href="styles/custom_styles.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown>
+            # Authentifizierung
+        </section>
+        <section>
+            <div data-markdown>
+                ## Inhalt
+
+                * Motivation
+                * Zugriffskontrolle
+                * Authenticationfactors
+                * Authenticationmethods
+                * Standards
+            </div>
+
+            <aside class="notes" data-markdown>
+                * Motivation
+                * Zugriffskontrolle
+                    * DAC / MAC
+                    * Identitybased
+                    * Rolebased
+                    * Attributebased
+                * Authenticationfactors
+                * Authenticationmethods
+                * Standards
+                    * SAML
+                    * OAuth2/JWT
+            </aside>
+        </section>
+        <section>
+            <section data-markdown>
+                ## Motivation
+            </section>
+        </section>
+        <section>
+            <section data-markdown>
+                ## Zugriffskontrolle
+            </section>
+            <section>
+                <h3>Zugriffstyp</h3>
+                <div class="container">
+                    <div class="col">
+                        <h4>Discretionary Access Control</h4>
+                        <ul>
+                            <li>
+                                Benutzerzentriert
+                            </li>
+                            <li>
+                                Objektbezogen
+                            </li>
+                            <li>
+                                Typisch: Read, Write, Execute
+                            </li>
+                            <li>
+                                Lack of Competence
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>Mandatory Access Control</h4>
+                        <ul>
+                            <li>
+                                Systemweit
+                            </li>
+                            <li>
+                                Das System dominiert
+                            </li>
+                            <li>
+                                lack of overview
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3>Discretionary Access Control</h3>
+                    <p>
+                        Jeder Benutzer kann die Rechte für ein Objekt einzeln einstellen.
+                        common challenged by lack of competence, overview
+                    </p>
+                    <h3>Mandatory Access Control</h3>
+                    <p>
+                        Das System gibt die Rechte vor, Nutzer kann sie zwar anpassen aber das System dominiert.
+                        commonly challenged by lack of overview, BOfH
+                    </p>
+                </aside>           
+            </section>
+            <section data-markdown>
+                ### Identitybased Access Control
+
+                * Zugriff wird anhand der Identät bestimmt
+                * Access Control Matrix
+            </section>
+            <section data-markdown>
+                ### Rolebased Access Control
+
+                * Zugriff wird über eine Rolle gesteuert
+                * Access Control List
+            </section>
+            <section data-markdown>
+                ### Attributebased Access Control
+
+                * ein Attribut entscheidet über den Zugriff
+            </section>
+            <section data-markdown>
+                <img src=""/>
+                <img src=""/>
+                <img src=""/>
+            </section>
+        </section>
+        <section>
+            <section data-markdown>
+                ## Authenticationfactors
+            </section>
+            <section data-markdown>
+                ### Typen
+
+                * Wissen
+                    * Password, Sicherheitsfragen ...
+                * Besitz
+                    * Security token, Smart Card ...
+                * Inhärenz
+                    * Biometrische Verfahren ...
+            </section>
+            <section>
+                <h3>Wissen: Passwort</h3>
+
+                <img src="assets/password.svg"/>
+                <aside class="notes">
+                    Passwort und Login wird vom User an den Server gesendet.
+                    Dieser prüft es gegen die Datenbank und gewährt entsprechen Zugriff oder verweigert ihn.
+                </aside>
+            </section>
+            <section>
+                <h3>Wissen: Passwort</h3>
+
+                <img src="assets/password-marked.svg"/>
+                <aside class="notes">
+                    Es gibt verschiedene unsichere Punkte:
+                    <ol>
+                        <li>
+                            Der Nutzer kann eine mögliche Schwachstelle sein. 
+                            Beispielsweise durch die Verwendung eines unsicheren Passwort. 
+                            Aber auch weil der Rechner des Nutzers infiziert sein könnte.
+                        </li>
+                        <li>
+                            Der Transportweg kann in der Regel als unsicher angenommen werden.
+                            Das heißt er erfüllt nicht Anforderungen an einen sicheren Kanal.
+                            Beispielsweise, dass Dritte Nachrichten abfangen oder manipulieren können.
+                            Bei ausreichender Verschlüsselung kann der Kanal als sicher angekommen werden.
+                        </li>
+                        <li>
+                            Außerdem könnte die Datenbank aus verschiedenen Gründen geleakt werden.
+                            Liegen dann die Passwörter im Klartext vor hat ein Angreifer leichtes Spiel.
+                            Dies ließe sich einfach durch gehashte und gesaltet Passwörter verbessern.
+                        </li>
+                    </ol>
+                    
+                    Wie man die Sicherheit eines solchen Prozess erhöht betrachten wir später.
+                    Ähnliche Verfahren bei Sicherheitsfragen.
+                </aside>
+            </section>
+            <section>
+                <h3>Besitz</h3>
+
+                <aside class="notes">
+                    Die Anwendung prüft ob der Anwender die richtige Smart Card oder ähnliches besitzt.
+                </aside>
+            </section>
+            <section data-markdown>
+                ### Biometrische Verfahren
+
+                * Fingerabdruck
+                * Iriserkennung
+                * Gesichtserkennung
+                * Venenerkennung
+                * Brainwave basiert (noch in der Entwicklung)
+            </section>
+            <section>
+                <h3>Biometrische Verfahren: Sicherheit?</h3>
+                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4VrqufsHpS4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <aside class="notes">
+                    Bisher sind alle biometrischen Verfahren zu universell sowie nicht eindeutig genug um praxistauglich und sicher zugleich zu sein.
+                    Sind trotzdem weit verbreitet.
+                    Hinweis auf Schäubles Fingerabdruck
+                </aside>
+            </section>
+            <section data-markdown>
+                ### Exkurs Brainwave Based Authentication
+
+                * Aktuell Forschungsgebiet
+                * Misst die Gehirnströme
+                * Mögliche Messarten:
+                    * einmalige Sequenz
+                    * dauerhaftes Messen und überprüfen
+                    <!--TODO beide Messarten in den Notes erklären -->
+            </section>
+            <section data-markdown>
+                ### Exkurs Brainwave Based Authentication: Probleme
+
+                * Performance
+                * Akzeptanz
+                * Erfassung der Daten
+            </section>
+            <section>
+                <h3>Exkurs Brainwave Based Authentication</h3>
+                <img src="assets/Brainwave-EEG-Camera.webp"/>
+            </section>
+        </section>
+        <section>
+            <section data-markdown>
+                ## Authentifizierungsarten
+    
+                * Direkt
+                * über einen dritten Abiter
+            </section>
+            <section>
+                <h3>Direkt</h3>
+                <img src="assets/authentifizierungsart-direkt.svg"/>
+
+                <p class="fragment">
+                    Vorteil: Anwendung hat die Hoheit über die Daten.
+                    Nachteil: Nutzer muss der Anwendung möglicherweise mehr Daten bereitstellen (mindestens: Password).
+                </p>
+            </section>
+            <section>
+                <h3>Arbiter</h3>
+                <img src="assets/authentifizierungsart-arbiter.svg"/>
+                
+                <p class="fragment">
+                    Vorteil: Der Anwender muss seine persönlichen Daten gegenüber der Anwendung nicht sichtbar machen.
+                    Nachteil: Beide müssen dem Arbiter vertrauen.
+                </p>
+
+                <aside class="notes">
+                    Der Nutzer kann sich eine Session/Token bei einem externen Arbiter (meist ein Identity Provider wie bspw. Shibboleth) erstellen lassen.
+                    Diese kann er dann nutzen um sich bei einer Anwendung zu authentifizieren.
+                </aside>
+            </section>
+            <section data-markdown>
+                ### Multi Faktor
+
+                * meist zwei Faktor
+                * erhöht die Sicherheit signifikant
+                * mindestens zwei unterschiedliche Authentifizierungsfaktoren (Wissen+Besitz)
+                * gängige Arten: Zeitbasiert (OTP), Tokens (SMS), Smart Cards
+            </section>
+            <section data-markdown>
+                ### Gängige Verfahren
+
+                * OTP
+                * TOTP
+                * U2F
+            </section>
+            <section data-markdown>
+                #### OTP
+
+                * One Time Password
+                * meist von der Anwendung generiert und an den Nutzer über einen getrennten Kanal übermittelt
+                    * E-Mail
+                    * SMS
+                    * WhatsApp (neuerdings bspw: Paypal)
+                * nicht mit One Time Pad verwechseln
+            </section>
+            <section data-markdown>
+                #### TOTP
+                
+                * OTP wird aus einem Secret und Timestamp generiert
+                * Secret wird zunächst zwischen Anwendung und Client ausgetauscht
+            </section>
+            <section data-markdown>
+                #### U2F
+
+                * spezielles Challenge Response Verfahren der FIDO Allianz
+                * alle gängigen Browser unterstützen mittlerweile U2F
+                * mittlerweile auch viele unterstütze Anwendungen
+                    * Nextcloud
+                    * Gitlab
+                * Spezielle USB Keys
+                    * Yubikey
+                    * Nitro
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Multi Faktor: Probleme
+    
+                    * bei generierten Tokens (bspw. OTP, TOTP)
+                        * Generierung sollte nicht auf gleichem Gerät stattfinden wie auf dem Benutzergerät
+                </div>
+                <aside class="notes">
+                    Generierte Tokens: Beispiel für problematische Anwendung Banken: PushTan plus Onlinebanking App auf gleichem Gerät.
+                    an der Tafel Angriff ausführen
+                </aside>
+            </section>
+        </section>
+        <section>
+            <section data-markdown>
+                ## Probleme in der Praxis
+            </section>
+            <section data-markdown>
+                ### Notwendigkeit Session
+                
+                * HTTP ist zustandslos
+                * Zustand für Authentifizierung nötig
+                * Abstraktes Konstrukt: Session
+            </section>
+            <section>
+                <h3>Speicherung der Sessions</h3>
+
+                <div class="container">
+                    <div class="col" data-markdown>
+                        #### Cookies
+
+                        * Zustimmung erforderlich
+                        * Session Riding nicht möglich
+                    </div>
+                    <div class="col" data-markdown>
+                        #### URL-Rewriting
+
+                        * Client unanbhängig
+                        * Session-ID offensichtlich
+                        * Gefahr durch "Session Riding"
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h3>Probleme in verteilten Anwendungen</h3>
+                <img src="assets/loadbalancer-initial.svg"/>
+                <aside class="notes">
+                    Sobald die Anwendung skaliert werden soll, entsteht ein Problem mit der Session Verwaltung.
+                    Dabei gibt es verschiedene Probleme die auftreten können und verschiedene Lösungen.
+                </aside>
+            </section>
+            <section>
+                <h3>Probleme in verteilten Anwendungen</h3>
+
+                <img src="assets/scaled-application-session.svg"/>
+                <aside class="notes">
+                    Ist eine Anwendung nicht für eine skalierte Nutzung konzipiert kann folgendes Szenario eintreten.
+                    Nutzer A verbindet sich über den Load Balancer mit der Instanz A.
+                    Dort erzeugt er eine für sich gültige Session. 
+                    Diese kann er nun benutzen um sich bei Instanz A als Nutzer auszugeben.
+                    Während seiner Nutzungszeit kann es jedoch vorkommen, dass der Loadbalancer den Nutzer auf eine andere Instanz verschiebt.
+                    In diesem Fall besitzt der Nutzer keine gültige Session mehr.
+                </aside>
+            </section>
+            <section>
+                <p data-markdown>
+                    ### Mögliche Lösungen
+    
+                    * Nutzer wird nach der initialen Zuweisung an eine Instanz dauerhaft gebunden
+                    * Sessions werden Instanz übergreifend gespeichert
+                    * Session Gateway
+                    * Session ist tokenbasiert beim Nutzer
+                </p>
+                <aside class="notes">
+                    Zusammenfassung
+                </aside>
+            </section>
+            <section>
+                <h3>
+                    Instanzbindung
+                </h3>
+                <img src="assets/loadbalancer-instancebased.svg"/>
+                <aside class="notes" data-markdown">
+                    Der Anwender wird in diesem Fall vom Loadbalancer immer an die gleiche Instanz weitergeleitet wird.
+                    Da der Nutzer dann immer bei der gleichen Instanz landet, muss man sich keine Gedanken über das Session Sharing machen.
+                    Vorteil:
+                    * keine extra Technik benötigt
+                    Nachteil:
+                    * Die Instanz darf nicht sterben
+                    * Last auf einer Instanz verhält sich dynamisch
+                </aside>
+            </section>
+            <section>
+                <h3>Instanzübergreifend</h3>
+                <img src="assets/loadbalancer-instance-shared.svg"/>
+                <aside class="notes" data-markdown>
+                    Die Session eines Users wird in einem Session Store abgelegt.
+                    Jede Instanz hat Zugriff auf diese.
+                    Vorteil:
+                    * Nutzer kann je nach Last auf den Instanzen verschoben werden
+                    * Instanzen können auch sterben
+                    Nachteil:
+                    * der Session Store kann ein Performance Bottleneck werden
+                </aside>
+            </section>
+            <section>
+                <h3>Sessiongateway</h3>
+                <img src="assets/loadbalancer-session-gateway.svg" />
+                <aside class="notes">
+                    Jeder Aufruf wird durch das Session Gateway geleitet.
+                    Meistens übernimmt der Loadbalancer diese Rolle.
+                    Vorteil:
+                    * Die Instanz muss sich nicht darum kümmern
+                    * eine zentrale Stelle
+                    Nachteil:
+                    * Performance Bottleneck
+                    * unter Umständen zu grob granular
+                </aside>
+            </section>
+            <section>
+                <h3>Tokenbasierte Sessions</h3>
+                <img src="assets/loadbalancer-token-based.svg" />
+                <aside class="notes">
+                    Der User schickt bei jeder Anfrage das Token mit.
+                    Eine Möglichkeit dabei ist dieses Token im HTTP Header mitzusenden.
+                    Vorteil und Nachteil zugleich:
+                    * Jede Instanz kann bzw. muss selber entscheiden können ob das Token gültig ist
+                </aside>
+            </section>
+        </section>
+        <section>
+            <section data-markdown>
+                ## mögliche Authentifizierungverfahren
+            </section>
+            <section data-markdown>
+                ### HTTP Basic Authentication
+
+                * Browser stellt Forumlar bereit
+                * Credentials-Tupel username:password
+                * meist authentifiziert der Server
+                * Formular nicht editierbar
+            </section>
+            <section>
+                <h3>HTTP Basic Authentication: Ablauf</h3>
+
+                <img src="assets/HTTP-Basic-Authentication.svg" />
+            </section>
+            <section data-markdown>
+                ### Form Based Authentication
+
+                * Formular wird von der Anwendung erzeugt
+                * Anwendung entscheidet über Zugang
+                * bessere Fehlerbehandlung
+            </section>
+            <section data-markdown>
+                ### Protokolle
+                
+                * Security Assertion Markup Language (SAML)
+                * OAuth2
+            </section>
+            <section>
+                <div class="container">
+                    <div class="col" data-markdown>
+                        #### Authorisation
+
+                        gewährt Usern Zugriff auf Resourcen
+                    </div>
+                    <div class="col" data-markdown>
+                        #### Authentication
+
+                        stellt sicher, dass der Nutzer auch wirklich der ist für den er sich ausgibt
+                    </div>
+                </div>
+                <aside class="notes">
+                    Unterscheidung Authorisation vs. Authentication wichtig zur Erkennung der Unterschiede zwischen OAuth2 und SAML.
+                </aside>
+            </section>
+            <section>
+                <h4>Terminologie</h4>
+
+                <div class="container">
+                    <div class="col" data-markdown>
+                        SAML 
+
+                        * Client
+                        * Identity Provider (IDP)
+                        * Service Provider (SP)
+                    </div>
+                    <div class="col" data-markdown>
+                        OAuth2
+
+                        * Client
+                        * Authorisation Server
+                        * Resource Server
+                    </div>
+                </div>
+                <aside class="notes" data-markdown>
+                    * Client ist der jeweilige User/Browser/Server der sich authentifizieren bzw. autorisieren möchte
+                    * Server, welcher die Identitäten und Zugangsdaten enthält
+                    * Die geschützte Resource/Anwendung
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    #### Security Assertion Markup Language
+    
+                    * XML basiertes Authentication Protokoll
+                    * Single Sign On (SSO)
+                    * Optional Single Sign Off (SLO)
+                    * Identity Management
+                </div>
+                <aside class="notes">
+                    Single Sign On erfordert nur ausgetauschte Zertifikate zwischen IDP und SP.
+                    Der SP kann dann das vom IDP signierte Zertifikat des Client verifizieren.
+                    Für Single Logout wird eine aktive Verbindung zwischen SP und IDP benötigt.
+                    Der IDP bestätigt dann die Gültigkeit des Zertifikat.
+                    Logout funktioniert ansonsten durch das "Vergessen" des Zertifikat.
+                    Daher sollten die Zertifikate ein Ablaufdatum haben.
+                </aside>
+            </section>
+            <section>
+                <img src="assets/SAML.webp"/>
+            </section>
+            <section>
+                <div data-markdown>
+                    #### OAuth2
+    
+                    * meist JSON Web Tokens (JWT)
+                    * Client muss nicht zwingend ein Browser sein
+                    * Autorisierungsprotokoll
+                    * Access and Refreshtokens
+                </div>
+                <aside class="notes" data-markdown>
+                    * Accesstokens haben in der Regel eine Lifetime
+                    * läuft diese ab, kann man mit dem Refreshtoken einen neuen Accesstoken anfordern
+                    * Refreshtoken haben daher eine längere Lifetime
+                </aside>
+            </section>
+            <section>
+                <img src="assets/OAuth2.webp"/>
+            </section>
+            <section data-markdown>
+                ### Ablage der Tokens
+
+                * Besondere Vorsicht wo die Tokens gespeichert werden
+                    * NICHT im Local- / Sessionstorage
+                * Auth0 Doku bietet Best Practices für verschiedene Szenarien
+            </section>
+        </section>
+        <section>
+            <section data-markdown>
+                ## JSON Web Token
+            </section>
+            <section data-markdown>
+                ### Generelles
+
+                * von AUTH0 bereitgestellt
+                * mittlerweile Libraries für alle gängigen Sprachen
+                * Framework für Autorisierungstokens
+            </section>
+            <section>
+                <h3>Aufbau JWT</h3>
+                
+                <img src="assets/JWT-Aufbau.png"/>
+                
+                <aside class="notes" data-markdown>
+                    * ein Token besteht aus drei Teilen
+                    * die Teile werden durch einen Punkt getrennt
+                    * der 1. Teil (rot) beinhaltet Daten über den Hash Algorithmus und den Typ
+                    * der 2. Teil (lila) beinhaltet die Payload Daten
+                    * der 3. Teil (cyan) ist ein Hash über die beiden ersten Teile plus einem Secret
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Token lifecycle
+    
+                    1. JWT wird mit Header und Payload wird vom Autorisierungsserver bestückt
+                    2. Autorisierungsserver signiert den Token mit dem Secret und sendet ihn an den Client
+                    3. Client sendet den Token an die Anwendung
+                    4. Anwendung prüft mithilfe des Secret den Token 
+                </div>
+                <aside class="notes" data-markdown>
+                    * Secret darf nur dem Autorisierungsserver und dem Anwendungserver bekannt sein
+                    * sollte das Secret öffentlich werden müssen alle Tokens als invalide behandelt werden
+                </aside>
+            </section>
+            <section data-markdown>
+                ### JWT.io Praxis
+            </section>
+        </section>
+    </div>
+</div>
+<style>
+    .container {
+        display: flex;
+    }
+
+    .col {
+        flex: 1;
+        padding: 0 20px;
+    }
+</style>
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        showNotes: 'separate-page',
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        dependencies: [
+            {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+        ]
+    });
+</script>
+</body>
+</html>
