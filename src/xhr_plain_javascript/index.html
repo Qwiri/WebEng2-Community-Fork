@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>xhr_plain_javascript</title>
+
+    <link rel="stylesheet" href="/dist/reset.css">
+    <link rel="stylesheet" href="/dist/reveal.css">
+    <link rel="stylesheet" href="/dist/theme/white.css">
+
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+    <link rel="stylesheet" href="styles/custom_styles.css">
+    <link rel="stylesheet" href="/src/custom_styles/global_styles.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h3>xhr Plain Javascript</h3>
+        </section>
+        <section>
+            <h4></h4>
+        </section>
+        <section>
+            <h4>Guidelines Testing</h4>
+            <ul>
+                <li>es geht um Qualität, nicht Quantität</li>
+                <li>Test Coverage zeigt das Fehlen von Tests, nicht die Qualität</li>
+                <li>Softwareentwickler sind selbst für Qualität verantwortlich</li>
+                <li>es geht um gute Tests, nicht um 100% Coverage</li>
+            </ul>
+            <aside class="notes">
+                <ul>
+                    <li>Es geht beim Testing nicht darum 100% Test-Coverage zu erreichen und jeden erdenklichen Fall zu testen</li>
+                    <li>Eine menge unnützer Tests gibt uns keinen Garanten für gute Software.</li>
+                    <li>Softwareentwickler sollten Gehirn investieren, um Tests für sinnvolle Fälle zu schreiben.</li>
+                    <li>Diese Guidelines kann man auf alle Tests übertragen.</li>
+                </ul>
+            </aside>
+        </section>
+        <section data-external="./0_test_pyramid.html"></section>
+    </div>
+</div>
+
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        dependencies: [
+            {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+            {
+                src: '../../plugin/external/external.js',
+                condition: function () {
+                    return !!document.querySelector('[data-external],[data-external-replace]');
+                }
+            },
+        ]
+    });
+    Reveal.configure({showNotes: false});
+</script>
+</body>
+</html>
