@@ -546,6 +546,95 @@
             </section>
         </section>
         <section>
+            <section>
+                <h2>Public/Private Key Kryptographie</h2>
+            </section>
+            <section>
+                <h3>Grundlagen Verschlüsselung</h3>
+                <ul>
+                    <li>
+                        immer Key Pair aus Public und Private Key
+                    </li>
+                    <li>
+                        Private Key meistens zum entschlüsseln genutzt
+                    </li>
+                    <li>
+                        Public Key meistens zum verschlüsseln genutzt
+                    </li>
+                </ul>
+                <aside class="notes">
+                    Bei Verschlüsselungsverfahren zum Transport wie beschrieben.
+                    Dagegen bei Signaturverfahren umgedreht.
+                </aside>
+            </section>
+            <section>
+                <h3>Verschlüsselung Beispiel</h3>
+                <ul>
+                    <li>Private Key: Schlüssel des Schloss</li>
+                    <li>Public Key: geöffnetes Schloss</li>
+                    <li>Verschlüsselung: Schloss verschließt Truhe</li>
+                    <li>Entschlüsseln: Private Key öffnet Schloss</li>
+                </ul>
+                <aside class="notes">
+                    Das geöffnete Schloss verrät nicht über dessen Schlüssel.
+                    Wenn Alice Bob eine Nachricht schicken möchte, kann Alice ein geöffnetes Schloss von Bob bekommen.
+                    Alice schreibt dann einen Brief und legt diesen in eine sichere Truhe.
+                    Die Truhe wird dann mit dem Schloss von Bob versehen.
+                    Das Schloss wird dann geschlossen und niemand außer Bob ist in der Lage das Schloss der Truhe zu öffnen.
+                    Die Truhe wird von Alice dann an Bob geschickt.
+                    Dieser nutzt seinen Schlüssel öffnet die Truhe und hat Zugriff auf die Nachricht.
+                </aside>
+            </section>
+            <section>
+                <h3>Unterschied Signaturverfahren / Verschlüsselungsverfahren</h3>
+                <ul>
+                    <li>
+                        Signaturverfahren: prüft ob Nachricht verändert wurde
+                    </li>
+                    <li>
+                        Verschlüsselungsverfahren: verhindert einen Leak des Nachrichteninhalt
+                    </li>
+                </ul>
+                <aside class="notes">
+                    <p>Signaturverfahren: Erzeugt eine Signatur. Mit dieser Signatur kann geprüft werden ob an einer Nachricht etwas verändert wurde. Auch Metadaten wie Absender oder ähnliches kann man damit überprüfen.</p>
+                    <p>Verschlüsselungsverfahren: Verhindert das ein Dritter Informationen über die Nachricht aus der Chiffre erhält, die er ohne die Chiffre nicht erhalten würde.</p>
+                </aside>
+            </section>
+            <section>
+                <h3>Grundlagen Signaturverfahren</h3>
+                <ul>
+                    <li>
+                        Alice erzeugte eine Signatur mit einem Private Key zu einer Nachricht.
+                    </li>
+                    <li>
+                        Bob erhält Nachricht und Signatur.
+                    </li>
+                    <li>
+                        Bob kann mit Hilfe des Public Keys und der Signatur die Nachricht auf Veränderung prüfen.
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>Signaturverfahren am Beispiel RSA</h3>
+                <ul>
+                    <li>
+                        Grundlegende Verwendung der Keys vertauscht mit der Verschlüsselung durch RSA
+                        <ul>
+                            <li>Encryption Key => private Key</li>
+                            <li>Decryption Key => public Key</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <b>NICHT</b> jedes Verschlüsselungsverfahren wird durch das Tauschen der Keys zu Signaturverfahren.
+                    </li>
+                </ul>
+                <aside class="notes">
+                    Beispielsweise beim Verschlüsselungsverfahren El Gamal funktioniert das Tauschen der Schlüssel nicht.
+                    Bei Verschlüsselungsverfahren manchen gefährdet ein reiner Schlüsseltausch das Verfahren.
+                </aside>
+            </section>
+        </section>
+        <section>
             <section data-markdown>
                 ## JSON Web Token
             </section>
@@ -567,6 +656,8 @@
                     * der 1. Teil (rot) beinhaltet Daten über den Hash Algorithmus und den Typ
                     * der 2. Teil (lila) beinhaltet die Payload Daten
                     * der 3. Teil (cyan) ist ein Hash über die beiden ersten Teile plus einem Secret
+
+                    Erklären warum die Signatur gehasht wird: Hash wird benötigt um die Länge der Signatur zu verringern.
                 </aside>
             </section>
             <section>
@@ -583,9 +674,6 @@
                     * sollte das Secret öffentlich werden müssen alle Tokens als invalide behandelt werden
                 </aside>
             </section>
-            <section data-markdown>
-                ### JWT.io Praxis
-            </section>
         </section>
     </div>
 </div>
@@ -593,7 +681,6 @@
     .container {
         display: flex;
     }
-
     .col {
         flex: 1;
         padding: 0 20px;
