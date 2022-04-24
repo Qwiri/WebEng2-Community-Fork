@@ -1,4 +1,4 @@
-# xhr Plain Javascript
+# Ajax in Plain Javascript
 
 ### Lernziel:
 

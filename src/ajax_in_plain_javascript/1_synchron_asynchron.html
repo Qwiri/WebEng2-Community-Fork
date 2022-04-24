@@ -1,0 +1,62 @@
+<section>
+    <h3>Synchron und Asynchron</h3>
+</section>
+<section>
+    <h4>Synchron</h4>
+    <ul>
+        <li>Programmabschnitte werden der Reihe nach ausgeführt</li>
+        <li>im Code ist bereits festgehalten wie diese Reihenfolge aussieht</li>
+        <li>zur Laufzeit kann sich diese nicht ändern</li>
+    </ul>
+</section>
+<section>
+    <h4>Asynchron</h4>
+    <ul>
+        <li>Programmschritte werden nicht Synchron ausgeführt</li>
+        <li>es muss nicht auf Programmschritte gewartet werden</li>
+        <li>Programmschritte können gleichzeitig ausgeführt werden (nicht in JS)</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Wenn wir Programmschritte haben, die länger dauern oder auf einen Request vom Backend warten, können wir in der zwischenzeit bereits anderen Code ausführen.</li>
+            <li>In Java können wir über verschiedene Threads rechenintensive Programmschritte, die unabhängig voneinander sind, parallel ausführen.</li>
+            <li>In Javscript ist dies nicht möglich. Javascript hat nur einen einzigen Thread zu verfügung. Damit ist echte parallelität nicht verfügbar.</li>
+            <li>Wir können uns asynchonität trotzdem zur nutze machen, da wir bereits Code ausführen können, wenn wir noch auf einen Backend request warten. Schließlich ist während dem Request keine Berechnung notwendig.</li>
+            <li>Um das besser zu verstehen, schauen wir uns dies wieder in der Praxis an.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Beispiel:</h4>
+    <pre>
+        <code class="javascript" data-line-numbers>function synchron() {
+    console.log("step 1");
+    console.log("step 2");
+    console.log("step 3");
+}
+
+function asynchron() {
+    console.log("step 1");
+    setTimeout(() => {
+        console.log("step 2");
+    }, 1000);
+    console.log("step 3");
+}       </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Im synchronen Beispiel wird nacheinander "step 1", "step 2" und "step 3" auf der Konsole geschrieben.</li>
+            <li>Im asynchronen Beispiel ist dies nicht der Fall. Checkt mal im Plain Javascript Repository den Branch "step_2" aus und probiert es selbst.</li>
+            <li>Die Funktion "setTimeout" simuliert eine längere Prozedur.</li>
+            <li>"setTimeout" nimmt einen Callback entgegen, der nach einer gewissen Zeit aufgerufen wird.</li>
+            <li>Die Zahl, die wir übergeben, definiert die Millisekunden, die mindestens gewartet werden, bis der Callback aufgerufen wird.</li>
+            <li>Warum mindestens?</li>
+            <li>Wie wir gelernt haben, haben wir in Javascript kein Multithreading. Das heißt alles wird auf einem Thread ausgeführt. Es kann daher passieren, dass nach 1000 Millisekunden grade etwas anderes ausgeführt wird und unser Callback warten muss.</li>
+            <li>Am besten wir spielen noch etwas mit "setTimeout" herum, um die asynchronität besser zu verstehen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis</h4>
+    <p>Branch: "step_2"</p>
+</section>

@@ -18,28 +18,30 @@
 <div class="reveal">
     <div class="slides">
         <section>
-            <h3>xhr Plain Javascript</h3>
+            <h3>Ajax in Plain Javascript</h3>
         </section>
         <section>
-            <h4></h4>
-        </section>
-        <section>
-            <h4>Guidelines Testing</h4>
+            <h4>Lernziele</h4>
             <ul>
-                <li>es geht um Qualität, nicht Quantität</li>
-                <li>Test Coverage zeigt das Fehlen von Tests, nicht die Qualität</li>
-                <li>Softwareentwickler sind selbst für Qualität verantwortlich</li>
-                <li>es geht um gute Tests, nicht um 100% Coverage</li>
+                <li>Was sind Callbacks?</li>
+                <li>Wie funktioniert Synchroner und Asynchroner Code in Javascript?</li>
+                <li>Wie rufe ich in Javascript Daten von einem Server ab?</li>
+                <li>Wie machen uns Promises das Leben leichter?</li>
+                <li>Was ist async/await?</li>
             </ul>
             <aside class="notes">
                 <ul>
-                    <li>Es geht beim Testing nicht darum 100% Test-Coverage zu erreichen und jeden erdenklichen Fall zu testen</li>
-                    <li>Eine menge unnützer Tests gibt uns keinen Garanten für gute Software.</li>
-                    <li>Softwareentwickler sollten Gehirn investieren, um Tests für sinnvolle Fälle zu schreiben.</li>
-                    <li>Diese Guidelines kann man auf alle Tests übertragen.</li>
-                </ul>
+                    <li>Callbacks sind die Grundlage für asynchrone Programmierung in Javascript, daher müssen wir uns dies als erstes ansehen.</li>
+                    <li>Synchronen Code sollte jeder bereits geschrieben haben, evtl. habt ihr auch in Java schon mit Threads asynchron gearbeitet.</li>
+                    <li>In Javascript ist asynchron nicht gleich asynchron und funktioniert auch grundlegend anders als in Java, daher wollen wir uns dies noch mal genauer ansehen.</li>
+                    <li>Wenn wir dies verstanden haben, können wir mal einen ersten Aufruf Richtung Backend starten.</li> 
+                    <li>Promises sind Konstrukte, die uns die Arbeit mit asynchronität erleichtern können, um dies zu nutzen müssen wir verstehen wie.</li>
+                    <li>Async/await setzt dem ganzen dann die Krone auf.</li>
+               </ul>
             </aside>
         </section>
+        <section data-external="./0_callbacks.html"></section>
+        <section data-external="./1_synchron_asynchron.html"></section>
         <section data-external="./0_test_pyramid.html"></section>
     </div>
 </div>
