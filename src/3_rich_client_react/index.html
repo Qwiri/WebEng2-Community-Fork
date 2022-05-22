@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>2_rich_client_react</title>
+
+    <link rel="stylesheet" href="/dist/reset.css">
+    <link rel="stylesheet" href="/dist/reveal.css">
+    <link rel="stylesheet" href="/dist/theme/white.css">
+
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+    <link rel="stylesheet" href="styles/custom_styles.css">
+    <link rel="stylesheet" href="/src/custom_styles/global_styles.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h3>Rich Client React</h3>
+        </section>
+        <section>
+            <h4>Lernziele</h4>
+            <ul>
+                <li>Was sind Callbacks?</li>
+                <li>Wie funktioniert Synchroner und Asynchroner Code in Javascript?</li>
+                <li>Wie rufe ich in Javascript Daten von einem Server ab?</li>
+                <li>Wie machen uns Promises das Leben leichter?</li>
+                <li>Was ist async/await?</li>
+            </ul>
+            <aside class="notes">
+                <ul>
+                    <li>Callbacks sind die Grundlage für asynchrone Programmierung in Javascript, daher müssen wir uns dies als erstes ansehen.</li>
+                    <li>Synchronen Code sollte jeder bereits geschrieben haben, evtl. habt ihr auch in Java schon mit Threads asynchron gearbeitet.</li>
+                    <li>In Javascript ist asynchron nicht gleich asynchron und funktioniert auch grundlegend anders als in Java, daher wollen wir uns dies noch mal genauer ansehen.</li>
+                    <li>Wenn wir dies verstanden haben, können wir mal einen ersten Aufruf Richtung Backend starten.</li> 
+                    <li>Promises sind Konstrukte, die uns die Arbeit mit asynchronität erleichtern können, um dies zu nutzen müssen wir verstehen wie.</li>
+                    <li>Async/await setzt dem ganzen dann die Krone auf.</li>
+               </ul>
+            </aside>
+        </section>
+        <section data-external="./0_callbacks.html"></section>
+    </div>
+</div>
+
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        dependencies: [
+            {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+            {
+                src: '../../plugin/external/external.js',
+                condition: function () {
+                    return !!document.querySelector('[data-external],[data-external-replace]');
+                }
+            },
+        ]
+    });
+    Reveal.configure({showNotes: false});
+</script>
+</body>
+</html>
