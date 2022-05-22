@@ -1,0 +1,45 @@
+<section>
+    <h3>Async/await</h3>
+</section>
+<section>
+    <h4>Syntaktischer Zucker</h4>
+    <ul>
+        <li>asnyc/await macht Promises noch schöner</li>
+        <li>mit async können wir Funktionen markieren, die asynchronen Code enthalten</li>
+        <li>mit await warten wir auf ein Ergebnis eines Promises</li>
+        <li>mit Codebeispielen versteht man es einfacher</li>
+    </ul>
+</section>
+<section>
+    <h4>Codebeispiel</h4>
+    <pre>
+        <code class="javascript" data-line-numbers="|1|4-5|7-8">async function showDadJoke() {
+    const url = 'https://icanhazdadjoke.com/';
+
+    const joke1 = await get(url);
+    const joke2 = await get(url);
+
+    document.getElementById('joke1').innerHTML = joke1.joke;
+    document.getElementById('joke2').innerHTML = joke2.joke;
+}     </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Mit async markiere ich, dass die Funktion showDadJoke() asynchronen Code enthält.</li>
+            <li>Damit gebe ich dem Aufrufer die Möglichkeit darauf zu warten oder sie asynchron laufen zu lassen.</li>
+            <li>Mit await warte ich auf das resolven der Promises.</li>
+            <li>Die Variablen joke1 und joke2 enthalten daher kein Promise, sondern das Ergebnis des Promises.</li>
+            <li>Unten kann ich dann einfach auf das Ergebnis zugreifen.</li>
+            <li>Jetzt sieht unser asynchroner Code fast wieder "normal" aus.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis</h4>
+    <ul>
+        <li>Branch: "step_7" - enthält ein Beispiel für async/await</li>
+        <li>Werden die Calls jetzt nacheinander abgeschickt?</li>
+        <li>Wie bekommen wir sie wieder parallel?</li>
+        <li>Läsung gibt es auch Branch: "step_8"</li>
+    </ul>
+</section>

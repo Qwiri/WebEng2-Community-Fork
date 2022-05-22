@@ -58,7 +58,7 @@
     - Wir erzeugen es so: `const xhr = new XMLHttpRequest();`
     - Mit diesem Objekt können wir HTTP Aufrufe an einen Server schicken.
 - xhr.open(method, url, async)
-    - Mit der open Methode können wir die Method (GET, POST, PUT, etc.), die Url und einen "async" Boolean setzen.
+    - Mit der open Funktion können wir die Method (GET, POST, PUT, etc.), die Url und einen "async" Boolean setzen.
     - Method und Url sollten klar sein.
     - Mit dem Parameter "async" wird definiert, ob der Aufruf synchron oder asynchron geschehen soll.
     - Die hier gesetzte Funktion bezeichnen wir üblicherweise als Callback Function
@@ -82,7 +82,7 @@
 - Hier sehen wie jetzt auch, wieso wir Asynchronität und Callbacks für Backendaufrufe brauchen.
 - Wir wollen den Programmcode während eines Backendcalls nicht blockieren lassen, wollen aber das Ergebnis über einen Callback zurück erhalten.
 
-### Mehrere Backendrequests
+### 4. Mehrere Backendrequests
 
 - Auf dem Branch "step_4" steht ein Beispiel dafür bereit, mehrere Witze vom Backend abzurufen.
 - Dabei habe ich eine Funktion erstellt, die für uns einen get HTTP Request abschickt.
@@ -95,7 +95,7 @@
 - Wie muss der Code aussehen, wenn wir sie gleichzeitig senden wollen, wir aber den HTML Code erst anpassen wollen, wenn beide Witze zurückgekommen sind?
     - Kleiner spoiler, es wird hässlich...
 
-### Promises
+### 5. Promises
 
 - Auf dem Branch "step_5" steh ein Beispiel für Promises bereit.
 - Promises erleichtern uns das Arbeiten mit asynchronem Code.
@@ -112,7 +112,7 @@
     - Promise.all kann darauf warten, bis mehrere Promises resolved sind und anschließend einen Callback ausführen.
     - Dies uns andere Beispiele machen das arbeiten mit Promises angenehmer.
 
-### Async/await
+### 6. Async/await
 
 - Auf dem Branch "step_7" steht ein Beispiel für async/await bereit.
 - Async/await macht das arbeiten mit asynchronem Code und Promises noch einfacher.
