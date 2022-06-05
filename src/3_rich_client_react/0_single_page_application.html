@@ -1,0 +1,536 @@
+<section>
+    <h3>Single Page Application (SPA)</h3>
+</section>
+<section>
+    <p><em>“A single-page application is exactly what its name implies: a JavaScript-driven web application that
+            requires only a single page load.”</em></p>
+    <p class="cite">JavaScript - The Definitive Guide</p>
+    <p class="cite">5th ed., O'Reilly, Sebastopol, CA, 2006</p>
+    <aside class="notes">
+        <ul>
+            <li>Bereits in der vorhergehenden Vorlesung haben wir uns mit Ajax beschäfitgt.</li>
+            <li>Ajax ist die Grundlage für SPA's.</li>
+            <li>SPA's sind quasi die stärkste Auspräung von Ajax.</li>
+            <li>Anders als bei einer Multi Page Anwendung haben wir nur einen Seitenaufruf und laden danach nur noch
+                Daten, aber zu den Details kommen wir gleich.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Single Page Application Konzept</h4>
+    <pre>
+        <code class="language-plantuml">
+            @startuml
+            participant "Client" as client
+            participant "Web Server" as webServer
+            participant "Web Service" as webService
+
+            group Initializing
+            activate client
+            client -> webServer: GET /index.html
+            activate webServer
+            webServer -> client: index.html
+            webServer -> client: styles.css
+            webServer -> client: script.js
+            deactivate webServer
+            client -> client: start application
+            end
+
+            group Runtime
+            client -> webService: GET /some-id
+            deactivate client
+            activate webService
+            webService -> client: some-data
+            deactivate webService
+            activate client
+            client -> client: rerender
+            end
+            @enduml
+        </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Terminologie
+                <ul>
+                    <li>Client -> PC, bzw. Browser des Nutzers.</li>
+                    <li>Web Server -> liefert HTML, CSS, JavaScript, Bilder, etc. aus.</li>
+                    <li>Web Service -> kümmert sich um die Verwaltung von dynamischen Daten der Anwendung (User,
+                        Warenkorb, etc.).</li>
+                </ul>
+            </li>
+            <li>Eine Single Page Application hat grundlegend zwei Phasen.
+                <ul>
+                    <li>Phase 1 ist die Initialisierung.
+                        <ul>
+                            <li>Der Client startet eine Anfrage an den Web Server, um die Frontend Application
+                                abzurufen.</li>
+                            <li>Anschließend liefert der Web Server die statischen Daten für die Application aus.</li>
+                            <li>Dies passiert oftmals gleichzeitig in mehreren Schritten. (HTTP 2 Multiplexing)</li>
+                            <li>Nachdem/während die statischen Daten geladen werden, startet der Browser die
+                                Application.</li>
+                        </ul>
+                    </li>
+                    <li>Phase 2 ist die Laufzeit.
+                        <ul>
+                            <li>Zur Laufzeit läd der Client nur noch dynamische Daten vom Web Service.</li>
+                            <li>Sobald er dynamische Daten geladen hat, löst er ein rerender aus und die Seite wird im
+                                Browser neu gezeichnet, nicht neu geladen!</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Wieso gibt es SPA's?</h4>
+
+    <p>Findet ihr Gründe dafür, warum man sowas machen sollte?</p>
+    <ul class="fragment fade-in">
+        <li>Reduktion der übertragenen Daten</li>
+        <li>Bessere User Experience</li>
+        <li>Weniger Serverressourcen</li>
+        <li>Session Clientseitig (Server ist Stateless)</li>
+        <li>Hybride Anwendung auch mobile einsetzbar</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Auf alle der hier genannten Punkte gehen wir jetzt noch mal genauer ein.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Reduktion der übertragenen Daten</h4>
+    <pre>
+        <code class="language-html" data-line-numbers>&lt;html&gt;
+  &lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+    &lt;script&gt;{javascript}&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      // some data
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Könnt ihr an diesem Beispiel einer HTML Seite erläutern welche Daten nur einmal ausgeliefert werden
+                müssen?</li>
+            <li>Diese Daten würden bei einer Multi Page Application bei jedem Seitenaufruf erneut mitgeschickt werden.
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Stylesheets</h4>
+    <pre>
+        <code class="language-html" data-line-numbers="3">&lt;html&gt;
+  &lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+    &lt;script&gt;{javascript}&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      // some data
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wie ist das z.B. mit Stylesheets?</li>
+            <li>Müssten sie wirklich immer neu augeliefert werden?</li>
+            <li>Normalerweise wollen wir, dass Buttons, Inputfelder, etc. überall in unserer Application gleich
+                aussehen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Stylesheets</h4>
+    <ul>
+        <li>enthalten häufig ähnliche Informationen</li>
+        <li>könnten einmalig ausgeliefert werden</li>
+    </ul>
+    <pre>
+          <code class="language-html" data-line-numbers>&lt;style&gt;
+ label {
+   font-size: 12pt;
+   color: blue;
+ }
+
+ input {
+   font-size: 10pt;
+   color: green;
+   height: 10px;
+   width: 20px;
+ }
+&lt;/style&gt;
+          </code>
+    </pre>
+</section>
+<section>
+    <h4>JavaScript</h4>
+    <pre>
+        <code class="language-html" data-line-numbers="4">&lt;html&gt;
+  &lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+    &lt;script&gt;{javascript}&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      // some data
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Was ist mit dem Javascript Code?</li>
+            <li>Der Javascript Code einer Multi Page Application wird sich wahrscheinlich auf Dropdowns oder ähnliches
+                Beschränken.</li>
+            <li>Schließlich passiert das eigentliche Rendering der Seite bereits im Backend.</li>
+            <li>Aber auch Frontend funktionalität wie Dropdowns oder Animationen sollten auf jeder Seite gleich
+                funktionieren.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>JavaScript</h4>
+    <ul>
+        <li>ebenfalls repetitiv</li>
+        <li>auf mehreren HTML Seiten braucht es gleiche Funktionalität</li>
+    </ul>
+    <pre>
+          <code class="language-html" data-line-numbers>&lt;script&gt;
+  function openDropdown() {
+    // do it
+  }
+
+  function doSomeFancyAnimation() {
+    // do it
+  }
+&lt;/script&gt;
+          </code>
+        </pre>
+</section>
+<section>
+    <h4>HTML Struktur</h4>
+    <pre>
+        <code class="language-html" data-line-numbers>&lt;html&gt;
+  // head
+  &lt;body&gt;
+    &lt;header&gt;&lt;/header&gt;
+    &lt;nav&gt;&lt;/nav&gt;
+    &lt;div&gt;
+      // some data
+    &lt;/div&gt;
+    &lt;footer&gt;&lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Was ist mit der restlichen HTML Struktur?</li>
+            <li>Können wir noch mehr einspaaren?</li>
+            <li>Header, Navigation und Footer sind meist auch überall gleich.</li>
+            <li>Brauchen teilweise nicht mal neu gerendert werden.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>HTML Struktur</h4>
+    <ul>
+        <li>dynamischer Anteil der Seite beschränkt sich auf Informationen</li>
+    </ul>
+    <pre>
+        <code class="language-html" data-line-numbers="7">&lt;html&gt;
+  // head
+  &lt;body&gt;
+    &lt;header&gt;&lt;/header&gt;
+    &lt;nav&gt;&lt;/nav&gt;
+    &lt;div&gt;
+      // some data
+    &lt;/div&gt;
+    &lt;footer&gt;&lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Am Ende beschränkt sich der dynamische Teil auf die "business" Daten der Application.</li>
+            <li>Das sind dann Nutzerdaten, Warenkörbe, etc.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Wieso gibt es SPA's?</h4>
+
+    <ul>
+        <li>Reduktion der übertragenen Daten</li>
+        <li><b><em>Bessere User Experience</em></b></li>
+        <li>Weniger Serverressourcen</li>
+        <li>Session Clientseitig (Server ist Stateless)</li>
+        <li>Hybride Anwendung auch mobile einsetzbar</li>
+    </ul>
+</section>
+<section>
+    <h4>Bessere User Experience</h4>
+    <ul>
+        <li>kürzere Response Time</li>
+        <li>weniger BE Request notwendig</li>
+        <li>Seite ist während eines BE Requests benutzbar</li>
+        <li>asynchrones Nachladen der Daten</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Kürzere Response Time
+                <ul>
+                    <li>durch weniger Daten die übertragen werden müssen</li>
+                </ul>
+            </li>
+            <li>weniger BE Requests notwendig
+                <ul>
+                    <li>Fehlermeldungen etc. können bereits ohne BE Requests angezeigt werden</li>
+                    <li>Auch Geschäftslogik kann direkt im Frontend ausgeführt werden</li>
+                </ul>
+            </li>
+            <li>Seite ist während eines BE Requests benutzbar
+                <ul>
+                    <li>Durch Loadingspinner etc. bekommt der Nutzer ein direktes Feedback auf seine Action</li>
+                    <li>Nutzer fordert Daten an und kann sich dann mit etwas anderem beschäftigen, bis die Daten geladen
+                        sind.
+                    </li>
+                    <li>In der Realität wird die Seite meistens nicht benutzt während eines BE Requests</li>
+                </ul>
+            </li>
+            <li>asynchrones Nachladen der Daten
+                <ul>
+                    <li>der Nutzer kann bereits mit ersten Daten interagieren, während andere noch geladen werden.</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Wieso gibt es SPA's?</h4>
+
+    <ul>
+        <li>Reduktion der übertragenen Daten</li>
+        <li>Bessere User Experience</li>
+        <li><b><em>Weniger Serverressourcen</em></b></li>
+        <li>Session Clientseitig (Server ist Stateless)</li>
+        <li>Hybride Anwendung auch mobile einsetzbar</li>
+    </ul>
+</section>
+<section>
+    <h4>Weniger Serverressourcen</h4>
+    <ul>
+        <li>Rendering läuft auf dem Client</li>
+        <li>Geschäftslogik kann auf dem Client laufen
+            <ul>
+                <li>weniger BE Requests notwendig</li>
+            </ul>
+        </li>
+        <li>Service kümmert sich nur um die Daten</li>
+        <li>nicht um das Rendering</li>
+    </ul>
+</section>
+<section>
+    <h4>Wieso gibt es SPA's?</h4>
+
+    <ul>
+        <li>Reduktion der übertragenen Daten</li>
+        <li>Bessere User Experience</li>
+        <li>Weniger Serverressourcen</li>
+        <li><b><em>Session Clientseitig (Service ist Stateless)</em></b></li>
+        <li>Hybride Anwendung auch mobile einsetzbar</li>
+    </ul>
+</section>
+<section>
+    <h4>Session Clientseitig (Service ist Stateless)</h4>
+    <ul>
+        <li>Service kann Stateless sein</li>
+        <li>Skalierbarkeit des Service</li>
+        <li>Loadbalancing ist einfacher</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Skalierbarkeit bedeutet, dass wir mehrere Instanzen eines Services laufen lassen können.</li>
+            <li>Bei hoher Last können die Zugriffe auf mehrere Instanzen verteilen.</li>
+            <li>Loadbalancing beschreibt den Prozess der Lastverteilung.</li>
+            <li>Wenn ein Nutzer immer dem gleichen Service zugeordnet werden muss, macht dies das Loadbalancing
+                schwieriger.</li>
+            <li>Wir gehen auf diese Punkte noch mal genauer in der Backend Vorlesung ein.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Wieso gibt es SPA's?</h4>
+
+    <ul>
+        <li>Reduktion der übertragenen Daten</li>
+        <li>Bessere User Experience</li>
+        <li>Weniger Serverressourcen</li>
+        <li>Session Clientseitig (Service ist Stateless)</li>
+        <li><b><em>Hybride Anwendung auch mobile einsetzbar</em></b></li>
+    </ul>
+</section>
+<section>
+    <h4>Hybride Anwendung auch mobile einsetzbar</h4>
+    <ul>
+        <li>SPA's sind ähnlich wie App's</li>
+        <li>Doppelentwicklungen können gespart werden</li>
+        <li>React Native oder Flutter zeigen wie es geht</li>
+        <li>ist nicht immer eine gute Entscheidung!</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Statische Daten werden bei einer App, wie bei einer SPA initial ausgelierert. Danach werden nur noch
+                "business" Daten ausgetauscht.</li>
+            <li>Mit React Nativ oder Flutter kann man Apps schreiben, die als Webseite und gleichzeitig als App genutzt
+                werden können.</li>
+            <li>Dies kann eine Menge Zeit bei der Entwicklung sparen.</li>
+            <li>Allerdings kann dies auch dazu führen, dass App und Web nicht entsprechend der Client Plattform
+                nutzerfreundlich ist.</li>
+            <li>Das heißt eine App bedient sich teilweise anders als ein Webbrowser.</li>
+            <li>Allein Apps zwischen Apple und Android unterscheiden sich, da die Betriebssysteme und Geräte anders
+                funktionieren.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Nachteile einer SPA</h4>
+    <p>Was könnten Nachteile einer SPA sein?</p>
+    <ul class="fragment fade-in">
+        <li>initiale Response ist groß</li>
+        <li>Client ist nicht Vertrauenswürdig</li>
+        <li>duplizierter Code</li>
+        <li>höherer Entwicklungsaufwand</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Jetzt habe ich euch die Vorteile von SPA's gezeigt.</li>
+            <li>Das heißt nicht, dass eine SPA immer die beste Wahl ist.</li>
+            <li>Multi Page Anwendungen haben durchaus ihre Berechtigung.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Initiale Response ist groß</h4>
+    <pre>
+        <code class="language-plantuml">
+            @startuml
+            participant "Client" as client
+            participant "Web Server" as webServer
+
+            group Initializing
+            activate client
+            client -> webServer: GET /index.html
+            activate webServer
+            webServer -> client: index.html
+            webServer -> client: styles.css
+            webServer -> client: script.js
+            deactivate webServer
+            client -> client: start application
+            end
+            @enduml
+        </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wir erinnern uns an das SPA Laufzeitdiagramm.</li>
+            <li>Zu Anfang müssen erstmal alle Daten geladen werden.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Nachteile einer SPA</h4>
+    <ul>
+        <li>initiale Response ist groß</li>
+        <li><b><em>Client ist nicht Vertrauenswürdig</em></b></li>
+        <li>duplizierter Code</li>
+        <li>höherer Entwicklungsaufwand</li>
+    </ul>
+</section>
+<section>
+    <h4>Client ist nicht Vertrauenswürdig</h4>
+    <ul>
+        <li>JavaScript Code auf dem Client kann manipuliert werden</li>
+        <li>erneute Validierung im BE notwendig</li>
+        <li>Validierungen sind meist duplizierter Code</li>
+        <li>dadurch entsteht mehr Entwicklungsaufwand</li>
+        <li>hierfür gibt es Abhilfe:
+            <ul>
+                <li>Multiplattform Libraries</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Ein versierter Nutzer kann den JavaScript Code in seinem Browser verändern.
+                <ul>
+                    <li>Wir sprechen hier noch nicht mal von XSS.</li>
+                </ul>
+            </li>
+            <li>Daten die im BE gespeichert werden, müssen daher noch mal validiert werden.</li>
+            <li>Validierungen, aber auch andere Geschäftslogik sind häufig dupliziert.
+                <ul>
+                    <li>Das kann gewünscht sein. Vielleicht möchte man Frontend und Backend voneinander entkoppeln.</li>
+                    <li>Andererseits kann man Code auch übers BE und Frontend sharen.</li>
+                    <li>Multiplattform Libraries können hier helfen.</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Routing?</h4>
+    <ul>
+        <li>ist theoretisch nicht notwendig</li>
+        <li>Anwendung macht einfach ein rerender</li>
+    </ul>
+    <img src="assets/routing_spa_wrong.png" style="height: 350px">
+    <aside class="notes">
+        <ul>
+            <li>Im Gegensatz zu einer Multi Page Application machen wir nun nach dem ersten Seitenaufruf keine weiteren
+                Aufrufe mehr.</li>
+            <li>Theoretisch könnten wir uns Routing eigentlich sparen.</li>
+            <li>Dynamische Daten vom Backend lösen einfach ein rerender des HTML Contents aus.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Also kein Routing?</h4>
+    <ul>
+        <li>URL bleibt über die Laufzeit gleich</li>
+        <li>teilen eines Links einer bestimmten Ressource?</li>
+    </ul>
+    <img src="assets/routing_spa_wrong_cross.png" style="height: 350px">
+    <aside class="notes">
+        <ul>
+            <li>Oftmals ist es durchaus Sinnvoll Routing zu unterstützen.</li>
+            <li>Link teilen, Lesezeichen hinzufügen, etc.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Routing</h4>
+    <ul>
+        <li>wir brauchen Routing in SPA's doch!</li>
+        <li>es passiert ein pseudo Routing</li>
+        <li>SPA Frameworks liefern Routing mit oder es gibt Libraries</li>
+        <li>dazu später mehr ...</li>
+    </ul>
+    <img src="assets/routing_spa.png" style="height: 350px">
+    <aside class="notes">
+        <ul>
+            <li>Wenn ein rerender des HTML Contents aufgerufen wird, kann die URL ausgetausch werden.</li>
+            <li>Dies macht natürlich nicht immer Sinn. Wenn sich nur ein Overlay öffnet, brauchen wir keine URL Änderung
+                (zumindest meistens).</li>
+            <li>Wir teilen mit der URL Änderung die "eine" Seite wieder in verschiedene Bereiche ein.</li>
+            <li>Das macht es für den Nutzer, aber auch den Entwickler wieder einfacher und stärkt die Struktur.</li>
+        </ul>
+    </aside>
+</section>

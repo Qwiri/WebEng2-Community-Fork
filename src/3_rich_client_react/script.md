@@ -6,15 +6,15 @@ Comment: Wir sollten noch einmal darüber nachdenken, ob wir auch in Plain Javas
 - Lernziele
     - Was ist eine Single Page Application?
     - Wie kann ein Frontendframework wie React uns dabei helfen eine Single Page Application zu schreiben?
-    - Wie hilft uns eine Component Architektur einfacher ein Frontend zu schreiben?
-    - Wie bringe ich Ordnung in meine Component Architektur?
+    - Wie hilft uns eine Component Architectur einfacher ein Frontend zu schreiben?
+    - Wie bringe ich Ordnung in meine Component Architectur?
     - Micro Frontends?
 
 - Was ist eine Single Page Application?
     - Definition
     - Konzept erklären -> Schaubild SPA
     - Was gewinnen wir damit?
-        - Ajax geht bereits in eine ä hnliche Richtung.
+        - Ajax geht bereits in eine ähnliche Richtung.
         - Wir wollen vermeinden die Seite bei jeder Änderung neu aus dem Backend auszuliefern.
         - Damit sparen wir Datentransfer.
         - Auch grade Daten geladen werden, kann der Nutzer schon etwas anderes machen.
