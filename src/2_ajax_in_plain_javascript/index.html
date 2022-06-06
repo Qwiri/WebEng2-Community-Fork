@@ -23,6 +23,7 @@
         <section>
             <h4>Lernziele</h4>
             <ul>
+                <li>Was ist Ajax?</li>
                 <li>Was sind Callbacks?</li>
                 <li>Wie funktioniert Synchroner und Asynchroner Code in Javascript?</li>
                 <li>Wie rufe ich in Javascript Daten von einem Server ab?</li>
@@ -31,6 +32,7 @@
             </ul>
             <aside class="notes">
                 <ul>
+                    <li>Lernziel für heute ist das Ajax Prinzip zu verstehen und in einer Javascript Application umsetzen zu können.</li>
                     <li>Callbacks sind die Grundlage für asynchrone Programmierung in Javascript, daher müssen wir uns dies als erstes ansehen.</li>
                     <li>Synchronen Code sollte jeder bereits geschrieben haben, evtl. habt ihr auch in Java schon mit Threads asynchron gearbeitet.</li>
                     <li>In Javascript ist asynchron nicht gleich asynchron und funktioniert auch grundlegend anders als in Java, daher wollen wir uns dies noch mal genauer ansehen.</li>
@@ -40,14 +42,14 @@
                </ul>
             </aside>
         </section>
-        <section data-external="./0_callbacks.html"></section>
-        <section data-external="./1_synchron_asynchron.html"></section>
-        <section data-external="./2_load_data_via_http.html"></section>
-        <section data-external="./3_promises.html"></section>
-        <section data-external="./4_async_await.html"></section>
+        <section data-external="./0_ajax.html"></section>
+        <section data-external="./1_callbacks.html"></section>
+        <section data-external="./2_synchron_asynchron.html"></section>
+        <section data-external="./3_load_data_via_http.html"></section>
+        <section data-external="./4_promises.html"></section>
+        <section data-external="./5_async_await.html"></section>
     </div>
 </div>
-
 <script src="/dist/reveal.js"></script>
 <script src="/plugin/notes/notes.js"></script>
 <script src="/plugin/markdown/markdown.js"></script>
@@ -67,7 +69,7 @@
             },
         ]
     });
-    Reveal.configure({showNotes: false});
+    Reveal.configure({showNotes: 'separate-page'});
 </script>
 </body>
 </html>
