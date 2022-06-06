@@ -1,0 +1,84 @@
+<section>
+    <h3>SPA in React</h3>
+    <aside class="notes">
+        <ul>
+            <li>Bevor wir jetzt direkt in React einsteigen, lasst uns erstmal herausfinden, warum wir React überhaupt brauchen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>SPA in plain JavaScript?</h4>
+    <ul>
+        <li>spricht etwas dagegen?</li>
+        <li>wäre quasi nur das exzessive einsetzen von Ajax</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Hat jemand bedenken wenn wir das machen?</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <!--TODO hier anpassen, wenn das Projekt für die Übung steht.-->
+    <h4>Praxis: SPA in plain JavaScript</h4>
+    <ul>
+        <li>ToDo App als SPA in plain JavaScript</li>
+        <li>Projekt auschecken</li> 
+        <li>es steht ein Mock Server bereit, der sich um die Daten kümmert</li>
+        <li>wir schreiben nur das Frontend</li>
+    </ul>
+</section>
+<section>
+    <!--Prüfen ob dies nicht zu viel Aufwand ist. Schließlich wollen wir nur sehen, dass es viel Zeit kostet das in plain JavaScript zu bauen.-->
+    <h4>Praxis: Anforderungen</h4>
+    <ul>
+        <li>Listenansicht der ToDos</li>
+        <li>Detailseite für ein ToDo</li>
+    </ul>
+</section>
+<section>
+    <h4>SPA in plain JavaScript?</h4>
+    <p>Was ist aufgefallen bei einer Implementierung in plain JavaScript?</p>
+    <ul class="fragment fade-in">
+        <li>es ist sehr aufwendig</li>
+        <li>viel boilderplate Code
+            <ul>
+                <li>XMLHttpRequests sind immer gleich</li>
+                <li>DOM Manipulation</li>
+                <li>Routing</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Das schreiben einer SPA in plain JavaScript ist sehr aufwendig.</li>
+            <li>Backend Requests, DOM Manipulation sind Aufgaben die in jeder Application auftreten. Braucht man nicht immer neu zu schreiben.</li>
+            <li>Routing ist ebenfalls aufwendig. Umbau der Seite, Anpassung der URL.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>SPA in React</h4>
+    <ul>
+        <li>nimmt uns viel Arbeit ab</li>
+        <li>unterstützt
+            <ul>
+                <li>XMLHttpRequests</li>
+                <li>DOM Manipulation</li>
+                <li>Routing</li>
+            </ul>
+        </li>
+        <li>bietet auch Change Detection</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>React macht vieles einfacher, was wir in plain JavaScript selbst erledigen mussten.</li>
+            <li>Es gibt eine vorgefertigtes Tooling um XMLHttpRequests abzusenden.</li>
+            <li>DOM Manipulation wird mit Data Binding wesentlich einfacher. Auf Data Binding gehen wir noch mal genauer ein.</li>
+            <li>Routing wird einfach wesentlich intuitiver.</li>
+            <li>Change Detection ist schon mal ein Schlagwort, dass ihr euch merken könnt. Auch darauf werde ich später noch genauer eingehen, wenn es wichtiger für uns wird.</li>
+        </ul>
+    </aside>
+</section>
+<!--Hier kommt dann der Praxis Part. Wir lernen Schritt für Schritt die React Syntax um unsere ToDo App zu bauen.-->
+

@@ -46,4 +46,10 @@ Comment: Wir sollten noch einmal darüber nachdenken, ob wir auch in Plain Javas
     - Storybook.
 - Micro Frontends
     - Was bringt das?
-    
+
+## Todo's
+
+- Kleine Übung vorbereiten um in Plain JavaScript mal Schritt für Schritt eine SPA zu bauen.
+    - Wir brauchen ein "Mock" Backend von dem die Daten für die Anwendung kommen.
+    - Wir könnten es direkt im Frontend mocken, dann müssten die Studenten aber keinen XMLHttpRequest schreiben.
+    - Wir könnten einen Mock Server bereitstellen, entweder lokal oder irgendwo global gehostet.
