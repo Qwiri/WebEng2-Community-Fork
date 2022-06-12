@@ -29,43 +29,108 @@
             </aside>
         </section>
         <section>
-            <div data-markdown>
-                ## Ziele
+            <section>
+                <div data-markdown>
+                    ## Worum gehts?
 
-                * Requestübergreifendes Management des States der UI Komponenten
-                * Stark typisiertes Eventmodel um serverseitig Client Events zu behandeln
-                * Kapselung der Unterschiede innerhalb der Clients und Browsern
-            </div>
-        </section>
-        <section>
-            <div data-markdown>
-                * Handling der Navigation sowie Error und Exception Events
-                * Typ Konvertierung
-                * Validierung der Daten sowie entsprechendes Errorhandling
-            </div>
-            <aside class="notes" data-markdown>
-                Typ Konvertierung: vom Application Model zu Anzeigestrings und umgedreht
-            </aside>
-        </section>
-        <section>
-            <div>
-                <h2>Abgrenzung zu JSP</h2>
-                <div class="container">
-                    <div class="col">
-                        <p><bold>JSF</bold></p>
-                        <p>
-                            ist ein MVC Framework, welches zu dem ein Lifecycle enthält
-                        </p>
-                    </div>
-                    <div class="col">
-                        <p><bold>JSP</bold></p>
-                        <p>
-                            ermöglicht das dynamische Erzeugen von HTML Pages
-                        </p>
+                    * Web MVC Framework
+                    * Component Based
+                    * nutzt Facelets zur Darstellung
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    ## Ziele
+
+                    * Requestübergreifendes Management des States der UI Komponenten
+                    * Stark typisiertes Eventmodel um serverseitig Client Events zu behandeln
+                    * Kapselung der Unterschiede innerhalb der Clients und Browsern
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    ## Ziele
+
+                    * Handling der Navigation sowie Error und Exception Events
+                    * Typ Konvertierung
+                    * Validierung der Daten sowie entsprechendes Errorhandling
+                </div>
+                <aside class="notes" data-markdown>
+                    Typ Konvertierung: vom Application Model zu Anzeigestrings und umgedreht
+                </aside>
+            </section>
+            <section>
+                <div>
+                    <h2>Abgrenzung zu JSP</h2>
+                    <div class="container">
+                        <div class="col">
+                            <p><bold>JSF</bold></p>
+                            <p>
+                                <ul>
+                                    <li>
+                                        ist ein MVC Framework, welches zu dem ein Lifecycle enthält
+                                    </li>
+                                </ul>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><bold>JSP</bold></p>
+                            <p>
+                                <ul>
+                                    <li>ermöglicht das dynamische Erzeugen von HTML Pages</li>
+                                    <li>wird von JSF zur Darstellung verwendet</li>
+                                </ul>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </section>
+
+        <section>
+            <section>
+                <h2>MVC</h2>
+                <ul>
+                    <li>Model View Controller Principle</li>
+                    <li>Wird von JSF beachtet</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Prinzip</h2>
+                <ul>
+                    <li>Model: "Speicherort" der Daten</li>
+                    <li>View: ist für die Darstellung verantwortlich</li>
+                    <li>Controller: enthält die Steuerung der Anwendung</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Nicht festgelegte Funktionalitäten</h2>
+                <ul>
+                    <li>
+                        Geschäftslogik
+                    </li>
+                    <li>
+                        Validierung der Benutzereingaben
+                    </li>
+                    <li>
+                        Formatierung
+                    </li>
+                    <li>
+                        Internationalisierung
+                    </li>
+                </ul>
+                <aside class="notes">
+                    Geschäftslogik: Wird in unterschiedlichen Frameworks unterschiedlich gehandhabt. Manche legen das fest andere überlassen dies dem Anwender. Früher wurde die Geschäftslogik meistens in den Controller geschrieben. Heute wird dies oft in das Model implementiert was unter anderem dazu führt, dass sich die Testbarkeit erhöht. (Da die einzelnen Bestandteile im Model unabhängiger testbar sind)
+                    MVC wird in einer Layered Architectures meistens als Erweiterung des Presentationslayer angesehen daher wird der Ort an dem die Business Logik liegt nicht klar definiert und unterscheidet sich daher oft.
+                    Nach der reinen Lehre wäre aber das Model am ehesten der Platz dafür, da der Presentationslayer mit dem Modell des MVCs eine Abhängigkeit in den Business Layer besitzt.
+                </aside>
+            </section>
+            <section>
+                <h3>MVC am Beispiel JSF</h3>
+                <img data-fragment-index="1" src="assets/JSF-MVC.png" height="400">
+            </section>
+        </section>
+
         <!--section>
             <div data-markdown>
                 ## Komponenten
@@ -79,7 +144,7 @@
                 JSF enthält ein Komponentensystem ähnlich dem System der Java Swing API.
             </aside>
         </section-->
-        <section>
+        <!-- <section>
             <div data-markdown>
                 ## JSF Konfiguration
 
@@ -90,7 +155,7 @@
                     * Beans
                     * etc.
             </div>
-        </section>
+        </section> -->
         <section>
             <section>
                 <h3>Lifecycle</h3>
@@ -99,17 +164,44 @@
                 </aside>
             </section>
             <section>
+                <h3>Eigenschaften des Lifecycle</h3>
+                <ul>
+                    <li>
+                        nicht jede Phase muss durchlaufen werden
+                    </li>
+                    <li>
+                        Reihenfolge der Phase ist nicht veränderlich
+                    </li>
+                </ul>
+                <aside class="notes">
+                    Jede Phasen können übersprungen werden wenn bestimmt Voraussetzungen erfüllt sind.
+                    Werden die Phasen aber durchlaufen dann muss die Reihenfolge eingehalten werden.
+                    Zwei verschiede Beispiele dazu auf den nächsten Folien.
+                </aside>
+            </section>
+            <section>
                 <h3>Lifecycle: Initialer Aufruf</h3>
                 <img data-fragment-index="1" src="assets/JSF-lifecycle-initial.svg" height="400">
-                <aside class="notes" data-markdown>
+                <aside class="notes">
+                    Beim Initialien Aufruf werden normalerweise keine Anfrageparameter mitgegeben daher ist es hier möglich die Phasen 2, 3, 4 und 5 übersprungen werden.
+                    Da in diesen Phasen nicht zu tun wäre ist es hier möglich von Phase 1 direkt in Phase 6 zu springen.
                 </aside>
             </section>
             <section>
                 <h3>Lifecycle: Validation Error</h3>
                 <img data-fragment-index="1" src="assets/JSF-lifecycle-validation-error.svg" height="400">
-                <aside class="notes" data-markdown>
+                <aside class="notes">
+                    Hier werden invalide Daten bspw. in einem Formular eingetragen.
+                    Da Daten eingefügt wurden werden diese Daten in Phase Zwei angewandt.
+                    In Phase drei wird dann aufgrund von invaliden Daten ein Fehler geworfen.
+                    Aus diesem Grund wird hier von Phase drei direkt zu Phase sechs gesprungen.
+                    Denn die Daten dürfen nicht ins Model übernommen werden.
+                    Dazu gibt es noch einige weiter Möglichkeiten Phasen zu überspringen, diese zwei Beispiele als kurzer Auszug.
                 </aside>
             </section>
+        </section>
+        <section>
+            <h2>Start Project</h2>
         </section>
         <section>
                 <h2>Erste Ausgabe</h2>
