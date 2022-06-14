@@ -86,7 +86,6 @@
                 </div>
             </section>
         </section>
-
         <section>
             <section>
                 <h2>MVC</h2>
@@ -201,113 +200,119 @@
             </section>
         </section>
         <section>
-            <h2>Start Project</h2>
+            <section>
+                <h2>Start Project</h2>
+            </section>
+            <section>
+                <h3>Voraussetzungen</h3>
+                <ul>
+                    <li>
+                        IDE (Empfehlung Intellij)
+                    </li>
+                    <li>
+                        Git
+                    </li>
+                    <li>
+                        Maven (je nach IDE)
+                    </li>
+                    <li>
+                        JDK 16 (je nach IDE)
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>Setup</h3>
+                <ul>
+                    <li>im IDE öffnen</li>
+                    <li>falls nicht automatisch maven install ausführen</li>
+                    <li>Main Class öffnen (Pfad: src/main/java/Main)</li>
+                    <li>
+                        JDK auswählen
+                        <br />
+                        <img data-fragment-index="1" src="assets/JSF-install-jdk.PNG">
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>Ausführen</h3>
+                <ul>
+                    <li>In Main Class Funktion main ausführen</li>
+                    <li>Im Browser öffnen: localhost:8080</li>
+                </ul>
+            </section>
         </section>
         <section>
-                <h2>Erste Ausgabe</h2>
-
-                <pre>
-                    <code data-line-numbers="|3-4|10">&lt;!DOCTYPE html&gt;
-&lt;html lang="de"  xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core" 
-    xmlns:h="http://java.sun.com/jsf/html"&gt;
-    &lt;head&gt;
-        &lt;meta charset="UTF-8"/&gt;
-        &lt;title&gt;Hello World of JSF&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h:outputText value="Hello World"/&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-                    </code>
-                </pre>
-        </section>
-       <!-- <section>
             <section>
                 <div data-markdown>
-                    ## JSF Tags
+                    ## JSF-Tags
                 </div>
-            </section>
-            <section>
-                <div data-markdown>
-## outputText
-
-| Parameter   | Bedeutung                                                                   |
-|-------------|-----------------------------------------------------------------------------|
-| ID          | Bezeichner                                                                  |
-| value       | Wert (kann auch zwischen öffnenden und schließenden Tag geschrieben werden) |
-| rendered    | Gibt an ob das Tag gerendert werden soll oder nicht.                        |
-| styleClass  | Css Klasse                                                                  |
-| style       | Css Stylerules                                                              |
-| title       | HTML Title Attribut                                                         |
-
-                </div>
-            </section>
-        </section> -->
-        <section>
-            <section>
-                <div data-markdown>
-                    ## Unified Expression Language
-    
-                    * Grundsyntax
-    
-                    ```html
-                    ${expression} // immediate
-                    #{expression} // deferred
-                    ```
-                </div>
-                <aside class="notes">
-                    Immediate: direkte Ausführung in der ersten Phase<br/>
-                    Deferred: wird in jeder Phase neu ausgeführt
+                <aside class="notes" data-markdown>
+                    * nur die für die Praxis relevanten
+                    * die JSF Tags besitzen mindestens die gleichen Attribute wie das HTML Pendant
                 </aside>
             </section>
             <section>
-                <div data-markdown>
-                    ### Literale
-
-                    ```
-                    ${'hello ' + 'world'} // hello world
-                    ${21*2} // 42
-                    
-                    ${'\${' + '\#{'} // $ und # müssen escaped werden
-                    ```
+                <div>
+                    <h4>Form</h4>
+                    <pre>
+                        <code class="html">&lt;h:form id="id"&gt;
+    ...
+&lt;/h:form&gt;</code>
+                    </pre>
                 </div>
                 <aside class="notes">
-                    Literal: Konstante
-                    Ansonsten gleich wie bei JSP
+                    https://www.javatpoint.com/jsf-form
+                    Besitzt die gleichen Attribute wie das HTML Tag.
+                    Wird benutzt um Formulare zu wrappen
                 </aside>
             </section>
             <section>
-                <div data-markdown>
-                    ### Attributzugriff auf Beans
-
-                    Rein lesend: 
-
-                    ```
-                    ${bean.attribute} // => bean.getAttribute
-                    ```
+                <div>
+                    <h4>Checkbox</h4>
+                    <pre>
+                        <code class="html">&lt;h:selectBooleanCheckbox value="#{item.done}"
+                         disabled="true" /&gt;</code>
+                    </pre>
                 </div>
                 <aside class="notes">
+                    https://www.javatpoint.com/jsf-form
+                    Besitzt die gleichen Attribute wie das HTML Tag.
+                    Wird benutzt um Formulare zu wrappen
                 </aside>
             </section>
             <section>
-                <div data-markdown>
-                    ### Attributzugriff auf Beans
-
-                    Lesend und schreibend: 
-
-                    ```
-                    #{bean.attribute} // Funktion phasenabhängig
-                    ```
-
-                    * Lesender Zugriff in den Phasen: `process validations` und `render response`
-                    * Schreibender Zugriff in den Phasen: `update Model`
-                    * Beispiel (Two-Way-Binding, lesend+schreiben):
-                    ```
-                    &lt;h:InputText value="#{bean.name}"/&gt;
-                    ```
+                <div>
+                    <h4>Input Text</h4>
+                    <pre>
+                        <code class="html">&lt;h:inputText value="#{item.title}"/&gt;</code>
+                    </pre>
                 </div>
                 <aside class="notes">
+                    https://www.javatpoint.com/jsf-inputtext
+                </aside>
+            </section>
+            <section>
+                <div>
+                    <h4>Input Hidden</h4>
+                    <pre>
+                        <code class="html">&lt;h:inputHidden value="#{item.title}"/&gt;</code>
+                    </pre>
+                </div>
+                <aside class="notes">
+                    https://www.javatpoint.com/jsf-inputhidden
+                </aside>
+            </section>
+            <section>
+                <div>
+                    <h4>Commandbutton</h4>
+                    <pre>
+                        <code class="html">&lt;h:commandButton value="Speichern"
+                 action="#{manager.save()}"/&gt;</code>
+                    </pre>
+                </div>
+                <aside class="notes">
+                    https://www.javatpoint.com/jsf-commandbutton
+                    Der Return Wert der Methode muss ein String sein. Dieser wird dann zur Navigation genutzt.
                 </aside>
             </section>
         </section>
@@ -435,6 +440,149 @@ public class SayHello
             </section>
         </section>
         <section>
+            <section>
+                <div data-markdown>
+                    ## Validatoren
+    
+                    * Validatoren für Beans und Input Fields
+                    * Standardvalidatoren für gängige Datentypen
+                        * einfache Einschränkungen für Standard-Datentypen
+                    * eigene komplexe Validatoren möglich
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Standardvalidatoren
+    
+                    ```html
+&lt;f:validateLength minimum="6" maximum="15"/&gt;
+&lt;f:validateLongRange minimum="6" maximum="15"/&gt;
+&lt;f:validatePattern pattern="&lt;myPattern&gt;"/&gt;
+                    ```
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Verwendung
+
+                    ```html
+&lt;h:inputText value="#{bean.variable}"
+             validator="validatorMethod()" /&gt;
+&lt;h:inputText value="#{bean.variable}"&gt;
+    &lt;f:validateRequired/&gt;
+&lt;/inputText&gt;
+                    ```
+                </div>
+            </section>
+        </section>
+        <section>
+            <section>
+                <div data-markdown>
+                    ## Konverter
+    
+                    * Validatoren für Beans und Input Fields
+                    * Konverter für gängige Datentypen
+                        * BooleanConverter, BigIntegerConverter, DateTimeConverter etc.
+                </div>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Verwendung
+
+                    * wird automatisch zugeordnet durch den Typ der Beanvariable
+                    ```
+                    &lt;h:inputText value="#{bean.variable}"/&gt;
+                    ```
+                </div>
+            </section>
+        </section>
+        <section>
+            <h2>Erste Ausgabe</h2>
+
+            <pre>
+                <code data-line-numbers="|3-4|10">&lt;!DOCTYPE html&gt;
+&lt;html lang="de"  xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core" 
+xmlns:h="http://java.sun.com/jsf/html"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"/&gt;
+    &lt;title&gt;Hello World of JSF&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h:outputText value="Hello World"/&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </code>
+            </pre>
+    </section>
+        <section>
+            <section>
+                <div data-markdown>
+                    ## Unified Expression Language
+    
+                    * Grundsyntax
+    
+                    ```html
+                    ${expression} // immediate
+                    #{expression} // deferred
+                    ```
+                </div>
+                <aside class="notes">
+                    Immediate: direkte Ausführung in der ersten Phase<br/>
+                    Deferred: wird in jeder Phase neu ausgeführt
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Literale
+
+                    ```
+                    ${'hello ' + 'world'} // hello world
+                    ${21*2} // 42
+                    
+                    ${'\${' + '\#{'} // $ und # müssen escaped werden
+                    ```
+                </div>
+                <aside class="notes">
+                    Literal: Konstante
+                    Ansonsten gleich wie bei JSP
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Attributzugriff auf Beans
+
+                    Rein lesend: 
+
+                    ```
+                    ${bean.attribute} // => bean.getAttribute
+                    ```
+                </div>
+                <aside class="notes">
+                </aside>
+            </section>
+            <section>
+                <div data-markdown>
+                    ### Attributzugriff auf Beans
+
+                    Lesend und schreibend: 
+
+                    ```
+                    #{bean.attribute} // Funktion phasenabhängig
+                    ```
+
+                    * Lesender Zugriff in den Phasen: `process validations` und `render response`
+                    * Schreibender Zugriff in den Phasen: `update Model`
+                    * Beispiel (Two-Way-Binding, lesend+schreiben):
+                    ```
+                    &lt;h:InputText value="#{bean.name}"/&gt;
+                    ```
+                </div>
+                <aside class="notes">
+                </aside>
+            </section>
+        </section>
+        <section>
             <!--section>
                 <div data-markdown>
                     ## User Interface Component Model
@@ -555,138 +703,6 @@ public class SayHello
                     * für System Events: `jakarta.faces.event.SystemEventListener`
                     * für Component System Events: `jakarta.faces.event.ComponentSystemEventListener`
                 </div>
-            </section>
-        </section>
-        <section>
-            <section>
-                <div data-markdown>
-                    ## Validatoren
-    
-                    * Validatoren für Beans und Input Fields
-                    * Standardvalidatoren für gängige Datentypen
-                        * einfache Einschränkungen für Standard-Datentypen
-                    * eigene komplexe Validatoren möglich
-                </div>
-            </section>
-            <section>
-                <div data-markdown>
-                    ### Standardvalidatoren
-    
-                    ```html
-&lt;f:validateLength minimum="6" maximum="15"/&gt;
-&lt;f:validateLongRange minimum="6" maximum="15"/&gt;
-&lt;f:validatePattern pattern="&lt;myPattern&gt;"/&gt;
-                    ```
-                </div>
-            </section>
-            <section>
-                <div data-markdown>
-                    ### Verwendung
-
-                    ```html
-&lt;h:inputText value="#{bean.variable}"
-             validator="validatorMethod()" /&gt;
-&lt;h:inputText value="#{bean.variable}"&gt;
-    &lt;f:validateRequired/&gt;
-&lt;/inputText&gt;
-                    ```
-                </div>
-            </section>
-        </section>
-        <section>
-            <section>
-                <div data-markdown>
-                    ## Konverter
-    
-                    * Validatoren für Beans und Input Fields
-                    * Konverter für gängige Datentypen
-                        * BooleanConverter, BigIntegerConverter, DateTimeConverter etc.
-                </div>
-            </section>
-            <section>
-                <div data-markdown>
-                    ### Verwendung
-
-                    * wird automatisch zugeordnet durch den Typ der Beanvariable
-                    ```
-                    &lt;h:inputText value="#{bean.variable}"/&gt;
-                    ```
-                </div>
-            </section>
-        </section>
-        <section>
-            <section>
-                <div data-markdown>
-                    ## JSF-Tags
-                </div>
-                <aside class="notes" data-markdown>
-                    * nur die für die Praxis relevanten
-                    * die JSF Tags besitzen mindestens die gleichen Attribute wie das HTML Pendant
-                </aside>
-            </section>
-            <section>
-                <div>
-                    <h4>Form</h4>
-                    <pre>
-                        <code class="html">&lt;h:form id="id"&gt;
-    ...
-&lt;/h:form&gt;</code>
-                    </pre>
-                </div>
-                <aside class="notes">
-                    https://www.javatpoint.com/jsf-form
-                    Besitzt die gleichen Attribute wie das HTML Tag.
-                    Wird benutzt um Formulare zu wrappen
-                </aside>
-            </section>
-            <section>
-                <div>
-                    <h4>Checkbox</h4>
-                    <pre>
-                        <code class="html">&lt;h:selectBooleanCheckbox value="#{item.done}"
-                         disabled="true" /&gt;</code>
-                    </pre>
-                </div>
-                <aside class="notes">
-                    https://www.javatpoint.com/jsf-form
-                    Besitzt die gleichen Attribute wie das HTML Tag.
-                    Wird benutzt um Formulare zu wrappen
-                </aside>
-            </section>
-            <section>
-                <div>
-                    <h4>Input Text</h4>
-                    <pre>
-                        <code class="html">&lt;h:inputText value="#{item.title}"/&gt;</code>
-                    </pre>
-                </div>
-                <aside class="notes">
-                    https://www.javatpoint.com/jsf-inputtext
-                </aside>
-            </section>
-            <section>
-                <div>
-                    <h4>Input Hidden</h4>
-                    <pre>
-                        <code class="html">&lt;h:inputHidden value="#{item.title}"/&gt;</code>
-                    </pre>
-                </div>
-                <aside class="notes">
-                    https://www.javatpoint.com/jsf-inputhidden
-                </aside>
-            </section>
-            <section>
-                <div>
-                    <h4>Commandbutton</h4>
-                    <pre>
-                        <code class="html">&lt;h:commandButton value="Speichern"
-                 action="#{manager.save()}"/&gt;</code>
-                    </pre>
-                </div>
-                <aside class="notes">
-                    https://www.javatpoint.com/jsf-commandbutton
-                    Der Return Wert der Methode muss ein String sein. Dieser wird dann zur Navigation genutzt.
-                </aside>
             </section>
         </section>
         <section>
