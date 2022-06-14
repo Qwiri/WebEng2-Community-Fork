@@ -14,7 +14,7 @@
         - .xhtml Page aufsetzen und mit den verschiedenen Tags spielen
 - Managed Beans
     - XML und Annotation Based
-    - Request Scopes
+    - Request Scopes (besser erklären)
     - praktische Übung
         - Bean anlegen, Funktionalität und verschiedene Scopes ausprobieren
         - ToDo Übersicht anlegen -> Managed Bean mit ToDo Liste und .xhtml View dazu
