@@ -51,5 +51,6 @@ Comment: Wir sollten noch einmal darüber nachdenken, ob wir auch in Plain Javas
 
 - Kleine Übung vorbereiten um in Plain JavaScript mal Schritt für Schritt eine SPA zu bauen.
     - Wir brauchen ein "Mock" Backend von dem die Daten für die Anwendung kommen.
-    - Wir könnten es direkt im Frontend mocken, dann müssten die Studenten aber keinen XMLHttpRequest schreiben.
     - Wir könnten einen Mock Server bereitstellen, entweder lokal oder irgendwo global gehostet.
+    - Wir können die Backendvorlesung vorziehen und hier bereits den Mock Server mit den Studenten entwickeln.
+    - Dann haben sie ihn auch lokal auf dem Rechner laufen.
