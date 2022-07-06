@@ -49,8 +49,6 @@ Comment: Wir sollten noch einmal darüber nachdenken, ob wir auch in Plain Javas
 
 ## Todo's
 
-- Kleine Übung vorbereiten um in Plain JavaScript mal Schritt für Schritt eine SPA zu bauen.
-    - Wir brauchen ein "Mock" Backend von dem die Daten für die Anwendung kommen.
-    - Wir könnten einen Mock Server bereitstellen, entweder lokal oder irgendwo global gehostet.
-    - Wir können die Backendvorlesung vorziehen und hier bereits den Mock Server mit den Studenten entwickeln.
-    - Dann haben sie ihn auch lokal auf dem Rechner laufen.
+- Wir tauschen die Client und Server Vorlesung miteinander.
+- Damit haben wir dann bereits einen Server, wenn wir damit beginnen die SPA zu entwickeln.
+- Der Abschnitt über SinglePageApplications wandert in die Vorlesung 2_ajax_in_plain_javascript. (Oder wird zu einer eigenen Vorlesung)
