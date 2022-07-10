@@ -48,6 +48,27 @@
         <section data-external="./3_load_data_via_http.html"></section>
         <section data-external="./4_promises.html"></section>
         <section data-external="./5_async_await.html"></section>
+        <section>
+            <h4>Lernziele</h4>
+            <ul>
+                <li>Was ist Ajax?</li>
+                <li>Was sind Callbacks?</li>
+                <li>Wie funktioniert synchroner und asynchroner Code in Javascript?</li>
+                <li>Wie rufe ich in Javascript Daten von einem Server ab?</li>
+                <li>Wie machen uns Promises das Leben leichter?</li>
+                <li>Was ist async/await?</li>
+            </ul>
+            <aside class="notes">
+                <ul>
+                    <li>Ajax: Daten asynchron von einem Server laden.</li>
+                    <li>Callback: Wie ein Rückruf bei einem Telefon.</li>
+                    <li>Synchronität und Asynchronität (auf einem Thread) -> Überbrückung von Wartezeit.</li>
+                    <li>Backend aufrufen mit XMLHttpRequests.</li> 
+                    <li>Promises, eine schöne Syntax für Asynchronität.</li>
+                    <li>Async/await syntaktischer Zucker für Promises.</li>
+               </ul>
+            </aside>
+        </section>
     </div>
 </div>
 <script src="/dist/reveal.js"></script>
@@ -69,7 +90,7 @@
             },
         ]
     });
-    Reveal.configure({showNotes: 'separate-page'});
+    Reveal.configure({showNotes: false});
 </script>
 </body>
 </html>
