@@ -1,0 +1,310 @@
+<section>
+    <h3>SPA in React</h3>
+</section>
+<section>
+    <h4>Wie hilft uns React?</h4>
+    <ul>
+        <li>unterstützt
+            <ul>
+                <li>DOM Manipulation</li>
+                <li>Routing</li>
+            </ul>
+        </li>
+        <li>bietet eine Menge Libraries zur Unterstützung
+            <ul>
+                <li>axios: für XMLHttpRequests</li>
+            </ul>
+        </li>
+        <li>bietet Change Detection</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>React macht vieles einfacher, was wir in plain JavaScript selbst erledigen mussten.</li>
+            <li>DOM Manipulation wird durch die JSX Syntax wesentlich einfacher.</li>
+            <li>Routing mit entsprechender URL Manipulation wird zum Kinderspiel.</li>
+            <li>Axios ist eine vorgefertigtes Tooling um XMLHttpRequests abzusenden.</li>
+            <li>Change Detection ist schon mal ein Schlagwort, dass ihr euch merken könnt. Auch darauf werde ich später
+                noch genauer eingehen, wenn es wichtiger für uns wird.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>React functions</h4>
+    <ul>
+        <li>enthalten Information und Logik zum Rendern der UI</li>
+        <li>eine Mischung aus Javascript und HTML (JSX)</li>
+    </ul>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">export default function ReactFunction() {
+    const name = 'World';
+
+    return <div>Hello {name}!</div>
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>React funktions geben als return Wert eine Art HTML Syntax zurück.</li>
+            <li>Es darf maximal ein toplevel Tag geben.</li>
+            <li>Über geschweifte Klammern können wir dynamische Daten in das HTML einfügen.</li>
+            <li>Das macht das Rendering von dynamischen Informationen wesentlich einfacher als mit plain Javascript.
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>React functions</h4>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">export default function ReactFunction() {
+    const names = ['World', 'Daniel', 'Iven', 'Kai'];
+
+    return <div>Hello {names.join(', ')}!</div>
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>In den geschweiften Klammern können wir nicht nur Variablen einbinden, sondern auch verschiedene
+                Expressions nutzen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>React functions</h4>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">export default function ReactFunction() {
+    const names = ['World', 'Daniel', 'Iven', 'Kai'];
+
+    return <div>Hello {names.map(name => <b>{name}, </b>)}!</div>
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Auch in den geschweiften Klammern können wir über die JSX Syntax wieder HTML Tags einfügen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>React functions</h4>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">export default function ReactFunction() {
+    let name;
+
+    return <div>{ name ? `Hello ${name}!` : 'Loading' }</div>
+}</code>
+    </pre>
+</section>
+<section>
+    <h4>Praxis: React functions (ListView)</h4>
+    <ul>
+        <li>ListView mit React bauen</li>
+        <li>ganz simpel, kein Styling, kein Backend!</li>
+        <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_0-list_view)</li>
+    </ul>
+</section>
+<section>
+    <h4>React routing</h4>
+    <ul>
+        <li>bietet uns einfache Navigation</li>
+        <li>automatische Anpassung der URL</li>
+    </ul>
+</section>
+<section>
+    <h4>React routing</h4>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">function App() {
+    return (
+    &lt;div className="App"&gt;
+        &lt;BrowserRouter&gt;
+            &lt;Routes&gt;
+                &lt;Route path='/' element={&lt;Screen1 /&gt;} /&gt;
+                &lt;Route path='/screen1' element={&lt;Screen1 /&gt;} /&gt;
+                &lt;Route path='/screen2/:someParam'
+                    element={&lt;Screen2 /&gt;} /&gt;
+            &lt;/Routes&gt;
+        &lt;/BrowserRouter&gt;
+    &lt;/div&gt;
+    );
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Mit dem BrowserRouter wird eine Stelle markiert, an der die einzelnen Seiten angezeigt werden.</li>
+            <li>Die Routes definieren alle Seiten, zu denen navigiert werden kann.</li>
+            <li>Mehrere Pfade können zu gleichen Seite führen.</li>
+            <li>Der Parameter "element" einer Route, definiert die React Function, zu der navigiert wird.</li>
+            <li>Über ein :someParam kann ein Parameter bei der Navigation mitgegeben werden.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>React routing</h4>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">export default function SomeScreen() {
+    const navigate = useNavigate();
+    const someParam = 'someParam';
+
+    return <div>
+            &lt;Button label='Screen1' onClick={navigate('/')}/&gt;;
+            &lt;Button 
+                label='Screen2' 
+                onClick={navigate(`/screen2/${someParam}`)}/&gt;;
+    </div>
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Über die Funktion "useNavigate()" bekommt man eine Funktion, mit der man eine Navigation auslösen kann.
+            </li>
+            <li>Dieser Funktion übergibt man nun den Pfad. Dabei können natürlich auch Parameter eingefügt werden.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>React routing</h4>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">export default function Screen2() {
+    const { someParam } = useParams();
+
+    return <div>{someParam}</div>;
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Über die Funktion "useParams()" bekommt man ein Objekt mit alle übergebenen Parametern.</li>
+            <li>Der Name des Parameters ist dabei der, der in der Route hinter dem Doppelpunkt definiert wurde.</li>
+            <li>Über Javascript Destructing wird der Parameter hier aus dem Objekt destructed.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: React routing</h4>
+    <ul>
+        <li>zu unserem bestehenden ListView bauen wir einen DetailView</li>
+        <li>Navigation zum DetailView und zurück soll möglich sein</li>
+        <li>wer nicht mitgekommen ist:
+            <ul>
+                <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_1-routing)</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section>
+    <h4>Laden dynamischer Daten</h4>
+    <ul>
+        <li>mit der Library axios</li>
+        <li>GET Request wie folgt:</li>
+    </ul>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">async getData() {
+    return axios.get(
+        'https://somedomain.de/get/data',
+    ).then((response) => response.data);
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wie ihr sehen könnt brauchen wir nur die URL.</li>
+            <li>Als Response bekommen wir ein Javascript Objekt, welches axios bereits aus dem JSON geparsed hat.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Laden dynamischer Daten</h4>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">async saveData(data) {
+    return axios.post(
+        'https://somedomain.de/post/data',
+        data,
+        {
+            headers: {'Content-Type': 'application/json'},
+        },
+    ).then((response) => response.data);
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Auch POST Requests funktionieren mit axios ziemlich einfach.</li>
+            <li>Wir können das Javascript Objekt, das gespeichert werden soll, einfacher als solches übergeben.</li>
+            <li>Axios kümmert sich um die JSON Serializierung.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Laden dynamischer Daten</h4>
+    <ul>
+        <li>Auslagern der Requests in eine eigene Klasse</li>
+    </ul>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">export default class DataHttpClient {
+    async getData() {
+    }
+
+    async saveData(data) {
+    }
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Um die Funktionen zum laden und speichern von Daten auf verschiedenen Seiten nutzen zu können, sollen wir sie in eine Klasse auslagern.</li>
+            <li>Außerdem bleiben so die React functions frei von solcher Logik und befassen sich nur mit dem Rendering</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Laden dynamischer Daten</h4>
+    <ul>
+        <li>Bereitstellen des DataHttpClient mittels Dependency Injection</li>
+        <li>in React nutzt man Context Injection</li>
+    </ul>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">export const DataHttpClientContext = 
+                createContext(DataHttpClient);
+
+function App() {
+    return (
+    <div className="App">
+        &lt;DataHttpClientContext.Provider 
+            value={new DataHttpClient()}&gt;
+        &lt;Screen1 /&gt;
+        &lt;/DataHttpClientContext.Provider&gt;
+    </div>
+    );
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Braucht ihr noch mal eine Erläuterung zu Dependency Injection?</li>
+            <li>Über den React Context können wir gewisse Objekte in teilen des DOM's verfügbar machen.</li>
+            <li>Mit der Funktion "createContext" erstellt man ein Kontext Objekt von einem gewissen Klassentyp.</li>
+            <li>Nun hängen wir einen Provider dieses Kontexts in dem DOM ein.</li>
+            <li>Dieser Provider erhält nun das konkrete Objekt, das unter dem Provider im DOM verfügbar ist.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Laden dynamischer Daten</h4>
+    <ul>
+        <li>Abrufen des Objektes funktioniert über den Kontext</li>
+        <li>nur möglich, wenn sich die React function im korrekten Kontext befindet</li>
+    </ul>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">export default function Screen1() {
+    const dataHttpClient = useContext(DataHttpClientContext);
+
+    return <div></div>;
+}</code>
+    </pre>
+</section>
+<section>
+    <h4>Praxis: Laden dynamischer Daten</h4>
+    <ul>
+        <li>schreibt euch einen TodoHttpClient mit dem ihr Todos abrufen könnt</li>
+        <li>startet dazu den Web Service vom letzten Mal</li>
+        <li>macht den Client per DI verfügbar</li>
+        <li>wer nicht mitgekommen ist:
+            <ul>
+                <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_2-load_data)</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<!--Hier kommt dann der Praxis Part. Wir lernen Schritt für Schritt die React Syntax um unsere ToDo App zu bauen.-->
