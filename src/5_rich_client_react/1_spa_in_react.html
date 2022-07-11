@@ -73,7 +73,7 @@
         <code class="language-javascript" data-line-numbers="">export default function ReactFunction() {
     const names = ['World', 'Daniel', 'Iven', 'Kai'];
 
-    return <div>Hello {names.map(name => <b>{name}, </b>)}!</div>
+    return <div>Hello {names.map(name => <b>{name},</b>)}!</div>
 }</code>
     </pre>
     <aside class="notes">
@@ -264,7 +264,7 @@ function App() {
     <div className="App">
         &lt;DataHttpClientContext.Provider 
             value={new DataHttpClient()}&gt;
-        &lt;Screen1 /&gt;
+            &lt;Screen1 /&gt;
         &lt;/DataHttpClientContext.Provider&gt;
     </div>
     );
@@ -306,5 +306,122 @@ function App() {
             </ul>
         </li>
     </ul>
+</section>
+<section>
+    <h4>React Hooks</h4>
+    <ul>
+        <li>ein Thema für sich</li>
+        <li>speichern von State: useState()</li>
+        <li>Lifecycle: useEffect()</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>React Hooks sind schon fast ein Thema für sich.</li>
+            <li>Wenn wir Daten in einer React function speichern wollen, können wir das mit useState() -> gleich mehr dazu</li>
+            <li>In unserer Plain Javascript SPA haben wir auch Code für die initialisierung gebraucht. Bzw. wir haben die einzelnen Seiten initial geladen.</li>
+            <li>In einer React function können wir nicht einfach asynchronen Code ausführen. Es muss immer direkt etwas zum Rendern zurückgegeben werden.</li>
+            <li>Daher gibt es Effects, um asynchron etwas vom Backend zu laden. Hier greifen wir dann auf den Client den wir geschrieben haben zu.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>React Hooks</h4>
+    <ul>
+        <li>useState()
+            <ul>
+                <li>zum Speichern/Ändern von Daten in einer React function</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">export default function Screen2() {
+    const [count, setCount] = useState(0)
+
+    return &lt;button onClick={() => setCount(count + 1)}&gt;
+        {count}
+    &lt;/button&gt;;
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Mit der Funktion useState() können wir Daten in einer React function speichern.</li>
+            <li>Die useState() function gibt uns ein Attribut "data" über das wir auf den Wert zugreifen können.</li>
+            <li>Der zweite Rückgabewert ist eine function, mit der wir den Wert verändern können.</li>
+            <li>Bennenen können wir die Rückgabewerte wie wir wollen. (hier wird wieder mit destruction gearbeitet)</li>
+            <li>Eine normale Variable würde ihren Wert verlieren, wenn die React function erneut aufgerufen wird.</li>
+            <li>useState() erzeugt einen state für die function der besteht. Außerdem wird die React function neu gezeichnet, sobald sich ein state ändert.</li>
+            <li>Auch über das onChange event des input fields wird der state neu gesetzt.</li>
+            <li>Angezeigt wird der aktuelle Wert, in dem wir die "data" variable dem value des inputs zuweisen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>React Hooks</h4>
+    <ul>
+        <li>useEffect()
+            <ul>
+                <li>Seiteneffekte für React functions</li>
+                <li>Callback der zu bestimmten Zeitpunkten aufgerufen wird</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">export default function Screen2() {
+    ...
+
+    useEffect(() => {
+        dataHttpClient.getData()
+            .then((data) => console.log(data));
+    });
+
+    ...
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Mit der Funktion useEffect() definieren wir einen Callback, der zu gewissen Zeitpunkten automatisch von React augerufen wird.</li>
+            <li>In diesem Beispiel wird der Callback zum Zeitpunkt der Initialisierung der React function aufgerufen.</li>
+            <li>Außerdem wir der Callback aufgerufen, wenn sich ein </li>
+            <li>Die React function ausgeführt und anschließend wird der Request gegen das Backend gestartet.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>React Hooks</h4>
+    <ul>
+        <li>useState()
+            <ul>
+                <li>zum Speichern/Ändern von Daten in einer React function</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="language-javascript" data-line-numbers="">export default function Screen2() {
+    ...
+    const [data, setData] = useState('')
+
+    useEffect(() => {
+        dataHttpClient.getData(data)
+            .then((data) => setData(data));
+    });
+
+    return &lt;input 
+            value={data} 
+            onChange={(e) => setData(e.target.value)} /&gt;;
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Mit der Funktion useState() können wir Daten in einer React function speichern.</li>
+            <li>Die useState() function gibt uns ein Attribut "data" über das wir auf den Wert zugreifen können.</li>
+            <li>Der zweite Rückgabewert ist eine function, mit der wir den Wert verändern können.</li>
+            <li>Bennenen können wir die Rückgabewerte wie wir wollen. (hier wird wieder mit destruction gearbeitet)</li>
+            <li>Eine normale Variable würde ihren Wert verlieren, wenn die React function erneut aufgerufen wird.</li>
+            <li>useState() erzeugt einen state für die function der besteht. Außerdem wird die React function neu gezeichnet, sobald sich ein state ändert.</li>
+            <li>In diesem Fall wird der initiale Wert des Inputfeldes aus dem Backend geladen. Sobald eine Response da ist, wird der state gesetzt und die React function neu gezeichnet (ausgeführt).</li>
+            <li>Auch über das onChange event des input fields wird der state neu gesetzt.</li>
+            <li>Angezeigt wird der aktuelle Wert, in dem wir die "data" variable dem value des inputs zuweisen.</li>
+        </ul>
+    </aside>
 </section>
 <!--Hier kommt dann der Praxis Part. Wir lernen Schritt für Schritt die React Syntax um unsere ToDo App zu bauen.-->
