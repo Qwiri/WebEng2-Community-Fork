@@ -1,0 +1,75 @@
+<section>
+    <h3>Micro Frontends</h3>
+</section>
+<section>
+    <h4>Component Architecture</h4>
+    <ul>
+        <li>bringt uns Ordnung und Struktur</li>
+        <li>was passiert wenn das Frontend wächst?</li>
+        <li>mehrere Teams arbeiten an einem Frontend?</li>
+        <li>unterschiedliche Teams
+            <ul>
+                <li>mögen unterschiedliche Technologien</li>
+                <li>haben unterschiedliche Arbeitsweisen</li>
+                <li>möchten unabhängig releasen</li>
+                <li>haben unterschiedlichen Codestyle</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Auch bei einer ordentlich gepflegten Component Architecture wird ein Frontend irgendwann zu groß.</li>
+            <li>Meistens wächst das Team ebenfalls, da die Anforderungen wachsen.</li>
+            <li>Das Team teilt sich dann meist schon von selbst, da ein einzelner nicht mehr die ganze Domäne überblicken kann.</li>
+            <li>Irgendwann lohnt es sich das Team und das Frontend offiziell zu teilen.</li>
+            <li>Sonst ist es absehbar, dass die Produktivität sinkt.</li>
+            <li>Zum Beispiel durch:
+                <ul>
+                    <li>Mergeconflicts durch zu viele Änderungen.</li>
+                    <li>Konflikte in einem großen Team durch
+                        <ul>
+                            <li>unterschiedlichen Codestyle.</li>
+                            <li>unterschiedliche Arbeitsweisen.</li>
+                            <li>unterschiedlich favorisierte Technologien.</li>
+                        </ul>
+                    </li>
+                    <li>Features können nicht unabhängig voneinander released werden.</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Micro Frontends</h4>
+    <ul>
+        <li>aufteilen des Monolith in mehrere Frontends</li>
+        <li>Frontends können zu einem Frontend zusammengesteckt werden</li>
+    </ul>
+    <img src="assets/micro_frontends_connected.png" height="400px" />
+    <aside class="notes">
+        <ul>
+            <li>Micro Frontends können bei Bedarf zu einem Frontend zusammengesteckt werden.</li>
+            <li>Dies muss aber nicht sein, evtl. wird über eine Navigation von einem zum anderen Frontend navigiert.
+            </li>
+            <li>Micro Frontends können von verschiedenen Teams mit verschiedenen Sprache und Frameworks gebaut werden.
+            </li>
+            <li>Evtl. auch ein eigener release Zyklus.</li>
+            <li>Micro Frontends können auch helfen, wenn man eine legacy Anwendung Stück für Stück erneuern möchte.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Micro Frontends</h4>
+    <ul>
+        <li>reden meist auch mit eigenen Backends</li>
+        <li>Micro Services</li>
+    </ul>
+    <img src="assets/micro_frontends_backend.png" height="300px" />
+    <aside class="notes">
+        <ul>
+            <li>Micro Frontends sind aus Micro Services entstanden</li>
+            <li>um auch die Frontends Skalierbarer zu machen</li>
+            <li>dies ist nur bei wirklich komplexen Anwendungen zu empfehlen</li>
+        </ul>
+    </aside>
+</section>

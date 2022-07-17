@@ -53,6 +53,9 @@
 </section>
 <section>
     <h4>React functions</h4>
+    <ul>
+        <li>Expressions im HTML sind möglich</li>
+    </ul>
     <pre>
         <code class="language-javascript" data-line-numbers="">export default function ReactFunction() {
     const names = ['World', 'Daniel', 'Iven', 'Kai'];
@@ -69,6 +72,9 @@
 </section>
 <section>
     <h4>React functions</h4>
+    <ul>
+        <li>HTML in einer Expression ebenfalls</li>
+    </ul>
     <pre>
         <code class="language-javascript" data-line-numbers="">export default function ReactFunction() {
     const names = ['World', 'Daniel', 'Iven', 'Kai'];
@@ -137,6 +143,9 @@
 </section>
 <section>
     <h4>React routing</h4>
+    <ul>
+        <li>mit useNavigate() können wir Navigationen auslösen.</li>
+    </ul>
     <pre>
         <code class="language-javascript" data-line-numbers="">export default function SomeScreen() {
     const navigate = useNavigate();
@@ -160,6 +169,9 @@
 </section>
 <section>
     <h4>React routing</h4>
+    <ul>
+        <li>useParams() erlaubt es uns auf Pfadparameter zuzugreifen</li>
+    </ul>
     <pre>
         <code class="language-javascript" data-line-numbers="">export default function Screen2() {
     const { someParam } = useParams();
@@ -209,6 +221,9 @@
 </section>
 <section>
     <h4>Laden dynamischer Daten</h4>
+    <ul>
+        <li>POST Request:</li>
+    </ul>
     <pre>
         <code class="language-javascript" data-line-numbers="">async saveData(data) {
     return axios.post(
@@ -283,7 +298,7 @@ function App() {
 <section>
     <h4>Laden dynamischer Daten</h4>
     <ul>
-        <li>Abrufen des Objektes funktioniert über den Kontext</li>
+        <li>Abrufen des Objekts mit useContext()</li>
         <li>nur möglich, wenn sich die React function im korrekten Kontext befindet</li>
     </ul>
     <pre>
@@ -345,13 +360,13 @@ function App() {
     <aside class="notes">
         <ul>
             <li>Mit der Funktion useState() können wir Daten in einer React function speichern.</li>
-            <li>Die useState() function gibt uns ein Attribut "data" über das wir auf den Wert zugreifen können.</li>
+            <li>Die useState() function gibt uns ein Attribut "count" über das wir auf den Wert zugreifen können.</li>
             <li>Der zweite Rückgabewert ist eine function, mit der wir den Wert verändern können.</li>
             <li>Bennenen können wir die Rückgabewerte wie wir wollen. (hier wird wieder mit destruction gearbeitet)</li>
             <li>Eine normale Variable würde ihren Wert verlieren, wenn die React function erneut aufgerufen wird.</li>
             <li>useState() erzeugt einen state für die function der besteht. Außerdem wird die React function neu gezeichnet, sobald sich ein state ändert.</li>
             <li>Auch über das onChange event des input fields wird der state neu gesetzt.</li>
-            <li>Angezeigt wird der aktuelle Wert, in dem wir die "data" variable dem value des inputs zuweisen.</li>
+            <li>Angezeigt wird der aktuelle Wert, in dem wir die "count" variable als Label des Buttons anzeigen.</li>
         </ul>
     </aside>
 </section>
@@ -381,17 +396,16 @@ function App() {
         <ul>
             <li>Mit der Funktion useEffect() definieren wir einen Callback, der zu gewissen Zeitpunkten automatisch von React augerufen wird.</li>
             <li>In diesem Beispiel wird der Callback zum Zeitpunkt der Initialisierung der React function aufgerufen.</li>
-            <li>Außerdem wir der Callback aufgerufen, wenn sich ein </li>
-            <li>Die React function ausgeführt und anschließend wird der Request gegen das Backend gestartet.</li>
+            <li>Die React function wird ausgeführt und anschließend wird der Request gegen das Backend gestartet.</li>
         </ul>
     </aside>
 </section>
 <section>
     <h4>React Hooks</h4>
     <ul>
-        <li>useState()
+        <li>useEffect()
             <ul>
-                <li>zum Speichern/Ändern von Daten in einer React function</li>
+                <li>funktioniert gut in Kombination mit useState()</li>
             </ul>
         </li>
     </ul>
@@ -412,16 +426,83 @@ function App() {
     </pre>
     <aside class="notes">
         <ul>
-            <li>Mit der Funktion useState() können wir Daten in einer React function speichern.</li>
-            <li>Die useState() function gibt uns ein Attribut "data" über das wir auf den Wert zugreifen können.</li>
-            <li>Der zweite Rückgabewert ist eine function, mit der wir den Wert verändern können.</li>
-            <li>Bennenen können wir die Rückgabewerte wie wir wollen. (hier wird wieder mit destruction gearbeitet)</li>
-            <li>Eine normale Variable würde ihren Wert verlieren, wenn die React function erneut aufgerufen wird.</li>
-            <li>useState() erzeugt einen state für die function der besteht. Außerdem wird die React function neu gezeichnet, sobald sich ein state ändert.</li>
-            <li>In diesem Fall wird der initiale Wert des Inputfeldes aus dem Backend geladen. Sobald eine Response da ist, wird der state gesetzt und die React function neu gezeichnet (ausgeführt).</li>
-            <li>Auch über das onChange event des input fields wird der state neu gesetzt.</li>
-            <li>Angezeigt wird der aktuelle Wert, in dem wir die "data" variable dem value des inputs zuweisen.</li>
+            <li>useEffect() wird nicht nur zur Initialisierung der React function aufgerufen, es wird auch aufgerufen, wenn sich ein state ändert.</li>
+            <li>Dieser Code würde daher eine Endlosschleife auslösen. Jedes mal wenn "setData" aufgerufen wird, wird der Callback erneut ausgeführt.</li>
         </ul>
     </aside>
 </section>
-<!--Hier kommt dann der Praxis Part. Wir lernen Schritt für Schritt die React Syntax um unsere ToDo App zu bauen.-->
+<section>
+    <h4>React Hooks</h4>
+    <ul>
+        <li>useEffect()
+            <ul>
+                <li>muss nicht auf State Änderungen reagieren</li>
+                <li>reagiert auf alle Parameter im Array</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="language-javascript" data-line-numbers="8">export default function Screen2() {
+    ...
+    const [data, setData] = useState('')
+
+    useEffect(() => {
+        dataHttpClient.getData(data)
+            .then((data) => setData(data));
+    }, []);
+
+    return &lt;input 
+            value={data} 
+            onChange={(e) => setData(e.target.value)} /&gt;;
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>useEffect() löst nun keine Endlosschleife mehr aus.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>React Hooks</h4>
+    <ul>
+        <li>useEffect()
+            <ul>
+                <li>kann zum Aufräumen verwendet</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="language-javascript" data-line-numbers="8">export default function Screen2() {
+    ...
+    const [data, setData] = useState('')
+
+    useEffect(() => {
+        dataHttpClient.getData(data)
+            .then((data) => setData(data));
+        return () => console.log('teardown');
+    }, []);
+
+    return &lt;input 
+            value={data} 
+            onChange={(e) => setData(e.target.value)} /&gt;;
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Der Rückgabewert des Callbacks des useEffect() Hooks wird aufgerufen, wenn die React function abgeräumt wird.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: React Hooks</h4>
+    <ul>
+        <li>ladet die Todos über den Client mit dem useEffect() Hook</li>
+        <li>für den ListView und den DetailView</li>
+        <li>macht die Checkbox im Detailview funktionsfähig</li>
+        <li>wer nicht mitgekommen ist:
+            <ul>
+                <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_3-react_hooks)</li>
+            </ul>
+        </li>
+    </ul>
+</section>
