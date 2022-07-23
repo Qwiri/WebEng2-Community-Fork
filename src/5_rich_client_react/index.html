@@ -35,6 +35,33 @@
         <section data-external="./2_component_architecture.html"></section>
         <section data-external="./3_atomic_design.html"></section>
         <section data-external="./4_micro_frontends.html"></section>
+        <section>
+            <h4>Lernziele</h4>
+            <ul>
+                <li>Wie schreiben wir eine SPA in Javascript?</li>
+                <li>Wie unterstützt uns React beim Schreiben einer SPA?</li>
+                <li>Wie hilft eine Component Architecture beim Schreiben eines Frontends?</li>
+                <li>Wie bringe ich Ordnung in eine Component Architectur?</li>
+                <li>Was sind Micro Frontends und was bringt das?</li>
+            </ul>
+            <aside class="notes">
+                <ul>
+                    <li>Eine SPA in plain Javascript zu schreiben funktioniert, ist allerdings umständlich.</li>
+                    <li>Da es Frameworks wie Sand am Meer gibt, können wir uns hier gut bedienen.</li>
+                    <li>React bietet uns viele verschiedene Tools um uns das Leben leichter zu machen.
+                        <ul>
+                            <li>Model binding</li>
+                            <li>Routing</li>
+                            <li>Http calls</li>
+                            <li>Components</li>
+                        </ul>
+                    </li>
+                    <li>Mit einer Component Architecture schaffen wir uns einen Baukasten an Components, mit denen wir konsistent und schnell ein Frontend zusammenstecken können.</li>
+                    <li>Mit Atomic Design und Storybook bekomme ich Ordnung in meine Component Architecture, finde Components schneller, sehe sie alle auf einen Blick und beschleunige meine Arbeit.</li>
+                    <li>Wenn ein Frontend zu groß wird, das Team wächst oder man einen legacy Monolith Stück für Stück erneuern möchte, können Microfrontends nützlich sein.</li>
+                </ul>
+            </aside>
+        </section>
     </div>
 </div>
 
@@ -57,7 +84,7 @@
             },
         ]
     });
-    Reveal.configure({showNotes: false});
+    Reveal.configure({showNotes: 'separate-page'});
 </script>
 </body>
 </html>
