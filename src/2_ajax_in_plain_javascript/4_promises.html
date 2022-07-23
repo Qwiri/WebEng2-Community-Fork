@@ -159,7 +159,24 @@ promise
     <ul>
         <li>Promises sind Microtasks</li>
         <li>sie landen daher auf der Microqueue</li>
-        <li>Tasks der Microqueue werden direkt bearbeitet</li>
+        <li>Tasks in der Microqueue werden nächstmöglich bearbeitet</li>
         <li>Testet mal setTimeout() vs Promise.resolve().then()</li>
     </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>console.log('start');
+
+setTimeout(() => console.log('setTimeout'));
+
+Promise.resolve().then(() => console.log('Promise'));
+
+console.log('end');</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Sobald der letzte Task von der Javascript Event Loop bearbeitet wurde und ein Microtask in der Microqueue ist, wird direkt der Microtask ausgeführt.</li>
+            <li>Dies passiert solange, bis kein Microtask mehr in der Queue ist.</li>
+            <li>Die Microqueue hat eine höhere Priorätät als normale Tasks und ein Rerender der UI.</li>
+            <li>Führt den aufgeführten Code mal in eurem Browser aus. Was hättet ihr erwartet?</li>
+        </ul>
+    </aside>
 </section>
