@@ -128,7 +128,3 @@
 - Diese schreibweise macht es auf jeden Fall leserlicher, als die Callbacks, die wir vorhin hatten.
 - Aktuell werden die Requests wieder nacheinander ans Backend geschickt. Wie könnte der Code aussehen, damit die Requests gleichzeitig abgeschickt werden? 
 - Ein Beispiel dafür steht auf Branch "step_8" bereit.
-
-# TODO
-
-- evtl. ein wenig anpassen nach dem Video von Fireship

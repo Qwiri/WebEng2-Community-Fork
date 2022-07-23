@@ -154,3 +154,12 @@ promise
         <li>Branch: "step_6" - ein Beispiel für Promise.all() (Lösung)</li>
     </ul>
 </section>
+<section>
+    <h4>Praxis: Promises und die Event Loop</h4>
+    <ul>
+        <li>Promises sind Microtasks</li>
+        <li>sie landen daher auf der Microqueue</li>
+        <li>Tasks der Microqueue werden direkt bearbeitet</li>
+        <li>Testet mal setTimeout() vs Promise.resolve().then()</li>
+    </ul>
+</section>
