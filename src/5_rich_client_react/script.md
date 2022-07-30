@@ -1,8 +1,5 @@
 # Rich Client React
 
-Comment: Wir sollten noch mal erklären was Ajax ist bei der Vorlesung davor.
-Comment: Wir sollten noch einmal darüber nachdenken, ob wir auch in Plain Javascript eine Todo App bauen wollen. Damit kommen dann die Vorteile von React und der Dom Manipulation stärker zur Geltung und man weiß es mehr zu schätzen.
-
 - Lernziele
     - Wie schreiben wir eine SPA in Javascript?
     - Wie kann ein Frontendframework wie React uns dabei helfen eine Single Page Application zu schreiben?
@@ -53,7 +50,3 @@ Comment: Wir sollten noch einmal darüber nachdenken, ob wir auch in Plain Javas
     - Ausblick und etwas Theorie.
 
 ## Todo's
-
-- Wir tauschen die Client und Server Vorlesung miteinander.
-- Damit haben wir dann bereits einen Server, wenn wir damit beginnen die SPA zu entwickeln.
-- Der Abschnitt über SinglePageApplications wandert in die Vorlesung 2_ajax_in_plain_javascript. (Oder wird zu einer eigenen Vorlesung)

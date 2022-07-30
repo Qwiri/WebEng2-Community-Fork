@@ -1,8 +1,3 @@
-### "Geplänkel"
-
-- Ich denke nicht, dass es sich hier um "Geplänkel" handelt.
-- Eine ordentliche Component Architektur ist ein wichtiges Werkzeug für das Schreiben von Frontends ist.
-
 ### React Fiber -> in Angular?
 
 - Was ist React Fiber?
