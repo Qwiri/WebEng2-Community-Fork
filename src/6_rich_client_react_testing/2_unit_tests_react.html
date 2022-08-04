@@ -1,0 +1,131 @@
+<section>
+    <h3>Unit Tests in React</h3>
+</section>
+<section>
+    <h4>React Testing Library</h4>
+    <ul>
+        <li>wir benutzen die React Testing Library</li>
+        <li>natives Testing enthält sehr viel Boilerplate</li>
+        <li>die Testing Library stellt auch eine einfachere API bereit</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Wer sich die klassische Syntax ansehen möchte, kann dies natürlich gerne selbst machen:
+                https://reactjs.org/docs/testing.html</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>render()</h4>
+    <ul>
+        <li>zum Rendern der Component</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it('some test', () => {
+    render(&lt;Button dataTestId={buttonDataTestId} 
+                   label={buttonLabel}/&gt;);
+});</code>
+    </pre>
+</section>
+<section>
+    <h4>screen</h4>
+    <ul>
+        <li>zum Abrufen von gerenderten Inhalten</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it('some test', () => {
+    render(&lt;Button dataTestId={buttonDataTestId} 
+                   label={buttonLabel}/&gt;);
+        
+    expect(screen.getByText(buttonLabel))
+        .toBeInTheDocument();
+});</code>
+    </pre>
+</section>
+<section>
+    <h4>screen Funktionen</h4>
+    <ul>
+        <li>verschiedene Funktionen, um Inhalt zu suchen</li>
+        <li>getBy... wirft einen Fehler wenn (Element != 1)</li>
+        <li>queryBy... gibt null zurück</li>
+        <li>findBy... gibt ein Promise zurück</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it('some test', () => {
+    ...
+    
+    expect(screen.getByRole(Button))
+        .toBeInTheDocument();
+
+    expect(screen.getByText(buttonLabel))
+        .toBeInTheDocument();
+
+    expect(screen.getByTestId(buttonDataTestId))
+        .toBeInTheDocument();
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Das Screen Objekt bietet verschiedene Funktionen, um Inhalt im DOM zu finden.</li>
+            <li>getBy... queryBy... und findBy... gibt es jeweils auch für mehrere Elemente heißt dann getByAll...</li>
+            <li>Wir können dann nach Text, einer speziellen DataTestId oder nach einer Component suchen.</li>
+            <li>Es gibt noch weitere Funktionen. Schaut dazu einfach in die Doku: https://testing-library.com/docs/react-testing-library/cheatsheet/</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>fireEvent</h4>
+    <ul>
+        <li>hilft uns beim triggern von Events</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it('some test', () => {
+    ...
+    
+    fireEvent.click(screen.getByTestId(buttonDataTestId));
+
+    fireEvent.change(screen.getByTestId(inputFieldDataTestId), 
+                     { target: {value: 'new text'}, });
+
+    ...
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Auch hier gibt es natürlich weitere Funktionen. Diese brauchen wir erstmal nicht.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>jest.fn()</h4>
+    <ul>
+        <li>mocken von Funktionen</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it('some test', () => {
+    const onClick = jest.fn();
+
+    render(&lt;Button dataTestId={buttonDataTestId} 
+                   label={buttonLabel}/&gt;);
+    
+    fireEvent.click(screen.getByTestId(buttonDataTestId));
+
+    expect(onClick).toHaveBeenCalledTimes(1);
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Jest Mock Funktionen speichern alle interaktionen mit ihnen.</li>
+            <li>Wir können somit prüfen, ob die Funktion entsprechend oft und mit den richtigen Parametern aufgerufen wurde.</li>            
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: Button Test</h4>
+    <ul>
+        <li>schreibt einen Test für die Button Component</li>
+        <li>was sollten wir testen?</li>
+        <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react_testing</li>
+        <li>Branch: step_0-button_test</li>
+    </ul>
+</section>
