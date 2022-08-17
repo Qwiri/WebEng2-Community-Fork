@@ -70,6 +70,8 @@
             <li>getBy... queryBy... und findBy... gibt es jeweils auch für mehrere Elemente heißt dann getByAll...</li>
             <li>Wir können dann nach Text, einer speziellen DataTestId oder nach einer Component suchen.</li>
             <li>Es gibt noch weitere Funktionen. Schaut dazu einfach in die Doku: https://testing-library.com/docs/react-testing-library/cheatsheet/</li>
+            <li>expect kennen wir bereits -> ist quasi ein assert (von Java).</li>
+            <li>expect bietet uns einige Funktionen, um Werte zu vergleichen, auf gewisse Eigenschaften zu prüfen, etc.</li>
         </ul>
     </aside>
 </section>
@@ -127,5 +129,61 @@
         <li>was sollten wir testen?</li>
         <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react_testing</li>
         <li>Branch: step_0-button_test</li>
+    </ul>
+</section>
+<section>
+    <h4>Next Step: Testen eines List View Items</h4>
+    <ul>
+        <li>isoliertes Testen?</li>
+        <li>Child Components haben eigene Tests</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>export default function ListViewItem({ todo, onShowDetail, dataTestId }) {
+    return (
+        &lt;div className='list-view-item' data-testid={dataTestId}&gt;
+            &lt;p className='list-view-item--title'&gt;{todo.title}&lt;/p&gt;
+            &lt;InputCheckboxGroup className='list-view-item--checkbox-group' id={`${todo.id}check`} disabled={true} label='Done' checked={todo.done} /&gt;
+            &lt;Button className='list-view-item--' label='Details' onClick={() => onShowDetail(todo.id)}/&gt;
+        &lt;/div&gt;
+    );
+};</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wir wollen Components immer isoliert testen.</li>
+            <li>Dazu gehören nicht nur Abhängigkeiten, wie z.B. unser TodoHttpClient, sondern auch Child Components.</li>
+            <li>Die InputCheckboxGroup Component und die Button Component haben ihre eigenen Unit Tests.</li>
+            <li>Wir wollen sie eigentlich nicht mittesten, sondern nur prüfen, ob die ListViewItem Component korrekt funktioniert.</li>
+            <li>Daher testen wir nur bis zur Schnittstelle. Das heißt wir prüfen ob die korrekten Parameter in die Component hineingegeben wurden und was passiert, wenn ein Callback von einer Child Component aufgerufen wird.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Child Components mocken</h4>
+    <ul>
+        <li>jest.mock erlaubt es uns Imports zu mocken</li>
+        <li>wir überschreiben nun die Component</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>jest.mock('../../molecules/.../InputCheckboxGroup', () => {
+    return function DummyInputCheckboxGroup(props) {
+        return &lt;div&gt;{props.id},{props.checked.toString()}&lt;/div&gt;
+    }
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Auch unsere Mock Component bekommt die "props" hineingereicht.</li>
+            <li>Da wir prüfen wollen, ob die parameter korrekt sind, schreiben wir sie einfach ins HTML, dann können wir sie später auf ihre Korrektheit prüfen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: List View Item Test</h4>
+    <ul>
+        <li>schreibt einen Test für die ListViewItem Component</li>
+        <li>was muss getestet werden?</li>
+        <li>mockt die Child Components</li>
+        <li>Todo: Branch vorbereiten, etc.</li>
     </ul>
 </section>
