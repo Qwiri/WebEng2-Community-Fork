@@ -84,5 +84,6 @@
     - Wenigstens eine Page, Organism, Molecule und Atom Component testen.
 
 ## Todos:
-- Branch vorbereiten für ListViewItem Praxis.
+- WaitFor erklären
+- Branch für DetailPage vorbereiten.
 - TodoHttpClient muss noch getestet werden.

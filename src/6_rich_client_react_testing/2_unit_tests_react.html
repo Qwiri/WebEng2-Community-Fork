@@ -184,6 +184,136 @@
         <li>schreibt einen Test für die ListViewItem Component</li>
         <li>was muss getestet werden?</li>
         <li>mockt die Child Components</li>
-        <li>Todo: Branch vorbereiten, etc.</li>
+        <li>Branch: step_1-list_view_item_test</li>
     </ul>
+</section>
+<section>
+    <h4>Routing im Test</h4>
+    <ul>
+        <li>Router muss vorhanden sein</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>export const reactRouterTestWrapper = (ui) => {
+    return (
+        &lt;MemoryRouter&gt;
+            &lt;Routes&gt;
+                &lt;Route path="/*" element={ui} /&gt;
+            &lt;/Routes&gt;
+        &lt;/MemoryRouter&gt;
+    )
+}</code>
+    </pre>
+    <pre>
+        <code class="javascript" data-line-numbers>render(
+    reactRouterTestWrapper(
+        &lt;SomeComponent&gt;&lt;/SomeComponent&gt;
+    )
+);</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Components in denen Routing genutzt wird, müssen innerhalb eines Routers liegen.</li>
+            <li>Daher müssen wir einen MemoryRouter um die Component legen.</li>
+            <li>Da wir Routing bei mehreren Tests und Components brauchen, sollten wir es abstrahieren.</li>
+            <li>Genutzt wird der Wrapper dann in der render Funktion.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Routing im Test</h4>
+    <ul>
+        <li>navigate sollte gemockt werden</li>
+        <li>das Routing sollten wir prüfen</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>const navigate = jest.fn();
+
+beforeEach(() => {
+    jest.spyOn(router, 'useNavigate')
+        .mockImplementation(() => navigate);
+});</code>
+    </pre>
+    <pre>
+        <code class="javascript" data-line-numbers>expect(navigate).toHaveBeenCalledTimes(1);
+expect(navigate).toHaveBeenCalledWith(`/list`);</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Da wir prüfen wollen, ob das Routing korrekt ausgelöst wird, müssen wir die navigate Funktion mocken.</li>
+            <li>Wir mocken daher den router.useNavigate() und geben eine eigene mock Funktion zurück.</li>
+            <li>Mit dieser können wir dann prüfen, ob die richtigen Navigationen ausgelöst wurden.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Context mocken im Test</h4>
+    <ul>
+        <li>TodoHttpClient muss gemockt werden</li>
+        <li>für isoliertes Testing</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>let todoHttpClientMock;
+
+beforeEach(() => {
+    todoHttpClientMock = {
+        getTodoById(_) {
+            return Promise.resolve(todo);
+        },
+        saveTodo(todo) {
+            return Promise.resolve(todo);
+        }
+    }
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Über Dependency Injection (genau genommen Context Injection) können wir den TodoHttpClient nutzen.</li>
+            <li>Dies machen wir, damit die HTTP Calls abstrahier von verschiedenen Stellen aus getätigt werden können und die Logik dafür nicht in jeder Component dupliziert ist.</li>
+            <li>Außerdem können wir dadurch im Testfall den TodoHttpClient einfach mocken, damit keine echten Backendcalls gemacht werden.</li>
+            <li>Den TodoHttpClient können wir mit jest mocken oder wie hier manuell mit Javascript.</li>
+            <li>Wie ihr sehen könnt, müssen wir natürlich nur die Funktionen mocken, die wir im Test brauchen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Context mocken im Test</h4>
+    <ul>
+        <li>TodoHttpClient wird über den Context provided</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>function renderWithContextProvider(ui) {
+    render(
+        &lt;TodoHttpClientContext.Provider 
+                value={todoHttpClientMock}&gt;
+            {ui}
+        &lt;/TodoHttpClientContext.Provider&gt;
+    );
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Über den Context.Provider können wir anschließend den MockClient verfügbar machen.</li>
+            <li>Über den useContext Hook, greift die Component anschließend auf unseren MockClient zu.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Context mocken im Test</h4>
+    <ul>
+        <li>Aufrufe prüfen</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>saveTodoSpy = jest.spyOn(todoHttpClientMock, 'saveTodo');</code>
+    </pre>
+    <pre>
+        <code class="javascript" data-line-numbers>expect(saveTodoSpy).toHaveBeenCalledTimes(1);
+expect(saveTodoSpy).toHaveBeenCalledWith(todo);</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wie auch bei anderen Funktionen, können wir darauf "spyen".</li>
+            <li>Anschließend können wir prüfen, ob die Schnittstellen der Methode korrekt aufgerufen werden.</li>
+            <li>WIr wollen schließlich prüfen, ob die Component End to End funktioniert.</li>
+        </ul>
+    </aside>
 </section>
