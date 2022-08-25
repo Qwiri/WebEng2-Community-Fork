@@ -317,3 +317,81 @@ expect(saveTodoSpy).toHaveBeenCalledWith(todo);</code>
         </ul>
     </aside>
 </section>
+<section>
+    <h4>WaitFor</h4>
+    <ul>
+        <li>warten auf asynchronen Code</li>
+        <li>z.B. bei Backendcalls</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it('should render', async () => {
+    render(&lt;DetailView dataTestId={detailViewDataTestId} /&gt;);
+
+    await waitFor(() => {
+        expect(screen.getByTestId(testId)).toBeInTheDocument();
+    });
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>WaitFor ist eine Funktion, der wir einen Callback übergeben. Die Funktion wird so lange aufgerufen, bis der Callback keine Exceptions mehr zurückliefert oder der Timeout abgelaufen ist.</li>
+            <li>getByTestId wirft eine Exception, falls die TestId nicht gefunden wurde. Dann wird waitFor erneut aufgerufen.</li>
+            <li>Wir können der waitFor Funktion einen Timeout und ein Interval übergeben. Der default für Timeout ist 1000ms und für das Interval 50ms.</li>
+            <li>Wir brauchen waitFor, um darauf zu warten, dass die Daten aus dem MockTodoHttpClient zurückgeliefert wurden und anschließend in der Component angezeigt werden.</li>
+            <li>Auf unseren Pages brauchen wir daher waitFor, da wir sonst nur "loading" zu sehen bekommen würden.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>WaitFor with FireEvent</h4>
+    <ul>
+        <li>Button muss sichtbar sein, bevor er geklickt werden kann</li>
+        <li>die Kombination ist tricky</li>
+        <li>FireEvent darf nicht in WaitFor aufgerufen werden</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>await waitFor(() => {
+    expect(screen.getByTestId(buttonId)).toBeInTheDocument();
+});
+fireEvent.click(screen.getByTestId(buttonId));</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Manchmal müssen wir einen Button klicken, der erst sichtbar wird, nachdem etwas erfolgreich vom Backend geladen wurde.</li>
+            <li>Die Kombination aus waitFor und fireEvent ist dabei nicht so einfach.</li>
+            <li>Wenn wir das fireEvent direkt im waitFor aufrufen, kann es passieren, dass der Button mehrmals geklickt wird, da der Callback öfter ausgeführt werden kann.</li>
+            <li>Das gilt natürlich für alle Seiteneffekte.</li>
+            <li>Daher sollten wir erst prüfen, ob der Button angezeigt wird und erst danach, außerhalb des waitFor, den Button klicken.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Assertions in WaitFor</h4>
+    <ul>
+        <li>nur einzelne Assertions erlaubt</li>
+        <li>führt zu schnellerer Testausführung</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>await waitFor(() => {
+    expect(saveSpy).toHaveBeenCalledTimes(1);
+});
+expect(saveSpy).toHaveBeenCalledWith({ ...todo, done: true });</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wir sollten nur eine Assertion im waitFor stehen haben, da unser Test im Fehlerfall schneller fehlschlägt, außerdem wird weniger Code wiederholt aufgerufen.</li>
+            <li>Die Idee ist wieder: Wir warten bis die UI in einem stabilen Zustand ist und testen anschließend, dass das richtige passiert ist.</li>
+            <li>Es ist auch sinnvoll die Assertions ins waitFor zu schreiben, die schneller fehlschlägt.</li>
+            <li>Wenn wir "toHaveBeenCalledWith" in die waitFor Funktion gepackt hätten, müssten wir auf den Timeout warten, da die Funktion evtl. noch aufgerufen werden könnte.</li>
+            <li>Wird die Funktion zweimal aufgerufen, wird waitFor direkt gestoppt, da die Assertion bereits fehlgeschlagen ist.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: Detail Page Test</h4>
+    <ul>
+        <li>schreibt einen Test für die Detail Page Component</li>
+        <li>was sollten wir testen?</li>
+        <li>Branch: step_2-detail_page_test</li>
+    </ul>
+</section>

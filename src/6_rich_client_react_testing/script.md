@@ -84,6 +84,4 @@
     - Wenigstens eine Page, Organism, Molecule und Atom Component testen.
 
 ## Todos:
-- WaitFor erklären
-- Branch für DetailPage vorbereiten.
-- TodoHttpClient muss noch getestet werden.
+- TodoHttpClient ist getestet, evtl. dazu noch eine Übung hinzufügen. Kurze Erklärung wie man axios mockt.
