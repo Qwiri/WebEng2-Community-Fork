@@ -343,7 +343,7 @@ expect(saveTodoSpy).toHaveBeenCalledWith(todo);</code>
     </aside>
 </section>
 <section>
-    <h4>WaitFor with FireEvent</h4>
+    <h4>WaitFor mit FireEvent</h4>
     <ul>
         <li>Button muss sichtbar sein, bevor er geklickt werden kann</li>
         <li>die Kombination ist tricky</li>
@@ -393,5 +393,54 @@ expect(saveSpy).toHaveBeenCalledWith({ ...todo, done: true });</code>
         <li>schreibt einen Test für die Detail Page Component</li>
         <li>was sollten wir testen?</li>
         <li>Branch: step_2-detail_page_test</li>
+    </ul>
+</section>
+<section>
+    <h4>TodoHttpClient?</h4>
+    <ul>
+        <li>ausgelagerte Logik muss auch getestet werden</li>
+        <li>axios muss gemockt werden</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>jest.mock("axios");
+
+it('should get all todos', async () => {
+    axios.get.mockResolvedValueOnce({data: mockTodos});
+
+    ...
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>jest.mock kennen wir bereits. Wir können damit Components mocken, aber auch andere Javascript Objekte, wie z.B. axios.</li>
+            <li>Anschließend müssen wir dem Mock Objekt natürlich sagen, wie es sich verhalten soll. Dazu bietet uns Jest verschiedene Möglichkeiten</li>
+            <li>mockResolvedValueOnce() sorgt dafür, dass das Mock Objekt diesen Wert genau einmal zurückgibt.</li>
+            <li>Außerdem müssen wir definieren, welche Funktion diesen Wert zurückgibt. Daher rufen wir vorher ".get" auf.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Aufrufe verifizieren</h4>
+    <pre>
+        <code class="javascript" data-line-numbers>it('should get all todos', async () => {
+    ...
+
+    expect(axios.get).toHaveBeenCalledTimes(1);
+    expect(axios.get).toHaveBeenCalledWith(url, headers);
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wir sollten natürlich verifizieren, dass unser Mock Objekt mit den richtigen Werten aufgerufen wurde, schließlich wollen wir prüfen, ob unser Client auch das richtige macht.</li>
+            <li>Dies machen wir wieder wie bei den Mock Funktionen zuvor in den Components. Mit expect können wir die Aufrufe prüfen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: Todo Http Client Test</h4>
+    <ul>
+        <li>Test schreiben für den Client</li>
+        <li>was wollen wir testen?</li>
+        <li>Branch: step_3-todo-http-client</li>
     </ul>
 </section>

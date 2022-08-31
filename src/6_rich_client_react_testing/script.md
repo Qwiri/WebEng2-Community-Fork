@@ -82,6 +82,3 @@
     - Evtl. können wir hier auch erst auf die normale Syntax eingehen, wobei ich die Testing Library Syntax deutlich besser finde.
     - Anschließend Tests für die Components schreiben.
     - Wenigstens eine Page, Organism, Molecule und Atom Component testen.
-
-## Todos:
-- TodoHttpClient ist getestet, evtl. dazu noch eine Übung hinzufügen. Kurze Erklärung wie man axios mockt.
