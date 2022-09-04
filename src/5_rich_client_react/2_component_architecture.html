@@ -31,12 +31,12 @@
     </ul>
     <aside class="notes">
         <ul>
-            <li>Die Idee ist grundlegend seine Webseite in einzelne Components aufzuteilen.</li>
+            <li>Die Idee ist grundlegend, seine Webseite in einzelne Components aufzuteilen.</li>
             <li>Damit teilt man die Komplexität seiner Seite in kleinere Teile (Components).</li>
-            <li>Quasi wie man es aus dem klassischen Softwareengineering kennt. Dort wird auch funktionalität die
-                zusammengehört in Komponenten zusammengefasst.</li>
+            <li>Quasi wie man es aus dem klassischen Softwareengineering kennt. Dort werden auch Funktionalitäten, die
+                zusammengehören, in Komponenten zusammengefasst.</li>
             <li>Ob das nun Klassen sind (OOP) oder Funktionen, ist egal.</li>
-            <li>Über Schnittstellen (vergleich zu Lego die Noppen), können Components dann wieder zusammengesteckt
+            <li>Über Schnittstellen (vergleich zu Lego: die Noppen), können Components dann wieder zusammengesteckt
                 werden.</li>
         </ul>
     </aside>
@@ -98,8 +98,8 @@
     <h4>Components in React</h4>
     <ul>
         <li>React functions sind Components</li>
-        <li>eine React functions kann Parameter entgegennehmen</li>
-        <li>über eine Callback kann ein Wert zurückgegeben werden</li>
+        <li>eine React function kann Parameter entgegennehmen</li>
+        <li>über einen Callback kann ein Wert zurückgegeben werden</li>
     </ul>
     <pre>
         <code class="language-javascript" data-line-numbers>export default function Button({ primary, label, 
@@ -124,7 +124,7 @@
             <li>Über das Label setzen wir einen Text.</li>
             <li>ClassName fügt weiteres Styling hinzu.</li>
             <li>OnClick ist ein Callback, mit dem wir zurückmelden können, wenn der Button geklickt wurde. Damit der
-                Nutzer des Buttons weis was passiert.</li>
+                Nutzer des Buttons weiß, was passiert.</li>
         </ul>
     </aside>
 </section>
@@ -152,7 +152,7 @@ Button.defaultProps = {
     </pre>
     <aside class="notes">
         <ul>
-            <li>Damit der Nutzer des Buttons weis, was er hineingeben kann und muss, können wir die propTypes verwenden.
+            <li>Damit der Nutzer des Buttons weiß, was er hineingeben kann und muss, können wir die propTypes verwenden.
             </li>
             <li>Wir sollten eine klare Schnittstelle definieren, damit der Entwickler, der den Button nutzen möchte,
                 nicht in die Implementierung schauen muss.</li>
@@ -188,16 +188,16 @@ Button.defaultProps = {
             </li>
             <li>Schnellere Entwicklung
                 <ul>
-                    <li>Ich muss den Button nicht noch mal für eine andere Seite Stylen oder mit den Code dazu kopieren.
+                    <li>Ich muss den Button nicht noch mal für eine andere Seite stylen oder mit den Code dazu kopieren.
                     </li>
-                    <li>Ich kann auf bereits basierende Strukturen aufbauen.</li>
+                    <li>Ich kann auf bereits basierenden Strukturen aufbauen.</li>
                 </ul>
             </li>
             <!--Nachteile-->
             <li>tiefe Verschachtelungen
                 <ul>
                     <li>Große Seiten und Anwendungen kämpfen häufig mit einer sehr hohen Verschachtelungstiefe</li>
-                    <li>Durch Komponenten die kein Styling hinzufügen, sondern nur Logik bereitstellen und teilen, wird
+                    <li>Durch Komponenten, die kein Styling hinzufügen, sondern nur Logik bereitstellen und teilen, wird
                         die Wrapper Hölle noch schlimmer.</li>
                     <li>Dies ist nicht sehr übersichtlich.</li>
                 </ul>

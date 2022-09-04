@@ -45,7 +45,7 @@
     <h4>Request-Manipulation - Lösung</h4>
     <ul>
         <li>Datenzugriff nur für berechtigte und authentifizierte Nutzer</li>
-        <li>evtl. zusätzlich keine monoton Aufsteigende Id's</li>
+        <li>evtl. zusätzlich keine monoton aufsteigende Id's</li>
     </ul>
     <aside class="notes">
         <ul>
@@ -153,10 +153,10 @@ em.createNativeQuery(sql)
 <section>
     <h4>Session Hijacking</h4>
     <ul>
-        <li>klauen der Session eines Nutzers</li>
-        <li>raten der Session ID</li>
-        <li>ausspähen der Session ID</li>
-        <li>aussperren des Nutzers durch Passwortänderung</li>
+        <li>Klauen der Session eines Nutzers</li>
+        <li>Raten der Session ID</li>
+        <li>Ausspähen der Session ID</li>
+        <li>Aussperren des Nutzers durch Passwortänderung</li>
     </ul>
     <aside class="notes">
         <ul>
@@ -167,7 +167,7 @@ em.createNativeQuery(sql)
 <section>
     <h4>Session Hijacking - Lösung</h4>
     <ul>
-        <li>binden der Session ID an die IP-Adresse oder Browser</li>
+        <li>Binden der Session ID an die IP-Adresse oder Browser</li>
         <li>größere Session ID wählen</li>
         <li>Passwort ändern verhindern
             <ul>
@@ -184,7 +184,7 @@ em.createNativeQuery(sql)
             <li>über einen Link kann man den Code auch in den Browser eines anderen bringen, dies nennt man nicht-persistentes xss.</li>
             <li>es gibt auch persistentes xss, z.B. über eine Datenbank (Kommentarfunktion)
                 <ul>
-                    <li>eingaben eines Nutzers werden bei anderen Nutzern wieder ausgegeben</li>
+                    <li>Eingaben eines Nutzers werden bei anderen Nutzern wieder ausgegeben</li>
                 </ul>
             </li>
         </ul>
@@ -193,13 +193,13 @@ em.createNativeQuery(sql)
 <section>
     <h4>Cross-Site-Scripting</h4>
     <ul>
-        <li>einfügen von JavaScript Code in Webseiten</li>
+        <li>Einfügen von JavaScript Code in Webseiten</li>
         <li>Ausführung des Codes durch den Browser</li>
         <li>Möglicher Schaden
             <ul>
                 <li>Verwirrung des Nutzers</li>
                 <li>Weiterleitung auf andere Webseiten</li>
-                <li>auslesen und wegschicken von Daten</li>
+                <li>Auslesen und Wegschicken von Daten</li>
             </ul>
         </li>
     </ul>
@@ -207,13 +207,13 @@ em.createNativeQuery(sql)
 <section>
     <h4>Cross-Site-Scripting - Lösung</h4>
     <ul>
-        <li>Encoding von Inhalten die Angezeigt werden</li>
+        <li>Encoding von Inhalten, die angezeigt werden</li>
         <li>Angular bringt das von Haus aus mit</li>
     </ul>
     <img src="assets/cross_site_scripting_solution.png" height="400px"/>
     <aside class="notes">
         <ul>
-            <li>Nicht nur bei der Ausgabe von Inhalten muss geprüft werden. Auch wenn Nutzer Daten an den Server schicken müssen die Inhalte geprüft werden.</li>
+            <li>Nicht nur bei der Ausgabe von Inhalten muss geprüft werden. Auch wenn Nutzer Daten an den Server schicken, müssen die Inhalte geprüft werden.</li>
             <li>Dann kann es gar nicht passieren, dass XSS aus dem Backend an den User ausgeliefert wird.</li>
         </ul>
     </aside>
@@ -224,7 +224,7 @@ em.createNativeQuery(sql)
         <li>Content Security Policy
             <ul>
                 <li>schränkt das Abrufen von Scripts ein</li>
-                <li>schränkt den JavaScript Code ein der ausgeführt wird
+                <li>schränkt den JavaScript Code ein, der ausgeführt wird
                     <ul>
                         <li>eval("some-code")</li>
                     </ul>
@@ -234,7 +234,7 @@ em.createNativeQuery(sql)
     </ul>
     <aside class="notes">
         <ul>
-            <li>eine Content Security Policy sagt dem Browser was er ausführen und laden darf</li>
+            <li>eine Content Security Policy sagt dem Browser, was er ausführen und laden darf</li>
             <li>natürlich kommt es auch darauf an, dass der Browser sich richtig verhält</li>
         </ul>
     </aside>
@@ -268,7 +268,7 @@ em.createNativeQuery(sql)
     <aside class="notes">
         <ul>
             <li>CSRF baut auf XSS auf. Daher am besten XSS verhindern</li>
-            <li>Angular bietet ein HttpClientXsrfModule an. Dies kümmert sich um das teilen eines Secrets (clientseitig)</li>
+            <li>Angular bietet ein HttpClientXsrfModule an. Dies kümmert sich um das Teilen eines Secrets (clientseitig)</li>
         </ul>
     </aside>
 </section>
@@ -305,7 +305,7 @@ em.createNativeQuery(sql)
 <section>
     <h4>Phishing</h4>
     <ul>
-        <li>erlangen von persönlichen Daten durchs Vertrauenserschleichung</li>
+        <li>Erlangen von persönlichen Daten durchs Vertrauenserschleichung</li>
         <li>Angreifer gibt sich z.B. als Webseiten Betreiber aus</li>
         <li>basiert auf Social Engineering</li>
     </ul>
@@ -318,7 +318,7 @@ em.createNativeQuery(sql)
     </ul>
     <aside class="notes">
         <ul>
-            <li>mit 2FA muss der Angreifer auch den zweiten Faktor, das Handy stehlen, um die Identität des Nutzers zu klauen</li>
+            <li>mit 2FA muss der Angreifer auch den zweiten Faktor, das Handy, stehlen, um die Identität des Nutzers zu klauen</li>
             <li>sich im Internet zu bewegen wird immer Mitdenken erfordern</li>
         </ul>
     </aside>
@@ -329,7 +329,7 @@ em.createNativeQuery(sql)
         <li>Überlastung eines Systems durch viele Anfragen</li>
         <li>im speziellen Fall auch Distributed-Denail-of-Service
             <ul>
-                <li>hierbei werden Anfragen von vielen Rechner gestellt</li>
+                <li>hierbei werden Anfragen von vielen Rechnern gestellt</li>
                 <li>oft durch Botnetze</li>
             </ul>
         </li>

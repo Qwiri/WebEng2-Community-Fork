@@ -22,8 +22,8 @@
             <li>React macht vieles einfacher, was wir in plain JavaScript selbst erledigen mussten.</li>
             <li>DOM Manipulation wird durch die JSX Syntax wesentlich einfacher.</li>
             <li>Routing mit entsprechender URL Manipulation wird zum Kinderspiel.</li>
-            <li>Axios ist eine vorgefertigtes Tooling um XMLHttpRequests abzusenden.</li>
-            <li>Change Detection ist schon mal ein Schlagwort, dass ihr euch merken könnt. Auch darauf werde ich später
+            <li>Axios ist eine vorgefertigtes Tooling, um XMLHttpRequests abzusenden.</li>
+            <li>Change Detection ist schon mal ein Schlagwort, das ihr euch merken könnt. Auch darauf werde ich später
                 noch genauer eingehen, wenn es wichtiger für uns wird.</li>
         </ul>
     </aside>
@@ -136,7 +136,7 @@
             <li>Mit dem BrowserRouter wird eine Stelle markiert, an der die einzelnen Seiten angezeigt werden.</li>
             <li>Die Routes definieren alle Seiten, zu denen navigiert werden kann.</li>
             <li>Mehrere Pfade können zu gleichen Seite führen.</li>
-            <li>Der Parameter "element" einer Route, definiert die React Function, zu der navigiert wird.</li>
+            <li>Der Parameter "element" einer Route, definiert die React function, zu der navigiert wird.</li>
             <li>Über ein :someParam kann ein Parameter bei der Navigation mitgegeben werden.</li>
         </ul>
     </aside>
@@ -181,7 +181,7 @@
     </pre>
     <aside class="notes">
         <ul>
-            <li>Über die Funktion "useParams()" bekommt man ein Objekt mit alle übergebenen Parametern.</li>
+            <li>Über die Funktion "useParams()" bekommt man ein Objekt mit allen übergebenen Parametern.</li>
             <li>Der Name des Parameters ist dabei der, der in der Route hinter dem Doppelpunkt definiert wurde.</li>
             <li>Über Javascript Destructing wird der Parameter hier aus dem Objekt destructed.</li>
         </ul>
@@ -214,7 +214,7 @@
     </pre>
     <aside class="notes">
         <ul>
-            <li>Wie ihr sehen könnt brauchen wir nur die URL.</li>
+            <li>Wie ihr sehen könnt, brauchen wir nur die URL.</li>
             <li>Als Response bekommen wir ein Javascript Objekt, welches axios bereits aus dem JSON geparsed hat.</li>
         </ul>
     </aside>
@@ -259,7 +259,7 @@
     </pre>
     <aside class="notes">
         <ul>
-            <li>Um die Funktionen zum laden und speichern von Daten auf verschiedenen Seiten nutzen zu können, sollen wir sie in eine Klasse auslagern.</li>
+            <li>Um die Funktionen zum Laden und Speichern von Daten auf verschiedenen Seiten nutzen zu können, sollten wir sie in eine Klasse auslagern.</li>
             <li>Außerdem bleiben so die React functions frei von solcher Logik und befassen sich nur mit dem Rendering</li>
         </ul>
     </aside>
@@ -288,8 +288,8 @@ function App() {
     <aside class="notes">
         <ul>
             <li>Braucht ihr noch mal eine Erläuterung zu Dependency Injection?</li>
-            <li>Über den React Context können wir gewisse Objekte in teilen des DOM's verfügbar machen.</li>
-            <li>Mit der Funktion "createContext" erstellt man ein Kontext Objekt von einem gewissen Klassentyp.</li>
+            <li>Über den React Context können wir gewisse Objekte in Teilen des DOM's verfügbar machen.</li>
+            <li>Mit der Funktion "createContext" erstellt man ein Kontext-Objekt von einem gewissen Klassentyp.</li>
             <li>Nun hängen wir einen Provider dieses Kontexts in dem DOM ein.</li>
             <li>Dieser Provider erhält nun das konkrete Objekt, das unter dem Provider im DOM verfügbar ist.</li>
         </ul>
@@ -312,7 +312,7 @@ function App() {
 <section>
     <h4>Praxis: Laden dynamischer Daten</h4>
     <ul>
-        <li>schreibt euch einen TodoHttpClient mit dem ihr Todos abrufen könnt</li>
+        <li>schreibt euch einen TodoHttpClient, mit dem ihr Todos abrufen könnt</li>
         <li>startet dazu den Web Service vom letzten Mal</li>
         <li>macht den Client per DI verfügbar</li>
         <li>wer nicht mitgekommen ist:
@@ -333,7 +333,7 @@ function App() {
         <ul>
             <li>React Hooks sind schon fast ein Thema für sich.</li>
             <li>Wenn wir Daten in einer React function speichern wollen, können wir das mit useState() -> gleich mehr dazu</li>
-            <li>In unserer Plain Javascript SPA haben wir auch Code für die initialisierung gebraucht. Bzw. wir haben die einzelnen Seiten initial geladen.</li>
+            <li>In unserer Plain Javascript SPA haben wir auch Code für die Initialisierung gebraucht. Bzw. wir haben die einzelnen Seiten initial geladen.</li>
             <li>In einer React function können wir nicht einfach asynchronen Code ausführen. Es muss immer direkt etwas zum Rendern zurückgegeben werden.</li>
             <li>Daher gibt es Effects, um asynchron etwas vom Backend zu laden. Hier greifen wir dann auf den Client den wir geschrieben haben zu.</li>
         </ul>
@@ -362,7 +362,7 @@ function App() {
             <li>Mit der Funktion useState() können wir Daten in einer React function speichern.</li>
             <li>Die useState() function gibt uns ein Attribut "count" über das wir auf den Wert zugreifen können.</li>
             <li>Der zweite Rückgabewert ist eine function, mit der wir den Wert verändern können.</li>
-            <li>Bennenen können wir die Rückgabewerte wie wir wollen. (hier wird wieder mit destruction gearbeitet)</li>
+            <li>Bennenen können wir die Rückgabewerte, wie wir wollen. (hier wird wieder mit destruction gearbeitet)</li>
             <li>Eine normale Variable würde ihren Wert verlieren, wenn die React function erneut aufgerufen wird.</li>
             <li>useState() erzeugt einen state für die function der besteht. Außerdem wird die React function neu gezeichnet, sobald sich ein state ändert.</li>
             <li>Auch über das onChange event des input fields wird der state neu gesetzt.</li>

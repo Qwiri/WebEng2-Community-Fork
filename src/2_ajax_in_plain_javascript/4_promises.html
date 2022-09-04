@@ -7,7 +7,7 @@
         <li>erleichtern uns das Arbeiten mit asynchronem Code
             <ul>
                 <li>sie machen aus einem Callback wieder einen "regulären" Rückgabewert</li>
-                <li>dieser Rückgabewert ist Zeitversetzt</li>
+                <li>dieser Rückgabewert ist zeitversetzt</li>
                 <li>es wird ein "Versprechen" gegeben, dass ein Wert zurückgegeben wird</li>
             </ul>
         </li>
@@ -105,8 +105,8 @@ promise
             <li>Promises können einfach aneinandergehängt werden. Damit wird der Code einfacher zu lesen.</li>
             <li>Kein Problem mit Namespaces beim Promise chaining.
                 <ul>
-                    <li>Im oberen Beispiel sollten wir für jedes "result" einen anderen Namen nutzen, da das dies sonst für Verwirrung sorgen könnte.</li>#
-                    <li>Wird der gleich Variablenname verwendet, "shadowen" wir die Variable einen "Scope" darüber.</li>
+                    <li>Im oberen Beispiel sollten wir für jedes "result" einen anderen Namen nutzen, da dies sonst für Verwirrung sorgen könnte.</li>#
+                    <li>Wird der gleiche Variablenname verwendet, "shadowen" wir die Variable einen "Scope" darüber.</li>
                 </ul>
             </li>
         </ul>
@@ -128,12 +128,12 @@ promise
     </pre>
     <aside class="notes">
         <ul>
-            <li>Mit Promises können wir recht einfach unser Problem von vorhin lösen. Mehrere Backendcalls können wir mir Promise.all() parallel abschicken und warten bis alle geantwortet haben.</li>
+            <li>Mit Promises können wir recht einfach unser Problem von vorhin lösen. Mehrere Backendcalls können wir mit Promise.all() parallel abschicken und warten bis alle geantwortet haben.</li>
             <li>Promise.all() resolved nur, wenn alle Promises resolved wurden.</li>
             <li>Promise.allSettled() resolved auch, wenn einzelne rejected wurden.</li>
             <li>Promise.any() resolved, wenn ein Promise resolved wurde.</li>
             <li>Weitere Infos findet ihr hier: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise</li>
-            <li>Ist aber nicht tiefergehend Prüfungsrelevant.</li>
+            <li>Ist aber nicht tiefergehend prüfungsrelevant.</li>
         </ul>
     </aside>
 </section>
@@ -150,7 +150,7 @@ promise
     <ul>
         <li>Branch: "step_5" - ein Beispiel für Promises</li>
         <li>Vermeidet die kleine "callback hell" in Branch "step_5"</li>
-        <li>Aufgabe von vorhin (Paralleler Request HTML editieren erst nach dem resolven beider Requests) jetzt mit Promises</li>
+        <li>Aufgabe von vorhin (paralleler Request HTML editieren erst nach dem resolven beider Requests) jetzt mit Promises</li>
         <li>Branch: "step_6" - ein Beispiel für Promise.all() (Lösung)</li>
     </ul>
 </section>
