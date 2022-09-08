@@ -31,8 +31,8 @@
     <h4>Request-Manipulation</h4>
     <ul>
         <li><em>"www.some-domain.de/users/41"</em></li>
-        <li>gibt es vielleicht auch einen user 42?</li>
-        <li>alle öffentlichen Schnittstellen können aufgerufen werden</li>
+        <li>Gibt es vielleicht auch einen user 42?</li>
+        <li>Alle öffentlichen Schnittstellen können aufgerufen werden</li>
     </ul>
     <aside class="notes">
         <ul>
@@ -45,7 +45,7 @@
     <h4>Request-Manipulation - Lösung</h4>
     <ul>
         <li>Datenzugriff nur für berechtigte und authentifizierte Nutzer</li>
-        <li>evtl. zusätzlich keine monoton aufsteigende Id's</li>
+        <li>Evtl. zusätzlich keine monoton aufsteigende Id's</li>
     </ul>
     <aside class="notes">
         <ul>
@@ -57,7 +57,7 @@
 <section>
     <h4>Directory Traversal</h4>
     <ul>
-        <li>ähnlich wie Request-Manipulation</li>
+        <li>Ähnlich wie Request-Manipulation</li>
         <li><em>"http://www.example.com/index.foo?item=datei1.html"</em></li>
         <li><em>"http://www.example.com/index.foo?item=../../../Config.sys"</em></li>
     </ul>
@@ -65,14 +65,14 @@
 <section>
     <h4>Directory Traversal - Lösung</h4>
     <ul>
-        <li>keine sensitiven Daten an öffentlichen Orten ablegen</li>
+        <li>Keine sensitiven Daten an öffentlichen Orten ablegen</li>
         <li>Zugriffsrechte auf Ordner absichern</li>
         <li>Pfade als Eingabe müssen überprüft werden</li>
     </ul>
     <aside class="notes">
         <ul>
-            <li>am besten einen eigenen Server für seine öffentlich zugänglichen Daten</li>
-            <li>ansonsten kann man die einzelnen Ordner gegen Zugriffe von außen schützen</li>
+            <li>Am besten einen eigenen Server für seine öffentlich zugänglichen Daten</li>
+            <li>Ansonsten kann man die einzelnen Ordner gegen Zugriffe von außen schützen</li>
         </ul>
     </aside>
 </section>
@@ -98,8 +98,8 @@ var password = "lala"</code>
     </pre>
     <aside class="notes">
         <ul>
-            <li>wir fügen zusätzlich zum Nutzernamen weiteren SQL Code in den Query ein</li>
-            <li>der Rest des Queries wird damit auskommentiert</li>
+            <li>Wir fügen zusätzlich zum Nutzernamen weiteren SQL Code in den Query ein</li>
+            <li>Der Rest des Queries wird damit auskommentiert</li>
             <li>Nutzername muss in diesem Fall zumindest valide sein</li>
         </ul>
     </aside>
@@ -119,7 +119,7 @@ var password = "lala"</code>
 <section>
     <h4>SQL-Injection - Vorgehen</h4>
     <ul>
-        <li>ausprobieren der gängigsten Namen für
+        <li>Ausprobieren der gängigsten Namen für
             <ul>
                 <li>Datenbanken</li>
                 <li>Tabellen</li>
@@ -130,7 +130,7 @@ var password = "lala"</code>
     </ul>
     <aside class="notes">
         <ul>
-            <li>hier sind Fehlermeldungen der Datenbank gemeint, die an eine öffentliche Schnittstelle weitergeleitet werden</li>
+            <li>Hier sind Fehlermeldungen der Datenbank gemeint, die an eine öffentliche Schnittstelle weitergeleitet werden</li>
         </ul>
     </aside>
 </section>
@@ -160,7 +160,7 @@ em.createNativeQuery(sql)
     </ul>
     <aside class="notes">
         <ul>
-            <li>die Session ID kann z.B. durch Cross Site Scripting geklaut werden</li>
+            <li>Die Session ID kann z.B. durch Cross Site Scripting geklaut werden</li>
         </ul>
     </aside>
 </section>
@@ -168,10 +168,10 @@ em.createNativeQuery(sql)
     <h4>Session Hijacking - Lösung</h4>
     <ul>
         <li>Binden der Session ID an die IP-Adresse oder Browser</li>
-        <li>größere Session ID wählen</li>
+        <li>Größere Session ID wählen</li>
         <li>Passwort ändern verhindern
             <ul>
-                <li>altes Passwort erneut eingeben</li>
+                <li>Altes Passwort erneut eingeben</li>
             </ul>
         </li>
     </ul>
@@ -181,8 +181,8 @@ em.createNativeQuery(sql)
     <img src="assets/cross_site_scripting.png" height="400px"/>
     <aside class="notes">
         <ul>
-            <li>über einen Link kann man den Code auch in den Browser eines anderen bringen, dies nennt man nicht-persistentes xss.</li>
-            <li>es gibt auch persistentes xss, z.B. über eine Datenbank (Kommentarfunktion)
+            <li>Über einen Link kann man den Code auch in den Browser eines anderen bringen, dies nennt man nicht-persistentes xss.</li>
+            <li>Es gibt auch persistentes xss, z.B. über eine Datenbank (Kommentarfunktion)
                 <ul>
                     <li>Eingaben eines Nutzers werden bei anderen Nutzern wieder ausgegeben</li>
                 </ul>
@@ -223,8 +223,8 @@ em.createNativeQuery(sql)
     <ul>
         <li>Content Security Policy
             <ul>
-                <li>schränkt das Abrufen von Scripts ein</li>
-                <li>schränkt den JavaScript Code ein, der ausgeführt wird
+                <li>Schränkt das Abrufen von Scripts ein</li>
+                <li>Schränkt den JavaScript Code ein, der ausgeführt wird
                     <ul>
                         <li>eval("some-code")</li>
                     </ul>
@@ -234,8 +234,8 @@ em.createNativeQuery(sql)
     </ul>
     <aside class="notes">
         <ul>
-            <li>eine Content Security Policy sagt dem Browser, was er ausführen und laden darf</li>
-            <li>natürlich kommt es auch darauf an, dass der Browser sich richtig verhält</li>
+            <li>Eine Content Security Policy sagt dem Browser, was er ausführen und laden darf</li>
+            <li>Natürlich kommt es auch darauf an, dass der Browser sich richtig verhält</li>
         </ul>
     </aside>
 </section>
@@ -257,7 +257,7 @@ em.createNativeQuery(sql)
 <section>
     <h4>Cross-Site-Request-Forgery - Lösung</h4>
     <ul>
-        <li>siehe XSS</li>
+        <li>Siehe XSS</li>
         <li>Webanwendung und Server teilen ein Secret
             <ul>
                 <li>Secret wird bei jedem Request mitgeschickt</li>
@@ -276,10 +276,10 @@ em.createNativeQuery(sql)
     <h4>Man-In-The-Middle (Man-In-The-Browser)</h4>
     <ul>
         <li>Angreifer schaltet sich zwischen Nutzer und Betreiber</li>
-        <li>zum Beispiel durch einen Fake Webauftritt</li>
-        <li>bei Man-In-The-Browser wird kein Fake Webauftritt gebraucht
+        <li>Zum Beispiel durch einen Fake Webauftritt</li>
+        <li>Bei Man-In-The-Browser wird kein Fake Webauftritt gebraucht
             <ul>
-                <li>der Angreifer manipuliert hier direkt den Browser</li>
+                <li>Der Angreifer manipuliert hier direkt den Browser</li>
             </ul>
         </li>
     </ul>
@@ -288,13 +288,13 @@ em.createNativeQuery(sql)
     <h4>Man-In-The-Middle - Lösung</h4>
     <ul>
         <li>HTTPS verwenden (ordentliche Verschlüsselung)</li>
-        <li>zwei Faktor Authentifizierung (2FA)</li>
+        <li>Zwei Faktor Authentifizierung (2FA)</li>
     </ul>
     <aside class="notes">
         <ul>
-            <li>es gibt natürlich noch weitere Maßnahmen, um das Mitlesen von Daten zu verhindern</li>
-            <li>dies sind die beiden primären Methoden, die wir (als Betreiber) in der Hand haben</li>
-            <li>wenn der zweite Faktor ein Schlüssel ist, kann dies zu einer sehr guten Verschlüsselung der Daten genutzt werden</li>
+            <li>Es gibt natürlich noch weitere Maßnahmen, um das Mitlesen von Daten zu verhindern</li>
+            <li>Dies sind die beiden primären Methoden, die wir (als Betreiber) in der Hand haben</li>
+            <li>Wenn der zweite Faktor ein Schlüssel ist, kann dies zu einer sehr guten Verschlüsselung der Daten genutzt werden</li>
         </ul>
     </aside>
 </section>
@@ -307,7 +307,7 @@ em.createNativeQuery(sql)
     <ul>
         <li>Erlangen von persönlichen Daten durchs Vertrauenserschleichung</li>
         <li>Angreifer gibt sich z.B. als Webseiten Betreiber aus</li>
-        <li>basiert auf Social Engineering</li>
+        <li>Basiert auf Social Engineering</li>
     </ul>
 </section>
 <section>
@@ -318,8 +318,8 @@ em.createNativeQuery(sql)
     </ul>
     <aside class="notes">
         <ul>
-            <li>mit 2FA muss der Angreifer auch den zweiten Faktor, das Handy, stehlen, um die Identität des Nutzers zu klauen</li>
-            <li>sich im Internet zu bewegen wird immer Mitdenken erfordern</li>
+            <li>Mit 2FA muss der Angreifer auch den zweiten Faktor, das Handy, stehlen, um die Identität des Nutzers zu klauen</li>
+            <li>Sich im Internet zu bewegen wird immer Mitdenken erfordern</li>
         </ul>
     </aside>
 </section>
@@ -327,23 +327,23 @@ em.createNativeQuery(sql)
     <h4>Denail-Of-Service</h4>
     <ul>
         <li>Überlastung eines Systems durch viele Anfragen</li>
-        <li>im speziellen Fall auch Distributed-Denail-of-Service
+        <li>Im speziellen Fall auch Distributed-Denail-of-Service
             <ul>
-                <li>hierbei werden Anfragen von vielen Rechnern gestellt</li>
-                <li>oft durch Botnetze</li>
+                <li>Hierbei werden Anfragen von vielen Rechnern gestellt</li>
+                <li>Oft durch Botnetze</li>
             </ul>
         </li>
     </ul>
     <aside class="notes">
         <ul>
-            <li>gehackte Rechner werden zu einem Botnetz zusammengesteckt</li>
+            <li>Gehackte Rechner werden zu einem Botnetz zusammengesteckt</li>
         </ul>
     </aside>
 </section>
 <section>
     <h4>Denail-Of-Service - Lösung</h4>
     <ul>
-        <li>wird im Idealfall vom Server Provider verhinder</li>
+        <li>Wird im Idealfall vom Server Provider verhinder</li>
         <li>Muster der Angriffe erkennen und auf diese nicht reagieren</li>
     </ul>
 </section>
