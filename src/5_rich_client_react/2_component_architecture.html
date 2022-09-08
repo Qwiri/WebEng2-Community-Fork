@@ -10,22 +10,22 @@
 <section>
     <h4>Component Architecture</h4>
     <ul>
-        <li>divide et impera
+        <li>Divide et impera
             <ul>
-                <li>teilen der Webseite in einzelnen Components</li>
+                <li>Teilen der Webseite in einzelnen Components</li>
                 <li>Verteilung und Strukturierung der Komplexität</li>
             </ul>
         </li>
         <li>Components
             <ul>
-                <li>enthalten zusammengehörige Funktionalität</li>
-                <li>haben feste Schnittstellen
+                <li>Enthalten zusammengehörige Funktionalität</li>
+                <li>Haben feste Schnittstellen
                     <ul>
-                        <li>möglichst lose Kopplung und hohe Kohäsion</li>
-                        <li>analog wie Legosteine</li>
+                        <li>Möglichst lose Kopplung und hohe Kohäsion</li>
+                        <li>Analog wie Legosteine</li>
                     </ul>
                 </li>
-                <li>abstrahieren Struktur und Styling</li>
+                <li>Abstrahieren Struktur und Styling</li>
             </ul>
         </li>
     </ul>
@@ -84,12 +84,12 @@
     </pre>
     <ul>
         <li>Components haben feste Schnittstellen</li>
-        <li>damit können sie modular eingesetzt werden</li>
-        <li>es können Parameter rein und rausgegeben werden</li>
+        <li>Damit können sie modular eingesetzt werden</li>
+        <li>Es können Parameter rein und rausgegeben werden</li>
     </ul>
     <aside class="notes">
         <ul>
-            <li>wir setzen mit der Component Architecture auf klassischen HTML Elementen auf und bauen daraus eigene
+            <li>Wir setzen mit der Component Architecture auf klassischen HTML Elementen auf und bauen daraus eigene
                 Components</li>
         </ul>
     </aside>
@@ -98,8 +98,8 @@
     <h4>Components in React</h4>
     <ul>
         <li>React functions sind Components</li>
-        <li>eine React function kann Parameter entgegennehmen</li>
-        <li>über einen Callback kann ein Wert zurückgegeben werden</li>
+        <li>Eine React function kann Parameter entgegennehmen</li>
+        <li>Über einen Callback kann ein Wert zurückgegeben werden</li>
     </ul>
     <pre>
         <code class="language-javascript" data-line-numbers>export default function Button({ primary, label, 
@@ -131,8 +131,8 @@
 <section>
     <h4>Components in React</h4>
     <ul>
-        <li>über propTypes können wir eine Schnittstelle definieren</li>
-        <li>über defaultProps können wir Defaultwerte hinterlegen</li>
+        <li>Über propTypes können wir eine Schnittstelle definieren</li>
+        <li>Über defaultProps können wir Defaultwerte hinterlegen</li>
     </ul>
     <pre>
         <code class="language-javascript" data-line-numbers>export default function Button({ ... }) {
@@ -166,13 +166,13 @@ Button.defaultProps = {
             <ul>
                 <li>Konsistenz im Styling</li>
                 <li>Wiederverwendbarkeit</li>
-                <li>schnellere Entwicklung</li>
-                <li>einfachere Instandhaltung </li>
+                <li>Schnellere Entwicklung</li>
+                <li>Einfachere Instandhaltung </li>
             </ul>
         </li>
         <li>Nachteile:
             <ul>
-                <li>tiefe Verschachtelungen möglich</li>
+                <li>Tiefe Verschachtelungen möglich</li>
             </ul>
         </li>
     </ul>
@@ -208,8 +208,8 @@ Button.defaultProps = {
 <section>
     <h4>Praxis: Component Architecture</h4>
     <ul>
-        <li>aufteilen der ListView Seite in kleinere Components</li>
-        <li>überlegt euch selbst, wie ihr die Seite aufteilen könnt</li>
+        <li>Aufteilen der ListView Seite in kleinere Components</li>
+        <li>Überlegt euch selbst, wie ihr die Seite aufteilen könnt</li>
         <li>Basiskomponenten stehen bereit um Zeit zu sparen
             <ul>
                 <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_3-component_architecture)</li>

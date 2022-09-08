@@ -4,18 +4,18 @@
 <section>
     <h4>Wie hilft uns React?</h4>
     <ul>
-        <li>unterstützt
+        <li>Unterstützt
             <ul>
                 <li>DOM Manipulation</li>
                 <li>Routing</li>
             </ul>
         </li>
-        <li>bietet eine Menge Libraries zur Unterstützung
+        <li>Bietet eine Menge Libraries zur Unterstützung
             <ul>
-                <li>axios: für XMLHttpRequests</li>
+                <li>Axios: für XMLHttpRequests</li>
             </ul>
         </li>
-        <li>bietet Change Detection</li>
+        <li>Bietet Change Detection</li>
     </ul>
     <aside class="notes">
         <ul>
@@ -31,8 +31,8 @@
 <section>
     <h4>React functions</h4>
     <ul>
-        <li>enthalten Information und Logik zum Rendern der UI</li>
-        <li>eine Mischung aus Javascript und HTML (JSX)</li>
+        <li>Enthalten Information und Logik zum Rendern der UI</li>
+        <li>Eine Mischung aus Javascript und HTML (JSX)</li>
     </ul>
     <pre>
         <code class="language-javascript" data-line-numbers="">export default function ReactFunction() {
@@ -102,15 +102,15 @@
     <h4>Praxis: React functions (ListView)</h4>
     <ul>
         <li>ListView mit React bauen</li>
-        <li>ganz simpel, kein Styling, kein Backend!</li>
+        <li>Ganz simpel, kein Styling, kein Backend!</li>
         <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_0-list_view)</li>
     </ul>
 </section>
 <section>
     <h4>React routing</h4>
     <ul>
-        <li>bietet uns einfache Navigation</li>
-        <li>automatische Anpassung der URL</li>
+        <li>Bietet uns einfache Navigation</li>
+        <li>Automatische Anpassung der URL</li>
     </ul>
 </section>
 <section>
@@ -144,7 +144,7 @@
 <section>
     <h4>React routing</h4>
     <ul>
-        <li>mit useNavigate() können wir Navigationen auslösen.</li>
+        <li>Mit useNavigate() können wir Navigationen auslösen.</li>
     </ul>
     <pre>
         <code class="language-javascript" data-line-numbers="">export default function SomeScreen() {
@@ -190,9 +190,9 @@
 <section>
     <h4>Praxis: React routing</h4>
     <ul>
-        <li>zu unserem bestehenden ListView bauen wir einen DetailView</li>
+        <li>Zu unserem bestehenden ListView bauen wir einen DetailView</li>
         <li>Navigation zum DetailView und zurück soll möglich sein</li>
-        <li>wer nicht mitgekommen ist:
+        <li>Wer nicht mitgekommen ist:
             <ul>
                 <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_1-routing)</li>
             </ul>
@@ -202,7 +202,7 @@
 <section>
     <h4>Laden dynamischer Daten</h4>
     <ul>
-        <li>mit der Library axios</li>
+        <li>Mit der Library axios</li>
         <li>GET Request wie folgt:</li>
     </ul>
     <pre>
@@ -268,7 +268,7 @@
     <h4>Laden dynamischer Daten</h4>
     <ul>
         <li>Bereitstellen des DataHttpClient mittels Dependency Injection</li>
-        <li>in React nutzt man Context Injection</li>
+        <li>In React nutzt man Context Injection</li>
     </ul>
     <pre>
         <code class="language-javascript" data-line-numbers="">export const DataHttpClientContext = 
@@ -299,7 +299,7 @@ function App() {
     <h4>Laden dynamischer Daten</h4>
     <ul>
         <li>Abrufen des Objekts mit useContext()</li>
-        <li>nur möglich, wenn sich die React function im korrekten Kontext befindet</li>
+        <li>Nur möglich, wenn sich die React function im korrekten Kontext befindet</li>
     </ul>
     <pre>
         <code class="language-javascript" data-line-numbers="">export default function Screen1() {
@@ -312,10 +312,10 @@ function App() {
 <section>
     <h4>Praxis: Laden dynamischer Daten</h4>
     <ul>
-        <li>schreibt euch einen TodoHttpClient, mit dem ihr Todos abrufen könnt</li>
-        <li>startet dazu den Web Service vom letzten Mal</li>
-        <li>macht den Client per DI verfügbar</li>
-        <li>wer nicht mitgekommen ist:
+        <li>Schreibt euch einen TodoHttpClient, mit dem ihr Todos abrufen könnt</li>
+        <li>Startet dazu den Web Service vom letzten Mal</li>
+        <li>Macht den Client per DI verfügbar</li>
+        <li>Wer nicht mitgekommen ist:
             <ul>
                 <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_2-load_data)</li>
             </ul>
@@ -325,8 +325,8 @@ function App() {
 <section>
     <h4>React Hooks</h4>
     <ul>
-        <li>ein Thema für sich</li>
-        <li>speichern von State: useState()</li>
+        <li>Ein Thema für sich</li>
+        <li>Speichern von State: useState()</li>
         <li>Lifecycle: useEffect()</li>
     </ul>
     <aside class="notes">
@@ -344,7 +344,7 @@ function App() {
     <ul>
         <li>useState()
             <ul>
-                <li>zum Speichern/Ändern von Daten in einer React function</li>
+                <li>Zum Speichern/Ändern von Daten in einer React function</li>
             </ul>
         </li>
     </ul>
@@ -405,7 +405,7 @@ function App() {
     <ul>
         <li>useEffect()
             <ul>
-                <li>funktioniert gut in Kombination mit useState()</li>
+                <li>Funktioniert gut in Kombination mit useState()</li>
             </ul>
         </li>
     </ul>
@@ -436,8 +436,8 @@ function App() {
     <ul>
         <li>useEffect()
             <ul>
-                <li>muss nicht auf State Änderungen reagieren</li>
-                <li>reagiert auf alle Parameter im Array</li>
+                <li>Muss nicht auf State Änderungen reagieren</li>
+                <li>Reagiert auf alle Parameter im Array</li>
             </ul>
         </li>
     </ul>
@@ -467,7 +467,7 @@ function App() {
     <ul>
         <li>useEffect()
             <ul>
-                <li>kann zum Aufräumen verwendet</li>
+                <li>Kann zum Aufräumen verwendet</li>
             </ul>
         </li>
     </ul>
@@ -496,10 +496,10 @@ function App() {
 <section>
     <h4>Praxis: React Hooks</h4>
     <ul>
-        <li>ladet die Todos über den Client mit dem useEffect() Hook</li>
-        <li>für den ListView und den DetailView</li>
-        <li>macht die Checkbox im Detailview funktionsfähig</li>
-        <li>wer nicht mitgekommen ist:
+        <li>Ladet die Todos über den Client mit dem useEffect() Hook</li>
+        <li>Für den ListView und den DetailView</li>
+        <li>Macht die Checkbox im Detailview funktionsfähig</li>
+        <li>Wer nicht mitgekommen ist:
             <ul>
                 <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_3-react_hooks)</li>
             </ul>
