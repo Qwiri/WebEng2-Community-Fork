@@ -4,11 +4,11 @@
 <section>
     <h4>Promises</h4>
     <ul>
-        <li>erleichtern uns das Arbeiten mit asynchronem Code
+        <li>Erleichtern uns das Arbeiten mit asynchronem Code
             <ul>
-                <li>sie machen aus einem Callback wieder einen "regulären" Rückgabewert</li>
-                <li>dieser Rückgabewert ist zeitversetzt</li>
-                <li>es wird ein "Versprechen" gegeben, dass ein Wert zurückgegeben wird</li>
+                <li>Sie machen aus einem Callback wieder einen "regulären" Rückgabewert</li>
+                <li>Dieser Rückgabewert ist zeitversetzt</li>
+                <li>Es wird ein "Versprechen" gegeben, dass ein Wert zurückgegeben wird</li>
             </ul>
         </li>
     </ul>
@@ -29,11 +29,11 @@ promise
     <aside class="notes">
         <ul>
             <li>Promises werden wie normale Datentypen (string, number, date, etc.) aus einer Funktion zurückgegeben.</li>
-            <li>damit sieht der Programmfluss schon mal "normaler" aus.</li>
-            <li>wenn ich das Ergebnis des Promises haben möchte
+            <li>Damit sieht der Programmfluss schon mal "normaler" aus.</li>
+            <li>Wenn ich das Ergebnis des Promises haben möchte
                 <ul>
-                    <li>rufe ich .then auf, um einen Callback einzufügen, der das Ergebnis verarbeitet.</li>
-                    <li>rufe ich .catch auf, um im Fehlerfall ein Fehlerhandling hinzuzufügen.</li>
+                    <li>Rufe ich .then auf, um einen Callback einzufügen, der das Ergebnis verarbeitet.</li>
+                    <li>Rufe ich .catch auf, um im Fehlerfall ein Fehlerhandling hinzuzufügen.</li>
                 </ul>
             </li>
             <li>Jetzt geben wir wieder Callbacks in das Promise, haben wir damit etwas gewonnen?</li>
@@ -45,7 +45,7 @@ promise
     <h4>Promises Beispiel:</h4>
     <ul>
         <li>Wichtig: an dem XMLHttpRequest ändert sich erstmal nichts</li>
-        <li>der Callback muss also in ein Promise umgewandelt werden</li>
+        <li>Der Callback muss also in ein Promise umgewandelt werden</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers="|2|5-8">function get() {
@@ -65,8 +65,8 @@ promise
         <ul>
             <li>Wenn man ein neues Promise erstellt, bekommt man in einem Callback eine resolve und eine reject Funktion.
                 <ul>
-                    <li>resolve nimmt im positiven Fall das Ergebnis zurück.</li>
-                    <li>mit reject wird ein Fehler zurückgegeben.</li>
+                    <li>Resolve nimmt im positiven Fall das Ergebnis zurück.</li>
+                    <li>Mit reject wird ein Fehler zurückgegeben.</li>
                 </ul>
             </li>
             <li>In diesem Fall gebe ich das Ergebnis vom Backend zurück, wenn es geklappt hat oder den Statustext, wenn ein Fehler aufgetreten ist.</li>
@@ -158,7 +158,7 @@ promise
     <h4>Praxis: Promises und die Event Loop</h4>
     <ul>
         <li>Promises sind Microtasks</li>
-        <li>sie landen daher auf der Microqueue</li>
+        <li>Sie landen daher auf der Microqueue</li>
         <li>Tasks in der Microqueue werden nächstmöglich bearbeitet</li>
         <li>Testet mal setTimeout() vs Promise.resolve().then()</li>
     </ul>
