@@ -4,9 +4,9 @@
 <section>
     <h4>React Testing Library</h4>
     <ul>
-        <li>wir benutzen die React Testing Library</li>
-        <li>natives Testing enthält sehr viel Boilerplate</li>
-        <li>die Testing Library stellt auch eine einfachere API bereit</li>
+        <li>Wir benutzen die React Testing Library</li>
+        <li>Natives Testing enthält sehr viel Boilerplate</li>
+        <li>Die Testing Library stellt auch eine einfachere API bereit</li>
     </ul>
     <aside class="notes">
         <ul>
@@ -18,7 +18,7 @@
 <section>
     <h4>render()</h4>
     <ul>
-        <li>zum Rendern der Component</li>
+        <li>Zum Rendern der Component</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>it('some test', () => {
@@ -30,7 +30,7 @@
 <section>
     <h4>screen</h4>
     <ul>
-        <li>zum Abrufen von gerenderten Inhalten</li>
+        <li>Zum Abrufen von gerenderten Inhalten</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>it('some test', () => {
@@ -45,7 +45,7 @@
 <section>
     <h4>screen Funktionen</h4>
     <ul>
-        <li>verschiedene Funktionen, um Inhalt zu suchen</li>
+        <li>Verschiedene Funktionen, um Inhalt zu suchen</li>
         <li>getBy... wirft einen Fehler wenn (Element != 1)</li>
         <li>queryBy... gibt null zurück</li>
         <li>findBy... gibt ein Promise zurück</li>
@@ -78,7 +78,7 @@
 <section>
     <h4>fireEvent</h4>
     <ul>
-        <li>hilft uns beim triggern von Events</li>
+        <li>Hilft uns beim triggern von Events</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>it('some test', () => {
@@ -101,7 +101,7 @@
 <section>
     <h4>jest.fn()</h4>
     <ul>
-        <li>mocken von Funktionen</li>
+        <li>Mocken von Funktionen</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>it('some test', () => {
@@ -125,8 +125,8 @@
 <section>
     <h4>Praxis: Button Test</h4>
     <ul>
-        <li>schreibt einen Test für die Button Component</li>
-        <li>was sollten wir testen?</li>
+        <li>Schreibt einen Test für die Button Component</li>
+        <li>Was sollten wir testen?</li>
         <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react_testing</li>
         <li>Branch: step_0-button_test</li>
     </ul>
@@ -134,7 +134,7 @@
 <section>
     <h4>Next Step: Testen eines List View Items</h4>
     <ul>
-        <li>isoliertes Testen?</li>
+        <li>Isoliertes Testen?</li>
         <li>Child Components haben eigene Tests</li>
     </ul>
     <pre>
@@ -162,7 +162,7 @@
     <h4>Child Components mocken</h4>
     <ul>
         <li>jest.mock erlaubt es uns Imports zu mocken</li>
-        <li>wir überschreiben nun die Component</li>
+        <li>Wir überschreiben nun die Component</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>jest.mock('../../molecules/.../InputCheckboxGroup', () => {
@@ -181,9 +181,9 @@
 <section>
     <h4>Praxis: List View Item Test</h4>
     <ul>
-        <li>schreibt einen Test für die ListViewItem Component</li>
-        <li>was muss getestet werden?</li>
-        <li>mockt die Child Components</li>
+        <li>Schreibt einen Test für die ListViewItem Component</li>
+        <li>Was muss getestet werden?</li>
+        <li>Mockt die Child Components</li>
         <li>Branch: step_1-list_view_item_test</li>
     </ul>
 </section>
@@ -222,8 +222,8 @@
 <section>
     <h4>Routing im Test</h4>
     <ul>
-        <li>navigate sollte gemockt werden</li>
-        <li>das Routing sollten wir prüfen</li>
+        <li>Navigate sollte gemockt werden</li>
+        <li>Das Routing sollten wir prüfen</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>const navigate = jest.fn();
@@ -249,7 +249,7 @@ expect(navigate).toHaveBeenCalledWith(`/list`);</code>
     <h4>Context mocken im Test</h4>
     <ul>
         <li>TodoHttpClient muss gemockt werden</li>
-        <li>für isoliertes Testing</li>
+        <li>Für isoliertes Testing</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>let todoHttpClientMock;
@@ -320,8 +320,8 @@ expect(saveTodoSpy).toHaveBeenCalledWith(todo);</code>
 <section>
     <h4>WaitFor</h4>
     <ul>
-        <li>warten auf asynchronen Code</li>
-        <li>z.B. bei Backendcalls</li>
+        <li>Warten auf asynchronen Code</li>
+        <li>Z.B. bei Backendcalls</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>it('should render', async () => {
@@ -346,7 +346,7 @@ expect(saveTodoSpy).toHaveBeenCalledWith(todo);</code>
     <h4>WaitFor mit FireEvent</h4>
     <ul>
         <li>Button muss sichtbar sein, bevor er geklickt werden kann</li>
-        <li>die Kombination ist tricky</li>
+        <li>Die Kombination ist tricky</li>
         <li>FireEvent darf nicht in WaitFor aufgerufen werden</li>
     </ul>
     <pre>
@@ -368,8 +368,8 @@ fireEvent.click(screen.getByTestId(buttonId));</code>
 <section>
     <h4>Assertions in WaitFor</h4>
     <ul>
-        <li>nur einzelne Assertions erlaubt</li>
-        <li>führt zu schnellerer Testausführung</li>
+        <li>Nur einzelne Assertions erlaubt</li>
+        <li>Führt zu schnellerer Testausführung</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>await waitFor(() => {
@@ -390,16 +390,16 @@ expect(saveSpy).toHaveBeenCalledWith({ ...todo, done: true });</code>
 <section>
     <h4>Praxis: Detail Page Test</h4>
     <ul>
-        <li>schreibt einen Test für die Detail Page Component</li>
-        <li>was sollten wir testen?</li>
+        <li>Schreibt einen Test für die Detail Page Component</li>
+        <li>Was sollten wir testen?</li>
         <li>Branch: step_2-detail_page_test</li>
     </ul>
 </section>
 <section>
     <h4>TodoHttpClient?</h4>
     <ul>
-        <li>ausgelagerte Logik muss auch getestet werden</li>
-        <li>axios muss gemockt werden</li>
+        <li>Ausgelagerte Logik muss auch getestet werden</li>
+        <li>Axios muss gemockt werden</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>jest.mock("axios");
@@ -440,7 +440,7 @@ it('should get all todos', async () => {
     <h4>Praxis: Todo Http Client Test</h4>
     <ul>
         <li>Test schreiben für den Client</li>
-        <li>was wollen wir testen?</li>
+        <li>Was wollen wir testen?</li>
         <li>Branch: step_3-todo-http-client</li>
     </ul>
 </section>

@@ -5,8 +5,8 @@
     <h4>Was sollten wir im Frontend testen?</h4>
     <ul>
         <li>Logik in unseren Components</li>
-        <li>dynamisches Rendering in Components</li>
-        <li>weitere Javascript Logik (TodoHttpClient)</li>
+        <li>Dynamisches Rendering in Components</li>
+        <li>Weitere Javascript Logik (TodoHttpClient)</li>
     </ul>
     <aside class="notes">
         <ul>
@@ -21,7 +21,7 @@
     <ul>
         <li>Nutzer interagieren mit Buttons und Textfeldern ...</li>
         <li>... nicht mit Javascript Funktionen</li>
-        <li>am besten immer End to End</li>
+        <li>Am besten immer End to End</li>
     </ul>
     <aside class="notes">
         <ul>
@@ -72,14 +72,14 @@
 <section>
     <h4>Testbeschreibung</h4>
     <ul>
-        <li>sollte einem Schema folgen
+        <li>Sollte einem Schema folgen
             <ul>
-                <li>z.B. "Object ... should ... when"</li>
-                <li>gerne auch andere Schemas</li>
-                <li>viele gehen in ähnliche Richtung</li>
+                <li>Z.B. "Object ... should ... when"</li>
+                <li>Gerne auch andere Schemas</li>
+                <li>Viele gehen in ähnliche Richtung</li>
             </ul>
         </li>
-        <li>oft hilft es einen Satz zu bilden</li>
+        <li>Oft hilft es einen Satz zu bilden</li>
         <li>Testbeschreibung als lebende Doku</li>
     </ul>
     <pre>
@@ -97,8 +97,8 @@
 <section>
     <h4>Testbeschreibung</h4>
     <ul>
-        <li>sollte wenig Duplizierungen enthalten</li>
-        <li>damit entsteht eine saubere Struktur</li>
+        <li>Sollte wenig Duplizierungen enthalten</li>
+        <li>Damit entsteht eine saubere Struktur</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>describe('ComponentUnderTest', () => {
@@ -125,13 +125,13 @@
 <section>
     <h4>Single Responsibility Principle</h4>
     <ul>
-        <li>jeder Test sollte nur eine Sache testen
+        <li>Jeder Test sollte nur eine Sache testen
             <ul>
-                <li>am besten ein "expect" pro Test</li>
-                <li>macht es einfacher eine Testbeschreibung zu finden</li>
+                <li>Am besten ein "expect" pro Test</li>
+                <li>Macht es einfacher eine Testbeschreibung zu finden</li>
             </ul>
         </li>
-        <li>im Fehlerfall ist das Problem schneller erkannt</li>
+        <li>Im Fehlerfall ist das Problem schneller erkannt</li>
     </ul>
     <aside class="notes">
         <ul>
@@ -143,13 +143,13 @@
 <section>
     <h4>Codeduplizierung (in Tests)</h4>
     <ul>
-        <li>ist ein kontroverses Thema</li>
-        <li>kann trotzdem vermieden werden</li>
-        <li>setup Code kann in "beforeEach"/"beforeAll"</li>
-        <li>parametrisierte Tests
+        <li>Ist ein kontroverses Thema</li>
+        <li>Kann trotzdem vermieden werden</li>
+        <li>Setup Code kann in "beforeEach"/"beforeAll"</li>
+        <li>Parametrisierte Tests
             <ul>
-                <li>gleicher Test mit unterschiedlichen Parametern</li>
-                <li>weniger Codeduplizierung</li>
+                <li>Gleicher Test mit unterschiedlichen Parametern</li>
+                <li>Weniger Codeduplizierung</li>
             </ul>
         </li>
     </ul>
@@ -181,7 +181,7 @@
             <ul>
                 <li>Produktivcode ist abhängig vom aktuellen Datum</li>
                 <li>Testcode muss damit auch vom aktuellen Datum abhängig sein</li>
-                <li>typischer Aprilscherz</li>
+                <li>Typischer Aprilscherz</li>
             </ul>
         </li>
     </ul>
