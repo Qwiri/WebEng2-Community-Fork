@@ -165,17 +165,17 @@
                 <textarea data-template>
                     #### Mögliche Ursachen (Plattformunabhängig)
 
-                    - unterschiedliche Plattformen (Windows, Mac, iOS, etc.)
-                        - stellen unterschiedliche Umgebungen bereit
-                        - erfordern unterschiedliche Anwendungen
+                    - Unterschiedliche Plattformen (Windows, Mac, iOS, etc.)
+                        - Stellen unterschiedliche Umgebungen bereit
+                        - Erfordern unterschiedliche Anwendungen
                     - Web Browser folgen dem W3C Standard
-                        - eine Anwendung läuft in jedem Browser (theoretisch)
+                        - Eine Anwendung läuft in jedem Browser (theoretisch)
                 </textarea>
                 <aside class="notes">
                     <ul>
-                        <li>unterschiedliche Plattformen (Mobile und Web mit verschiedenen Betriebssystemen)
+                        <li>Unterschiedliche Plattformen (Mobile und Web mit verschiedenen Betriebssystemen)
                             <ul>
-                                <li>unterschiedliche Systemumgebungen, unterschiedliche Entwicklungsumgebungen</li>
+                                <li>Unterschiedliche Systemumgebungen, unterschiedliche Entwicklungsumgebungen</li>
                             </ul>
                         </li>
                         <li>Web Browser funktionieren theoretisch alle gleich. In der Praxis unterscheiden sie sich
@@ -190,10 +190,10 @@
                     #### Mögliche Ursachen
 
                     - Datenübertragung übers Internet ist günstig
-                        - früher Messung in KB heute in MB (für Webfrontends)
-                    - niedrige Einstiegshürde für Entwickler
+                        - Früher Messung in KB heute in MB (für Webfrontends)
+                    - Niedrige Einstiegshürde für Entwickler
                         - HTML, JavaScript und CSS wird interpretiert
-                        - schnelle Resultate
+                        - Schnelle Resultate
                 </textarea>
                 <aside class="notes">
                     <ul>
@@ -216,14 +216,16 @@
                 <textarea data-template>
                     #### Ablauf der Vorlesung
     
-                    - Theoretische Einführung
-                    - Praktische Vertiefung
-                    - Praktische Übung
+                    - Mix aus Theorie und Praxis
+                    - Im Wechsel
+                        - Kurze Theorie
+                        - Praktische Anwendung
                 </textarea>
                 <aside class="notes">
                     <ul>
                         <li>Anteile variieren.</li>
                         <li>Kommt auf das Thema an.</li>
+                        <li>Wir versuchen häufig kleine Praxisübungen einzuschieben, damit man gelerntes direkt vertiefen kann und es nicht langweilig wird.</li>
                     </ul>
                 </aside>
             </section>
@@ -232,11 +234,10 @@
                     #### Themen
 
                     - Dynamisches HTML
-                    - Rich Client
+                    - Single Page Application (incl. Server)
                     - Benutzerverwaltung
                     - Security
                     - Prüfungsvorbereitung
-                    - App Entwicklung (Optional)
                 </textarea>
             </section>
             <section data-markdown>
@@ -244,9 +245,9 @@
                     #### Dynamisches HTML
 
                     - Umsetzung einer Anwendung
-                        - mit bereits erlernten Technologien
+                        - Mit bereits erlernten Technologien
                         - Java, HTML und JSP
-                    - wir nutzen JSF
+                    - Wir nutzen JSF
                         - MVC Design
                         - Lifecycle und Eventmanagement
                 </textarea>
@@ -254,10 +255,10 @@
                     <ul>
                         <li>Umsetzung mit erlernten Technologien
                             <ul>
-                                <li>wir schauen mal wie weit wir kommen, mit dem was wir schon können</li>
+                                <li>Wir schauen mal wie weit wir kommen, mit dem was wir schon können</li>
                             </ul>
                         </li>
-                        <li>früher nutze JSF JSP, seit JSF 2 gibt es eine eigenes Rendering (facelets -> erweiterte
+                        <li>Früher nutze JSF JSP, seit JSF 2 gibt es eine eigenes Rendering (facelets -> erweiterte
                             servlets).
                         </li>
                         <li>JSF
@@ -272,18 +273,18 @@
             </section>
             <section data-markdown>
                 <textarea data-template>
-                    #### Rich Client
+                    #### Single Page Application
 
                     - Umsetzung einer Anwendung
-                        - mit unbekannten Technologien
-                        - Typescript, Angular und Spring
+                        - Mit unbekannten Technologien
+                        - Javascript, React und Spring
                     - Aufteilung in Frontend und Backend
-                        - 2-3 Vorlesungseinheiten
+                        - 4 Vorlesungseinheiten
                 </textarea>
                 <aside class="notes">
                     <ul>
                         <li>Aufteilung in Frontend und Backend</li>
-                        <li>Rich Clients sind häufig in Frontend und Backend geteilt, da das Frontend bereits eine
+                        <li>Single Page Applications sind häufig in Frontend und Backend geteilt, da das Frontend bereits eine
                             eigene
                             Anwendung ist.
                         </li>
@@ -293,31 +294,30 @@
             </section>
             <section data-markdown>
                 <textarea data-template>
-                    #### Rich Client
+                    #### Single Page Application
 
-                    - Warum Angular?
-                        - stärkere Struktur
-                        - gut zum Einsteigen
+                    - Warum React?
+                        - Javascript solltet ihr teilweise können
+                        - Niedrige Einstiegshürde
                     - Warum Spring?
-                        - weit verbreitet
-                        - wenig Konfiguration
+                        - Weit verbreitet
+                        - Wenig Konfiguration
                     - Frameworks sind repräsentativ für ihre Gattung
                 </textarea>
                 <aside class="notes">
                     <ul>
-                        <li>Warum Angular?
+                        <li>Warum React?
                             <ul>
-                                <li>weit verbreitet</li>
-                                <li>werdet ihr bestimmt in Projekten mal sehen</li>
-                                <li>Wir kennen uns damit aus</li>
+                                <li>Weit verbreitet</li>
+                                <li>Werdet ihr bestimmt in Projekten mal sehen</li>
                             </ul>
                         </li>
                         <li>Warum Spring?
                             <ul>
-                                <li>wichtig für das Arbeitsleben</li>
-                                <li>wird euch wahrscheinlich mal unterkommen</li>
-                                <li>wenig Zeit für das Setup</li>
-                                <li>weniger auf die Technik konzentrieren</li>
+                                <li>Wichtig für das Arbeitsleben</li>
+                                <li>Wird euch wahrscheinlich mal unterkommen</li>
+                                <li>Wenig Zeit für das Setup</li>
+                                <li>Weniger auf die Technik konzentrieren</li>
                             </ul>
                         </li>
                     </ul>
@@ -333,15 +333,15 @@
                         - Datenverwaltung
                         - Abrechnungsverwaltung
                     - OAuth2 und JWT
-                        - ist "der" verbreitete Standard
+                        - Ist "der" verbreitete Standard
                 </textarea>
                 <aside class="notes">
                     <ul>
                         <li>Nutzer müssen identifiziert werden
                             <ul>
-                                <li>brauchen verschiedene Rechte</li>
-                                <li>dürfen nur auf bestimmte Daten zugreifen</li>
-                                <li>müssen evtl. für Dienstleistungen bezahlen</li>
+                                <li>Brauchen verschiedene Rechte</li>
+                                <li>Dürfen nur auf bestimmte Daten zugreifen</li>
+                                <li>Müssen evtl. für Dienstleistungen bezahlen</li>
                             </ul>
                         </li>
                         <li>Benutzerverwaltung ist kompliziert
@@ -349,8 +349,8 @@
                         </li>
                         <li>OAuth2
                             <ul>
-                                <li>weil kompliziert bitte Standards verwenden</li>
-                                <li>und best practices einhalten</li>
+                                <li>Weil kompliziert bitte Standards verwenden</li>
+                                <li>Und best practices einhalten</li>
                             </ul>
                         </li>
                     </ul>
@@ -365,7 +365,7 @@
                         - Confidentiality
                         - Integrity
                         - Availability
-                    - wird gerne vernachlässigt
+                    - Wird gerne vernachlässigt
                     - Benutzerfreundlichkeit steht im Konflikt zu Security
                 </textarea>
                 <aside class="notes" data-markdown>
@@ -380,7 +380,7 @@
                     #### Praxisteil
 
                     - Skeleton Projekt
-                        - wird als Git Repository bereitgestellt
+                        - Wird als Git Repository bereitgestellt
                     - Funktionale Anforderungen stellen wir bereit
                     - Gemeinsame Umsetzung der Anforderungen
                 </textarea>
@@ -390,11 +390,12 @@
                     #### Voraussetzungen Praxisteil
 
                     - Vorhandene Entwicklungsumgebung
-                        - wir unterstützen: Intellij & Eclipse
+                        - Wir unterstützen: Intellij & Eclipse
+                        - Fürs Frontend auch VS-Code
                     - Projekte auf Gitlab
                         - Git ist installiert!
                     - Java Projekte über Maven
-                        - mit Maven Wrapper
+                        - Mit Maven Wrapper
                     - JavaScript Projekte mit NPM
                         - NPM ist installiert!
                 </textarea>

@@ -9,18 +9,18 @@ Wir brauchen natürlich nicht alle Entwicklungsumgebungen. Jeder von euch sollte
 - Eclipse
     - Open Source
     - für Java entwickelt
-    - für Angular gibt es einen Plugin (habs noch nicht getestet)
+    - für React gibt es einen Plugin (habs noch nicht getestet)
     - https://www.eclipse.org/getting_started/
 - Intellij Idea
     - Community Edition ist Open Source
-    - Ultimate kostet
-    - perfekt für Java & Kotlin
-    - für Angular, React oder andere JavaScript/TypeScript Frameworks ebenfalls sehr gut
+    - Ultimate kostet (nicht für Studenten)
+    - perfekt für Java
+    - für React oder andere JavaScript/TypeScript Frameworks ebenfalls gut (oder Webstorm verwenden)
     - https://www.jetbrains.com/help/idea/getting-started.html
 - VisualStudio Code
     - Open Source
     - hauptsächlich für die Frontendentwicklung
-    - Angular, React, JavaScript, TypeScript etc.
+    - für React oder andere JavaScript/TypeScipt Frameworks super geeignet
     - https://code.visualstudio.com/docs/introvideos/basics
     
 ### Versionsverwaltung (Git)
