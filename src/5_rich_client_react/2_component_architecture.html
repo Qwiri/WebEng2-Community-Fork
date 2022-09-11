@@ -10,33 +10,33 @@
 <section>
     <h4>Component Architecture</h4>
     <ul>
-        <li>divide et impera
+        <li>Divide et impera
             <ul>
-                <li>teilen der Webseite in einzelnen Components</li>
+                <li>Teilen der Webseite in einzelnen Components</li>
                 <li>Verteilung und Strukturierung der Komplexität</li>
             </ul>
         </li>
         <li>Components
             <ul>
-                <li>enthalten zusammengehörige Funktionalität</li>
-                <li>haben feste Schnittstellen
+                <li>Enthalten zusammengehörige Funktionalität</li>
+                <li>Haben feste Schnittstellen
                     <ul>
-                        <li>möglichst lose Kopplung und hohe Kohäsion</li>
-                        <li>analog wie Legosteine</li>
+                        <li>Möglichst lose Kopplung und hohe Kohäsion</li>
+                        <li>Analog wie Legosteine</li>
                     </ul>
                 </li>
-                <li>abstrahieren Struktur und Styling</li>
+                <li>Abstrahieren Struktur und Styling</li>
             </ul>
         </li>
     </ul>
     <aside class="notes">
         <ul>
-            <li>Die Idee ist grundlegend seine Webseite in einzelne Components aufzuteilen.</li>
+            <li>Die Idee ist grundlegend, seine Webseite in einzelne Components aufzuteilen.</li>
             <li>Damit teilt man die Komplexität seiner Seite in kleinere Teile (Components).</li>
-            <li>Quasi wie man es aus dem klassischen Softwareengineering kennt. Dort wird auch funktionalität die
-                zusammengehört in Komponenten zusammengefasst.</li>
+            <li>Quasi wie man es aus dem klassischen Softwareengineering kennt. Dort werden auch Funktionalitäten, die
+                zusammengehören, in Komponenten zusammengefasst.</li>
             <li>Ob das nun Klassen sind (OOP) oder Funktionen, ist egal.</li>
-            <li>Über Schnittstellen (vergleich zu Lego die Noppen), können Components dann wieder zusammengesteckt
+            <li>Über Schnittstellen (vergleich zu Lego: die Noppen), können Components dann wieder zusammengesteckt
                 werden.</li>
         </ul>
     </aside>
@@ -84,12 +84,12 @@
     </pre>
     <ul>
         <li>Components haben feste Schnittstellen</li>
-        <li>damit können sie modular eingesetzt werden</li>
-        <li>es können Parameter rein und rausgegeben werden</li>
+        <li>Damit können sie modular eingesetzt werden</li>
+        <li>Es können Parameter rein und rausgegeben werden</li>
     </ul>
     <aside class="notes">
         <ul>
-            <li>wir setzen mit der Component Architecture auf klassischen HTML Elementen auf und bauen daraus eigene
+            <li>Wir setzen mit der Component Architecture auf klassischen HTML Elementen auf und bauen daraus eigene
                 Components</li>
         </ul>
     </aside>
@@ -98,8 +98,8 @@
     <h4>Components in React</h4>
     <ul>
         <li>React functions sind Components</li>
-        <li>eine React functions kann Parameter entgegennehmen</li>
-        <li>über eine Callback kann ein Wert zurückgegeben werden</li>
+        <li>Eine React function kann Parameter entgegennehmen</li>
+        <li>Über einen Callback kann ein Wert zurückgegeben werden</li>
     </ul>
     <pre>
         <code class="language-javascript" data-line-numbers>export default function Button({ primary, label, 
@@ -124,15 +124,15 @@
             <li>Über das Label setzen wir einen Text.</li>
             <li>ClassName fügt weiteres Styling hinzu.</li>
             <li>OnClick ist ein Callback, mit dem wir zurückmelden können, wenn der Button geklickt wurde. Damit der
-                Nutzer des Buttons weis was passiert.</li>
+                Nutzer des Buttons weiß, was passiert.</li>
         </ul>
     </aside>
 </section>
 <section>
     <h4>Components in React</h4>
     <ul>
-        <li>über propTypes können wir eine Schnittstelle definieren</li>
-        <li>über defaultProps können wir Defaultwerte hinterlegen</li>
+        <li>Über propTypes können wir eine Schnittstelle definieren</li>
+        <li>Über defaultProps können wir Defaultwerte hinterlegen</li>
     </ul>
     <pre>
         <code class="language-javascript" data-line-numbers>export default function Button({ ... }) {
@@ -152,7 +152,7 @@ Button.defaultProps = {
     </pre>
     <aside class="notes">
         <ul>
-            <li>Damit der Nutzer des Buttons weis, was er hineingeben kann und muss, können wir die propTypes verwenden.
+            <li>Damit der Nutzer des Buttons weiß, was er hineingeben kann und muss, können wir die propTypes verwenden.
             </li>
             <li>Wir sollten eine klare Schnittstelle definieren, damit der Entwickler, der den Button nutzen möchte,
                 nicht in die Implementierung schauen muss.</li>
@@ -166,13 +166,13 @@ Button.defaultProps = {
             <ul>
                 <li>Konsistenz im Styling</li>
                 <li>Wiederverwendbarkeit</li>
-                <li>schnellere Entwicklung</li>
-                <li>einfachere Instandhaltung </li>
+                <li>Schnellere Entwicklung</li>
+                <li>Einfachere Instandhaltung </li>
             </ul>
         </li>
         <li>Nachteile:
             <ul>
-                <li>tiefe Verschachtelungen möglich</li>
+                <li>Tiefe Verschachtelungen möglich</li>
             </ul>
         </li>
     </ul>
@@ -188,16 +188,16 @@ Button.defaultProps = {
             </li>
             <li>Schnellere Entwicklung
                 <ul>
-                    <li>Ich muss den Button nicht noch mal für eine andere Seite Stylen oder mit den Code dazu kopieren.
+                    <li>Ich muss den Button nicht noch mal für eine andere Seite stylen oder mit den Code dazu kopieren.
                     </li>
-                    <li>Ich kann auf bereits basierende Strukturen aufbauen.</li>
+                    <li>Ich kann auf bereits basierenden Strukturen aufbauen.</li>
                 </ul>
             </li>
             <!--Nachteile-->
             <li>tiefe Verschachtelungen
                 <ul>
                     <li>Große Seiten und Anwendungen kämpfen häufig mit einer sehr hohen Verschachtelungstiefe</li>
-                    <li>Durch Komponenten die kein Styling hinzufügen, sondern nur Logik bereitstellen und teilen, wird
+                    <li>Durch Komponenten, die kein Styling hinzufügen, sondern nur Logik bereitstellen und teilen, wird
                         die Wrapper Hölle noch schlimmer.</li>
                     <li>Dies ist nicht sehr übersichtlich.</li>
                 </ul>
@@ -208,8 +208,8 @@ Button.defaultProps = {
 <section>
     <h4>Praxis: Component Architecture</h4>
     <ul>
-        <li>aufteilen der ListView Seite in kleinere Components</li>
-        <li>überlegt euch selbst, wie ihr die Seite aufteilen könnt</li>
+        <li>Aufteilen der ListView Seite in kleinere Components</li>
+        <li>Überlegt euch selbst, wie ihr die Seite aufteilen könnt</li>
         <li>Basiskomponenten stehen bereit um Zeit zu sparen
             <ul>
                 <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_3-component_architecture)</li>

@@ -5,23 +5,23 @@
     <h4>Synchron</h4>
     <ul>
         <li>Programmabschnitte werden der Reihe nach ausgeführt</li>
-        <li>im Code ist bereits festgehalten wie diese Reihenfolge aussieht</li>
-        <li>zur Laufzeit kann sich diese nicht ändern</li>
+        <li>Im Code ist bereits festgehalten, wie diese Reihenfolge aussieht</li>
+        <li>Zur Laufzeit kann sich diese nicht ändern</li>
     </ul>
 </section>
 <section>
     <h4>Asynchron</h4>
     <ul>
-        <li>Programmschritte werden nicht Synchron ausgeführt</li>
-        <li>es muss nicht auf Programmschritte gewartet werden</li>
+        <li>Programmschritte werden nicht synchron ausgeführt</li>
+        <li>Es muss nicht auf Programmschritte gewartet werden</li>
         <li>Programmschritte können gleichzeitig ausgeführt werden (nicht in JS)</li>
     </ul>
     <aside class="notes">
         <ul>
-            <li>Wenn wir Programmschritte haben, die länger dauern oder auf einen Request vom Backend warten, können wir in der zwischenzeit bereits anderen Code ausführen.</li>
+            <li>Wenn wir Programmschritte haben, die länger dauern oder auf einen Request vom Backend warten, können wir in der Zwischenzeit bereits anderen Code ausführen.</li>
             <li>In Java können wir über verschiedene Threads rechenintensive Programmschritte, die unabhängig voneinander sind, parallel ausführen.</li>
-            <li>In Javscript ist dies nicht möglich. Javascript hat nur einen einzigen Thread zu verfügung. Damit ist echte parallelität nicht verfügbar.</li>
-            <li>Wir können uns asynchonität trotzdem zur nutze machen, da wir bereits Code ausführen können, wenn wir noch auf einen Backend request warten. Schließlich ist während dem Request keine Berechnung notwendig.</li>
+            <li>In Javscript ist dies nicht möglich. Javascript hat nur einen einzigen Thread zur Verfügung. Damit ist echte Parallelität nicht verfügbar.</li>
+            <li>Wir können uns Asynchonität trotzdem zu nutze machen, da wir bereits Code ausführen können, wenn wir noch auf einen Backend Request warten. Schließlich ist während des Requests keine Berechnung notwendig.</li>
             <li>Um das besser zu verstehen, schauen wir uns dies wieder in der Praxis an.</li>
         </ul>
     </aside>
@@ -52,7 +52,7 @@ function asynchron() {
             <li>Die Zahl, die wir übergeben, definiert die Millisekunden, die mindestens gewartet werden, bis der Callback aufgerufen wird.</li>
             <li>Warum mindestens?</li>
             <li>Wie wir gelernt haben, haben wir in Javascript kein Multithreading. Das heißt alles wird auf einem Thread ausgeführt. Es kann daher passieren, dass nach 1000 Millisekunden grade etwas anderes ausgeführt wird und unser Callback warten muss.</li>
-            <li>Am besten wir spielen noch etwas mit "setTimeout" herum, um die asynchronität besser zu verstehen.</li>
+            <li>Am besten spielen wir noch etwas mit "setTimeout" herum, um die Asynchronität besser zu verstehen.</li>
         </ul>
     </aside>
 </section>
@@ -66,12 +66,12 @@ function asynchron() {
             <li>Tasks werden in diese Event Loop eingestellt und nacheinander abgearbeitet.</li>
             <li>Zwischen jedem Task wird einmal durch die Event Loop gekreist. Damit könnte ein Rerender ausgelöst werden.</li>
             <li>Damit wird sichergestellt, dass die UI zwischenzeitlich neu gezeichnet wird und der Nutzer keine Lags hat.</li>
-            <li>Normale asynchrone Tasks werden auf der so genannten Macroqueue eingestellt. Pro Event Loop cycle wird ein Macrotask ausgeführt.</li>
+            <li>Normale asynchrone Tasks werden auf der so genannten Macroqueue eingestellt. Pro Event Loop Cycle wird ein Macrotask ausgeführt.</li>
             <li>Damit wird sichergestellt, dass zwischendrin immer ein Rerender passieren kann.</li>
             <li>Für wichtigere Tasks gibt es noch mal die Microqueue. Tasks der Microqueue werden zum nächstmöglichen Zeitpunkt ausgeführt.</li>
-            <li>Sobald kein Task mehr ausgeführt wird und auch kein Rerender stattfindet werden solange Tasks von der Microqueue ausgeführt bis nichts mehr in der Microqueue ist.</li>
+            <li>Sobald kein Task mehr ausgeführt wird und auch kein Rerender stattfindet, werden solange Tasks von der Microqueue ausgeführt bis nichts mehr in der Microqueue ist.</li>
             <li>Callbacks eines Promises landen auf der Microqueue. Zu Promises später mehr.</li>
-            <li>Schaut euch gerne noch mal das Video ausführlich an, dann versteht ihr im Detail wie die Event Loop funktioniert.</li>
+            <li>Schaut euch gerne noch mal das Video ausführlich an, dann versteht ihr im Detail, wie die Event Loop funktioniert.</li>
         </ul>
     </aside>
 </section>

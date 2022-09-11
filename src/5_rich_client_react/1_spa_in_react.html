@@ -4,26 +4,26 @@
 <section>
     <h4>Wie hilft uns React?</h4>
     <ul>
-        <li>unterstützt
+        <li>Unterstützt
             <ul>
                 <li>DOM Manipulation</li>
                 <li>Routing</li>
             </ul>
         </li>
-        <li>bietet eine Menge Libraries zur Unterstützung
+        <li>Bietet eine Menge Libraries zur Unterstützung
             <ul>
-                <li>axios: für XMLHttpRequests</li>
+                <li>Axios: für XMLHttpRequests</li>
             </ul>
         </li>
-        <li>bietet Change Detection</li>
+        <li>Bietet Change Detection</li>
     </ul>
     <aside class="notes">
         <ul>
             <li>React macht vieles einfacher, was wir in plain JavaScript selbst erledigen mussten.</li>
             <li>DOM Manipulation wird durch die JSX Syntax wesentlich einfacher.</li>
             <li>Routing mit entsprechender URL Manipulation wird zum Kinderspiel.</li>
-            <li>Axios ist eine vorgefertigtes Tooling um XMLHttpRequests abzusenden.</li>
-            <li>Change Detection ist schon mal ein Schlagwort, dass ihr euch merken könnt. Auch darauf werde ich später
+            <li>Axios ist eine vorgefertigtes Tooling, um XMLHttpRequests abzusenden.</li>
+            <li>Change Detection ist schon mal ein Schlagwort, das ihr euch merken könnt. Auch darauf werde ich später
                 noch genauer eingehen, wenn es wichtiger für uns wird.</li>
         </ul>
     </aside>
@@ -31,8 +31,8 @@
 <section>
     <h4>React functions</h4>
     <ul>
-        <li>enthalten Information und Logik zum Rendern der UI</li>
-        <li>eine Mischung aus Javascript und HTML (JSX)</li>
+        <li>Enthalten Information und Logik zum Rendern der UI</li>
+        <li>Eine Mischung aus Javascript und HTML (JSX)</li>
     </ul>
     <pre>
         <code class="language-javascript" data-line-numbers="">export default function ReactFunction() {
@@ -102,15 +102,15 @@
     <h4>Praxis: React functions (ListView)</h4>
     <ul>
         <li>ListView mit React bauen</li>
-        <li>ganz simpel, kein Styling, kein Backend!</li>
+        <li>Ganz simpel, kein Styling, kein Backend!</li>
         <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_0-list_view)</li>
     </ul>
 </section>
 <section>
     <h4>React routing</h4>
     <ul>
-        <li>bietet uns einfache Navigation</li>
-        <li>automatische Anpassung der URL</li>
+        <li>Bietet uns einfache Navigation</li>
+        <li>Automatische Anpassung der URL</li>
     </ul>
 </section>
 <section>
@@ -136,7 +136,7 @@
             <li>Mit dem BrowserRouter wird eine Stelle markiert, an der die einzelnen Seiten angezeigt werden.</li>
             <li>Die Routes definieren alle Seiten, zu denen navigiert werden kann.</li>
             <li>Mehrere Pfade können zu gleichen Seite führen.</li>
-            <li>Der Parameter "element" einer Route, definiert die React Function, zu der navigiert wird.</li>
+            <li>Der Parameter "element" einer Route, definiert die React function, zu der navigiert wird.</li>
             <li>Über ein :someParam kann ein Parameter bei der Navigation mitgegeben werden.</li>
         </ul>
     </aside>
@@ -144,7 +144,7 @@
 <section>
     <h4>React routing</h4>
     <ul>
-        <li>mit useNavigate() können wir Navigationen auslösen.</li>
+        <li>Mit useNavigate() können wir Navigationen auslösen.</li>
     </ul>
     <pre>
         <code class="language-javascript" data-line-numbers="">export default function SomeScreen() {
@@ -181,7 +181,7 @@
     </pre>
     <aside class="notes">
         <ul>
-            <li>Über die Funktion "useParams()" bekommt man ein Objekt mit alle übergebenen Parametern.</li>
+            <li>Über die Funktion "useParams()" bekommt man ein Objekt mit allen übergebenen Parametern.</li>
             <li>Der Name des Parameters ist dabei der, der in der Route hinter dem Doppelpunkt definiert wurde.</li>
             <li>Über Javascript Destructing wird der Parameter hier aus dem Objekt destructed.</li>
         </ul>
@@ -190,9 +190,9 @@
 <section>
     <h4>Praxis: React routing</h4>
     <ul>
-        <li>zu unserem bestehenden ListView bauen wir einen DetailView</li>
+        <li>Zu unserem bestehenden ListView bauen wir einen DetailView</li>
         <li>Navigation zum DetailView und zurück soll möglich sein</li>
-        <li>wer nicht mitgekommen ist:
+        <li>Wer nicht mitgekommen ist:
             <ul>
                 <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_1-routing)</li>
             </ul>
@@ -202,7 +202,7 @@
 <section>
     <h4>Laden dynamischer Daten</h4>
     <ul>
-        <li>mit der Library axios</li>
+        <li>Mit der Library axios</li>
         <li>GET Request wie folgt:</li>
     </ul>
     <pre>
@@ -214,7 +214,7 @@
     </pre>
     <aside class="notes">
         <ul>
-            <li>Wie ihr sehen könnt brauchen wir nur die URL.</li>
+            <li>Wie ihr sehen könnt, brauchen wir nur die URL.</li>
             <li>Als Response bekommen wir ein Javascript Objekt, welches axios bereits aus dem JSON geparsed hat.</li>
         </ul>
     </aside>
@@ -259,7 +259,7 @@
     </pre>
     <aside class="notes">
         <ul>
-            <li>Um die Funktionen zum laden und speichern von Daten auf verschiedenen Seiten nutzen zu können, sollen wir sie in eine Klasse auslagern.</li>
+            <li>Um die Funktionen zum Laden und Speichern von Daten auf verschiedenen Seiten nutzen zu können, sollten wir sie in eine Klasse auslagern.</li>
             <li>Außerdem bleiben so die React functions frei von solcher Logik und befassen sich nur mit dem Rendering</li>
         </ul>
     </aside>
@@ -268,7 +268,7 @@
     <h4>Laden dynamischer Daten</h4>
     <ul>
         <li>Bereitstellen des DataHttpClient mittels Dependency Injection</li>
-        <li>in React nutzt man Context Injection</li>
+        <li>In React nutzt man Context Injection</li>
     </ul>
     <pre>
         <code class="language-javascript" data-line-numbers="">export const DataHttpClientContext = 
@@ -288,8 +288,8 @@ function App() {
     <aside class="notes">
         <ul>
             <li>Braucht ihr noch mal eine Erläuterung zu Dependency Injection?</li>
-            <li>Über den React Context können wir gewisse Objekte in teilen des DOM's verfügbar machen.</li>
-            <li>Mit der Funktion "createContext" erstellt man ein Kontext Objekt von einem gewissen Klassentyp.</li>
+            <li>Über den React Context können wir gewisse Objekte in Teilen des DOM's verfügbar machen.</li>
+            <li>Mit der Funktion "createContext" erstellt man ein Kontext-Objekt von einem gewissen Klassentyp.</li>
             <li>Nun hängen wir einen Provider dieses Kontexts in dem DOM ein.</li>
             <li>Dieser Provider erhält nun das konkrete Objekt, das unter dem Provider im DOM verfügbar ist.</li>
         </ul>
@@ -299,7 +299,7 @@ function App() {
     <h4>Laden dynamischer Daten</h4>
     <ul>
         <li>Abrufen des Objekts mit useContext()</li>
-        <li>nur möglich, wenn sich die React function im korrekten Kontext befindet</li>
+        <li>Nur möglich, wenn sich die React function im korrekten Kontext befindet</li>
     </ul>
     <pre>
         <code class="language-javascript" data-line-numbers="">export default function Screen1() {
@@ -312,10 +312,10 @@ function App() {
 <section>
     <h4>Praxis: Laden dynamischer Daten</h4>
     <ul>
-        <li>schreibt euch einen TodoHttpClient mit dem ihr Todos abrufen könnt</li>
-        <li>startet dazu den Web Service vom letzten Mal</li>
-        <li>macht den Client per DI verfügbar</li>
-        <li>wer nicht mitgekommen ist:
+        <li>Schreibt euch einen TodoHttpClient, mit dem ihr Todos abrufen könnt</li>
+        <li>Startet dazu den Web Service vom letzten Mal</li>
+        <li>Macht den Client per DI verfügbar</li>
+        <li>Wer nicht mitgekommen ist:
             <ul>
                 <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_2-load_data)</li>
             </ul>
@@ -325,15 +325,15 @@ function App() {
 <section>
     <h4>React Hooks</h4>
     <ul>
-        <li>ein Thema für sich</li>
-        <li>speichern von State: useState()</li>
+        <li>Ein Thema für sich</li>
+        <li>Speichern von State: useState()</li>
         <li>Lifecycle: useEffect()</li>
     </ul>
     <aside class="notes">
         <ul>
             <li>React Hooks sind schon fast ein Thema für sich.</li>
             <li>Wenn wir Daten in einer React function speichern wollen, können wir das mit useState() -> gleich mehr dazu</li>
-            <li>In unserer Plain Javascript SPA haben wir auch Code für die initialisierung gebraucht. Bzw. wir haben die einzelnen Seiten initial geladen.</li>
+            <li>In unserer Plain Javascript SPA haben wir auch Code für die Initialisierung gebraucht. Bzw. wir haben die einzelnen Seiten initial geladen.</li>
             <li>In einer React function können wir nicht einfach asynchronen Code ausführen. Es muss immer direkt etwas zum Rendern zurückgegeben werden.</li>
             <li>Daher gibt es Effects, um asynchron etwas vom Backend zu laden. Hier greifen wir dann auf den Client den wir geschrieben haben zu.</li>
         </ul>
@@ -344,7 +344,7 @@ function App() {
     <ul>
         <li>useState()
             <ul>
-                <li>zum Speichern/Ändern von Daten in einer React function</li>
+                <li>Zum Speichern/Ändern von Daten in einer React function</li>
             </ul>
         </li>
     </ul>
@@ -362,7 +362,7 @@ function App() {
             <li>Mit der Funktion useState() können wir Daten in einer React function speichern.</li>
             <li>Die useState() function gibt uns ein Attribut "count" über das wir auf den Wert zugreifen können.</li>
             <li>Der zweite Rückgabewert ist eine function, mit der wir den Wert verändern können.</li>
-            <li>Bennenen können wir die Rückgabewerte wie wir wollen. (hier wird wieder mit destruction gearbeitet)</li>
+            <li>Bennenen können wir die Rückgabewerte, wie wir wollen. (hier wird wieder mit destruction gearbeitet)</li>
             <li>Eine normale Variable würde ihren Wert verlieren, wenn die React function erneut aufgerufen wird.</li>
             <li>useState() erzeugt einen state für die function der besteht. Außerdem wird die React function neu gezeichnet, sobald sich ein state ändert.</li>
             <li>Auch über das onChange event des input fields wird der state neu gesetzt.</li>
@@ -405,7 +405,7 @@ function App() {
     <ul>
         <li>useEffect()
             <ul>
-                <li>funktioniert gut in Kombination mit useState()</li>
+                <li>Funktioniert gut in Kombination mit useState()</li>
             </ul>
         </li>
     </ul>
@@ -436,8 +436,8 @@ function App() {
     <ul>
         <li>useEffect()
             <ul>
-                <li>muss nicht auf State Änderungen reagieren</li>
-                <li>reagiert auf alle Parameter im Array</li>
+                <li>Muss nicht auf State Änderungen reagieren</li>
+                <li>Reagiert auf alle Parameter im Array</li>
             </ul>
         </li>
     </ul>
@@ -467,7 +467,7 @@ function App() {
     <ul>
         <li>useEffect()
             <ul>
-                <li>kann zum Aufräumen verwendet</li>
+                <li>Kann zum Aufräumen verwendet</li>
             </ul>
         </li>
     </ul>
@@ -496,10 +496,10 @@ function App() {
 <section>
     <h4>Praxis: React Hooks</h4>
     <ul>
-        <li>ladet die Todos über den Client mit dem useEffect() Hook</li>
-        <li>für den ListView und den DetailView</li>
-        <li>macht die Checkbox im Detailview funktionsfähig</li>
-        <li>wer nicht mitgekommen ist:
+        <li>Ladet die Todos über den Client mit dem useEffect() Hook</li>
+        <li>Für den ListView und den DetailView</li>
+        <li>Macht die Checkbox im Detailview funktionsfähig</li>
+        <li>Wer nicht mitgekommen ist:
             <ul>
                 <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_3-react_hooks)</li>
             </ul>

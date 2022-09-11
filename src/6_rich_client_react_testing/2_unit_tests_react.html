@@ -4,9 +4,9 @@
 <section>
     <h4>React Testing Library</h4>
     <ul>
-        <li>wir benutzen die React Testing Library</li>
-        <li>natives Testing enthält sehr viel Boilerplate</li>
-        <li>die Testing Library stellt auch eine einfachere API bereit</li>
+        <li>Wir benutzen die React Testing Library</li>
+        <li>Natives Testing enthält sehr viel Boilerplate</li>
+        <li>Die Testing Library stellt auch eine einfachere API bereit</li>
     </ul>
     <aside class="notes">
         <ul>
@@ -18,7 +18,7 @@
 <section>
     <h4>render()</h4>
     <ul>
-        <li>zum Rendern der Component</li>
+        <li>Zum Rendern der Component</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>it('some test', () => {
@@ -30,7 +30,7 @@
 <section>
     <h4>screen</h4>
     <ul>
-        <li>zum Abrufen von gerenderten Inhalten</li>
+        <li>Zum Abrufen von gerenderten Inhalten</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>it('some test', () => {
@@ -45,7 +45,7 @@
 <section>
     <h4>screen Funktionen</h4>
     <ul>
-        <li>verschiedene Funktionen, um Inhalt zu suchen</li>
+        <li>Verschiedene Funktionen, um Inhalt zu suchen</li>
         <li>getBy... wirft einen Fehler wenn (Element != 1)</li>
         <li>queryBy... gibt null zurück</li>
         <li>findBy... gibt ein Promise zurück</li>
@@ -67,7 +67,7 @@
     <aside class="notes">
         <ul>
             <li>Das Screen Objekt bietet verschiedene Funktionen, um Inhalt im DOM zu finden.</li>
-            <li>getBy... queryBy... und findBy... gibt es jeweils auch für mehrere Elemente heißt dann getByAll...</li>
+            <li>getBy... queryBy... und findBy... gibt es jeweils auch für mehrere Elemente, heißt dann getByAll...</li>
             <li>Wir können dann nach Text, einer speziellen DataTestId oder nach einer Component suchen.</li>
             <li>Es gibt noch weitere Funktionen. Schaut dazu einfach in die Doku: https://testing-library.com/docs/react-testing-library/cheatsheet/</li>
             <li>expect kennen wir bereits -> ist quasi ein assert (von Java).</li>
@@ -78,7 +78,7 @@
 <section>
     <h4>fireEvent</h4>
     <ul>
-        <li>hilft uns beim triggern von Events</li>
+        <li>Hilft uns beim triggern von Events</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>it('some test', () => {
@@ -101,7 +101,7 @@
 <section>
     <h4>jest.fn()</h4>
     <ul>
-        <li>mocken von Funktionen</li>
+        <li>Mocken von Funktionen</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>it('some test', () => {
@@ -125,8 +125,8 @@
 <section>
     <h4>Praxis: Button Test</h4>
     <ul>
-        <li>schreibt einen Test für die Button Component</li>
-        <li>was sollten wir testen?</li>
+        <li>Schreibt einen Test für die Button Component</li>
+        <li>Was sollten wir testen?</li>
         <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react_testing</li>
         <li>Branch: step_0-button_test</li>
     </ul>
@@ -134,7 +134,7 @@
 <section>
     <h4>Next Step: Testen eines List View Items</h4>
     <ul>
-        <li>isoliertes Testen?</li>
+        <li>Isoliertes Testen?</li>
         <li>Child Components haben eigene Tests</li>
     </ul>
     <pre>
@@ -154,7 +154,7 @@
             <li>Dazu gehören nicht nur Abhängigkeiten, wie z.B. unser TodoHttpClient, sondern auch Child Components.</li>
             <li>Die InputCheckboxGroup Component und die Button Component haben ihre eigenen Unit Tests.</li>
             <li>Wir wollen sie eigentlich nicht mittesten, sondern nur prüfen, ob die ListViewItem Component korrekt funktioniert.</li>
-            <li>Daher testen wir nur bis zur Schnittstelle. Das heißt wir prüfen ob die korrekten Parameter in die Component hineingegeben wurden und was passiert, wenn ein Callback von einer Child Component aufgerufen wird.</li>
+            <li>Daher testen wir nur bis zur Schnittstelle. Das heißt wir prüfen, ob die korrekten Parameter in die Component hineingegeben wurden und was passiert, wenn ein Callback von einer Child Component aufgerufen wird.</li>
         </ul>
     </aside>
 </section>
@@ -162,7 +162,7 @@
     <h4>Child Components mocken</h4>
     <ul>
         <li>jest.mock erlaubt es uns Imports zu mocken</li>
-        <li>wir überschreiben nun die Component</li>
+        <li>Wir überschreiben nun die Component</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>jest.mock('../../molecules/.../InputCheckboxGroup', () => {
@@ -174,16 +174,16 @@
     <aside class="notes">
         <ul>
             <li>Auch unsere Mock Component bekommt die "props" hineingereicht.</li>
-            <li>Da wir prüfen wollen, ob die parameter korrekt sind, schreiben wir sie einfach ins HTML, dann können wir sie später auf ihre Korrektheit prüfen.</li>
+            <li>Da wir prüfen wollen, ob die Parameter korrekt sind, schreiben wir sie einfach ins HTML, dann können wir sie später auf ihre Korrektheit prüfen.</li>
         </ul>
     </aside>
 </section>
 <section>
     <h4>Praxis: List View Item Test</h4>
     <ul>
-        <li>schreibt einen Test für die ListViewItem Component</li>
-        <li>was muss getestet werden?</li>
-        <li>mockt die Child Components</li>
+        <li>Schreibt einen Test für die ListViewItem Component</li>
+        <li>Was muss getestet werden?</li>
+        <li>Mockt die Child Components</li>
         <li>Branch: step_1-list_view_item_test</li>
     </ul>
 </section>
@@ -222,8 +222,8 @@
 <section>
     <h4>Routing im Test</h4>
     <ul>
-        <li>navigate sollte gemockt werden</li>
-        <li>das Routing sollten wir prüfen</li>
+        <li>Navigate sollte gemockt werden</li>
+        <li>Das Routing sollten wir prüfen</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>const navigate = jest.fn();
@@ -249,7 +249,7 @@ expect(navigate).toHaveBeenCalledWith(`/list`);</code>
     <h4>Context mocken im Test</h4>
     <ul>
         <li>TodoHttpClient muss gemockt werden</li>
-        <li>für isoliertes Testing</li>
+        <li>Für isoliertes Testing</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>let todoHttpClientMock;
@@ -268,7 +268,7 @@ beforeEach(() => {
     <aside class="notes">
         <ul>
             <li>Über Dependency Injection (genau genommen Context Injection) können wir den TodoHttpClient nutzen.</li>
-            <li>Dies machen wir, damit die HTTP Calls abstrahier von verschiedenen Stellen aus getätigt werden können und die Logik dafür nicht in jeder Component dupliziert ist.</li>
+            <li>Dies machen wir, damit die HTTP Calls abstrahiert von verschiedenen Stellen aus getätigt werden können und die Logik dafür nicht in jeder Component dupliziert ist.</li>
             <li>Außerdem können wir dadurch im Testfall den TodoHttpClient einfach mocken, damit keine echten Backendcalls gemacht werden.</li>
             <li>Den TodoHttpClient können wir mit jest mocken oder wie hier manuell mit Javascript.</li>
             <li>Wie ihr sehen könnt, müssen wir natürlich nur die Funktionen mocken, die wir im Test brauchen.</li>
@@ -313,15 +313,15 @@ expect(saveTodoSpy).toHaveBeenCalledWith(todo);</code>
         <ul>
             <li>Wie auch bei anderen Funktionen, können wir darauf "spyen".</li>
             <li>Anschließend können wir prüfen, ob die Schnittstellen der Methode korrekt aufgerufen werden.</li>
-            <li>WIr wollen schließlich prüfen, ob die Component End to End funktioniert.</li>
+            <li>Wir wollen schließlich prüfen, ob die Component End to End funktioniert.</li>
         </ul>
     </aside>
 </section>
 <section>
     <h4>WaitFor</h4>
     <ul>
-        <li>warten auf asynchronen Code</li>
-        <li>z.B. bei Backendcalls</li>
+        <li>Warten auf asynchronen Code</li>
+        <li>Z.B. bei Backendcalls</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>it('should render', async () => {
@@ -336,7 +336,7 @@ expect(saveTodoSpy).toHaveBeenCalledWith(todo);</code>
         <ul>
             <li>WaitFor ist eine Funktion, der wir einen Callback übergeben. Die Funktion wird so lange aufgerufen, bis der Callback keine Exceptions mehr zurückliefert oder der Timeout abgelaufen ist.</li>
             <li>getByTestId wirft eine Exception, falls die TestId nicht gefunden wurde. Dann wird waitFor erneut aufgerufen.</li>
-            <li>Wir können der waitFor Funktion einen Timeout und ein Interval übergeben. Der default für Timeout ist 1000ms und für das Interval 50ms.</li>
+            <li>Wir können der waitFor Funktion einen Timeout und ein Intervall übergeben. Der default für Timeout ist 1000ms und für das Intervall 50ms.</li>
             <li>Wir brauchen waitFor, um darauf zu warten, dass die Daten aus dem MockTodoHttpClient zurückgeliefert wurden und anschließend in der Component angezeigt werden.</li>
             <li>Auf unseren Pages brauchen wir daher waitFor, da wir sonst nur "loading" zu sehen bekommen würden.</li>
         </ul>
@@ -346,7 +346,7 @@ expect(saveTodoSpy).toHaveBeenCalledWith(todo);</code>
     <h4>WaitFor mit FireEvent</h4>
     <ul>
         <li>Button muss sichtbar sein, bevor er geklickt werden kann</li>
-        <li>die Kombination ist tricky</li>
+        <li>Die Kombination ist tricky</li>
         <li>FireEvent darf nicht in WaitFor aufgerufen werden</li>
     </ul>
     <pre>
@@ -368,8 +368,8 @@ fireEvent.click(screen.getByTestId(buttonId));</code>
 <section>
     <h4>Assertions in WaitFor</h4>
     <ul>
-        <li>nur einzelne Assertions erlaubt</li>
-        <li>führt zu schnellerer Testausführung</li>
+        <li>Nur einzelne Assertions erlaubt</li>
+        <li>Führt zu schnellerer Testausführung</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>await waitFor(() => {
@@ -390,16 +390,16 @@ expect(saveSpy).toHaveBeenCalledWith({ ...todo, done: true });</code>
 <section>
     <h4>Praxis: Detail Page Test</h4>
     <ul>
-        <li>schreibt einen Test für die Detail Page Component</li>
-        <li>was sollten wir testen?</li>
+        <li>Schreibt einen Test für die Detail Page Component</li>
+        <li>Was sollten wir testen?</li>
         <li>Branch: step_2-detail_page_test</li>
     </ul>
 </section>
 <section>
     <h4>TodoHttpClient?</h4>
     <ul>
-        <li>ausgelagerte Logik muss auch getestet werden</li>
-        <li>axios muss gemockt werden</li>
+        <li>Ausgelagerte Logik muss auch getestet werden</li>
+        <li>Axios muss gemockt werden</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>jest.mock("axios");
@@ -440,7 +440,7 @@ it('should get all todos', async () => {
     <h4>Praxis: Todo Http Client Test</h4>
     <ul>
         <li>Test schreiben für den Client</li>
-        <li>was wollen wir testen?</li>
+        <li>Was wollen wir testen?</li>
         <li>Branch: step_3-todo-http-client</li>
     </ul>
 </section>

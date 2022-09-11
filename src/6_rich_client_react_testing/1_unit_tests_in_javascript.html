@@ -5,14 +5,14 @@
     <h4>Was sollten wir im Frontend testen?</h4>
     <ul>
         <li>Logik in unseren Components</li>
-        <li>dynamisches rendering in Components</li>
-        <li>weitere Javascript Logik (TodoHttpClient)</li>
+        <li>Dynamisches Rendering in Components</li>
+        <li>Weitere Javascript Logik (TodoHttpClient)</li>
     </ul>
     <aside class="notes">
         <ul>
             <li>Natürlich sollten wir die Logik und das dynamische Rendering in unseren Components testen.</li>
-            <li>Z.B werden die Daten gerendert, die ich hineingebe, wird eine Callback aufgerufen, wenn ein Button gedrückt wird.</li>
-            <li>Außerdem sollten wir alle weitere Javascript Logik testen. Wie z.B. ob unser TodoHttpClient die korrekten HttpCalls auslöst.</li>
+            <li>Z.B werden die Daten gerendert, die ich hineingebe und es wird eine Callback aufgerufen, wenn ein Button gedrückt wird.</li>
+            <li>Außerdem sollten wir jede weitere Javascript Logik testen. Wie z.B. ob unser TodoHttpClient die korrekten HttpCalls auslöst.</li>
         </ul>
     </aside>
 </section>
@@ -21,7 +21,7 @@
     <ul>
         <li>Nutzer interagieren mit Buttons und Textfeldern ...</li>
         <li>... nicht mit Javascript Funktionen</li>
-        <li>am besten immer End to End</li>
+        <li>Am besten immer End to End</li>
     </ul>
     <aside class="notes">
         <ul>
@@ -31,7 +31,7 @@
             <li>Z.B. könnte die Javascript Funktion korrekt funktionieren, sie wird aber nicht im HTML aufgerufen.</li>
             <li>End to End heißt dabei von den Eingabeparametern und anderen Schnittstellen der Component bis zum HTML und zurück.</li>            
             <li>Z.B. wird im HTML das angezeigt, was ich als Parameter hineingegeben habe?</li>
-            <li>Z.B. wird die der TodoHttpClient mit den richtigen Parametern aufgerufen, wenn der Save Button geklickt wurde?</li>
+            <li>Z.B. wird der TodoHttpClient mit den richtigen Parametern aufgerufen, wenn der Save Button geklickt wurde?</li>
         </ul>
     </aside>
 </section>
@@ -54,7 +54,7 @@
     </pre>
     <aside class="notes">
         <ul>
-            <li>JavaScript Test werden normalerweise mit Jasmine geschrieben.</li>
+            <li>JavaScript Tests werden normalerweise mit Jasmine geschrieben.</li>
             <li>Wir arbeiten in React mit Jest, welches wiederum auf Jasmine aufsetzt und uns eine bequemere API bereitstellt.</li>
             <li>Jasmine liefert verschiedene Tools, um Tests strukturierter aufzubauen und einfacher zu gestalten.</li>
             <li>"describe" beschreibt einen Test und kann mehrere Tests logisch zusammenfassen.</li>
@@ -72,14 +72,14 @@
 <section>
     <h4>Testbeschreibung</h4>
     <ul>
-        <li>sollte einem Schema folgen
+        <li>Sollte einem Schema folgen
             <ul>
-                <li>z.B. "Object ... should ... when"</li>
-                <li>gerne auch andere Schema's</li>
-                <li>viele gehen in ähnliche Richtung</li>
+                <li>Z.B. "Object ... should ... when"</li>
+                <li>Gerne auch andere Schemas</li>
+                <li>Viele gehen in ähnliche Richtung</li>
             </ul>
         </li>
-        <li>oft hilft es einen Satz zu bilden</li>
+        <li>Oft hilft es einen Satz zu bilden</li>
         <li>Testbeschreibung als lebende Doku</li>
     </ul>
     <pre>
@@ -88,17 +88,17 @@
     </pre>
     <aside class="notes">
         <ul>
-            <li>Ein Schema sorgt dafür, dass sich andere Entwickler besser zurechtfinden. Und auch man selbst hat irgendwann vergessen was hier in diesem Code passiert.</li>
+            <li>Ein Schema sorgt dafür, dass sich andere Entwickler besser zurechtfinden. Und auch man selbst hat irgendwann vergessen, was hier in diesem Code passiert.</li>
             <li>Ein korrekter Satz als Testbeschreibung macht es oft einfacher den Testfall zu verstehen. Beim Schreiben von Textnachrichten, lassen wir auch nicht einfach irgendwelche Wörter weg.</li>
-            <li>Über gute Testbeschreibungen kann man sehr gut erkennen wie sich Components verhalten sollen und was ihre Aufgabe ist.</li>
+            <li>Über gute Testbeschreibungen kann man sehr gut erkennen, wie sich Components verhalten sollen und was ihre Aufgabe ist.</li>
         </ul>
     </aside>
 </section>
 <section>
     <h4>Testbeschreibung</h4>
     <ul>
-        <li>sollte wenig Duplizierungen enthalten</li>
-        <li>damit entsteht eine saubere Struktur</li>
+        <li>Sollte wenig Duplizierungen enthalten</li>
+        <li>Damit entsteht eine saubere Struktur</li>
     </ul>
     <pre>
         <code class="javascript" data-line-numbers>describe('ComponentUnderTest', () => {
@@ -117,7 +117,7 @@
     </pre>
     <aside class="notes">
         <ul>
-            <li>In dem wir die Testbeschreibung aufteilen und nicht duplizieren, sorgen dir automatisch dafür, dass unser Test eine gute Struktur erhält.</li>
+            <li>Indem wir die Testbeschreibung aufteilen und nicht duplizieren, sorgen wir automatisch dafür, dass unser Test eine gute Struktur erhält.</li>
             <li>Zusammengehörige Testfälle für z.B. eine Methode werden im gleichen describe zusammengefasst.</li>
         </ul>
     </aside>
@@ -125,31 +125,31 @@
 <section>
     <h4>Single Responsibility Principle</h4>
     <ul>
-        <li>jeder Test sollte nur eine Sache testen
+        <li>Jeder Test sollte nur eine Sache testen
             <ul>
-                <li>am besten ein "expect" pro Test</li>
-                <li>macht es einfacher eine Testbeschreibung zu finden</li>
+                <li>Am besten ein "expect" pro Test</li>
+                <li>Macht es einfacher eine Testbeschreibung zu finden</li>
             </ul>
         </li>
-        <li>im Fehlerfall ist das Problem schneller erkannt</li>
+        <li>Im Fehlerfall ist das Problem schneller erkannt</li>
     </ul>
     <aside class="notes">
         <ul>
-            <li>Wenn der Test nur eine Sache testen, ist im Fehlerfall schneller erkennbar was kaputt ist. Denn es steht ja in der Testbeschreibung.</li>
-            <li>Es kann natürlich auch passieren, dass der Test wegen Setup Code fehlschlägt, dieser Setup Code sollte allerdings auch in einem eigenen Test fehlschlagen.</li>
+            <li>Wenn der Test nur eine Sache testet, ist im Fehlerfall schneller erkennbar, was kaputt ist. Denn es steht ja in der Testbeschreibung.</li>
+            <li>Es kann natürlich auch passieren, dass der Test wegen des Setup Codes fehlschlägt, dieser Setup Code sollte allerdings auch in einem eigenen Test fehlschlagen.</li>
         </ul>
     </aside>
 </section>
 <section>
     <h4>Codeduplizierung (in Tests)</h4>
     <ul>
-        <li>ist ein kontroverses Thema</li>
-        <li>kann trotzdem vermieden werden</li>
-        <li>setup Code kann in "beforeEach"/"beforeAll"</li>
-        <li>parametrisierte Tests
+        <li>Ist ein kontroverses Thema</li>
+        <li>Kann trotzdem vermieden werden</li>
+        <li>Setup Code kann in "beforeEach"/"beforeAll"</li>
+        <li>Parametrisierte Tests
             <ul>
-                <li>gleicher Test mit unterschiedlichen Parametern</li>
-                <li>weniger Codeduplizierung</li>
+                <li>Gleicher Test mit unterschiedlichen Parametern</li>
+                <li>Weniger Codeduplizierung</li>
             </ul>
         </li>
     </ul>
@@ -165,9 +165,9 @@
     <aside class="notes">
         <ul>
             <li>Einige Entwickler sehen Codeduplizierung im Test nicht als Problem.</li>
-            <li>Manchmal kann es mehr Übersichtlichkeit schaffen Code und Daten zu duplizieren.</li>
+            <li>Manchmal kann es mehr Übersichtlichkeit schaffen, Code und Daten zu duplizieren.</li>
             <li>Z.B. kann man Testdaten über mehrere Tests nutzen. Manche Tests wären einfacher zu verstehen, wenn die Testdaten direkt im Test stehen würden.</li>
-            <li>Trotzdem gibt es gute Gründe und auch mechanismen, um Codeduplizierung im Test zu vermeiden.</li>
+            <li>Trotzdem gibt es gute Gründe und auch Mechanismen, um Codeduplizierung im Test zu vermeiden.</li>
             <li>Setup Code ist oft dupliziert und sollte daher in entsprechende Blöcke ausgelagert werden.</li>
             <li>Parametrisierte Tests helfen, wenn der Testcode dupliziert wird.</li>
         </ul>
@@ -181,7 +181,7 @@
             <ul>
                 <li>Produktivcode ist abhängig vom aktuellen Datum</li>
                 <li>Testcode muss damit auch vom aktuellen Datum abhängig sein</li>
-                <li>typischer Aprilscherz</li>
+                <li>Typischer Aprilscherz</li>
             </ul>
         </li>
     </ul>

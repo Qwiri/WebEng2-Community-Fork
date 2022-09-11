@@ -8,41 +8,41 @@
 <section>
     <h4>Unit Tests</h4>
     <ul>
-        <li>automatisierte Tests</li>
+        <li>Automatisierte Tests</li>
         <li>Testen der kleinsten Einheiten</li>
-        <li>auf sehr detaillierter Ebene</li>
-        <li>kurze Laufzeit</li>
+        <li>Auf sehr detaillierter Ebene</li>
+        <li>Kurze Laufzeit</li>
     </ul>
     <aside class="notes">
         <ul>
             <li>Unit Tests müssen automatisiert laufen.</li>
             <li>Wir testen die kleinsten Einheiten des Systems. Z.B. eine Klasse oder eine Component.</li>
-            <li>Da wir die alle Einheiten einzeln testen, können wir auf sehr detaillierter Ebene testen.</li>
+            <li>Da wir alle Einheiten einzeln testen, können wir auf sehr detaillierter Ebene testen.</li>
             <li>Unit Tests haben üblicherweise eine kurze Laufzeit, da nicht eine vollständige Anwendung hochgefahren werden muss.</li>
             <li>Bei einem Frontend wird oft auch kein richtiger Browser verwendet, sondern ein "headless" Browser, der das HTML nicht rendered.</li>
-            <li>Unit Tests sollte auch schnell laufen, da sie das schnellste Feedback beim Entwickeln geben.</li>
+            <li>Unit Tests sollten auch schnell laufen, da sie das schnellste Feedback beim Entwickeln geben.</li>
         </ul>
     </aside>
 </section>
 <section>
     <h4>Integration Tests</h4>
     <ul>
-        <li>automatisierte Tests</li>
+        <li>Automatisierte Tests</li>
         <li>Testen zusammenhängender Teile der Anwendung
             <ul>
-                <li>ein Backend Service (ohne Frontend)</li>
-                <li>ein Frontend (ohne Backend)</li>
+                <li>Ein Backend Service (ohne Frontend)</li>
+                <li>Ein Frontend (ohne Backend)</li>
             </ul>
         </li>
-        <li>weniger Detailtiefe</li>
+        <li>Weniger Detailtiefe</li>
         <li>Fokus liegt auf
             <ul>
-                <li>wichtigen Szenarien</li>
-                <li>interessanten Edge-Cases</li>
+                <li>Wichtigen Szenarien</li>
+                <li>Interessanten Edge-Cases</li>
                 <li>Fehlern die aufgetreten sind</li>
             </ul>
         </li>
-        <li>etwas längere Laufzeit</li>
+        <li>Etwas längere Laufzeit</li>
     </ul>
     <aside class="notes">
         <ul>
@@ -50,7 +50,7 @@
             <li>Ein Backend oder ein Frontend wird hochgefahren, die Schnittstellen werden gemockt.</li>
             <li>Anschließend werden die Schnittstellen des Frontends/Backends maschinell angesprochen. Z.B. ein Bot, der eine Web API aufruft.</li>
             <li>Da es mehr Fälle geben kann, muss man sich auf wichtige Szenarien beschränken.</li>
-            <li>Oft lohnt es sich merkwürdige Fehler die aufgetreten sind über einen Integration-Test zu testen, um den Fehler in Zukunft zu verhindern.</li>
+            <li>Oft lohnt es sich merkwürdige Fehler, die aufgetreten sind, über einen Integration-Test zu testen, um den Fehler in Zukunft zu verhindern.</li>
             <li>Meist haben Integration-Tests eine höhere Laufzeit, da erst der Service oder das Frontend hochgefahren werden muss.</li>
         </ul>
     </aside>
@@ -58,17 +58,17 @@
 <section>
     <h4>Manuelle/automatisierte End to End UI Tests</h4>
     <ul>
-        <li>manuelle oder automatisierte Tests</li>
+        <li>Manuelle oder automatisierte Tests</li>
         <li>Testen über das richtige UI</li>
         <li>Testen der gesamten Software</li>
         <li>Styling erfordert manuelle Tests</li>
-        <li>lange Laufzeit (besonders für einen Mensch)</li>
+        <li>Lange Laufzeit (besonders für einen Mensch)</li>
     </ul>
     <aside class="notes">
         <ul>
             <li>Test auf der realen Umgebung.</li>
-            <li>Computer oder Mensch klickt sich durch die Anwendung und prüft ob sie richtig funktioniert.</li>
-            <li>Ein Computer kann nicht entscheiden ob etwas gut oder schlecht aussieht. Daher kommt es beim Styling immer noch auf den Mensch an.</li>
+            <li>Computer oder Mensch klickt sich durch die Anwendung und prüft, ob sie richtig funktioniert.</li>
+            <li>Ein Computer kann nicht entscheiden, ob etwas gut oder schlecht aussieht. Daher kommt es beim Styling immer noch auf den Mensch an.</li>
             <li>Besonders bei manuellen Tests ist die Laufzeit sehr hoch, da ein Mensch nur begrenzt schnell klicken kann.</li>
             <li>Außerdem kann man Menschen nicht duplizieren und die Tests parallel ausführen.</li>
             <li>Aber auch für einen Bot dauert es länger das Frontend zu klicken, da immer auf eine richtige Antwort aus dem Backend gewartet werden muss und das Frontend neu rendern muss.</li>
@@ -78,21 +78,21 @@
 <section>
     <h4>Wieso schreiben wir Unit Tests?</h4>
     <ul>
-        <li>kleine Tests sind übersichtlicher</li>
-        <li>test driven development
+        <li>Kleine Tests sind übersichtlicher</li>
+        <li>Test driven development
             <ul>
-                <li>schnelles Feedback</li>
-                <li>vermeidet Seiteneffekte</li>
+                <li>Schnelles Feedback</li>
+                <li>Vermeidet Seiteneffekte</li>
             </ul>
         </li>
-        <li>Components vielseitig Einsetzbar</li>
-        <li>lebende Dokumentation</li>
+        <li>Components vielseitig einsetzbar</li>
+        <li>Lebende Dokumentation</li>
     </ul>
     <aside class="notes">
         <ul>
             <li>Kleine Tests sind wie kleine Components übersichtlicher. Daher sollten wir Unittesten.</li>
-            <li>TDD bietet uns bei der Entwicklung schnelles Feedback und das vermeiden von Seiteneffekten beim anpassen von Features.</li>
-            <li>Statt ein Feature jedes mal manuell über die UI zu testen, kann man beim TDD einfach schnell die Tests ausführen.</li>
+            <li>TDD bietet uns bei der Entwicklung schnelles Feedback und das Vermeiden von Seiteneffekten beim Anpassen von Features.</li>
+            <li>Statt ein Feature jedes Mal manuell über die UI zu testen, kann man beim TDD einfach schnell die Tests ausführen.</li>
             <li>Components müssen eigenständig getestet sein, da sie auch eigenständig eingesetzt werden können.</li>
             <li>Tests können gut als lebende Dokumentation dienen.</li>
         </ul>
