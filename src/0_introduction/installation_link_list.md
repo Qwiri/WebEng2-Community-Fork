@@ -9,7 +9,7 @@ Wir brauchen natürlich nicht alle Entwicklungsumgebungen. Jeder von euch sollte
 - Eclipse
     - Open Source
     - für Java entwickelt
-    - für React gibt es einen Plugin (habs noch nicht getestet)
+    - für React gibt es einen Plugin, der allerdings outdated ist (habs noch nicht getestet)
     - https://www.eclipse.org/getting_started/
 - Intellij Idea
     - Community Edition ist Open Source
