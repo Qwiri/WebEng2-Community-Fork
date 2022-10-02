@@ -182,7 +182,7 @@
                 <h3>Lifecycle: Initialer Aufruf</h3>
                 <img data-fragment-index="1" src="assets/JSF-lifecycle-initial.svg" height="400">
                 <aside class="notes">
-                    Beim Initialien Aufruf werden normalerweise keine Anfrageparameter mitgegeben daher ist es hier möglich die Phasen 2, 3, 4 und 5 übersprungen werden.
+                    Beim Initialien Aufruf werden normalerweise keine Anfrageparameter mitgegeben daher ist es hier möglich die Phasen 2, 3, 4 und 5 zu überspringen.
                     Da in diesen Phasen nicht zu tun wäre ist es hier möglich von Phase 1 direkt in Phase 6 zu springen.
                 </aside>
             </section>
@@ -315,6 +315,42 @@
                     Der Return Wert der Methode muss ein String sein. Dieser wird dann zur Navigation genutzt.
                 </aside>
             </section>
+            <section>
+                <h4>Praxis</h4>
+                <ul>
+                    <li>
+                        editiere die Datei <code>src/main/webapp/index.xhtml</code>
+                    </li>
+                    <li>
+                        implementiere ein Formular mit folgenden Feldern:
+                        <ul>
+                            <li>
+                                ID
+                            </li>
+                            <li>
+                                Titel
+                            </li>
+                            <li>
+                                Beschreibung
+                            </li>
+                            <li>
+                                Aktiv Checkbox
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        implementiere eine Übersichtstabelle mit folgenden Feldern:
+                        <ul>
+                            <li>
+                                Titel
+                            </li>
+                            <li>
+                                Aktiv Status
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
         </section>
         <section>
             <section>
@@ -391,6 +427,31 @@ public class SayHello
                         * Pufferung und Interpretation der Daten
                 </div>
             </section>
+            <section>
+                <h3>Praxis</h3>
+                <ul>
+                    <li>
+                        Bean implementieren um die Formulardaten zu speichern
+                    </li>
+                    <li>
+                        Bean mit verschiedenen Scopes annotieren
+                    </li>
+                    <li>
+                        verschiedene Aufrufe je Scope durchführen um Scopes zu testen
+                        <ul>
+                            <li>
+                                Aufruf mit anderem Browser
+                            </li>
+                            <li>
+                                Aufruf mit anderem Fenster
+                            </li>
+                            <li>
+                                Neuladen der Seite
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
         </section>
         <section>
             <section>
@@ -438,6 +499,22 @@ public class SayHello
                     Greift keine Navigation Regel dann wird der Rückgabewert der jeweiligen Action als relative URL genutzt.
                 </div>
             </section>
+            <section>
+                <h3>
+                    Praxis
+                </h3>
+                <ul>
+                    <li>
+                        Detailansicht zusätzlich implementieren
+                    </li>
+                    <li>
+                        Verlinkung aus Listenansicht mit der Detailansicht verknüpfen
+                    </li>
+                    <li>
+                        Formular nicht nur zum Anlegen nutzen sondern auch um das Editieren bestehender Einträge zu ermöglichen
+                    </li>
+                </ul>
+            </section>
         </section>
         <section>
             <section>
@@ -474,8 +551,6 @@ public class SayHello
                     ```
                 </div>
             </section>
-        </section>
-        <section>
             <section>
                 <div data-markdown>
                     ## Konverter
@@ -494,6 +569,214 @@ public class SayHello
                     &lt;h:inputText value="#{bean.variable}"/&gt;
                     ```
                 </div>
+            </section>
+            <section>
+                <h3>
+                    Praxis
+                </h3>
+                <ul>
+                    <li>
+                        Nutze einen Validator um sicherzustellen, dass im Titel Feld Text vorhanden ist.
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>JDBC Integration</h2>
+            </section>
+            <section>
+                <h3>Wofür JDBC?</h3>
+                <ul>
+                    <li>
+                        Daten extern speichern
+                    </li>
+                    <li>
+                        Daten sind nach Restart noch verfügbar
+                    </li>
+                    <li>
+                        Datenbanken sind effizienter als bspw. Datei Persistierung
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>
+                    Maven Dependency
+                </h3>
+                <p>
+                    pom.xml
+                </p>
+                <div data-markdown>
+                    ```html
+                    &lt;dependencies&gt;
+                        ...
+                        &lt;dependency&gt;
+                            &lt;groupId&gt;postgresql&lt;/groupId&gt;
+                            &lt;artifactId&gt;postgresql&lt;/artifactId&gt;
+                            &lt;version&gt;9.1-901.jdbc4&lt;/version&gt;
+                        &lt;/dependency&gt;
+                        ...
+                    &lt;/dependencies&gt;
+                    ```
+                </code>
+            </section>
+            <section>
+                <h3>
+                    Verbindungsaufbau
+                </h3>
+                <div data-markdown>
+                    ``` Java [|2|3|4|5|7,10,12|8|11|13]
+                    public Connection getConnection() {
+                        Connection con = null;
+                        String url = "jdbc:postgresql://localhost/testdb";
+                        String user = "user1";
+                        String password = "user1";
+                        
+                        try {
+                           con = DriverManager.getConnection(url, user, password);
+                           System.out.println("Connection completed.");
+                        } catch (SQLException ex) {
+                           System.out.println(ex.getMessage());
+                        }
+                        return con;
+                    }
+                    ```
+                </div>
+            </section>
+            <section>
+                <h3>
+                    Save Statement ausführen
+                </h3>
+                <div data-markdown>
+                    ```Java [|1|2,9,10,11|3,4,5|6,7|8|]
+                    Connection con = this.getConnection();
+                    try{
+                        PreparedStatement stmt = con.prepareStatement(
+                            "INSERT INTO todo(title,description) VALUES(?,?);"
+                            );  
+                        stmt.setString(1, this.getTitle());  
+                        stmt.setString(2, this.getDescription());  
+                        int result = stmt.executeUpdate(); /* 1=>success */
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    ```
+                </div>
+            </section>
+            <section>
+                <h3>
+                    Read Statement ausführen
+                </h3>
+                <div data-markdown>
+                    ```Java [|1|2,15,16,17|3,4,5|6|8|9,14|10|4,11,12|13|]
+                    Connection con = this.getConnection();
+                    try{
+                        PreparedStatement stmt = con.prepareStatement(
+                            "SELECT `title`,`description` FROM todo;"
+                            );  
+                        ResultSet result = stmt.executeUpdate();
+
+                        List&lt;Todo&gt; records = new ArrayList();
+                        while(rs.next()) {
+                            Todo todo = new Todo();
+                            todo.setTitle(rs.getString(1));
+                            todo.setDescription(rs.getString(2));
+                            records.add(todo);				
+                         }
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    ```
+                </div>
+            </section>
+            <section>
+                <h3>
+                    Praxis
+                </h3>
+                <ul>
+                    <li>
+                        Speichere die Todos in der Datenbank.
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>
+                    Ausblick
+                </h2>
+            </section>
+            <section>
+                <h3>
+                    Ajax
+                </h3>
+                <ul>
+                    <li>
+                        Partial Loading
+                    </li>
+                    <li>
+                        Asynchron
+                    </li>
+                    <li>
+                        normalerweise nur einmal UI danach lediglich Austausch der Daten
+                    </li>
+                    <li>
+                        eigenes JSF Tag
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>
+                    Event Handling
+                </h3>
+                <ul>
+                    <li>
+                        Ereignisse treten an verschiedene Stellen auf
+                    </li>
+                    <li>
+                        Eventhandler reagieren auf die Events
+                    </li>
+                    <li>
+                        ermöglicht auf Zustandsänderungen zu reagieren
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>
+                    Internationalisierung (i18n)
+                </h3>
+                <ul>
+                    <li>
+                        Produkte ohne (oder nur kleine) Anpassung für mehrere Märkte nutzbar
+                    </li>
+                    <li>
+                        Weniger Frage des Frameworks als mehr Frage der UI Gestaltung
+                    </li>
+                    <li>
+                        Bspw. Icons prägen, genug Platz für unterschiedliche Sprachen
+                    </li>
+                </ul>
+                <aside class="notes">
+                    I18n = Internationalisierung hat 18 Buchstaben
+
+                    Bspw.: Anleitung nicht mit Worten sondern mit Diagrammen oder Icons => Ikea
+                </aside>
+            </section>
+            <section>
+                <h3>
+                    Lokalisierung
+                </h3>
+                <ul>
+                    <li>
+                        Anpassen an spezielle Länder/Marktspezifische Verhalten
+                    </li>
+                    <li>
+                        Hier kann das Framework bspw. mit der Unterstützung von verschiedenen Sprachen helfen.
+                    </li>
+                    <li>
+                        Bspw. Sprachswitches oder Leserichtung
+                    </li>
+                </ul>
             </section>
         </section>
         <section>

@@ -3,7 +3,7 @@
 - Einleitung in JSF
     - Was ist JSF grundsätzlich
     - JSF ist gar nicht so uncool
-- MVC kurz erklärt anhand von JSF (Kommentar bei Businesslogik mit Kai besprechen)
+- MVC kurz erklärt anhand von JSF
 - Life Cycle JSF
     - Mehr Absprung Möglichkeiten zu Render Response
 - Aufgesetztes Projekt starten
@@ -42,3 +42,4 @@
     - Event Handling
     - Spring Integration
     - Internationalization
+    
