@@ -156,11 +156,11 @@
       </section>
       <section>
         <h4>Architekturen</h4>
-        <img src="assets/architecture-blackbox.png" height="400">
+        <img src="assets/architecture-blackbox.svg" height="400">
       </section>
       <section>
         <h4>Architekturen</h4>
-        <img src="assets/architecture-whitebox.png" height="400">
+        <img src="assets/architecture-whitebox.svg" height="400">
       </section>
       <section>
         <div data-markdown>
@@ -683,7 +683,7 @@
       </section>
       <section>
         <div data-markdown data-line-numbers="3">
-          #### Starten
+          #### Spring-Boot - Bootstrap
 
           ```java
           @SpringBootApplication
@@ -701,9 +701,12 @@
           </ul>
         </aside>
       </section>
+    </section>
+    <!-- Spring - Schichten -->
+    <section>
       <section>
         <div data-markdown>
-          #### Spring Schichten
+          #### Schichten
 
           - Frontend
           - Middleware
@@ -1079,21 +1082,7 @@
       </section>
       <section>
         <div data-markdown data-line-numbers>
-          #### Middleware - Service
-
-          ```java
-          @Service
-          public class DocumentService {
-              public byte[] getDocument(Person person) {
-                  ...
-              }
-          }
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown data-line-numbers>
-          #### Middleware - Default
+          #### Middleware - Default Implementation
 
           ```java
           @Service
@@ -1109,7 +1098,7 @@
       </section>
       <section>
         <div data-markdown data-line-numbers>
-          #### Middleware - Conditional
+          #### Middleware - Conditional Implementation
 
           ```java
           @Service
@@ -1119,6 +1108,20 @@
               public Person getPerson(String name) {
                   ...
               }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Middleware - Service
+
+          ```java
+          @Service
+          public class DocumentService {
+          public byte[] getDocument(Person person) {
+          ...
+          }
           }
           ```
         </div>
@@ -1290,7 +1293,17 @@
           - Bootstrap baut Objektgraphen auf
           - Objektgraph ist normalerweise statisch
           - Objektgraph erlaubt aber dynamische Erweiterung
+          - Zwei primäre Quellen für Objekte
+            - Components
+            - Configurations
         </div>
+        <aside class="notes">
+          <ul>
+            <li>Objektgraphen ist der Graph den der Dependency Injection Container aufbaut</li>
+            <li>Quellen -> Einstiegspunkte für den Graphen</li>
+            <li>zu jeder Zeit können Objekte zur Laufzeit hinzugefügt werden</li>
+          </ul>
+        </aside>
       </section>
       <section>
         <div data-markdown>
@@ -1433,17 +1446,8 @@
           #### Configurations
 
           - Indirekte Deklaration von Objekten
-          - Sowie Ändern und Erweitern bestehender Objekte
+          - Ändern und Erweitern bestehender Objekte
           - Aufruf durch den Dependency-Injection-Container
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Configurations - Verwendung
-
-          - `@Configuration` zur Deklaration einer Konfiguration
-          - `@Bean` zur Deklaration eines Objektes
-          - `@Order` zur Definition der Präzedenz
         </div>
       </section>
       <section>
@@ -1454,8 +1458,24 @@
           @Configuration
           public class MyConfiguration {
               @Bean
-              public MyComponent createComponent(){
+              public MyComponent createComponent() {
                   ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Configurations - Beispiel
+
+          ```java
+          @Configuration
+          @EnableWebMvc
+          public class WebConfiguration implements WebMvcConfigurer {
+              @Override
+              public void addCorsMappings(CorsRegistry registry) {
+                  registry.addMapping("/**");
               }
           }
           ```
@@ -1512,8 +1532,10 @@
           #### Validation - Beispiel
 
           ```java
-          @RequestMapping(method = RequestMethod.POST)
-          public Note createNote(@RequestBody @Valid NoteProposal proposal) {
+          @PostMapping
+          public Note createNote(
+              @RequestBody @Valid NoteProposal proposal
+          ) {
               ...
           }
           ```
@@ -1548,7 +1570,7 @@
       </section>
       <section>
         <div data-markdown>
-          #### Praxis - TODO abfragen
+          #### Praxis - TODOs abfragen
 
           `GET /todo`
           - Repository: Methode zum Abrufen alle TODOs anlegen
