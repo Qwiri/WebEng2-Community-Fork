@@ -17,12 +17,12 @@
 <div class="reveal">
   <div class="slides">
     <section>
-      <h3>Rich Client: Server Anwendung</h3>
+      <h3>Rich Client: Server</h3>
     </section>
     <section>
       <section>
         <div data-markdown>
-          ### Überleitung
+          ### Wiederholung
         </div>
       </section>
       <section>
@@ -30,36 +30,33 @@
           #### Verantwortlichkeiten - JSF
 
           - View-Management
-          - Rendering
-          - Validation
           - State-Management
+          - Rendering
           - Events
           - Routing
+          - Validation
           - Data-Management
           - Persistence
         </div>
-        <aside class="notes">
-          <li>these are some notes</li>
-        </aside>
       </section>
       <section>
         <div data-markdown>
           #### Verantwortlichkeiten - Rich Client
 
           - View-Management
-          - Rendering
-          - Ensurance
           - State-Management
+          - Rendering
           - Events
           - Routing
+          - Ensurance
         </div>
       </section>
       <section>
         <div data-markdown>
           #### Verantwortlichkeiten - Webservice
 
-          - Data-Management
           - Validation
+          - Data-Management
           - Persistence
         </div>
       </section>
@@ -69,6 +66,22 @@
         <div data-markdown>
           ### Webservice
         </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Webservice
+
+          Drei grundlegende Eigenschaften:
+          - Stateless
+          - Scalable
+          - Untrusting
+        </div>
+        <aside class="notes">
+          <ul>
+            <li>Keine Übertragung von Zustandsänderungen</li>
+            <li>Keine Übertragung von unzusammenhängenden Informationen</li>
+          </ul>
+        </aside>
       </section>
       <section>
         <div data-markdown>
@@ -106,11 +119,11 @@
       </section>
       <section>
         <div data-markdown>
-          #### Webservice - Skalierbar
+          #### Webservice - Scalable
 
           - Abhängig von ausschließlich externen Informationen
-          - Eingaben des Clients
-          - Daten der Persistence
+            - Eingaben des Clients
+            - Daten der Persistence
           - Instanzen sind identitätslos
           - Dynamisches hoch-/runterfahren von Instanzen
         </div>
@@ -139,6 +152,31 @@
       <section>
         <div data-markdown>
           ### Architekturen
+        </div>
+      </section>
+      <section>
+        <h4>Architekturen</h4>
+        <img src="assets/architecture-blackbox.svg" height="400">
+      </section>
+      <section>
+        <h4>Architekturen</h4>
+        <img src="assets/architecture-whitebox.svg" height="400">
+      </section>
+      <section>
+        <div data-markdown>
+          #### Architekturen
+
+          - Aufteilung von Verantwortlichkeiten
+          - Abgrenzung einzelner Komponenten
+          - Interaktion zwischen Komponenten
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Architekturen
+
+          - Architektur bedingt API
+          - API bedingt nicht die Architektur
         </div>
       </section>
       <!-- Architekturen -->
@@ -568,7 +606,52 @@
     <section>
       <section>
         <div data-markdown>
-          ### Spring
+          ### Umsetzung
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Technologien - Webengineering I
+
+          - Servlets
+            - Rohes HTTP
+            - Erfordert eigene Implementierung
+          - JSP
+            - Implementierung von Servlets
+            - Ausschließlich HTML
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Technologien - Webengineering II
+
+          - JSF
+            - Implementierung von Servlets
+            - Quasi ausschließlich HTML
+          - ?
+            - Vollständiges HTTP
+            - Vielseitige Media-Types
+            - Einfache Bedienung
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Technologien - Webengineering II
+
+          - JSF
+            - Implementierung von Servlets
+            - Quasi ausschließlich HTML
+          - Spring, Quarkus, Micronaut...
+            - Vollständiges HTTP
+            - Vielseitige Media-Types
+            - Einfache Bedienung
+        </div>
+      </section>
+    </section>
+    <section>
+      <section>
+        <div data-markdown>
+          ### Spring-Boot
         </div>
       </section>
       <section>
@@ -598,17 +681,621 @@
           </ul>
         </aside>
       </section>
-      <!-- Spring - Bootstrap -->
+      <section>
+        <div data-markdown data-line-numbers="3">
+          #### Spring-Boot - Bootstrap
+
+          ```java
+          @SpringBootApplication
+          public class MySpringApplication {
+              public static void main(String[] args) {
+                  SpringApplication.run(MySpringApplication.class, args);
+              }
+          }
+          ```
+        </div>
+        <aside class="notes">
+          <ul>
+            <li>Startet eine leere Anwendung</li>
+            <li>Trotzdem bietet die Anwendung oftmals bereits Endpunkte wie z.B. /health</li>
+          </ul>
+        </aside>
+      </section>
+    </section>
+    <!-- Spring - Schichten -->
+    <section>
       <section>
         <div data-markdown>
-          #### Bootstrap
+          #### Schichten
 
-          - Aufbau des Objektgraphen
-          - Zwei primäre Quellen für Objekte
-          - Components
-          - Configurations
+          - Frontend
+          - Middleware
+          - Backend
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Spring Schichten - Frontend
+
+          - Schnittstelle zur Außenwelt
+          - Einordnung
+            - Wird nicht referenziert
+            - Referenziert Middleware
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Spring Schichten - Middleware
+
+          - Implementiert Businesslogik
+          - Einordnung
+            - Wird von Frontend und Middleware referenziert
+            - Referenziert Backend
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Spring Schichten - Backend
+
+          - Persistence Ebene / andere Services
+          - Einordnung
+            - Wird von Middleware referenziert
+            - Referenziert nichts
+        </div>
+      </section>
+    </section>
+    <!-- Spring - Frontend -->
+    <section>
+      <section>
+        <div data-markdown>
+          ### Frontend
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Frontend
+
+          - Implementierung erfolgt durch Controller
+          - API in ReST, GraphQL usw.
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Controller
+
+          ```java
+          @RestController
+          public class PersonController {
+              ...
+          }
+          ```
+        </div>
+        <aside class="notes">
+          <ul>
+            <li>Ein Controller ist der Einstiegspunkt für alle Anfragen</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Methods
+
+          GET /persons
+          ```java
+          @RestController
+          public class PersonController {
+              @RequestMapping(
+                  method = RequestMethod.GET,
+                  path = "/persons"
+              )
+              public List&lt;Person&gt; getPersons() {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Methods
+
+          POST /persons {"firstName": "John", "lastName": "Doe"}
+          ```java
+          @RestController
+          @RequestMapping(path = "/persons")
+          public class PersonController {
+              @RequestMapping(
+                  method = RequestMethod.POST
+              )
+              public void createPerson(@RequestBody Person person) {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Methods
+
+          PUT /persons {"firstName": "John", "lastName": "Doe"}
+          ```java
+          @RestController
+          @RequestMapping(path = "/persons")
+          public class PersonController {
+              @RequestMapping(
+                  method = RequestMethod.PUT
+              )
+              public void updatePerson(@RequestBody Person person) {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Methods
+
+          DELETE /persons/John%32Doe
+          ```java
+          @RestController
+          @RequestMapping(path = "/persons")
+          public class PersonController {
+              @RequestMapping(
+                  method = RequestMethod.DELETE,
+                  path = "/{name}"
+              )
+              public void deletePerson(@PathVariable String name) {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Methods
+
+          Methoden haben Shorthands-Annotations
+          - `@RequestMapping(method = RequestMethod.GET)`-> `@GetMapping()`
+          - `@RequestMapping(method = RequestMethod.POST)`-> `@PostMapping()`
+          - `@RequestMapping(method = RequestMethod.PUT)`-> `@PutMapping()`
+          - `@RequestMapping(method = RequestMethod.DELETE)`-> `@DeleteMapping()`
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Paths
+
+          GET /persons
+          ```java
+          @RestController
+          public class PersonController {
+              @GetMapping(path = "/persons")
+              public List&lt;Person&gt; getPersons() {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Paths
+
+          GET /persons
+          ```java
+          @RestController
+          @RequestMapping(path = "/persons")
+          public class PersonController {
+              @GetMapping
+              public List&lt;Person&gt; getPersons() {
+                  ...
+              }
+          }
+          ```
+        </div>
+        <aside class="notes">
+          <ul>
+            <li>Ganze Pfade können in einem Controller zusammengefasst werden</li>
+            <li>Alle Endpunkte des Controllers befinden sich implizit unter der Oberpfad</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Paths
+
+          GET /persons/subpath
+          ```java
+          @RestController
+          @RequestMapping(path = "/persons")
+          public class PersonController {
+              @GetMapping(path = "/subpath")
+              public String getSomething() {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Path Variables
+
+          GET /persons/John%32Doe
+          ```java
+          @RestController
+          @RequestMapping(path = "/persons")
+          public class PersonController {
+              @GetMapping(path = "/{name}")
+              public Person getPerson(@PathVariable String name) {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Parameters
+
+          GET /persons?firstName=John&lastName=Doe
+          ```java
+          @RestController
+          @RequestMapping(path = "/persons")
+          public class PersonController {
+              @GetMapping
+              public Person getPerson(
+                  @RequestParam String firstName,
+                  @RequestParam String lastName
+              ) {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Bodies
+
+          PUT /persons  {"firstName": "John", "lastName": "Doe"}
+          ```java
+          @RestController
+          @RequestMapping(path = "/persons")
+          public class PersonController {
+              @PutMapping
+              public void updatePerson(@RequestBody Person person) {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Media-Types
+
+          POST /persons/convert {"firstName": "John", "lastName": "Doe"}
+          ```java
+          @RestController
+          @RequestMapping(path = "/persons")
+          public class PersonController {
+              @PostMapping(
+                  path = "/convert",
+                  consumes = MediaType.APPLICATION_JSON_VALUE,
+                  produces = MediaType.APPLICATION_XML_VALUE
+              )
+              public Person convertPerson(@RequestBody Person person) {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Frontend - Media-Types
+
+          POST /persons/291/document/43006
+          ```java
+          @RestController
+          @RequestMapping(path = "/persons")
+          public class PersonController {
+              @GetMapping(
+                  path = "/{id}/documents/{documentId}",
+                  produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
+              )
+              public byte[] get(
+                  @PathVariable Long id,
+                  @PathVariable Long documentId
+              ) {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Frontend - Media-Types
+
+          - Konvertierung zwischen Java und JSON, XML usw.
+          - Häufig genutzte Media-Types automatisch unterstützt
+          - Darunter z.B. auch Text, HTML oder Binär
+          - Serialisierung kann konfiguriert werden
+        </div>
+      </section>
+    </section>
+    <!-- Spring - Middleware -->
+    <section>
+      <section>
+        <div data-markdown>
+          ### Middleware
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Middleware
+
+          - Implementierung erfolgt durch Services
+          - Teilt die Businesslogik in Fachlichkeiten auf
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Middleware - Umsetzung
+
+          - Empfohlen als Interfaces mit Implementierungen
+            - Austauschbar
+            - Konfigurierbar
+          - **aber** keine Pflicht
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Middleware - Service Interface
+
+          ```java
+          public interface PersonService {
+              Person getPerson(String name);
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Middleware - Service Implementation
+
+          ```java
+          @Service
+          public class PersonServiceImpl implements PersonService {
+              @Override
+              public Person getPerson(String name) {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Middleware - Default Implementation
+
+          ```java
+          @Service
+          @ConditionalOnMissingBean(PersonService.class)
+          public class DefaultPersonService implements PersonService {
+              @Override
+              public Person getPerson(String name) {
+              ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Middleware - Conditional Implementation
+
+          ```java
+          @Service
+          @ConditionalOnProperty("service.dumbMode")
+          public class DumbModePersonService implements PersonService {
+              @Override
+              public Person getPerson(String name) {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown data-line-numbers>
+          #### Middleware - Service
+
+          ```java
+          @Service
+          public class DocumentService {
+          public byte[] getDocument(Person person) {
+          ...
+          }
+          }
+          ```
+        </div>
+      </section>
+    </section>
+    <!-- Spring - Backend -->
+    <section>
+      <section>
+        <div data-markdown>
+          ### Backend
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Backend
+
+          - Implementierung erfolgt durch Repositories / Services
+          - Datenbanken, Dateisystem und anderes Services
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Backend - JPA Übersicht
+
+          - Objekt-Relationales-Mapping
+          - Entities
+          - Abbildungen von Objekten auf Tabellen
+          - Transaktionsmanagement
+          - Aggregation von zusammengehörigen Änderungen
+          - Gewährleistung von Datenintegrität
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Backend - JPA Entities
+
+          - `@Entity` zur Deklaration eine Entity
+          - `@Id` zur Markierung des ID-Feldes
+          - `@GeneratedValue` zur automatischen Generierung
+          - usw.
+        </div>
+        <aside class="notes">
+          <ul>
+            <li>JPA Annotations sind zahlreich</li>
+            <li>Objekt-Relationales-Mapping mithilfe von JPA ist nicht Teil des Rahmens der Vorlesung</li>
+            <li>Für ausführliche Informationen zu JPA: https://www.baeldung.com/learn-jpa-hibernate</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Backend - JPA Repository
+
+          ```java
+          @Repository
+          public interface PersonRepository
+                      extends JpaRepository&lt;Person, Long&gt; {
+            ...
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Backend - JPA Repository
+
+          - Implementiert Datenbankschnittstelle für eine Entity
+          - Verschiedene Arten von Datenbankschnittstelle möglich (JPA, ElasticSearch etc.)
+          - Deklaration als Interface, Implementierung erfolgt automatisch
+          - Queries werden anhand des Names automatisch generiert
+          - Standard-Methoden bereits vorgegeben
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Backend - JPA Repository
+
+          ```java
+          List&lt;Person&gt; findAll();
+          ```
+          `SELECT * FROM person`
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Backend - JPA Repository
+
+          ```java
+          Person findById(Long id);
+          ```
+          `SELECT * FROM person WHERE id=:personId`
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Backend - JPA Repository
+
+          ```java
+          Person findByFirstNameAndLastName(
+              String firstName,
+              String lastName
+          );
+          ```
+          `SELECT * FROM person WHERE firstName=:firstName AND lastName=:lastName`
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Backend - JPA Repository
+
+          ```java
+          @Query("SELECT n FROM Person p "
+                  + "WHERE p.tag IN (:tags) "
+                  + "AND p.creationDate >= :timestamp")
+          List&lt;Person&gt; findWithTagsAfter(
+              String[] tags,
+              OffsetDateTime timestamp
+          );
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### JPA-Repository - Better Practice
+
+          - Vielzahl an vordefinierten Operationen
+          - Wrapper-Klasse für explizite Schnittstellen
+          - Mehr Aufwand - Mehr Konsistenz
+          - Projekt-spezifisches Wording
+          - Verändern der Methodensignatur
+          - Keine ungewollten Operationen
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### JPA-Repository - Beispiel
+
+          ```java
+          @Repository
+          public class PersonRepository {
+              private final SpringPersonRepository delegate;
+
+              public PersonRepository(
+                  @Autowired SpringPersonRepository delegate
+              ) {
+                  this.delegate = delegate;
+              }
+
+              public @Nullable Note find(@NotNull Long id) {
+                  return delegate.findById(id).orElse(null)
+              }
+          }
+          ```
+        </div>
+      </section>
+    </section>
+    <!-- Spring - Referenzierung -->
+    <section>
+      <section>
+        <div data-markdown>
+          ### Referenzierung
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Referenzierung
+
+          - Spring ist ein Dependency-Injection-Container
+          - Bootstrap baut Objektgraphen auf
           - Objektgraph ist normalerweise statisch
-          - Objektgraph erlaubt dynamische Erweiterung
+          - Objektgraph erlaubt aber dynamische Erweiterung
+          - Zwei primäre Quellen für Objekte
+            - Components
+            - Configurations
         </div>
         <aside class="notes">
           <ul>
@@ -620,26 +1307,15 @@
       </section>
       <section>
         <div data-markdown>
-          ### Bootstrap
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Bootstrap - Verwendung
-
-          - `@SpringBootApplication` zur Deklaration des Einstiegspunkt
-          - `@ComponentScan` für komplexere Umstände
-        </div>
-      </section>
-      <section>
-        <div data-markdown data-line-numbers="3">
-          #### Bootstrap - Beispiel
+          #### Referenzierung - Verwendung
 
           ```java
-          @SpringBootApplication
-          public class MySpringApplication {
-              public static void main(String[] args) {
-                  SpringApplication.run(MySpringApplication.class, args);
+          @RestController
+          public class PersonController {
+              public PersonController(
+                @Autowired PersonService personService
+              ) {
+                  ...
               }
           }
           ```
@@ -647,42 +1323,56 @@
       </section>
       <section>
         <div data-markdown>
-          #### Bootstrap - Details
+          #### Referenzierung - Verwendung
 
-          `@SpringBootApplication`
-          - `scanBasePackages` Base-Package für alle Configurations und Components
-          - Default ist das aktuelle Package
+          ```java
+          @Service
+          public class PersonServiceImpl {
+              public PersonServiceImpl(
+                  @Autowired PersonRepository personRepository
+              ) {
+                  ...
+              }
+          }
+          ```
         </div>
-      </section>
-      <!-- Spring - Components -->
-      <section>
-        <div data-markdown>
-          #### Components
-
-          - Direkte Deklaration von Objekten
-          - Erzeugung durch den Dependency-Injection-Container
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Components - Verwendung
-
-          - `@Component` zur Deklaration
-          - `@Order` zur Definition der Präzedenz
-        </div>
-        <aside class="notes">
-          <ul>
-            <li>@Order wird nur gebraucht wenn man bestehende Components einer Library überschreiben möchte</li>
-          </ul>
-        </aside>
       </section>
       <section>
         <div data-markdown>
-          #### Components - Beispiel
+          #### Referenzierung
+
+          - Benötigt Aufruf durch Dependency-Injection-Container
+          - Auflösung der Referenzen über Typ
+          - Mehrfach vorhandene Objekt über Namen ggf. Classifier
+          - Boostrap scheitert wenn Referenz nicht auslösbar
+            - kein entsprechendes Objekt
+            - mehrere entsprechende Objekte
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Referenzierung
+
+          - Zwei Einstiegspunkte in den Objektgraphen
+            - Components
+            - Configurations
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Referenzierung - Components
+
+          - Klassen direkt oder indirekt annotiert mit `@Component`
+          - Durch `@RestController`, `@Service` und `@Repository` indirekt annotiert
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Referenzierung - Components
 
           ```java
           @Component
-          public class MyComponent {
+          public class IndependentComponent {
               ...
           }
           ```
@@ -690,31 +1380,74 @@
       </section>
       <section>
         <div data-markdown>
-          #### Components - Aliase
+          #### Referenzierung - Components
 
-          - `@Controller` für Endpoints
-          - `@RestController` für ReST-Endpoints
-          - `@Services` für Services
-          - `@Repository` für Datenbankschnittstellen
+          ```java
+          @Component
+          public class DependentComponent {
+              public DependentComponent(
+                  @Autowired RequiredComponent component
+              ) {
+                  ...
+              }
+          }
+          ```
         </div>
       </section>
-      <!-- Spring - Configurations -->
+      <section>
+        <div data-markdown>
+          #### Referenzierung - Configurations
+
+          - Klassen annotiert mit `@Configuration` über Methoden annotiert mit `@Bean`
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Referenzierung - Configurations
+
+          ```java
+          @Configuration
+          public class SomeConfiguration {
+              @Bean
+              public IndependentComponent createComponent() {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Referenzierung - Configurations
+
+          ```java
+          @Configuration
+          public class SomeConfiguration {
+              @Bean
+              public DependentComponent createComponent(
+                  @Autowired RequiredComponent component
+              ) {
+                  ...
+              }
+          }
+          ```
+        </div>
+      </section>
+    </section>
+    <!-- Spring - Configurations -->
+    <section>
+      <section>
+        <div data-markdown>
+          ### Configurations
+        </div>
+      </section>
       <section>
         <div data-markdown>
           #### Configurations
 
           - Indirekte Deklaration von Objekten
-          - Sowie Ändern und Erweitern bestehender Objekte
+          - Ändern und Erweitern bestehender Objekte
           - Aufruf durch den Dependency-Injection-Container
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Configurations - Verwendung
-
-          - `@Configuration` zur Deklaration einer Konfiguration
-          - `@Bean` zur Deklaration eines Objektes
-          - `@Order` zur Definition der Präzedenz
         </div>
       </section>
       <section>
@@ -725,43 +1458,7 @@
           @Configuration
           public class MyConfiguration {
               @Bean
-              public MyComponent createComponent(){
-                  ...
-              }
-          }
-          ```
-        </div>
-      </section>
-      <!-- Spring - Referenzierung -->
-      <section>
-        <div data-markdown>
-          #### Referenzierung
-
-          - Benötigt Aufruf durch Dependency-Injection-Container
-          - Auflösung der Referenzen über Typ
-          - Mehrfach vorhandene Objekt über Namen ggf. Classifier
-          - Boostrap scheitert wenn Referenz nicht auslösbar
-          - keine entsprechendes Objekt
-          - mehrere entsprechende Objekte
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Referenzierung - Verwendung
-
-          - `@Autowired` zur Markierung eines Parameters
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Referenzierung - Beispiel
-
-          ```java
-          @Component
-          public class MyComponentWithDependency {
-              public MyComponentWithDependency(
-                  @Autowired MyRequiredComponent component
-              ) {
+              public MyComponent createComponent() {
                   ...
               }
           }
@@ -770,252 +1467,28 @@
       </section>
       <section>
         <div data-markdown>
-          #### Referenzierung - Beispiel
+          #### Configurations - Beispiel
 
           ```java
           @Configuration
-          public class MyConfiguration {
-              @Bean
-              public MyComponentWithDependency createDependantComponent(
-                  @Autowired MyRequiredComponent component
-              ) {
-                  ...
+          @EnableWebMvc
+          public class WebConfiguration implements WebMvcConfigurer {
+              @Override
+              public void addCorsMappings(CorsRegistry registry) {
+                  registry.addMapping("/**");
               }
           }
           ```
         </div>
       </section>
-      <section>
-        <div data-markdown>
-          #### Referenzierung - Details
-
-          `@Autowired`
-          - `required` für optionale Objekte
-        </div>
-        <aside class="notes">
-          <ul>
-            <li>required ist ein Attribut von Autowired</li>
-            <li>wird z.B. für Libraries verwendet</li>
-          </ul>
-        </aside>
-      </section>
     </section>
+    <!-- Spring - Validation -->
     <section>
       <section>
         <div data-markdown>
-          ### Spring Schichten
+          ### Validation
         </div>
       </section>
-      <section>
-        <div data-markdown>
-          #### Spring Schichten
-
-          - Frontend
-          - Middleware
-          - Backend
-        </div>
-      </section>
-      <!-- Spring - Controllers -->
-      <section>
-        <div data-markdown>
-          #### Controller
-
-          - Schnittstelle zur Außenwelt
-          - Abstraktes Konstrukt
-          - Verschiedene Arten von Schnittstellen möglich (ReST, GraphQL etc.)
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Controller - Einordnung
-
-          - Frontend
-          - Referenziert Services
-          - Wird von niemanden referenziert
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Controller - Verwendung
-
-          - `@Controller` zur Deklaration
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller
-
-          - Konkrete Ausprägung eines Controllers
-          - ReST basiert
-          - Definiert die Endpoints der Anwendung
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Verwendung
-
-          - `@RestController` zur Deklaration
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Verwendung
-
-          - `@RequestMapping` zur Definition des Endpoints
-          - `@PathVariable` für Pfad-Variablen
-          - `@RequestParam` für Query-Parameter
-          - `@RequestBody` für Bodies
-          - `@ResponseStatus` für besondere Http-Status
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Beispiel
-
-          ```java
-          @RestController
-          @RequestMapping(
-              path = "/notes",
-              produces = MediaType.APPLICATION_JSON
-          )
-          public class MyNoteController {
-              ...
-          }
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Beispiel
-
-          Notizen holen
-          `GET /notes`
-
-          Notizen suchen
-          `GET /notes?q={search}`
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Beispiel
-
-          ```java
-          @RequestMapping(method = RequestMethod.GET)
-          public List&lt;Note&gt; getNotes(
-              @RequestParam(name = "q", required = false) String search
-          ) {
-              ...
-          }
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Beispiel
-
-          Notiz anlegen
-          `POST /notes`
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Beispiel
-
-          ```java
-          @RequestMapping(method = RequestMethod.POST)
-          public Note createNote(@RequestBody NoteProposal proposal) {
-              ...
-          }
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Beispiel
-
-          Notiz ändern
-          `PUT /notes/{note}`
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Beispiel
-
-          ```java
-          @RequestMapping(path = "/{note}", method = RequestMethod.PUT)
-          public Note updateNote(
-              @PathVariable("note") Long noteId,
-              @RequestBody NoteProposal proposal
-          ) {
-              ...
-          }
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Beispiel
-
-          Notiz ändern
-          `DELETE /notes/{note}`
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Beispiel
-
-          ```java
-          @RequestMapping(
-              path = "/{note}",
-              method = RequestMethod.DELETE
-          )
-          public Note deleteNote(
-              @PathVariable("note") Long noteId
-          ) {
-              ...
-          }
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Beispiel
-
-          Anhang holen
-          `GET /notes/{note}/attachment/{attachment}`
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Beispiel
-
-          ```java
-          @RequestMapping(
-              path = "/{note}/attachment/{attachment}",
-              method = RequestMethod.GET,
-              produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
-          )
-          public byte[] getAttachment(
-              @PathVariable("note") Long noteId,
-              @PathVariable("attachment") String attachmentId
-          ) {
-              ...
-          }
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Rest-Controller - Details
-
-          `@RequestMapping`
-          - `path` Pfad ink. Pfad-Variablen
-          - `method` Erwartete Methode
-          - `consumes` Erwarteter Content-Type
-          - `produces` Erzeugter Content-Type
-        </div>
-      </section>
-      <!-- Spring - Validation -->
       <section>
         <div data-markdown>
           #### Validation
@@ -1059,225 +1532,14 @@
           #### Validation - Beispiel
 
           ```java
-          @RequestMapping(method = RequestMethod.POST)
-          public Note createNote(@RequestBody @Valid NoteProposal proposal) {
+          @PostMapping
+          public Note createNote(
+              @RequestBody @Valid NoteProposal proposal
+          ) {
               ...
           }
           ```
         </div>
-      </section>
-      <!-- Spring - Service -->
-      <section>
-        <div data-markdown>
-          #### Service
-
-          - Implementiert Businesslogik
-          - Oftmals durch ein Interface abstrahiert
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Service - Einordnung
-
-          - Middleware
-          - Referenziert Repositories und andere Services
-          - Wird von Controller und Services referenziert
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Service - Verwendung
-
-          - `@Service` zur Deklaration
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Service - Beispiel
-
-          ```java
-          @Service
-          public interface MyNoteService {
-              ...
-          }
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Service - Beispiel
-
-          ```java
-          @Service
-          public class MyNoteServiceImpl implements MyNoteService {
-              ...
-          }
-          ```
-        </div>
-      </section>
-      <!-- Spring - Repository -->
-      <section>
-        <div data-markdown>
-          #### Repository
-
-          - Implementiert Datenbankschnittstelle für eine Entity
-          - Abstraktes Konstrukt
-          - Verschiedene Arten von Datenbankschnittstelle möglich (JPA, ElasticSearch etc.)
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Repository - Einordnung
-
-          - Backend
-          - Referenziert andere Repositories
-          - Wird von Services referenziert
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### Repository - Verwendung
-
-          - `@Repository` zur Deklaration
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### JPA-Repository
-
-          - Basiert auf Java-Persistence-API
-          - Implementation per Proxy
-          - Erweiterung durch Annotationen
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### JPA-Repository - Verwendung
-
-          - `@Repository` zur Deklaration
-          - `@Query` zur Definition komplexer Queries
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### JPA-Repository - Beispiel
-
-          ```java
-          @Repository
-          public interface MyNoteRepository
-              extends JpaRepository&lt;Note, Long&gt; {
-              ...
-          }
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### JPA-Repository - Beispiel
-
-          ```java
-          List&lt;Note&gt; findAll();
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### JPA-Repository - Beispiel
-
-          ```java
-          Note findById(Long id);
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### JPA-Repository - Beispiel
-
-          ```java
-          Note findByNameAndDescription(
-              String name,
-              String description
-          );
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### JPA-Repository - Beispiel
-
-          ```java
-          @Query("SELECT n FROM Notes n "
-              + "WHERE n.tag IN (:tags) "
-              + "AND n.creationDate >= :timestamp")
-          List&lt;Note&gt; findWithTagsAfter(
-              String[] tags,
-              OffsetDateTime timestamp
-          );
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### JPA-Repository - Better Practice
-
-          - Vielzahl an vordefinierten Operationen
-          - Wrapper-Klasse für explizite Schnittstellen
-          - Mehr Aufwand - Mehr Konsistenz
-          - Projekt-spezifisches Wording
-          - Verändern der Methodensignatur
-          - Keine ungewollten Operationen
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### JPA-Repository - Beispiel
-
-          ```java
-          @Repository
-          public class MyNoteRepository {
-              private final MySpringNoteRepository delegate;
-
-              public MyNoteRepository(
-                  @Autowired MySpringNoteRepository delegate
-              ) {
-                  this.delegate = delegate;
-              }
-
-              public @Nullable Note find(@NotNull Long id) {
-                  return delegate.findById(id).orElse(null)
-              }
-          }
-          ```
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### JPA - Übersicht
-
-          - Objekt-Relationales-Mapping
-          - Entities
-          - Abbildungen von Objekten auf Tabellen
-          - Transaktionsmanagement
-          - Aggregation von zusammengehörigen Änderungen
-          - Gewährleistung von Datenintegrität
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          #### JPA - Entities
-
-          - `@Entity` zur Deklaration eine Entity
-          - `@Id` zur Markierung des ID-Feldes
-          - `@GeneratedValue` zur automatischen Generierung
-          - usw.
-        </div>
-        <aside class="notes">
-          <ul>
-            <li>JPA Annotations sind zahlreich</li>
-            <li>Objekt-Relationales-Mapping mithilfe von JPA ist nicht Teil des Rahmens der Vorlesung</li>
-            <li>Für ausführliche Informationen zu JPA: https://www.baeldung.com/learn-jpa-hibernate</li>
-          </ul>
-        </aside>
       </section>
     </section>
     <section>
@@ -1288,76 +1550,79 @@
       </section>
       <section>
         <div data-markdown>
-          #### Praxis - API
+          #### Praxis - Aufgaben
 
           - TODOs abfragen
           - TODO anlegen
-          - TODO als Done markieren
+          - TODO abfragen
+          - TODO ändern
           - TODO löschen
         </div>
       </section>
       <section>
         <div data-markdown>
-          #### Praxis - API
+          #### Praxis - Vorbereitung
 
-          TODOs abfragen
+          - Repository: `SpringTodoRepository` anlegen, in `TodoRepository` einbinden
+          - Service: `TodoServiceImpl` anlegen
+          - Controller: `TodoService` in `TodoController` einbinden
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Praxis - TODOs abfragen
+
           `GET /todo`
+          - Repository: Methode zum Abrufen alle TODOs anlegen
+          - Service: Repository aufrufen
+          - Controller: Endpunkt anlegen, Service aufrufe
         </div>
       </section>
       <section>
         <div data-markdown>
-          #### Praxis - API
+          #### Praxis - TODO anlegen
 
-          TODO anlegen
-          `POST /todo`
+          `POST /todo {"title": "Cleanup"}`
+          - Repository: Methode zum Speichern anlegen
+          - Service: Aus Proposal ein TODO machen, in Repository speichern
+          - Controller: Endpunkt anlegen, Service aufrufen
         </div>
       </section>
       <section>
         <div data-markdown>
-          #### Praxis - API
+          #### Praxis - TODO abfragen
 
-          TODO als Done markieren
-          `PUT /todo/{id}`
+          `GET /todo/{id}`
+          - Repository: Methode zum Abrufen eines TODO anlegen
+          - Service: Repository aufrufen und Existenz überprüfen
+          - Controller: Endpunkt anlegen, Service aufrufen
         </div>
       </section>
       <section>
         <div data-markdown>
-          #### Praxis - API
+          #### Praxis - TODO ändern
 
-          TODO löschen
+          `PUT /todo/{id} {"done": true}`
+          - Repository: -
+          - Service: TODO laden, anpassen, in Repository speichern
+          - Controller: Endpunkt anlegen, Service aufrufen
+        </div>
+      </section>
+      <section>
+        <div data-markdown>
+          #### Praxis - TODO löschen
+
           `DELETE /todo/{id}`
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          ### Praxis - Rest-Controller
-
-          - Klasse
-            - Annotations hinzufügen
-            - Repository injecten
-          - Methoden
-            - anhand von API modellieren
-            - Annotations hinzufügen
-            - Repository aufrufen
-        </div>
-      </section>
-      <section>
-        <div data-markdown>
-          ### Praxis - Repository
-
-          - Klasse
-            - Annotations hinzufügen
-            - Spring-Repository injecten
-          - Methoden
-            - anhand der Anforderungen modellieren
-            - an Spring-Repository weiterleiten
+          - Repository: Methode zum Löschen anlegen
+          - Service: TODO laden, in Repository löschen
+          - Controller: Endpunkt anlegen, Service aufrufen
         </div>
       </section>
       <section>
         <div data-markdown>
           ### Praxis - Validierung
 
-          - `Todo.title`
+          - `TodoProposal.title`
             - nicht Leer
             - maximal 50 Zeichen
         </div>
