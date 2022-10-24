@@ -1,0 +1,32 @@
+### Todo's
+
+- PWA's?
+    - Quasi das beste von Web Apps und Nativ Apps vereint.
+    - Discoverable, so the contents can be found through search engines.
+    - Installable, so it can be available on the device's home screen or app launcher.
+    - Linkable, so you can share it by sending a URL.
+    - Network independent, so it works offline or with a poor network connection.
+    - Progressively enhanced, so it's still usable on a basic level on older browsers, but fully-functional on the latest ones.
+    - Re-engageable, so it's able to send notifications whenever there's new content available.
+    - Responsively designed, so it's usable on any device with a screen and a browser—mobile phones, tablets, laptops, TVs, refrigerators, etc.
+    - Secure, so the connections between the user, the app, and your server are secured against any third parties trying to get access to sensitive data.
+- Vorteile
+    - Caching? -> In Richtung PWA
+- Nachteile
+    - Search Engine Optimization
+        - https://medium.com/new-era-code-school/search-engine-optimization-for-single-page-applications-56483bbe6eef
+        - HTML Snapshots
+            - headless browser on the server
+            - cloud service
+            - isomorphic code base (node.js in backend)
+        - https://blog.angular-university.io/angular-2-universal-meet-the-internet-of-the-future-seo-friendly-single-page-web-apps/
+        - Angular universal
+            - server side rendering for the first page
+            - afterwards a angular spa will be started
+        - SEO also improved
+            - google is also able to crawl spa's
+        - tutorial from google to optimize spa
+            - https://codelabs.developers.google.com/codelabs/making-a-single-page-app-search-friendly#0
+        - SEO optimization
+            - https://www.youtube.com/watch?v=nwGY-9lwTF4&list=PLKoqnv2vTMUPOalM1zuWDP9OQl851WMM9&index=3
+            - dynamic rendering -> only show prerendered stuff to bots
