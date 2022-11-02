@@ -76,39 +76,39 @@
               @enduml
           </code>
       </pre>
-        <aside class="notes">
+      <aside class="notes">
           <ul>
-            <li>Terminologie
-              <ul>
-                <li>Client -> PC, bzw. Browser des Nutzers.</li>
-                <li>Web Server -> liefert HTML, CSS, JavaScript, Bilder, etc. aus.</li>
-                <li>Web Service -> kümmert sich um die Verwaltung von dynamischen Daten der Anwendung (User,
-                  Warenkorb, etc.).</li>
-              </ul>
-            </li>
-            <li>Eine Single Page Application hat grundlegend zwei Phasen.
-              <ul>
-                <li>Phase 1 ist die Initialisierung.
-                  <ul>
-                    <li>Der Client startet eine Anfrage an den Web Server, um die Frontend Application
-                      abzurufen.</li>
-                    <li>Anschließend liefert der Web Server die statischen Daten für die Application aus.</li>
-                    <li>Dies passiert oftmals gleichzeitig in mehreren Schritten. (HTTP 2 Multiplexing)</li>
-                    <li>Nachdem/während die statischen Daten geladen werden, startet der Browser die
-                      Application.</li>
-                  </ul>
-                </li>
-                <li>Phase 2 ist die Laufzeit.
-                  <ul>
-                    <li>Zur Laufzeit lädt der Client nur noch dynamische Daten vom Web Service.</li>
-                    <li>Sobald er dynamische Daten geladen hat, löst er ein rerender aus und die Seite wird im
-                      Browser neu gezeichnet, nicht neu geladen!</li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
+              <li>Terminologie
+                <ul>
+                  <li>Client -> PC, bzw. Browser des Nutzers.</li>
+                  <li>Web Server -> liefert HTML, CSS, JavaScript, Bilder, etc. aus.</li>
+                  <li>Web Service -> kümmert sich um die Verwaltung von dynamischen Daten der Anwendung (User,
+                    Warenkorb, etc.).</li>
+                </ul>
+              </li>
+              <li>Eine Single Page Application hat grundlegend zwei Phasen.
+                <ul>
+                  <li>Phase 1 ist die Initialisierung.
+                    <ul>
+                      <li>Der Client startet eine Anfrage an den Web Server, um die Frontend Application
+                        abzurufen.</li>
+                      <li>Anschließend liefert der Web Server die statischen Daten für die Application aus.</li>
+                      <li>Dies passiert oftmals gleichzeitig in mehreren Schritten. (HTTP 2 Multiplexing)</li>
+                      <li>Nachdem/während die statischen Daten geladen werden, startet der Browser die
+                        Application.</li>
+                    </ul>
+                  </li>
+                  <li>Phase 2 ist die Laufzeit.
+                    <ul>
+                      <li>Zur Laufzeit lädt der Client nur noch dynamische Daten vom Web Service.</li>
+                      <li>Sobald er dynamische Daten geladen hat, löst er ein rerender aus und die Seite wird im
+                        Browser neu gezeichnet, nicht neu geladen!</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
           </ul>
-        </aside>
+      </aside>
       </section>
       <section>
         <h4>Wieso gibt es SPA's?</h4>
