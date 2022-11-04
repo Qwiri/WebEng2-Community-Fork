@@ -2,6 +2,15 @@
     <h3>SPA in React</h3>
 </section>
 <section>
+    <h4>Vorbereitung</h4>
+    <ul>
+        <li>Bitte einmal auschecken</li>
+        <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: main)</li>
+        <li><code>npm install</code></li>
+        <li>Für VS Code -> React Extension Pack</li>
+    </ul>
+</section>
+<section>
     <h4>Wie hilft uns React?</h4>
     <ul>
         <li>Unterstützt
@@ -168,10 +177,10 @@
     const someParam = 'someParam';
 
     return <div>
-            &lt;Button label='Screen1' onClick={navigate('/')}/&gt;;
-            &lt;Button 
-                label='Screen2' 
-                onClick={navigate(`/screen2/${someParam}`)}/&gt;;
+            &lt;button value='Screen1' onClick={() => navigate('/')}/&gt;;
+            &lt;button 
+                value='Screen2' 
+                onClick={() => navigate(`/screen2/${someParam}`)}/&gt;;
     </div>
 }</code>
     </pre>
