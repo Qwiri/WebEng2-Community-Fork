@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>4_rich_client_testing</title>
+
+    <link rel="stylesheet" href="/dist/reset.css">
+    <link rel="stylesheet" href="/dist/reveal.css">
+    <link rel="stylesheet" href="/dist/theme/white.css">
+
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+    <link rel="stylesheet" href="styles/custom_styles.css">
+    <link rel="stylesheet" href="/src/custom_styles/global_styles.css">
+</head>
+<body>
+<!-- Qwiri Fork Start -->
+<style>
+#qf-controls {
+  position: absolute;
+  z-index: 1;
+  margin-top: .25rem;
+  margin-left: .25rem;
+}
+#qf-controls button {
+  background: black;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  color: white;
+}
+</style>
+
+<div id="qf-controls">
+  <button onclick="window.location = '/'">Home</button>
+  <button onclick="toggleTheme()">Change Theme</button>
+</div>
+<!-- / Qwiri Fork End -->
+
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h3>Rich Client Testing</h3>
+        </section>
+        <section>
+            <h4>Guidelines Testing</h4>
+            <ul>
+                <li>es geht um Qualität, nicht Quantität</li>
+                <li>Test Coverage zeigt das Fehlen von Tests, nicht die Qualität</li>
+                <li>Softwareentwickler sind selbst für Qualität verantwortlich</li>
+                <li>es geht um gute Tests, nicht um 100% Coverage</li>
+            </ul>
+            <aside class="notes">
+                <ul>
+                    <li>Es geht beim Testing nicht darum 100% Test-Coverage zu erreichen und jeden erdenklichen Fall zu testen</li>
+                    <li>Eine menge unnützer Tests gibt uns keinen Garanten für gute Software.</li>
+                    <li>Softwareentwickler sollten Gehirn investieren, um Tests für sinnvolle Fälle zu schreiben.</li>
+                    <li>Diese Guidelines kann man auf alle Tests übertragen.</li>
+                </ul>
+            </aside>
+        </section>
+        <section data-external="./0_test_pyramid.html"></section>
+        <section data-external="./1_unit_tests.html"></section>
+        <section data-external="./2_frontend_unit_tests.html"></section>
+        <section data-external="./3_testing_in_angular.html"></section>
+        <section data-external="./4_praxis.html"></section>
+    </div>
+</div>
+
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        dependencies: [
+            {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+            {
+                src: '../../../plugin/external/external.js',
+                condition: function () {
+                    return !!document.querySelector('[data-external],[data-external-replace]');
+                }
+            },
+        ]
+    });
+    Reveal.configure({showNotes: false});
+</script>
+</body>
+</html>

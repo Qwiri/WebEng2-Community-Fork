@@ -1,0 +1,180 @@
+<section>
+    <h3>Atomic Design</h3>
+</section>
+<section>
+    <h4>Atomic Design</h4>
+    <p>Große Frontends mit vielen Components werden unübersichtlich</p>
+    <img src="assets/lego-unsorted.jpg" style="height: 400px;">
+</section>
+<section>
+    <h4>Atomic Design</h4>
+    <p>Strukturierung und Kategorisierung von Components</p>
+    <p>Ziel ist ein ordentlicher Baukasten an Components</p>
+    <img src="assets/component-periodic-table.png" style="height: 400px;">
+    <p class="small-text">https://bradfrost.com/blog/post/atomic-web-design/</p>
+</section>
+<section>
+    <h4>Atomic Design</h4>
+    <ul>
+        <li>Atomic Design ordnet Components nach:
+            <ul>
+                <li>Atoms - Buttons, Text Fields, etc.</li>
+                <li>Molecules - Search Bar, Form Groups, etc.</li>
+                <li>Organisms - Header, Footer, Overlays, etc.</li>
+                <li>Templates - Schablone</li>
+                <li>Pages - konkrete Seite</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>https://bradfrost.com/blog/post/atomic-web-design/</li>
+            <li>Atoms - die Bausteine unserer Anwendung - Buttons, etc.</li>
+            <li>Molecules - kleine Zusammenschlüsse von Atoms - Suchfelder, Form Groups</li>
+            <li>Organisms - fachliche Components. Zusammenschlüsse von Molecules, mit denen der User interagieren kann
+            </li>
+            <li>Templates - Schablone die den Aufbau der Seite zeigt</li>
+            <li>Pages - konkrete Seiten</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Storybook</h4>
+    <ul>
+        <li>Macht Atomic Design noch nützlicher</li>
+        <li>Visualisierung einzelner Components in verschiedener Ausprägung</li>
+    </ul>
+    <img src="assets/storybook.png" style="height: 300px;">
+</section>
+<section>
+    <h4>Storybook Syntax</h4>
+    <pre>
+        <code class="language-javascript" data-line-numbers="|1-4|6|8">export default {
+    title: 'Components/Background',
+    component: Background,
+};
+
+const Template = () => &lt;Background /&gt;;
+
+export const BackgroundClassic = Template.bind({});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Ein Storybookeintrag besteht aus drei Bestandteilen.</li>
+            <li>Definition des Eintrags
+                <ul>
+                    <li>Hier geben wir dem Eintrag einen Titel. Dieser muss auch den Pfad enthalten, damit die Einträge entsprechend geordnet dargestellt werden.</li>
+                    <li>Außerdem müssen wir hier die Component angeben, die wir in diesem Storybookeintrag anzeigen wollen. In diesem Fall die Background Component</li>
+                </ul>
+            </li>
+            <li>Definition des Templates
+                <ul>
+                    <li>Im Template können wir mit der JSX Syntax definieren, was in der Story angezeigt wird.</li>
+                    <li>Dies muss nicht immer nur die eine Component sein. Manchmal wollen wir evtl. noch einen Hintergrund hinzufügen, oder müssen etwas im Context mocken -> dazu gleich mehr</li>
+                </ul>
+            </li>
+            <li>Definition der konkreten Ausprägung
+                <ul>
+                    <li>Es kann in einem Storybookeintrag für eine Component mehrere Ausprägungen einer Component geben.</li>
+                    <li>Durch die Input Parameter der Component könnte die Component unterschiedlich aussehen.</li>
+                    <li>BackgroundClassic ist in diesem Fall der Name der Ausprägung.</li>
+                    <li>Mit Template.bind({}) erstellen wir die Ausprägung. Gleich mehr dazu, wie man Parameter an die Component übergibt.</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Storybook mit Parametern</h4>
+    <pre>
+        <code class="language-javascript" data-line-numbers="|1-3|5-9|11-14">const Template = (args) => &lt;Background&gt;
+                               &lt;Button {...args} /&gt;
+                           &lt;/Background&gt;;
+
+export const Primary = Template.bind({});
+Primary.args = {
+    primary: true,
+    label: 'Button',
+};
+
+export const Secondary = Template.bind({});
+Secondary.args = {
+    label: 'Button',
+};</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>In dieser Story werden Parameter an die Component übergeben.</li>
+            <li>Bei der Definition des Templates werden die Parameter über destruction an die Component übergeben.</li>
+            <li>In diesem Fall wurde auch neben der Component die in der Story präsentiert werden soll, noch ein Hintergrund eingefügt.</li>
+            <li>Template.bind({}) wird nun zweimal ausgeführt, da es zwei verschiedene Ausprägungen des Buttons gibt.</li>
+            <li>Anschließend werden auf der Ausprägung die "args" gesetzt.</li>
+            <li>Es gibt eine "primary" und eine "secondary" Ausprägung des Buttons.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Storybook mit Contextinjection</h4>
+    <pre>
+        <code class="language-javascript" data-line-numbers>const someMockClient = {
+    getData(_) {
+        return Promise.resolve(new Data('lala'));
+    },
+    saveData(data) {
+        return Promise.resolve(data);
+    }
+}
+
+const Template = (args) => 
+            &lt;SomeContext.Provider value={someMockClient}&gt;
+                &lt;SomeComponent {...args} /&gt;
+            &lt;/SomeContext.Provider&gt;;</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wenn eine Component auf den Context zugreift, um einen HttpClient oder ähnliches zu verwenden, dann müssen wir diesen mocken.</li>
+            <li>Dazu können wir einfach einen Provider mit einem mockValue bereit stellen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Storybook mit Router</h4>
+    <pre>
+        <code class="language-javascript" data-line-numbers>export const reactRouterDecorator = (Story) => {
+    return (
+        &lt;MemoryRouter&gt;
+            &lt;Routes&gt;
+                &lt;Route path="/*" element={&lt;Story /&gt;} /&gt;
+            &lt;/Routes&gt;
+        &lt;/MemoryRouter&gt;
+    )
+}</code>
+    </pre>
+    <pre>
+        <code class="language-javascript" data-line-numbers>export default {
+    title: 'Components/SomeComponent',
+    component: SomeComponent,
+    decorators: [reactRouterDecorator],
+};</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wenn eine Component, die wir in einem Storybookeintrag anzeigen wollen, routing enthält, müssen wir einen Router um die Component legen. Sonst führt dies zu Fehlern.</li>
+            <li>Da wir hier kein spezielles Objekt mocken wollen, können wir einen generalisierten Decorator bauen, den wir über viele Stories legen können.</li>
+            <li>Der reactRouterDecorator bekommt die Story als Parameter hineingegeben. Anschließend wird der Router um die Component gelegt.</li>
+            <li>Über den parameter "decorators" können wir den Decorator zu einem Storybookeintrag hinzufügen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: Atomic Design + Storybook</h4>
+    <ul>
+        <li>Sortieren des Projekts nach Atomic Design</li>
+        <li>Storybookeintrag erstellen für wenigstens drei weitere Components</li>
+        <li>Wer nicht mitgekommen ist:
+            <ul>
+                <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react (branch: step_5-atomic_design)</li>
+            </ul>
+        </li>
+    </ul>
+</section>

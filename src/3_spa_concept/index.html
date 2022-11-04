@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>3_spa_concept</title>
+
+  <link rel="stylesheet" href="/dist/reset.css">
+  <link rel="stylesheet" href="/dist/reveal.css">
+  <link rel="stylesheet" href="/dist/theme/white.css">
+
+  <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+  <link rel="stylesheet" href="/src/custom_styles/global_styles.css">
+</head>
+
+<body>
+  <!-- Qwiri Fork Start -->
+<style>
+#qf-controls {
+  position: absolute;
+  z-index: 1;
+  margin-top: .25rem;
+  margin-left: .25rem;
+}
+#qf-controls button {
+  background: black;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  color: white;
+}
+</style>
+
+<div id="qf-controls">
+  <button onclick="window.location = '/'">Home</button>
+  <button onclick="toggleTheme()">Change Theme</button>
+</div>
+<!-- / Qwiri Fork End -->
+
+<div class="reveal">
+    <div class="slides">
+      <section>
+        <h3>Single Page Application (SPA)</h3>
+      </section>
+      <section>
+        <h4>Lernziele</h4>
+        <ul>
+          	<li>Was ist eine Single Page Application (SPA)?</li>
+            <li>Wie funktioniert einer SPA (in der Theorie)?</li>
+            <li>Was sind Vorteile und Nachteile einer SPA?</li>
+        </ul>
+      </section>
+      <section>
+        <p><em>“A single-page application is exactly what its name implies: a JavaScript-driven web application that
+            requires only a single page load.”</em></p>
+        <p class="cite">JavaScript - The Definitive Guide</p>
+        <p class="cite">5th ed., O'Reilly, Sebastopol, CA, 2006</p>
+        <aside class="notes">
+          <ul>
+            <li>Wir haben uns bereits Ajax beschäfitgt.</li>
+            <li>Ajax ist die Grundlage für SPA's.</li>
+            <li>SPA's sind quasi die stärkste Ausprägung von Ajax.</li>
+            <li>Anders als bei einer Multi Page Anwendung haben wir nur einen Seitenaufruf und laden danach nur noch
+              Daten, aber zu den Details kommen wir gleich.</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <h4>Single Page Application Konzept</h4>
+        <pre>
+          <code class="language-plantuml">
+              @startuml
+              participant "Client" as client
+              participant "Web Server" as webServer
+              participant "Web Service" as webService
+  
+              group Initializing
+              activate client
+              client -> webServer: GET /index.html
+              activate webServer
+              webServer -> client: index.html
+              webServer -> client: styles.css
+              webServer -> client: script.js
+              deactivate webServer
+              client -> client: start application
+              end
+  
+              group Runtime
+              client -> webService: GET /some-id
+              deactivate client
+              activate webService
+              webService -> client: some-data
+              deactivate webService
+              activate client
+              client -> client: rerender
+              end
+              @enduml
+          </code>
+      </pre>
+      <aside class="notes">
+          <ul>
+              <li>Terminologie
+                <ul>
+                  <li>Client -> PC, bzw. Browser des Nutzers.</li>
+                  <li>Web Server -> liefert HTML, CSS, JavaScript, Bilder, etc. aus.</li>
+                  <li>Web Service -> kümmert sich um die Verwaltung von dynamischen Daten der Anwendung (User,
+                    Warenkorb, etc.).</li>
+                </ul>
+              </li>
+              <li>Eine Single Page Application hat grundlegend zwei Phasen.
+                <ul>
+                  <li>Phase 1 ist die Initialisierung.
+                    <ul>
+                      <li>Der Client startet eine Anfrage an den Web Server, um die Frontend Application
+                        abzurufen.</li>
+                      <li>Anschließend liefert der Web Server die statischen Daten für die Application aus.</li>
+                      <li>Dies passiert oftmals gleichzeitig in mehreren Schritten. (HTTP 2 Multiplexing)</li>
+                      <li>Nachdem/während die statischen Daten geladen werden, startet der Browser die
+                        Application.</li>
+                    </ul>
+                  </li>
+                  <li>Phase 2 ist die Laufzeit.
+                    <ul>
+                      <li>Zur Laufzeit lädt der Client nur noch dynamische Daten vom Web Service.</li>
+                      <li>Sobald er dynamische Daten geladen hat, löst er ein rerender aus und die Seite wird im
+                        Browser neu gezeichnet, nicht neu geladen!</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+          </ul>
+      </aside>
+      </section>
+      <section>
+        <h4>Wieso gibt es SPA's?</h4>
+
+        <p>Findet ihr Gründe dafür, warum man sowas machen sollte?</p>
+        <ul class="fragment fade-in">
+          <li>Reduktion der übertragenen Daten</li>
+          <li>Bessere User Experience</li>
+          <li>Weniger Serverressourcen</li>
+          <li>Session clientseitig (Server ist stateless)</li>
+          <li>Hybride Anwendung auch mobil einsetzbar</li>
+        </ul>
+        <aside class="notes">
+          <ul>
+            <li>Auf alle der hier genannten Punkte gehen wir jetzt noch mal genauer ein.</li>
+          </ul>
+        </aside>
+      </section>
+      <section data-external="./0_benefits_reduction_of_the_transmitted_data.html"></section>
+      <section data-external="./1_benefits_better_user_experience.html"></section>
+      <section data-external="./2_benefits_less_server_resources.html"></section>
+      <section data-external="./3_benefits_stateless_server.html"></section>
+      <section data-external="./4_benefits_hybrid_applications.html"></section>
+      <section data-external="./5_downsides.html"></section>
+      <section data-external="./6_routing.html"></section>
+      <section>
+        <h4>Lernziele</h4>
+        <ul>
+          	<li>Was ist eine Single Page Application (SPA)?</li>
+            <li>Wie funktioniert einer SPA (in der Theorie)?</li>
+            <li>Was sind Vorteile und Nachteile einer SPA?</li>
+        </ul>
+        <aside class="notes">
+          <ul>
+            <li>SPA ist eine Application, bei der nur ein Seitenaufruf erfolgt und danach nur noch Daten per Ajax geladen werden.</li>
+            <li>Initialisierungsphase -> Laufzeitphase, auch Routing ist wichtig.</li>
+            <li>SPA's sind kein Allerheilsmittel, es gibt viele Vorteile, aber auch Nachteile. Multi Page Applications haben ihre Daseinsberechtigung.</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <h4>Das nächste Mal ...</h4>
+        <ul>
+          <li>Backend für eine SPA</li>
+          <li>Wie baut man einen Web Service?</li>
+        </ul>
+        <aside class="notes">
+          <ul>
+            <li>Wir haben bereits gesehen, wie man mit plain Javascript und Ajax Daten von einem bestehenden Backend abfragt.</li>
+            <li>Wir haben ebenfalls eine Multi Page Application gebaut und damit auch schon einen Server, kombiniert mit einem Client, aufgesetzt.</li>
+            <li>Eine getrennte Form von Server und Client, wie bei einer SPA, bauen wir das nächste Mal.</li>
+          </ul>
+        </aside>
+      </section>
+    </div>
+  </div>
+
+  <script src="/dist/reveal.js"></script>
+  <script src="/plugin/notes/notes.js"></script>
+  <script src="/plugin/markdown/markdown.js"></script>
+  <script src="/plugin/highlight/highlight.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      dependencies: [
+        { src: '//cdn.jsdelivr.net/npm/reveal-plantuml' },
+        {
+                src: '../../plugin/external/external.js',
+                condition: function () {
+                    return !!document.querySelector('[data-external],[data-external-replace]');
+                }
+            },
+      ]
+    });
+    Reveal.configure({ showNotes: false });
+  </script>
+</body>
+
+</html>

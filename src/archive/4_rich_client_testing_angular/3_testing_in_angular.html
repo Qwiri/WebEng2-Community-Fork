@@ -1,0 +1,293 @@
+<section>
+    <h3>Testing in Angular</h3>
+</section>
+<section>
+    <h4>Testing Module</h4>
+    <ul>
+        <li>ein Angular Module</li>
+        <li>um die Component isoliert zu testen</li>
+        <li>für jeden Test ein neues Module</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>beforeEach(waitForAsync(() => {
+  TestBed.configureTestingModule({
+    imports: [
+      RouterTestingModule
+    ],
+    declarations: [
+      AppComponent
+    ],
+  }).compileComponents();
+}));</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Die Idee dahinter ist, dass die einzelnen Tests so völlig isoliert voneinander sind. Jeder Test hat ja sein eigenes Module.</li>
+            <li>Damit können Tests auch nicht aufgrund ihrer Reihenfolge fehlschlagen. Lediglich wenn der Entwickler Daten über die Testfälle teilt.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Fixture</h4>
+    <ul>
+        <li>bekommt man beim Erstellen der Component</li>
+        <li>lässt uns auf die Bestandteile der Component zugreifen</li>
+        <li>kennt außerdem den Zustand der Component</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>const fixture = TestBed.createComponent(AppComponent);</code>
+    </pre>
+</section>
+<section>
+    <h4>Fixture</h4>
+    <ul>
+        <li>gibt Zugriff auf das JavaScript Objekt einer Component</li>
+        <li>ermöglicht Zugriff auf das HTML</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>const component = fixture.debugElement.componentInstance;</code>
+    </pre>
+    <pre>
+        <code class="javascript" data-line-numbers>fixture.debugElement.query(By.css('.some-class'));
+fixture.debugElement.query(By.css('#some-id'));
+const nativeElement = fixture.debugElement.query(By.css(
+    '[data-test-id=some-data-test-id]'
+)).nativeElement;
+const componentInstance = fixture.debugElement.query(
+    By.directive(SomeComponent)
+).componentInstance;</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Über das JavaScript Objekt können wir auf den Zustand der Component zugreifen. Wir können Variablen auslesen und Methoden aufrufen.</li>
+            <li>Mit dem Zugriff auf das HTML können wir prüfen, ob das HTML richtig gerendert wurde.</li>
+            <li>Außerdem können wir programmatisch Events auf den HTML Elementen auslösen. Z.B. ein Klick.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Fixture</h4>
+    <ul>
+        <li>kennt den Zustand einer Component</li>
+        <li>kann die Change Detection auslösen
+            <ul>
+                <li>Change Detection wird im Test nicht automatisch ausgelöst</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>fixture.detectChanges();</code>
+    </pre>
+    <pre>
+        <code class="javascript" data-line-numbers>await fixture.whenStable();</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Normalerweise wird die Change Detection vom Framework immer aufgerufen wenn sich Daten einer Component ändern. Bzw. wenn sich Daten ändern, die auch im HTML relevant sind.</li>
+            <li>detectChanges() muss aufgerufen werden, wenn man möchte, dass das HTML gerendert wird. Wenn man Daten ändert und sich das HTML verändern soll, muss erst detectChanges aufgerufen werden.</li>
+            <li>whenStable() kann helfen auf asynchrone Events zu warten.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>TS-Mockito</h4>
+    <ul>
+        <li>bekannt aus Java</li>
+        <li>Library fürs Mocking</li>
+        <li>Syntax ist für andere Sprachen ähnlich</li>
+    </ul>
+    <p>Zero Setup:</p>
+    <pre>
+        <code class="json">"ts-mockito": "^2.6.1"</code>
+    </pre>
+</section>
+<section>
+    <h4>TS-Mockito</h4>
+    <ul>
+        <li>mock() liefert ein Rekorder Objekt
+            <ul>
+                <li>interaktionen mit dem Mock Objekt werden erkannt</li>
+                <li>Rückgabewerte für Methoden werden hier definiert</li>
+            </ul>
+        </li>
+        <li>instance() liefert das Mock Objekt
+            <ul>
+                <li>ein Objekt der Klasse</li>
+                <li>mockt öffentliche Schnittstellen</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="typescript" data-line-numbers>class SomeService {
+    someFunction(): boolean {
+        return true;
+    }
+
+    someOtherFunction(): string {
+        return 'foo';
+    }
+}
+
+const someServiceMock = mock(SomeService);
+const someServiceInstance = instance(someServiceMock);</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Um ein Mock Objekt zu erstellen scannt Mockito die Klassenstruktur und erkennt die öffentlichen Schnittstellen.</li>
+            <li>Auf dem Rekorder Objekt können wir dann Rückgabewerte für die Methoden definieren und interaktionen mit dem Mock prüfen.</li>
+            <li>Die Mock Instanz geben wir an das zu testende Objekt. In Angular registrieren wir es im Testing Module, damit es der Dependency Injection Container in die Component stecken kann.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>when</h4>
+    <ul>
+        <li>when() mockt Rückgabewerte des Mocks</li>
+        <li>ein Mock kann verschiedene Rückgabewerte haben</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>when(mock.someFunction('test')).thenReturn(false);
+when(mock.someFunction('testi').thenReturn(true));
+when(mock.someFunction(anything()).thenReturn(true));
+when(mock.someOtherFunction()).thenReturn('bar');</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wenn die Parameter egal sind, die in das Mock Objekt hineingegeben werden, kann anything() genutzt werden. Dies gibt es auch in spezielleren Varianten wie anyString().</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>verify</h4>
+    <ul>
+        <li>mit verify() prüfen wir Interaktionen mit dem Mock</li>
+        <li>wir können testen wie viele Interaktionen stattgefunden haben</li>
+        <li>Parameter werden "strict-equal" verglichen
+            <ul>
+                <li>bei Objekten heißt das per Referenz</li>
+            </ul>
+        </li>
+        <li>für Objekte nutzt man meistens deepEqual()
+            <ul>
+                <li>schließlich will man die Werte prüfen</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>verify(mock.someFunction()).once();
+verify(mock.someOtherFunction('test123')).once();
+verify(mock.someOtherFunction(deepEqual({}))).once();
+verify(mock.someOtherFunction(anything())).never();
+verify(mock.someOtherFunction(anyString())).never();</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>anything() sollte möglichst nur in Kombination mit .never() verwendet werden. Schließlich wollen wir sonst prüfen, ob die Funktion auch mit den richtigen Parametern aufgerufen wurde.</li>
+            <li>Statt once() gibt es auch twice() und times(number)</li>
+            <li>Wenn man das Objekt nicht matchen kann nutzt lieber anyString() als anything(). Dann ist es wenigstens der gleiche Typ.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Alternativen zu Mockito</h4>
+    <ul>
+        <li>Jasmine/Jest
+            <ul>
+                <li>liefert Testing mit</li>
+                <li>nicht so komfortabel</li>
+            </ul>
+        </li>
+        <li>manuelles Mocking
+            <ul>
+                <li>sehr aufwendig</li>
+                <li>ungeschützt bei Renaming</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>const someServiceMock = {
+    someFunction(): boolean {
+        return true;
+    },
+    someOtherFunction(): string {
+        return 'lala';
+    }
+} as SomeService;</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wenn ich Mocking-Frameworks verwende habe eine direkte Referenz auf die Klasse. Nenne ich eine Methode der Klasse um, ändert sich autommatisch auch das Mock.</li>
+            <li>Mocke ich ein Objekt manuell, dann muss ich die Methoden hier manuell umbenennen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>ng-mocks</h4>
+    <ul>
+        <li>Library zum Mocken von Components</li>
+        <li>Component kann andere Components enthalten</li>
+        <li>Subcomponents sollen nicht getestet werden</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Components die von der zu testenden Component verwendet werden, werden ja selbst unit testet. Wir wollen sie daher nicht mittesten.</li>
+            <li>Ich habe diese Funktionalität bisher für React, Flutter und andere Frameworks vermisst. Ich denke besonders, um saubere UI-Unit-Tests zu schreiben ist sowas sehr hilfreich.</li>
+            <li>Die Funktionalität von Subcomponents wird natürlich mit gemockt.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>ng-mocks</h4>
+    <p>Zero Setup:</p>
+    <pre>
+        <code class="json">"ng-mocks": "^12.5.0"</code>
+    </pre>
+    <p>Mocking von Components:</p>
+    <pre>
+        <code class="typescript" data-line-numbers>TestBed.configureTestingModule({
+    declarations: [
+        MockComponent(ButtonComponent),
+        ComponentUnderTest
+    ],
+}).compileComponents();</code>
+    </pre>
+</section>
+<section>
+    <h4>ng-mocks</h4>
+    <p>Mock Component ist über das Fixture erreichbar</p>
+    <pre>
+        <code class="javascript" data-line-numbers>const componentInstance = fixture.debugElement.query(
+    By.directive(SomeComponent)
+).componentInstance;</code>
+    </pre>
+    <p>Input und Output Parameter sind verwendbar</p>
+    <pre>
+        <code class="javascript" data-line-numbers>componentInstance.someOutput.emit('someOutput'):
+componentInstance.someInput = 'someInput';</code>
+    </pre>
+</section>
+<section>
+    <h4>Testing Libraries</h4>
+    <ul>
+        <li>Karma
+            <ul>
+                <li>Standard für Angular</li>
+                <li>nutzt echten Browser für Testausführung</li>
+                <li>nah an der Realität</li>
+            </ul>
+        </li>
+        <li>Jest
+            <ul>
+                <li>nutzt Headless Browser</li>
+                <li>viel schneller als Karma</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Die Frage ist, ob man die Nähe zur Realität braucht. Bzw. ob eigentlich auch ein Headless Browser reicht.</li>
+            <li>Headless Browser ist ein Browser ohne UI.</li>
+        </ul>
+    </aside>
+</section>
+

@@ -1,0 +1,349 @@
+<section>
+    <h3>Angriffsmethoden</h3>
+</section>
+<section>
+    <h4>Angriffsmethoden</h4>
+    <ul>
+        <li>Request-Manipulation</li>
+        <li>Directory Traversal</li>
+        <li>SQL-Injection</li>
+        <li>Session Hijacking</li>
+        <li>Cross-Site-Scripting</li>
+        <li>Cross-Site-Request-Forgery</li>
+        <li>Man-In-The-Browser</li>
+        <li>Phishing</li>
+        <li>Denail-Of-Service</li>
+    </ul>
+</section>
+<section>
+    <h4>Request-Manipulation</h4>
+    <p>Wer hat davon mitbekommen?</p>
+    <img src="assets/cdu_connect.jpg" height="200px" />
+    <aside class="notes">
+        <ul>
+            <li>https://lilithwittmann.medium.com/wenn-die-cdu-ihren-wahlkampf-digitalisiert-a3e9a0398b4d</li>
+            <li>Die Sicherheitslücke bei CDU Connect war durch einfache Request Manipulation zu finden.</li>
+            <li>Wie Lilith Wittmann in ihrem Beitrag dazu schreibt, konnte sie die Daten der Anwendung einfach über die Backendschnittstellen abfragen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Request-Manipulation</h4>
+    <ul>
+        <li><em>"www.some-domain.de/users/41"</em></li>
+        <li>Gibt es vielleicht auch einen user 42?</li>
+        <li>Alle öffentlichen Schnittstellen können aufgerufen werden</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Security through obscurity ist keine ordentliche Security</li>
+            <li>Nur weil jemand nicht darauf klicken kann, heißt es nicht, dass man es nicht aufrufen kann.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Request-Manipulation - Lösung</h4>
+    <ul>
+        <li>Datenzugriff nur für berechtigte und authentifizierte Nutzer</li>
+        <li>Evtl. zusätzlich keine monoton aufsteigende Id's</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Wie wir anhand des CDU Beispiels sehen, ist Request Manipulation leider immer noch ein Thema</li>
+            <li>Man kann auch aus den kleinsten Daten wichtige Informationen extrahieren.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Directory Traversal</h4>
+    <ul>
+        <li>Ähnlich wie Request-Manipulation</li>
+        <li><em>"http://www.example.com/index.foo?item=datei1.html"</em></li>
+        <li><em>"http://www.example.com/index.foo?item=../../../Config.sys"</em></li>
+    </ul>
+</section>
+<section>
+    <h4>Directory Traversal - Lösung</h4>
+    <ul>
+        <li>Keine sensitiven Daten an öffentlichen Orten ablegen</li>
+        <li>Zugriffsrechte auf Ordner absichern</li>
+        <li>Pfade als Eingabe müssen überprüft werden</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Am besten einen eigenen Server für seine öffentlich zugänglichen Daten</li>
+            <li>Ansonsten kann man die einzelnen Ordner gegen Zugriffe von außen schützen</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>SQL-Injection</h4>
+    <img src="assets/sql_injection_meme.jpg" height="400px"/>
+</section>
+<section>
+    <h4>SQL-Injection</h4>
+    <pre>
+        <code class="java" data-line-numbers>var username = "foo@mail.com'; --"
+var password = "lala"</code>
+    </pre>
+    <pre>
+        <code class="java" data-line-numbers>var sql = "SELECT * FROM user " +
+          "WHERE username='" + username + "' " +
+            "AND password= '" + password "';";</code>
+    </pre>
+    <pre>
+        <code class="sql" data-line-numbers>SELECT * FROM user
+  WHERE username='foo@mail.com';
+    --' AND password='lala';</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wir fügen zusätzlich zum Nutzernamen weiteren SQL Code in den Query ein</li>
+            <li>Der Rest des Queries wird damit auskommentiert</li>
+            <li>Nutzername muss in diesem Fall zumindest valide sein</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>SQL-Injection - Varianten</h4>
+    <pre>
+        <code class="java" data-line-numbers>var username = "lala'; DROP TABLE user;--"
+var password = "lala"</code>
+    </pre>
+    <pre>
+        <code class="java" data-line-numbers>var username = "lala'; UPDATE password='password' " +
+                      "WHERE username='foo@mail.com';--"
+var password = "lala"</code>
+    </pre>
+</section>
+<section>
+    <h4>SQL-Injection - Vorgehen</h4>
+    <ul>
+        <li>Ausprobieren der gängigsten Namen für
+            <ul>
+                <li>Datenbanken</li>
+                <li>Tabellen</li>
+                <li>Spalten</li>
+            </ul>
+        </li>
+        <li>Fehlermeldungen liefern wichtige Informationen</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Hier sind Fehlermeldungen der Datenbank gemeint, die an eine öffentliche Schnittstelle weitergeleitet werden</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>SQL-Injection - Lösung</h4>
+    <ul>
+        <li>Silver Bullet: Prepared Statements</li>
+    </ul>
+    <pre>
+        <code class="java" data-line-numbers>var sql = "SELECT * FROM user " +
+          "WHERE username=:username" +
+            "AND password=:password";
+
+em.createNativeQuery(sql)
+    .setParameter("username", username)
+    .setParameter("password", password)
+    .getSingleResult();</code>
+    </pre>
+</section>
+<section>
+    <h4>Session Hijacking</h4>
+    <ul>
+        <li>Klauen der Session eines Nutzers</li>
+        <li>Raten der Session ID</li>
+        <li>Ausspähen der Session ID</li>
+        <li>Aussperren des Nutzers durch Passwortänderung</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Die Session ID kann z.B. durch Cross Site Scripting geklaut werden</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Session Hijacking - Lösung</h4>
+    <ul>
+        <li>Binden der Session ID an die IP-Adresse oder Browser</li>
+        <li>Größere Session ID wählen</li>
+        <li>Passwort ändern verhindern
+            <ul>
+                <li>Altes Passwort erneut eingeben</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section>
+    <h4>Cross-Site-Scripting</h4>
+    <img src="assets/cross_site_scripting.png" height="400px"/>
+    <aside class="notes">
+        <ul>
+            <li>Über einen Link kann man den Code auch in den Browser eines anderen bringen, dies nennt man nicht-persistentes xss.</li>
+            <li>Es gibt auch persistentes xss, z.B. über eine Datenbank (Kommentarfunktion)
+                <ul>
+                    <li>Eingaben eines Nutzers werden bei anderen Nutzern wieder ausgegeben</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Cross-Site-Scripting</h4>
+    <ul>
+        <li>Einfügen von JavaScript Code in Webseiten</li>
+        <li>Ausführung des Codes durch den Browser</li>
+        <li>Möglicher Schaden
+            <ul>
+                <li>Verwirrung des Nutzers</li>
+                <li>Weiterleitung auf andere Webseiten</li>
+                <li>Auslesen und Wegschicken von Daten</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section>
+    <h4>Cross-Site-Scripting - Lösung</h4>
+    <ul>
+        <li>Encoding von Inhalten, die angezeigt werden</li>
+        <li>Angular bringt das von Haus aus mit</li>
+    </ul>
+    <img src="assets/cross_site_scripting_solution.png" height="400px"/>
+    <aside class="notes">
+        <ul>
+            <li>Nicht nur bei der Ausgabe von Inhalten muss geprüft werden. Auch wenn Nutzer Daten an den Server schicken, müssen die Inhalte geprüft werden.</li>
+            <li>Dann kann es gar nicht passieren, dass XSS aus dem Backend an den User ausgeliefert wird.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Cross-Site-Scripting - Lösung</h4>
+    <ul>
+        <li>Content Security Policy
+            <ul>
+                <li>Schränkt das Abrufen von Scripts ein</li>
+                <li>Schränkt den JavaScript Code ein, der ausgeführt wird
+                    <ul>
+                        <li>eval("some-code")</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Eine Content Security Policy sagt dem Browser, was er ausführen und laden darf</li>
+            <li>Natürlich kommt es auch darauf an, dass der Browser sich richtig verhält</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Cross-Site-Request-Forgery</h4>
+    <ul>
+        <li>Mischung aus XSS und Session Hijacking</li>
+        <li>Ausnutzung der Session durch XSS</li>
+        <li>Script löst im Hintergrund Transaktionen aus</li>
+    </ul>
+    <img src="assets/cross_site_request_forgery.png" height="200px"/>
+    <aside class="notes">
+        <ul>
+            <li>Streng genommen ist die Nutzung einer Session Id eine Variante von CSRF. Dies nennt man Session-Riding.</li>
+            <li>Normales CSRF beschränkt sich auf das Ausführen von Transaktionen</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Cross-Site-Request-Forgery - Lösung</h4>
+    <ul>
+        <li>Siehe XSS</li>
+        <li>Webanwendung und Server teilen ein Secret
+            <ul>
+                <li>Secret wird bei jedem Request mitgeschickt</li>
+                <li>Secret kann im Cookie oder im Header liegen</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>CSRF baut auf XSS auf. Daher am besten XSS verhindern</li>
+            <li>Angular bietet ein HttpClientXsrfModule an. Dies kümmert sich um das Teilen eines Secrets (clientseitig)</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Man-In-The-Middle (Man-In-The-Browser)</h4>
+    <ul>
+        <li>Angreifer schaltet sich zwischen Nutzer und Betreiber</li>
+        <li>Zum Beispiel durch einen Fake Webauftritt</li>
+        <li>Bei Man-In-The-Browser wird kein Fake Webauftritt gebraucht
+            <ul>
+                <li>Der Angreifer manipuliert hier direkt den Browser</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section>
+    <h4>Man-In-The-Middle - Lösung</h4>
+    <ul>
+        <li>HTTPS verwenden (ordentliche Verschlüsselung)</li>
+        <li>Zwei Faktor Authentifizierung (2FA)</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Es gibt natürlich noch weitere Maßnahmen, um das Mitlesen von Daten zu verhindern</li>
+            <li>Dies sind die beiden primären Methoden, die wir (als Betreiber) in der Hand haben</li>
+            <li>Wenn der zweite Faktor ein Schlüssel ist, kann dies zu einer sehr guten Verschlüsselung der Daten genutzt werden</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Phishing</h4>
+    <img src="assets/phishing.png" height="400px"/>
+</section>
+<section>
+    <h4>Phishing</h4>
+    <ul>
+        <li>Erlangen von persönlichen Daten durchs Vertrauenserschleichung</li>
+        <li>Angreifer gibt sich z.B. als Webseiten Betreiber aus</li>
+        <li>Basiert auf Social Engineering</li>
+    </ul>
+</section>
+<section>
+    <h4>Phishing - Lösung</h4>
+    <ul>
+        <li>2FA hilft gegen Identitätsdiebstahl</li>
+        <li>Nutzer müssen leider mitdenken</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Mit 2FA muss der Angreifer auch den zweiten Faktor, das Handy, stehlen, um die Identität des Nutzers zu klauen</li>
+            <li>Sich im Internet zu bewegen wird immer Mitdenken erfordern</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Denail-Of-Service</h4>
+    <ul>
+        <li>Überlastung eines Systems durch viele Anfragen</li>
+        <li>Im speziellen Fall auch Distributed-Denail-of-Service
+            <ul>
+                <li>Hierbei werden Anfragen von vielen Rechnern gestellt</li>
+                <li>Oft durch Botnetze</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Gehackte Rechner werden zu einem Botnetz zusammengesteckt</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Denail-Of-Service - Lösung</h4>
+    <ul>
+        <li>Wird im Idealfall vom Server Provider verhinder</li>
+        <li>Muster der Angriffe erkennen und auf diese nicht reagieren</li>
+    </ul>
+</section>

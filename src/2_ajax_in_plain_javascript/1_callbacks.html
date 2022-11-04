@@ -1,0 +1,103 @@
+<section>
+    <h3>Callbacks</h3>
+</section>
+<section>
+    <h4>Was sind Callbacks?</h4>
+    <ul>
+        <p><em>“In computer programming, a callback is a piece of executable code that is passed as an argument to other
+                code, which is expected to call back (execute) the argument at some convenient time. The invocation may
+                be immediate as in a synchronous callback or it might happen at later time, as in an asynchronous
+                callback.”</em></p>
+        <p class="cite">Wikipedia - Callback (computer programming)</p>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Hier ist auch von asynchonen Callbacks die Rede, darauf gehen wir später genauer ein.</li>
+            <li>Um es einfacher zu machen, schauen wir uns jetzt erstmal synchrone Callbacks auf.</li>
+            <li>Callback Zitat: https://en.wikipedia.org/wiki/Callback_(computer_programming)</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Beispiel Callback:</h4>
+    <pre>
+        <code class="javascript" data-line-numbers>function someFunction(callback) {
+    console.log('do something');
+
+    callback()
+}
+
+function someCallbackFunction() {
+    console.log('callback called');
+}
+
+function onButtonClick() {
+    someFunction(someCallbackFunction)
+}       </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Hier sehen wir, wie Funktionen in Javascript als Parameter in eine andere Funktion gegeben werden können.</li>
+            <li>Dies nennt man dann einen Callback.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis</h4>
+    <p>Code aus dem Repo auschecken: </p> 
+    <p>gitlab.com/dhbw_webengineering_2/plain_javascript</p>
+    <p>Branch: "step_1"</p>
+    <aside class="notes">
+        <ul>
+            <li>Wir schauen uns verschiedene Callbacks im richtigen Javascript Code an, um es besser zu vertiefen.</li>
+            <li>Alle Beispiele habe ich euch auch hier im Foliensatz noch mal aufgeführt, damit ihr sie für später noch einmal nachsehen könnt.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Beispiel Callback anonym:</h4>
+    <pre>
+        <code class="javascript" data-line-numbers>function someFunction(callback) {
+    console.log('do something');
+
+    callback()
+}
+
+
+function onButtonClick() {
+    someFunction(() => console.log('callback called'));
+}       </code>
+    </pre>
+</section>
+<section>
+    <h4>Beispiel Callback mit Parameter:</h4>
+    <pre>
+        <code class="javascript" data-line-numbers>function someFunction(callback) {
+    console.log('do something');
+
+    callback('callback called');
+}
+
+function someCallbackFunction(string) {
+    console.log(string);
+}
+
+function onButtonClick() {
+    someFunction(someCallbackFunction);
+}       </code>
+    </pre>
+</section>
+<section>
+    <h4>Beispiel Callback mit Parameter anonym:</h4>
+    <pre>
+        <code class="javascript" data-line-numbers>function someFunction(callback) {
+    console.log('do something');
+
+    callback('callback called');
+}
+
+function onButtonClick() {
+    someFunction((string) => console.log(string));
+}       </code>
+    </pre>
+</section>

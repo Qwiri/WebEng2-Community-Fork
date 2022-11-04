@@ -1,0 +1,261 @@
+<section>
+    <h3>State Management</h3>
+</section>
+<section>
+    <h4>Lösung für das Datenmanagement</h4>
+    <img alt="component_hierarchy_global_state" src="assets/component_hierarchy_global_data.svg" style="height: 400px">
+    <aside class="notes">
+        <ul>
+            <li>an welches Pattern erinnert euch dieser Aufbau?</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Singleton oder Global State</h4>
+    <ul>
+        <li>globales Objekt</li>
+        <li>jeder kann darauf zugreifen</li>
+        <li>im schlimmsten Fall ein
+            <ul>
+                <li>direkter Zugriff</li>
+                <li>statischer Zugriff</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>erinnert an ein Singleton, das oft als Antipattern beschimpft wird</li>
+            <li>ein Global State bringt viele Nachteile mit, wenn er schlecht gebaut ist</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Mögliche Nachteile eines Global States</h4>
+    <ul>
+        <li>hohe unkontrollierte Kopplung im ganzen Projekt</li>
+        <li>direkte und statische Aufrufe sorgen für die hohe Kopplung</li>
+        <li>Fehlersuche wird schwieriger durch:
+            <ul>
+                <li>Seiteneffekte</li>
+                <li>Verteilung im ganzen Projekt</li>
+            </ul>
+        </li>
+        <li>es wird passieren
+            <ul>
+                <li>Murphys Law:</li>
+                <li>Anything that can go wrong will go wrong.</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>theoretisch müssen die Aufrufe nicht unkontrolliert im ganzen Projekt statt finden</li>
+            <li>besonders in Entwicklungsteams mit mehreren Entwicklern (junior wie senior), wird es dazu kommen</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Mögliche Nachteile eines Global States</h4>
+    <ul>
+        <li>Unvorhersehbar
+            <ul>
+                <li>jeder kann den State bearbeiten</li>
+                <li>Seiteneffekte</li>
+            </ul>
+        </li>
+        <li>keiner weiß:
+            <ul>
+                <li>warum sich der State ändert</li>
+                <li>wo sich der State ändert</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Projekte mit dieser Art Global State werden schnell:
+                <ul>
+                    <li>unübersichtlich</li>
+                    <li>schlecht wartbar</li>
+                    <li>schlecht erweiterbar</li>
+                    <li>Seiteneffekte wollen wir ja eigentlich mit State Management vermeiden</li>
+                </ul>
+            </li>
+            <li>trotzdem wollen wir einen Global state verwenden</li>
+            <li>schließlich wollen wir uns den Code sparen, um Daten durch die Components zu reichen</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Global State Richtig</h4>
+    <p>State Management mit NgRx</p>
+    <pre>
+        <code class="language-plantuml">
+            @startuml
+            component store
+            component reducer
+            component action
+            component selector
+            node UI {
+                component presentation
+                component control
+            }
+
+            reducer -> store
+            store --> selector
+            reducer <-- action
+            store ---> presentation
+            selector -> presentation
+            action <-- control
+            @enduml
+        </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>um ein besseres State Management zu erhalten müssen erstmal die Abhängigkeiten aufgetrennt werden</li>
+            <li>es gibt nicht nur noch den einen Global State, auf den jeder zugreifne kann</li>
+            <li>das State Management wird in mehrere Komponenten aufgesplittet</li>
+            <li>in den meisten Fällen gibt es Actions, Reducer und einen State</li>
+            <li>diese Grafik zeigt State Management mit NgRx
+                <ul>
+                    <li>hier kommen zusätzlich Selectors hinzu</li>
+                    <li>diese sind nicht zwingend notwendig</li>
+                </ul>
+            </li>
+            <li>im Folgenden gehen wir genauer auf die einzelnen Komponenten ein</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Store</h4>
+    <ul>
+        <li>enthält den aktuellen State
+            <ul>
+                <li>quasi ein Stream aus States</li>
+            </ul>
+        </li>
+        <li>State
+            <ul>
+                <li>ist immutable</li>
+                <li>wird neu erstellt bei jeder Änderung</li>
+                <li>wird von einem Reducer erstellt</li>
+                <li>kann aus mehreren Teilen bestehen</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>State bildet den ganzen Anwendungsstate ab</li>
+            <li>oftmals lohnt es sich den State in logische Teile zu unterteilen</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Reducer</h4>
+    <ul>
+        <li>verarbeitet Actions</li>
+        <li>baut aus State und Action neuen State</li>
+        <li>State darf nur ersetzt werden!</li>
+        <li>keine Änderungen</li>
+        <li>führt nur synchrone Operationen aus</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>er reduziert die Action und den State auf einen neuen State</li>
+            <li>Dabei führt er nur synchrone Operationen aus. Er kann nicht auf einen Backendcall oder eine andere längere Operation warten.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Action</h4>
+    <ul>
+        <li>eine Interaktion des Nutzers</li>
+        <li>löst Logik im Reducer aus</li>
+        <li>kann Daten für den Reducer enthalten</li>
+        <li>wird asynchron an einen Reducer dispatched (geschickt)</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Actions können natürlich auch Daten an den Reducer leiten
+                <ul>
+                    <li>Wenn z.B. der Nutzer neue Todo's anlegt, wir dieses Todo über eine Action an den Reducer gegeben.</li>
+                </ul>
+            </li>
+            <li>z.B. wenn der Nutzer etwas eingegeben hat</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Funktionsweise des State Managements</h4>
+    <ul>
+        <li>Nutzer löst Action aus</li>
+        <li>Reducer verarbeitet Action und erstellt neuen State</li>
+        <li>UI reagiert auf den State</li>
+    </ul>
+    <pre>
+        <code class="language-plantuml">
+            @startuml
+            component store
+            component reducer
+            component action
+            component selector
+            node UI {
+                component presentation
+                component control
+            }
+
+            reducer -> store
+            store --> selector
+            reducer <-- action
+            store ---> presentation
+            selector -> presentation
+            action <-- control
+            @enduml
+        </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Änderungen werden nur über Actions ausgelöst</li>
+            <li>der State ist immutable</li>
+            <li>Reducer enthalten Logik zum Verändern des States</li>
+            <li>Der Store stellt einen Stream aus States bereit. Die UI, bzw. eine Component kann dann auf diesen Stream subscriben. Somit kann die Component auf Änderungen des States reagieren.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Selector</h4>
+    <ul>
+        <li>ist nicht zwingend notwendig</li>
+        <li>mit einem Selector kann man
+            <ul>
+                <li>teile des States auslesen</li>
+                <li>eine Projektion auf dem State auslösen</li>
+            </ul>
+        </li>
+        <li>Selectors können verschachtelt werden</li>
+    </ul>
+</section>
+<section>
+    <h4>Vorteile von State Management</h4>
+    <ul>
+        <li>Daten bzw. State kann von überall abgerufen werden</li>
+        <li>Fehler durch Seiteneffekte werden eingeschränkt</li>
+        <li>Daten werden nicht mehrmals vom Backend geladen</li>
+        <li>basiert auf Functional Reactive Programming (FRP)
+            <ul>
+                <li>macht die Anwendung häufig Nutzerfreundlicher</li>
+                <li>Anwendung soll nach einer Nutzereingabe nicht "blockieren"</li>
+            </ul>
+        </li>
+        <li>zentraler State hilf beim Entwickeln/Debuggen</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>kein unnötiger Code mehr zur Weitergabe von Daten</li>
+            <li>Seiteneffekte werden vermieden. Action führt zu neuem State. State zu einem UI rerender.</li>
+            <li>in großen Projekten werden Daten in den verschiedensten Components geladen. Somit kann es schnell passieren, dass Daten doppelt geladen werden</li>
+            <li>FRP wird häufig eingesetzt um Anwendungen Nutzerfreundlicher und reaktiver zu gestalten.</li>
+            <li>State Management arbeitet quasi mit FRP</li>
+            <li>mit einem zentralen State hat man zu jeder Zeit einen Überblick über die Anwendung und kann Fehler schneller finden.</li>
+        </ul>
+    </aside>
+</section>

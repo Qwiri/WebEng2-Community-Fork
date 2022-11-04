@@ -1,0 +1,446 @@
+<section>
+    <h3>Unit Tests in React</h3>
+</section>
+<section>
+    <h4>React Testing Library</h4>
+    <ul>
+        <li>Wir benutzen die React Testing Library</li>
+        <li>Natives Testing enthält sehr viel Boilerplate</li>
+        <li>Die Testing Library stellt auch eine einfachere API bereit</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Wer sich die klassische Syntax ansehen möchte, kann dies natürlich gerne selbst machen:
+                https://reactjs.org/docs/testing.html</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>render()</h4>
+    <ul>
+        <li>Zum Rendern der Component</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it('some test', () => {
+    render(&lt;Button dataTestId={buttonDataTestId} 
+                   label={buttonLabel}/&gt;);
+});</code>
+    </pre>
+</section>
+<section>
+    <h4>screen</h4>
+    <ul>
+        <li>Zum Abrufen von gerenderten Inhalten</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it('some test', () => {
+    render(&lt;Button dataTestId={buttonDataTestId} 
+                   label={buttonLabel}/&gt;);
+        
+    expect(screen.getByText(buttonLabel))
+        .toBeInTheDocument();
+});</code>
+    </pre>
+</section>
+<section>
+    <h4>screen Funktionen</h4>
+    <ul>
+        <li>Verschiedene Funktionen, um Inhalt zu suchen</li>
+        <li>getBy... wirft einen Fehler wenn (Element != 1)</li>
+        <li>queryBy... gibt null zurück</li>
+        <li>findBy... gibt ein Promise zurück</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it('some test', () => {
+    ...
+    
+    expect(screen.getByRole(Button))
+        .toBeInTheDocument();
+
+    expect(screen.getByText(buttonLabel))
+        .toBeInTheDocument();
+
+    expect(screen.getByTestId(buttonDataTestId))
+        .toBeInTheDocument();
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Das Screen Objekt bietet verschiedene Funktionen, um Inhalt im DOM zu finden.</li>
+            <li>getBy... queryBy... und findBy... gibt es jeweils auch für mehrere Elemente, heißt dann getByAll...</li>
+            <li>Wir können dann nach Text, einer speziellen DataTestId oder nach einer Component suchen.</li>
+            <li>Es gibt noch weitere Funktionen. Schaut dazu einfach in die Doku: https://testing-library.com/docs/react-testing-library/cheatsheet/</li>
+            <li>expect kennen wir bereits -> ist quasi ein assert (von Java).</li>
+            <li>expect bietet uns einige Funktionen, um Werte zu vergleichen, auf gewisse Eigenschaften zu prüfen, etc.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>fireEvent</h4>
+    <ul>
+        <li>Hilft uns beim triggern von Events</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it('some test', () => {
+    ...
+    
+    fireEvent.click(screen.getByTestId(buttonDataTestId));
+
+    fireEvent.change(screen.getByTestId(inputFieldDataTestId), 
+                     { target: {value: 'new text'}, });
+
+    ...
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Auch hier gibt es natürlich weitere Funktionen. Diese brauchen wir erstmal nicht.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>jest.fn()</h4>
+    <ul>
+        <li>Mocken von Funktionen</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it('some test', () => {
+    const onClick = jest.fn();
+
+    render(&lt;Button dataTestId={buttonDataTestId} 
+                   label={buttonLabel}/&gt;);
+    
+    fireEvent.click(screen.getByTestId(buttonDataTestId));
+
+    expect(onClick).toHaveBeenCalledTimes(1);
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Jest Mock Funktionen speichern alle interaktionen mit ihnen.</li>
+            <li>Wir können somit prüfen, ob die Funktion entsprechend oft und mit den richtigen Parametern aufgerufen wurde.</li>            
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: Button Test</h4>
+    <ul>
+        <li>Schreibt einen Test für die Button Component</li>
+        <li>Was sollten wir testen?</li>
+        <li>https://gitlab.com/dhbw_webengineering_2/rich_client_react_testing</li>
+        <li>Branch: step_0-button_test</li>
+    </ul>
+</section>
+<section>
+    <h4>Next Step: Testen eines List View Items</h4>
+    <ul>
+        <li>Isoliertes Testen?</li>
+        <li>Child Components haben eigene Tests</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>export default function ListViewItem({ todo, onShowDetail, dataTestId }) {
+    return (
+        &lt;div className='list-view-item' data-testid={dataTestId}&gt;
+            &lt;p className='list-view-item--title'&gt;{todo.title}&lt;/p&gt;
+            &lt;InputCheckboxGroup className='list-view-item--checkbox-group' id={`${todo.id}check`} disabled={true} label='Done' checked={todo.done} /&gt;
+            &lt;Button className='list-view-item--' label='Details' onClick={() => onShowDetail(todo.id)}/&gt;
+        &lt;/div&gt;
+    );
+};</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wir wollen Components immer isoliert testen.</li>
+            <li>Dazu gehören nicht nur Abhängigkeiten, wie z.B. unser TodoHttpClient, sondern auch Child Components.</li>
+            <li>Die InputCheckboxGroup Component und die Button Component haben ihre eigenen Unit Tests.</li>
+            <li>Wir wollen sie eigentlich nicht mittesten, sondern nur prüfen, ob die ListViewItem Component korrekt funktioniert.</li>
+            <li>Daher testen wir nur bis zur Schnittstelle. Das heißt wir prüfen, ob die korrekten Parameter in die Component hineingegeben wurden und was passiert, wenn ein Callback von einer Child Component aufgerufen wird.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Child Components mocken</h4>
+    <ul>
+        <li>jest.mock erlaubt es uns Imports zu mocken</li>
+        <li>Wir überschreiben nun die Component</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>jest.mock('../../molecules/.../InputCheckboxGroup', () => {
+    return function DummyInputCheckboxGroup(props) {
+        return &lt;div&gt;{props.id},{props.checked.toString()}&lt;/div&gt;
+    }
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Auch unsere Mock Component bekommt die "props" hineingereicht.</li>
+            <li>Da wir prüfen wollen, ob die Parameter korrekt sind, schreiben wir sie einfach ins HTML, dann können wir sie später auf ihre Korrektheit prüfen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: List View Item Test</h4>
+    <ul>
+        <li>Schreibt einen Test für die ListViewItem Component</li>
+        <li>Was muss getestet werden?</li>
+        <li>Mockt die Child Components</li>
+        <li>Branch: step_1-list_view_item_test</li>
+    </ul>
+</section>
+<section>
+    <h4>Routing im Test</h4>
+    <ul>
+        <li>Router muss vorhanden sein</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>export const reactRouterTestWrapper = (ui) => {
+    return (
+        &lt;MemoryRouter&gt;
+            &lt;Routes&gt;
+                &lt;Route path="/*" element={ui} /&gt;
+            &lt;/Routes&gt;
+        &lt;/MemoryRouter&gt;
+    )
+}</code>
+    </pre>
+    <pre>
+        <code class="javascript" data-line-numbers>render(
+    reactRouterTestWrapper(
+        &lt;SomeComponent&gt;&lt;/SomeComponent&gt;
+    )
+);</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Components in denen Routing genutzt wird, müssen innerhalb eines Routers liegen.</li>
+            <li>Daher müssen wir einen MemoryRouter um die Component legen.</li>
+            <li>Da wir Routing bei mehreren Tests und Components brauchen, sollten wir es abstrahieren.</li>
+            <li>Genutzt wird der Wrapper dann in der render Funktion.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Routing im Test</h4>
+    <ul>
+        <li>Navigate sollte gemockt werden</li>
+        <li>Das Routing sollten wir prüfen</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>const navigate = jest.fn();
+
+beforeEach(() => {
+    jest.spyOn(router, 'useNavigate')
+        .mockImplementation(() => navigate);
+});</code>
+    </pre>
+    <pre>
+        <code class="javascript" data-line-numbers>expect(navigate).toHaveBeenCalledTimes(1);
+expect(navigate).toHaveBeenCalledWith(`/list`);</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Da wir prüfen wollen, ob das Routing korrekt ausgelöst wird, müssen wir die navigate Funktion mocken.</li>
+            <li>Wir mocken daher den router.useNavigate() und geben eine eigene mock Funktion zurück.</li>
+            <li>Mit dieser können wir dann prüfen, ob die richtigen Navigationen ausgelöst wurden.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Context mocken im Test</h4>
+    <ul>
+        <li>TodoHttpClient muss gemockt werden</li>
+        <li>Für isoliertes Testing</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>let todoHttpClientMock;
+
+beforeEach(() => {
+    todoHttpClientMock = {
+        getTodoById(_) {
+            return Promise.resolve(todo);
+        },
+        saveTodo(todo) {
+            return Promise.resolve(todo);
+        }
+    }
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Über Dependency Injection (genau genommen Context Injection) können wir den TodoHttpClient nutzen.</li>
+            <li>Dies machen wir, damit die HTTP Calls abstrahiert von verschiedenen Stellen aus getätigt werden können und die Logik dafür nicht in jeder Component dupliziert ist.</li>
+            <li>Außerdem können wir dadurch im Testfall den TodoHttpClient einfach mocken, damit keine echten Backendcalls gemacht werden.</li>
+            <li>Den TodoHttpClient können wir mit jest mocken oder wie hier manuell mit Javascript.</li>
+            <li>Wie ihr sehen könnt, müssen wir natürlich nur die Funktionen mocken, die wir im Test brauchen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Context mocken im Test</h4>
+    <ul>
+        <li>TodoHttpClient wird über den Context provided</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>function renderWithContextProvider(ui) {
+    render(
+        &lt;TodoHttpClientContext.Provider 
+                value={todoHttpClientMock}&gt;
+            {ui}
+        &lt;/TodoHttpClientContext.Provider&gt;
+    );
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Über den Context.Provider können wir anschließend den MockClient verfügbar machen.</li>
+            <li>Über den useContext Hook, greift die Component anschließend auf unseren MockClient zu.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Context mocken im Test</h4>
+    <ul>
+        <li>Aufrufe prüfen</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>saveTodoSpy = jest.spyOn(todoHttpClientMock, 'saveTodo');</code>
+    </pre>
+    <pre>
+        <code class="javascript" data-line-numbers>expect(saveTodoSpy).toHaveBeenCalledTimes(1);
+expect(saveTodoSpy).toHaveBeenCalledWith(todo);</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wie auch bei anderen Funktionen, können wir darauf "spyen".</li>
+            <li>Anschließend können wir prüfen, ob die Schnittstellen der Methode korrekt aufgerufen werden.</li>
+            <li>Wir wollen schließlich prüfen, ob die Component End to End funktioniert.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>WaitFor</h4>
+    <ul>
+        <li>Warten auf asynchronen Code</li>
+        <li>Z.B. bei Backendcalls</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>it('should render', async () => {
+    render(&lt;DetailView dataTestId={detailViewDataTestId} /&gt;);
+
+    await waitFor(() => {
+        expect(screen.getByTestId(testId)).toBeInTheDocument();
+    });
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>WaitFor ist eine Funktion, der wir einen Callback übergeben. Die Funktion wird so lange aufgerufen, bis der Callback keine Exceptions mehr zurückliefert oder der Timeout abgelaufen ist.</li>
+            <li>getByTestId wirft eine Exception, falls die TestId nicht gefunden wurde. Dann wird waitFor erneut aufgerufen.</li>
+            <li>Wir können der waitFor Funktion einen Timeout und ein Intervall übergeben. Der default für Timeout ist 1000ms und für das Intervall 50ms.</li>
+            <li>Wir brauchen waitFor, um darauf zu warten, dass die Daten aus dem MockTodoHttpClient zurückgeliefert wurden und anschließend in der Component angezeigt werden.</li>
+            <li>Auf unseren Pages brauchen wir daher waitFor, da wir sonst nur "loading" zu sehen bekommen würden.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>WaitFor mit FireEvent</h4>
+    <ul>
+        <li>Button muss sichtbar sein, bevor er geklickt werden kann</li>
+        <li>Die Kombination ist tricky</li>
+        <li>FireEvent darf nicht in WaitFor aufgerufen werden</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>await waitFor(() => {
+    expect(screen.getByTestId(buttonId)).toBeInTheDocument();
+});
+fireEvent.click(screen.getByTestId(buttonId));</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Manchmal müssen wir einen Button klicken, der erst sichtbar wird, nachdem etwas erfolgreich vom Backend geladen wurde.</li>
+            <li>Die Kombination aus waitFor und fireEvent ist dabei nicht so einfach.</li>
+            <li>Wenn wir das fireEvent direkt im waitFor aufrufen, kann es passieren, dass der Button mehrmals geklickt wird, da der Callback öfter ausgeführt werden kann.</li>
+            <li>Das gilt natürlich für alle Seiteneffekte.</li>
+            <li>Daher sollten wir erst prüfen, ob der Button angezeigt wird und erst danach, außerhalb des waitFor, den Button klicken.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Assertions in WaitFor</h4>
+    <ul>
+        <li>Nur einzelne Assertions erlaubt</li>
+        <li>Führt zu schnellerer Testausführung</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>await waitFor(() => {
+    expect(saveSpy).toHaveBeenCalledTimes(1);
+});
+expect(saveSpy).toHaveBeenCalledWith({ ...todo, done: true });</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wir sollten nur eine Assertion im waitFor stehen haben, da unser Test im Fehlerfall schneller fehlschlägt, außerdem wird weniger Code wiederholt aufgerufen.</li>
+            <li>Die Idee ist wieder: Wir warten bis die UI in einem stabilen Zustand ist und testen anschließend, dass das richtige passiert ist.</li>
+            <li>Es ist auch sinnvoll die Assertions ins waitFor zu schreiben, die schneller fehlschlägt.</li>
+            <li>Wenn wir "toHaveBeenCalledWith" in die waitFor Funktion gepackt hätten, müssten wir auf den Timeout warten, da die Funktion evtl. noch aufgerufen werden könnte.</li>
+            <li>Wird die Funktion zweimal aufgerufen, wird waitFor direkt gestoppt, da die Assertion bereits fehlgeschlagen ist.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: Detail Page Test</h4>
+    <ul>
+        <li>Schreibt einen Test für die Detail Page Component</li>
+        <li>Was sollten wir testen?</li>
+        <li>Branch: step_2-detail_page_test</li>
+    </ul>
+</section>
+<section>
+    <h4>TodoHttpClient?</h4>
+    <ul>
+        <li>Ausgelagerte Logik muss auch getestet werden</li>
+        <li>Axios muss gemockt werden</li>
+    </ul>
+    <pre>
+        <code class="javascript" data-line-numbers>jest.mock("axios");
+
+it('should get all todos', async () => {
+    axios.get.mockResolvedValueOnce({data: mockTodos});
+
+    ...
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>jest.mock kennen wir bereits. Wir können damit Components mocken, aber auch andere Javascript Objekte, wie z.B. axios.</li>
+            <li>Anschließend müssen wir dem Mock Objekt natürlich sagen, wie es sich verhalten soll. Dazu bietet uns Jest verschiedene Möglichkeiten</li>
+            <li>mockResolvedValueOnce() sorgt dafür, dass das Mock Objekt diesen Wert genau einmal zurückgibt.</li>
+            <li>Außerdem müssen wir definieren, welche Funktion diesen Wert zurückgibt. Daher rufen wir vorher ".get" auf.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Aufrufe verifizieren</h4>
+    <pre>
+        <code class="javascript" data-line-numbers>it('should get all todos', async () => {
+    ...
+
+    expect(axios.get).toHaveBeenCalledTimes(1);
+    expect(axios.get).toHaveBeenCalledWith(url, headers);
+});</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wir sollten natürlich verifizieren, dass unser Mock Objekt mit den richtigen Werten aufgerufen wurde, schließlich wollen wir prüfen, ob unser Client auch das richtige macht.</li>
+            <li>Dies machen wir wieder wie bei den Mock Funktionen zuvor in den Components. Mit expect können wir die Aufrufe prüfen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: Todo Http Client Test</h4>
+    <ul>
+        <li>Test schreiben für den Client</li>
+        <li>Was wollen wir testen?</li>
+        <li>Branch: step_3-todo-http-client</li>
+    </ul>
+</section>

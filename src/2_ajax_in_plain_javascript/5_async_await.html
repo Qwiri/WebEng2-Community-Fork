@@ -1,0 +1,50 @@
+<section>
+    <h3>Async/await</h3>
+</section>
+<section>
+    <h4>Syntaktischer Zucker</h4>
+    <ul>
+        <li>Asnyc/await macht Promises noch schöner</li>
+        <li>Mit async können wir Funktionen markieren, die asynchronen Code enthalten</li>
+        <li>Mit await warten wir auf ein Ergebnis eines Promises</li>
+        <li>Mit Codebeispielen versteht man es einfacher</li>
+    </ul>
+</section>
+<section>
+    <h4>Codebeispiel</h4>
+    <pre>
+        <code class="javascript" data-line-numbers="|1|4-5|7-8">async function showDadJoke() {
+    const url = 'https://icanhazdadjoke.com/';
+
+    const joke1 = await get(url);
+    const joke2 = await get(url);
+
+    document.getElementById('joke1').innerHTML = joke1.joke;
+    document.getElementById('joke2').innerHTML = joke2.joke;
+}     </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Mit async markiere ich, dass die Funktion showDadJoke() asynchronen Code enthält.</li>
+            <li>Damit gebe ich dem Aufrufer die Möglichkeit darauf zu warten oder sie asynchron laufen zu lassen.</li>
+            <li>Mit await warte ich auf das resolven der Promises.</li>
+            <li>Die Variablen joke1 und joke2 enthalten daher kein Promise, sondern das Ergebnis des Promises.</li>
+            <li>Unten kann ich dann einfach auf das Ergebnis zugreifen.</li>
+            <li>Jetzt sieht unser asynchroner Code fast wieder "normal" aus.</li>
+            <li>Hier wird allerdings ein typischer Fehler gemacht.</li>
+            <li>Die Backendcalls werden nacheinander abgeschickt.</li>
+            <li>Dies müssen sie nur, wenn sie voneinander Abhängig sind, ansonsten sollten wir sie parallel abschicken.</li>
+            <li>Ihr könnt später probieren, wie es besser klappt.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis</h4>
+    <ul>
+        <li>Branch: "step_7" - enthält ein Beispiel für async/await</li>
+        <li>Werden die Calls jetzt nacheinander abgeschickt?</li>
+        <li>Wie bekommen wir sie wieder parallel?</li>
+        <li>Lösung gibt es auch Branch: "step_8"</li>
+        <li>Nehmt euch auch hier gerne die Zeit und spielt etwas damit herum.</li>
+    </ul>
+</section>

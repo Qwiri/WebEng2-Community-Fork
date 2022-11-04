@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>5_rich_client_react</title>
+
+    <link rel="stylesheet" href="/dist/reset.css">
+    <link rel="stylesheet" href="/dist/reveal.css">
+    <link rel="stylesheet" href="/dist/theme/white.css">
+
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+    <link rel="stylesheet" href="styles/custom_styles.css">
+    <link rel="stylesheet" href="/src/custom_styles/global_styles.css">
+</head>
+<body>
+<!-- Qwiri Fork Start -->
+<style>
+#qf-controls {
+  position: absolute;
+  z-index: 1;
+  margin-top: .25rem;
+  margin-left: .25rem;
+}
+#qf-controls button {
+  background: black;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  color: white;
+}
+</style>
+
+<div id="qf-controls">
+  <button onclick="window.location = '/'">Home</button>
+  <button onclick="toggleTheme()">Change Theme</button>
+</div>
+<!-- / Qwiri Fork End -->
+
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h3>Rich Client React</h3>
+        </section>
+        <section>
+            <h4>Lernziele</h4>
+            <ul>
+                <li>Wie schreiben wir eine SPA in Javascript?</li>
+                <li>Wie unterstützt uns React beim Schreiben einer SPA?</li>
+                <li>Wie hilft eine Component Architecture beim Schreiben eines Frontends?</li>
+                <li>Wie bringe ich Ordnung in eine Component Architectur?</li>
+                <li>Was sind Micro Frontends und was bringt das?</li>
+            </ul>
+        </section>
+        <section data-external="./0_spa_in_plain_javascript.html"></section>
+        <section data-external="./1_spa_in_react.html"></section>
+        <section data-external="./2_component_architecture.html"></section>
+        <section data-external="./3_atomic_design.html"></section>
+        <section data-external="./4_micro_frontends.html"></section>
+        <section>
+            <h4>Lernziele</h4>
+            <ul>
+                <li>Wie schreiben wir eine SPA in Javascript?</li>
+                <li>Wie unterstützt uns React beim Schreiben einer SPA?</li>
+                <li>Wie hilft eine Component Architecture beim Schreiben eines Frontends?</li>
+                <li>Wie bringe ich Ordnung in eine Component Architectur?</li>
+                <li>Was sind Micro Frontends und was bringt das?</li>
+            </ul>
+            <aside class="notes">
+                <ul>
+                    <li>Eine SPA in plain Javascript zu schreiben funktioniert, ist allerdings umständlich.</li>
+                    <li>Da es Frameworks wie Sand am Meer gibt, können wir uns hier gut bedienen.</li>
+                    <li>React bietet uns viele verschiedene Tools, um uns das Leben leichter zu machen.
+                        <ul>
+                            <li>Model binding</li>
+                            <li>Routing</li>
+                            <li>Http calls</li>
+                            <li>Components</li>
+                        </ul>
+                    </li>
+                    <li>Mit einer Component Architecture schaffen wir uns einen Baukasten an Components, mit denen wir konsistent und schnell ein Frontend zusammenstecken können.</li>
+                    <li>Mit Atomic Design und Storybook bekomme ich Ordnung in meine Component Architecture, finde Components schneller, sehe sie alle auf einen Blick und beschleunige meine Arbeit.</li>
+                    <li>Wenn ein Frontend zu groß wird, das Team wächst oder man einen legacy Monolith Stück für Stück erneuern möchte, können Microfrontends nützlich sein.</li>
+                </ul>
+            </aside>
+        </section>
+    </div>
+</div>
+
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        dependencies: [
+            {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+            {
+                src: '../../plugin/external/external.js',
+                condition: function () {
+                    return !!document.querySelector('[data-external],[data-external-replace]');
+                }
+            },
+        ]
+    });
+    Reveal.configure({showNotes: false});
+</script>
+</body>
+</html>

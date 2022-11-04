@@ -1,0 +1,156 @@
+<section>
+    <h3>Motivation</h3>
+</section>
+<section>
+    <h4>Datenmanagement im Frontend</h4>
+    <pre>
+        <code class="javascript" data-line-numbers>export class ShowDataComponent {
+
+    @Input()
+    someData: SomeData;
+    @Output()
+    output: EventEmitter = new EventEmitter&lt;Output&gt;();
+}       </code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>wir erinnern uns an die letzte Vorlesung</li>
+            <li>Daten werden über Input und Output Parameter in Components hinein und heraus gegeben</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Datenmanagement im Frontend</h4>
+    <pre>
+        <code class="html" data-line-numbers>&lt;app-show-data
+    [someData]=&quot;{ ... }&quot;
+    (output)=&quot;callOnOutput($event)&quot;&gt;
+&lt;/app-show-data&gt;</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Daten können von der Parent Component an eine Child Component weitergegeben werden</li>
+            <li>Genauso umgekehrt von einer Child Component an die Parent Component</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Tiefe Component Hierarchien</h4>
+    <ul>
+        <li>Daten werden durch Components "hindurchgereicht"</li>
+        <li>Boilerplate Code</li>
+    </ul>
+    <img src="assets/component_hierarchy.png" style="height: 400px;">
+    <aside class="notes">
+        <ul>
+            <li>Daten werden in beide Richtungen "durchgereicht"</li>
+            <li>als Input durch die Component nach untern</li>
+            <li>und als Output wieder hoch</li>
+            <li>dies erzeugt eine Menge Code der irgendwie falsch erscheint</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Beispiel Component Hierarchy</h4>
+    <aside class="notes">
+        <ul>
+            <li>hier ziehe ich ein Codebeispiel hinzu</li>
+            <li>es geht dabei darum den Boilerplate Code an einem Beispiel zu zeigen</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Think Big</h4>
+    <p>Was wenn das Frontend noch größer ist ...</p>
+    <p>und überall die Daten erneut aus dem Backend gefetched werden?</p>
+    <img src="assets/component_hierarchy.png" style="height: 400px;">
+    <aside class="notes">
+        <ul>
+            <li>Daten werden mehrmals geladen</li>
+            <li>unnötige Datenübertragung</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Verteilte Daten</h4>
+    <ul>
+        <li>Daten können überall bearbeitet werden
+            <ul>
+                <li>Auswirkungen auf unterschiedliche Components</li>
+                <li>Call by Reference</li>
+            </ul>
+        </li>
+        <li>unübersichtlich bei großen Anwendungen
+            <ul>
+                <li>fehlerhafte Daten müssen erst entdeckt werden</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Daten sind meist über die Anwendung verteilt</li>
+            <li>Besonders bei größeren Anwendungen wird es unübersichtlich
+                <ul>
+                    <li>Man kann sich manche Fehler nicht erklären, weil Daten überall übers Frontend verteilt sind</li>
+                    <li>Wechselwirkungen und Seiteneffekte treten dann gerne auf</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Beispiel: Verteilte Daten</h4>
+    <pre>
+        <code class="java" data-line-numbers>public void someMethod() {
+    var someData = new SomeData("some-title");
+
+    someOtherMethod(someData);
+
+    assert someData.getTitle().equals("some-title");
+}
+
+private void someOtherMethod(SomeData data) {
+    data.setTitle("some-other-title");
+}</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>mit Methoden in Java verhält es sich ähnlich wie mit Components in Component Architekturen</li>
+            <li>Seiteneffekte in Components / Methoden führen oft zu ungewolltem Verhalten</li>
+            <li>es wird schwer nachzuvollziehen, warum und was grade passiert</li>
+            <li>auch in Components können Seiteneffekte die Daten verändern und damit kann es zu merkwürdigen Effekten führen</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Routing</h4>
+    <ul>
+        <li>Wie werden Daten über mehrere Screens geteilt?</li>
+        <li>Router Outlet nimmt keine Parameter entgegen
+            <ul>
+                <li>Wie auch, es können unterschiedliche Screens eingebettet werden</li>
+                <li>Die Screens könnten alle unterschiedliche Parameter haben</li>
+            </ul>
+        </li>
+        <li>Services könnten die Daten cachen
+            <ul>
+                <li>dies geht schon in die Richtung State Management</li>
+            </ul>
+        </li>
+    </ul>
+    <pre>
+        <code class="html" data-line-numbers="">&lt;router-outlet&gt;&lt;/router-outlet&gt;</code>
+    </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wenn wir die Daten nur in der Component laden und speichern müssten wir nach jeder Navigation die Daten erneut vom Backend laden</li>
+            <li>Wir können die Daten auch nicht in der obersten Component laden und durch das Router Outlet an die Screens geben, da wir keine Parameter durch den Router Outlet reichen können</li>
+            <li>Die Services könnten die Daten vom Backend cachen
+                <ul>
+                    <li>damit würde unser Service bereits zu einem übergeordneten Objekt, dass uns die Daten managed</li>
+                    <li>das heißt ein Service mit Caching geht bereits in Richtung State Management</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>

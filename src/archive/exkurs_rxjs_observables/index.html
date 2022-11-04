@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>1. Socket Webserver</title>
+
+    <link rel="stylesheet" href="/dist/reset.css">
+    <link rel="stylesheet" href="/dist/reveal.css">
+    <link rel="stylesheet" href="/dist/theme/white.css">
+
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+    <link rel="stylesheet" href="styles/custom_styles.css">
+    <link rel="stylesheet" href="/src/custom_styles/global_styles.css">
+</head>
+<body>
+<!-- Qwiri Fork Start -->
+<style>
+#qf-controls {
+  position: absolute;
+  z-index: 1;
+  margin-top: .25rem;
+  margin-left: .25rem;
+}
+#qf-controls button {
+  background: black;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  color: white;
+}
+</style>
+
+<div id="qf-controls">
+  <button onclick="window.location = '/'">Home</button>
+  <button onclick="toggleTheme()">Change Theme</button>
+</div>
+<!-- / Qwiri Fork End -->
+
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h3>RxJS Observables</h3>
+        </section>
+        <section>
+            <h4>Events</h4>
+            <ul>
+                <li>Nutzerinteraktionen sind Events</li>
+                <li>Beispiel: <em>"onclick"</em>, <em>"onchange"</em>, etc.</li>
+                <li>um auf Events zu reagieren wird ein Listener benötigt</li>
+            </ul>
+            <pre>
+                <code class="typescript" data-line-numbers>document.addEventListener(
+    'click',
+    () => console.log('Clicked')
+);</code>
+            </pre>
+        </section>
+        <section>
+            <h4>Observables</h4>
+            <ul>
+                <li>Observables vereinfachen den Umgang mit Events</li>
+                <li>RxJS verfolgt den Functional Reactive Ansatz</li>
+                <li>asynchrone Event Streams werden wie Arrays behandelt
+                    <ul>
+                        <li>Pipes and Filters</li>
+                    </ul>
+                </li>
+            </ul>
+            <aside class="notes">
+                <ul>
+                    <li>der Functional Reactive Ansatz soll die Architektur eines interaktiven Systems verbessern</li>
+                    <li>klassischerweise reagiert ein interaktives System immer auf Events des Nutzers</li>
+                    <li>diese Events werden dann bearbeitet und verändern anschließend den State des Systems</li>
+                    <li>der neue State des Systems macht sich anschließend wieder über z.B. eine UI sichtbar</li>
+                    <li>Beispielsweise kann man sich ein Radio vorstellen
+                        <ul>
+                            <li>der Nutzer dreht an der Volume</li>
+                            <li>anschließend wird ein Event gesendet: "Musik leiser"</li>
+                            <li>dieses Event beeinflusst den internen State des Radios</li>
+                            <li>der State wird "hörbar" durch eine Änderung der Lautstärke</li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <h4>Observables</h4>
+            <ul>
+                <li>es wird auf einem asynchronen Event Stream subscribed</li>
+                <li>auf den Events können Operationen ausgeführt werden</li>
+                <li>das dies asynchron passiert ist erstmal irrelevant</li>
+                <li>quasi wie Streams in Java</li>
+            </ul>
+            <pre>
+                <code class="typescript" data-line-numbers>fromEvent(document, 'click')
+  .pipe(scan(count => count + 1, 0))
+  .subscribe(count => console.log(`Click count ${count}`));</code>
+            </pre>
+            <aside class="notes">
+                <ul>
+                    <li>RxJS bietet mit Observables einen guten Handwerkskasten für FRP</li>
+                    <li>wir nutzen für unser State Management in unserer Anwendung auch RxJS</li>
+                </ul>
+            </aside>
+        </section>
+    </div>
+</div>
+
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        dependencies: [
+            {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+        ]
+    });
+</script>
+</body>
+</html>

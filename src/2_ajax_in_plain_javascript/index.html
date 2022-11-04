@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>2_xhr_plain_javascript</title>
+
+    <link rel="stylesheet" href="/dist/reset.css">
+    <link rel="stylesheet" href="/dist/reveal.css">
+    <link rel="stylesheet" href="/dist/theme/white.css">
+
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
+    <link rel="stylesheet" href="styles/custom_styles.css">
+    <link rel="stylesheet" href="/src/custom_styles/global_styles.css">
+</head>
+<body>
+<!-- Qwiri Fork Start -->
+<style>
+#qf-controls {
+  position: absolute;
+  z-index: 1;
+  margin-top: .25rem;
+  margin-left: .25rem;
+}
+#qf-controls button {
+  background: black;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  color: white;
+}
+</style>
+
+<div id="qf-controls">
+  <button onclick="window.location = '/'">Home</button>
+  <button onclick="toggleTheme()">Change Theme</button>
+</div>
+<!-- / Qwiri Fork End -->
+
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h3>Ajax in Plain Javascript</h3>
+        </section>
+        <section>
+            <h4>Lernziele</h4>
+            <ul>
+                <li>Was ist Ajax?</li>
+                <li>Was sind Callbacks?</li>
+                <li>Wie funktioniert synchroner und asynchroner Code in Javascript?</li>
+                <li>Wie rufe ich in Javascript Daten von einem Server ab?</li>
+                <li>Wie machen uns Promises das Leben leichter?</li>
+                <li>Was ist async/await?</li>
+            </ul>
+            <aside class="notes">
+                <ul>
+                    <li>Lernziel für heute ist es das Ajax Prinzip zu verstehen und in einer Javascript Application umsetzen zu können.</li>
+                    <li>Callbacks sind die Grundlage für asynchrone Programmierung in Javascript, daher müssen wir uns dies als erstes ansehen.</li>
+                    <li>Synchronen Code sollte jeder bereits geschrieben haben, evtl. habt ihr auch in Java schon mit Threads asynchron gearbeitet.</li>
+                    <li>In Javascript ist asynchron nicht gleich asynchron und funktioniert auch grundlegend anders als in Java, daher wollen wir uns dies noch mal genauer ansehen.</li>
+                    <li>Wenn wir dies verstanden haben, können wir mal einen ersten Aufruf Richtung Backend starten.</li> 
+                    <li>Promises sind Konstrukte, die uns die Arbeit mit Asynchronität erleichtern können, um dies zu nutzen, müssen wir verstehen wie dies funktioniert.</li>
+                    <li>Async/await setzt dem ganzen dann die Krone auf.</li>
+               </ul>
+            </aside>
+        </section>
+        <section data-external="./0_ajax.html"></section>
+        <section data-external="./1_callbacks.html"></section>
+        <section data-external="./2_synchron_asynchron.html"></section>
+        <section data-external="./3_load_data_via_http.html"></section>
+        <section data-external="./4_promises.html"></section>
+        <section data-external="./5_async_await.html"></section>
+        <section>
+            <h4>Lernziele</h4>
+            <ul>
+                <li>Was ist Ajax?</li>
+                <li>Was sind Callbacks?</li>
+                <li>Wie funktioniert synchroner und asynchroner Code in Javascript?</li>
+                <li>Wie rufe ich in Javascript Daten von einem Server ab?</li>
+                <li>Wie machen uns Promises das Leben leichter?</li>
+                <li>Was ist async/await?</li>
+            </ul>
+            <aside class="notes">
+                <ul>
+                    <li>Ajax: Daten asynchron von einem Server laden.</li>
+                    <li>Callback: Wie ein Rückruf bei einem Telefon.</li>
+                    <li>Synchronität und Asynchronität (auf einem Thread) -> Überbrückung von Wartezeit.</li>
+                    <li>Backend aufrufen mit XMLHttpRequests.</li> 
+                    <li>Promises, eine schöne Syntax für Asynchronität.</li>
+                    <li>Async/await syntaktischer Zucker für Promises.</li>
+               </ul>
+            </aside>
+        </section>
+    </div>
+</div>
+<script src="/dist/reveal.js"></script>
+<script src="/plugin/notes/notes.js"></script>
+<script src="/plugin/markdown/markdown.js"></script>
+<script src="/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        dependencies: [
+            {src: '//cdn.jsdelivr.net/npm/reveal-plantuml'},
+            {
+                src: '../../plugin/external/external.js',
+                condition: function () {
+                    return !!document.querySelector('[data-external],[data-external-replace]');
+                }
+            },
+        ]
+    });
+    Reveal.configure({showNotes: false});
+</script>
+</body>
+</html>

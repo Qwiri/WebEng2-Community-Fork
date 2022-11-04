@@ -1,0 +1,132 @@
+<section>
+    <h3>SPA in plain Javascript</h3>
+    <aside class="notes">
+        <ul>
+            <li>Bevor wir jetzt direkt in React einsteigen, lasst uns erstmal herausfinden, wofür React überhaupt gut
+                ist.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>SPA in plain JavaScript?</h4>
+    <ul>
+        <li>Spricht etwas dagegen?</li>
+        <li>Wäre quasi nur das exzessive Einsetzen von Ajax</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Hat jemand Bedenken, wenn wir das machen?</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: SPA in plain JavaScript</h4>
+    <ul>
+        <li>Todo App als SPA in plain JavaScript</li>
+        <li>HTML Seite mit plain Javascript anlegen</li>
+        <li>Den Web Service habt ihr letzte Woche bereits geschrieben</li>
+        <li>Falls ihr nicht fertig geworden seid
+            <ul>
+                <li>https://gitlab.com/dhbw_webengineering_2/rich_client_server</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Also Web Service starten, HTML Seite anlegen und loslegen.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: Anforderungen</h4>
+    <ul>
+        <li>Listenansicht der Todos
+            <ul>
+                <li>Alle Titel der Todos werden in einer Liste angezeigt</li>
+                <li>Es gibt einen Button hinter jedem Todo, um eine Detailansicht zu öffnen</li>
+            </ul>
+        </li>
+        <li>Detailseite für ein Todo
+            <ul>
+                <li>Hier soll eine genauere Beschreibung des ToDos angezeigt werden</li>
+            </ul>
+        </li>
+        <li>Kein explizites Routing (Anpassung der URL)</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Wir schreiben nur zwei Seiten und das auch gerne ohne viel Styling.</li>
+            <li>Es geht mir nur darum, mal zu zeigen wie man sowas ohne ein Framework bauen würde.</li>
+            <li>Beispielanwendung zeigen, wie dies aussehen könnte.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: Was brauchen wir?</h4>
+    <ul>
+        <li class="fragment fade-in">index.html mit Placeholder für den Inhalt</li>
+        <li class="fragment fade-in">HTTP call ans Backend, zum laden der Daten</li>
+        <li class="fragment fade-in">Javascript zum Bauen der Listenansicht</li>
+        <li class="fragment fade-in">Javascript zum Bauen der Detailansicht</li>
+        <li class="fragment fade-in">Initialisierung der Seite</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>In der index.html Datei brauchen wir einen Bereich, in dem unsere zwei Seiten angezeigt werden.</li>
+            <li>Möglich wäre auch ein Menü, dass auf beiden Seiten existiert, um auf die Startseite zurück zu kehren.
+            </li>
+            <li>XMLHttpRequests kennt ihr bereits aus der letzten Vorlesung, die könnt ihr hier anwenden.</li>
+            <li>Per Javascript müssen wir dann das HTML so editieren, dass die Daten vom Backend entsprechend angezeigt
+                werden können.</li>
+            <li>Wer die Syntax zum editieren von HTML nicht mehr kennt, kann sich gerne des Internets bedienen.</li>
+            <li>Die Listenansicht soll initial angezeigt werden, das heißt wir brauchen eine Art Initialisierung.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Praxis: Unterstützung</h4>
+    <ul>
+        <li>Ihr könnt natürlich direkt mit einer HTML Seite starten</li>
+        <li>Wer sich beim Styling ein wenig Zeit sparen möchte:
+            <ul>
+                <li>https://gitlab.com/dhbw_webengineering_2/spa_plain_javascript (branch: main)</li>
+                <li>Enthält Funktionen, um einige Components zu bauen</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section>
+    <h4>Praxis: Lösung</h4>
+    <ul>
+        <li>Lösung gibt es hier: https://gitlab.com/dhbw_webengineering_2/spa_plain_javascript (branch: solution)</li>
+        <li>Ihr dürft euch natürlich inspirieren lassen</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Meine Beispiellösung ist nicht perfekt.</li>
+            <li>Versucht gerne eine bessere oder schönere Lösung zu bauen!</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>SPA in plain JavaScript?</h4>
+    <p>Was ist bei einer Implementierung aufgefallen in plain JavaScript?</p>
+    <ul class="fragment fade-in">
+        <li>Es ist sehr aufwendig</li>
+        <li>Viel boilerplate Code
+            <ul>
+                <li>XMLHttpRequests sind immer gleich</li>
+                <li>DOM Manipulation</li>
+                <li>Routing</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Das schreiben einer SPA in plain JavaScript ist sehr aufwendig.</li>
+            <li>Backend Requests, DOM Manipulation sind Aufgaben, die in jeder Application auftreten. Braucht man nicht
+                immer neu zu schreiben.</li>
+            <li>Routing ist ebenfalls aufwendig. Umbau der Seite, Anpassung der URL.</li>
+        </ul>
+    </aside>
+</section>

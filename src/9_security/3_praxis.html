@@ -1,0 +1,42 @@
+<section>
+    <h4>Praxis</h4>
+    <ul>
+        <li>Einbrechen in eine Beispielanwendung</li>
+        <li>Anwendung 1:
+            <ul>
+                <li>https://github.com/OWASP/Vulnerable-Web-Application</li>
+                <li>docker run -it --name vuln_app -p 9991:80 santosomar/vuln_app:latest /bin/bash</li>
+            </ul>
+        </li>
+        <li>Anwendung 2:
+            <ul>
+                <li>dhbw_webengineering_2/security_bWAPP</li>
+                <li>Wird mit <em>"docker-compose up -d"</em> gestartet</li>
+                <li>Docker wird benötigt</li>
+            </ul>
+        </li>
+        <li>Wer kein Docker hat (Anwendung 2):
+            <ul>
+                <li>http://91.132.146.156:8000/login.php</li>
+                <li>User: bee</li>
+                <li>Password: bug</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Ich habe euch mal zwei Anwendungen bereitgestellt.</li>
+            <li>Anwendung 2 hat ein paar mehr Einbruchsmöglichkeiten.</li>
+            <li>Anwendung 2 ist außerdem auf meinem Server verfügbar, ihr braucht daher kein Docker.</li>
+            <li>Durch die Anwendung "leiten" und die einzelnen Angriffsmöglichkeiten erklären.</li>
+            <li>Sinnvoll ist sehr wahrscheinlich:
+                <ul>
+                    <li>SQL Injection</li>
+                    <li>Insecure DOR</li>
+                    <li>Directory Traversal</li>
+                    <li>Cross Site Scripting</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>

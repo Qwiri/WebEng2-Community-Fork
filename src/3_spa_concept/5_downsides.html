@@ -1,0 +1,85 @@
+<section>
+    <h4>Nachteile einer SPA</h4>
+    <p>Was könnten Nachteile einer SPA sein?</p>
+    <ul class="fragment fade-in">
+        <li>Initiale Response ist groß</li>
+        <li>Client ist nicht vertrauenswürdig</li>
+        <li>Duplizierter Code</li>
+        <li>Höherer Entwicklungsaufwand</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Jetzt habe ich euch die Vorteile von SPA's gezeigt.</li>
+            <li>Das heißt nicht, dass eine SPA immer die beste Wahl ist.</li>
+            <li>Multi Page Anwendungen haben durchaus ihre Berechtigung.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Initiale Response ist groß</h4>
+    <pre>
+      <code class="language-plantuml">
+          @startuml
+          participant "Client" as client
+          participant "Web Server" as webServer
+
+          group Initializing
+          activate client
+          client -> webServer: GET /index.html
+          activate webServer
+          webServer -> client: index.html
+          webServer -> client: styles.css
+          webServer -> client: script.js
+          deactivate webServer
+          client -> client: start application
+          end
+          @enduml
+      </code>
+  </pre>
+    <aside class="notes">
+        <ul>
+            <li>Wir erinnern uns an das SPA Laufzeitdiagramm.</li>
+            <li>Zu Anfang müssen erstmal alle Daten geladen werden.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Nachteile einer SPA</h4>
+    <ul>
+        <li>Initiale Response ist groß</li>
+        <li><b><em>Client ist nicht vertrauenswürdig</em></b></li>
+        <li>Duplizierter Code</li>
+        <li>Höherer Entwicklungsaufwand</li>
+    </ul>
+</section>
+<section>
+    <h4>Client ist nicht vertrauenswürdig</h4>
+    <ul>
+        <li>JavaScript Code auf dem Client kann manipuliert werden</li>
+        <li>Erneute Validierung im BE notwendig</li>
+        <li>Validierungen sind meist duplizierter Code</li>
+        <li>Dadurch entsteht mehr Entwicklungsaufwand</li>
+        <li>Hierfür gibt es Abhilfe:
+            <ul>
+                <li>Multiplattform Libraries</li>
+            </ul>
+        </li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>Ein versierter Nutzer kann den JavaScript Code in seinem Browser verändern.
+                <ul>
+                    <li>Wir sprechen hier noch nicht mal von XSS.</li>
+                </ul>
+            </li>
+            <li>Daten die im BE gespeichert werden, müssen daher noch mal validiert werden.</li>
+            <li>Validierungen, aber auch andere Geschäftslogik sind häufig dupliziert.
+                <ul>
+                    <li>Das kann gewünscht sein. Vielleicht möchte man Frontend und Backend voneinander entkoppeln.</li>
+                    <li>Andererseits kann man Code auch übers BE und Frontend sharen.</li>
+                    <li>Multiplattform Libraries können hier helfen.</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>

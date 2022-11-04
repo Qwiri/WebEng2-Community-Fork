@@ -1,0 +1,49 @@
+<section>
+    <h4>Routing?</h4>
+    <ul>
+        <li>Ist theoretisch nicht notwendig</li>
+        <li>Anwendung macht einfach ein rerender</li>
+    </ul>
+    <img src="assets/routing_spa_wrong.png" style="height: 350px">
+    <aside class="notes">
+        <ul>
+            <li>Im Gegensatz zu einer Multi Page Application machen wir nun nach dem ersten Seitenaufruf keine weiteren
+                Aufrufe mehr.</li>
+            <li>Theoretisch könnten wir uns Routing eigentlich sparen.</li>
+            <li>Dynamische Daten vom Backend lösen einfach ein rerender des HTML Contents aus.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Also kein Routing?</h4>
+    <ul>
+        <li>URL bleibt über die Laufzeit gleich</li>
+        <li>Teilen eines Links einer bestimmten Ressource?</li>
+    </ul>
+    <img src="assets/routing_spa_wrong_cross.png" style="height: 350px">
+    <aside class="notes">
+        <ul>
+            <li>Oftmals ist es durchaus sinnvoll Routing zu unterstützen.</li>
+            <li>Link teilen, Lesezeichen hinzufügen, etc.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Routing</h4>
+    <ul>
+        <li>Wir brauchen Routing in SPA's doch!</li>
+        <li>Es passiert ein pseudo Routing</li>
+        <li>SPA Frameworks liefern Routing mit oder es gibt Libraries</li>
+        <li>Dazu später mehr ...</li>
+    </ul>
+    <img src="assets/routing_spa.png" style="height: 350px">
+    <aside class="notes">
+        <ul>
+            <li>Wenn ein rerender des HTML Contents aufgerufen wird, kann die URL ausgetauscht werden.</li>
+            <li>Dies macht natürlich nicht immer Sinn. Wenn sich nur ein Overlay öffnet, brauchen wir keine URL Änderung
+                (zumindest meistens).</li>
+            <li>Wir teilen mit der URL Änderung die "eine" Seite wieder in verschiedene Bereiche ein.</li>
+            <li>Das macht es für den Nutzer, aber auch den Entwickler wieder einfacher und stärkt die Struktur.</li>
+        </ul>
+    </aside>
+</section>
