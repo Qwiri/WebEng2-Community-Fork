@@ -8,7 +8,27 @@
 
     <link rel="stylesheet" href="/dist/reset.css">
     <link rel="stylesheet" href="/dist/reveal.css">
-    <link rel="stylesheet" href="/dist/theme/white.css">
+    <!-- Qwiri Fork Start -->
+<link rel="stylesheet" id="night" href="/dist/theme/night.css">
+<link rel="stylesheet alternate" id="white" href="/dist/theme/white.css">
+<link rel="stylesheet alternate" id="moon" href="/dist/theme/moon.css">
+
+<script defer>
+    let themes = [ 'night', 'white', 'moon' ];
+    let current = 0;
+
+    function toggleTheme() {
+      current = (current + 1) % themes.length;
+      for (const i in themes) {
+        if (current == i) {
+          document.getElementById(themes[i]).setAttribute("rel", "stylesheet");
+        } else {
+          document.getElementById(themes[i]).setAttribute("rel", "stylesheet alternate");
+        }
+      }
+    }
+</script>
+<!-- / Qwiri Fork End -->
 
     <link rel="stylesheet" href="/node_modules/highlight.js/styles/stackoverflow-dark.css">
     <link rel="stylesheet" href="/src/custom_styles/global_styles.css">
