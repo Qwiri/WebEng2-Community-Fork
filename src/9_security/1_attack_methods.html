@@ -208,13 +208,14 @@ em.createNativeQuery(sql)
     <h4>Cross-Site-Scripting - Lösung</h4>
     <ul>
         <li>Encoding von Inhalten, die angezeigt werden</li>
-        <li>Angular bringt das von Haus aus mit</li>
+        <li>React bringt das von Haus aus mit</li>
     </ul>
     <img src="assets/cross_site_scripting_solution.png" height="400px"/>
     <aside class="notes">
         <ul>
             <li>Nicht nur bei der Ausgabe von Inhalten muss geprüft werden. Auch wenn Nutzer Daten an den Server schicken, müssen die Inhalte geprüft werden.</li>
             <li>Dann kann es gar nicht passieren, dass XSS aus dem Backend an den User ausgeliefert wird.</li>
+            <li>Trotzdem sollte man vorsichtig sein: https://stackoverflow.com/questions/33644499/what-does-it-mean-when-they-say-react-is-xss-protected</li>
         </ul>
     </aside>
 </section>
@@ -305,7 +306,7 @@ em.createNativeQuery(sql)
 <section>
     <h4>Phishing</h4>
     <ul>
-        <li>Erlangen von persönlichen Daten durchs Vertrauenserschleichung</li>
+        <li>Erlangen von persönlichen Daten durch Vertrauenserschleichung</li>
         <li>Angreifer gibt sich z.B. als Webseiten Betreiber aus</li>
         <li>Basiert auf Social Engineering</li>
     </ul>
