@@ -23,6 +23,10 @@ export default class Notes {
 	 * Called when the reveal.js config is updated.
 	 */
 	configure( config, oldConfig ) {
+        // Qwiri Fork Start
+        // always show notes
+        config.showNotes = 'separate-page'
+        // Qwiri Fork End
 
 		if( config.showNotes ) {
 			this.element.setAttribute( 'data-layout', typeof config.showNotes === 'string' ? config.showNotes : 'inline' );
